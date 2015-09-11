@@ -25,5 +25,5 @@ are instructions to make the app available under `http://resly.app`.
 3. edit your `/etc/hosts` and add the following:
 ```
 192.168.10.10    resly.app
-```s
+```
 
