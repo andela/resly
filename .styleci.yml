@@ -1,0 +1,7 @@
+preset: laravel
+
+linting: true
+
+finder:
+  exclude:
+    - "tests"
