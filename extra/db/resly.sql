@@ -24,8 +24,11 @@ CREATE TABLE IF NOT EXISTS `resly`.`Restaurant` (
   `restaurant_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(45) NOT NULL COMMENT '',
   `location` VARCHAR(200) NOT NULL COMMENT '',
-  `restauranteur_id` VARCHAR(45) NOT NULL COMMENT '',
-  PRIMARY KEY (`restaurant_id`)  COMMENT '')
+  `restaurateur_id` INT NOT NULL COMMENT '',
+  `description` VARCHAR(200) NULL,
+  `cuisines` VARCHAR(200) NULL,
+  PRIMARY KEY (`restaurant_id`)  COMMENT '',
+  FOREIGN KEY (`restaurateur_id`) REFERENCES Restaurateur(`restaurateur_id`))
 ENGINE = InnoDB;
 
 
@@ -61,22 +64,45 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `resly`.`Table` (
   `table_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `restaurant_id` INT NOT NULL COMMENT '',
-  `calender` VARCHAR(100) NOT NULL COMMENT '',
-  `location` VARCHAR(45) NOT NULL COMMENT '',
+  `position` VARCHAR(45) NOT NULL COMMENT '',
   `seats_number` INT NOT NULL COMMENT '',
-  PRIMARY KEY (`table_id`)  COMMENT '')
+  PRIMARY KEY (`table_id`)  COMMENT '',
+  FOREIGN KEY (`restaurant_id`) REFERENCES 
+    Restaurant(`restaurant_id`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `resly`.`Booking`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `resly`.`Booking` (
+  `booking_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `payment_id` INT NOT NULL,
+  `diner_id` INT NOT NULL,
+  `tables` VARCHAR(40) NOT NULL COMMENT 'Comma delimited booked tables',
+  `restaurant_id` INT NOT NULL COMMENT '',
+  `seats_number` INT NOT NULL COMMENT '',
+  `booking_time` TIMESTAMP NOT NULL,
+  `booking_duration` INT NOT NULL COMMENT 'In minutes',
+  PRIMARY KEY (`booking_id`)  COMMENT '',
+  FOREIGN KEY (`payment_id`) REFERENCES 
+    Payment(`payment_id`),
+  FOREIGN KEY (`diner_id`) REFERENCES
+    Diner(`diner_id`),
+  FOREIGN KEY (`restaurant_id`) REFERENCES
+    Restaurant(`restaurant_id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `resly`.`Transaction`
+-- Table `resly`.`Payment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `resly`.`Transaction` (
-  `transaction_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+CREATE TABLE IF NOT EXISTS `resly`.`Payment` (
+  `payment_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `diner_id` INT NOT NULL COMMENT '',
   `payment_amount` INT NOT NULL COMMENT '',
   `payment_type` VARCHAR(30) NOT NULL COMMENT '',
-  PRIMARY KEY (`transaction_id`)  COMMENT '')
+  PRIMARY KEY (`payment_id`)  COMMENT '',
+  FOREIGN KEY (`diner_id`) REFERENCES Diner(`diner_id`))
 ENGINE = InnoDB;
 
 
