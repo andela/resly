@@ -1,5 +1,7 @@
 # resly
 
+Resly is a graphical reservations system for restaurants.
+
 ## installation instructions
 
 1. run `composer install`
