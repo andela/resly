@@ -27,3 +27,5 @@ are instructions to make the app available under `http://resly.app`.
 192.168.10.10    resly.app
 ```
 
+Also note that we are using version `5.1` of Laravel. So be sure that you use documentation
+for that version.
