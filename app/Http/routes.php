@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/restaurant/add', 'RestaurantController@create');
+
+Route::get('/table/add', 'TableController@create');
