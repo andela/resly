@@ -13,8 +13,11 @@
 
 Route::get('/', function () {
     return view('welcome');
+
 });
 
-Route::get('/restaurant/add', 'RestaurantController@create');
+Route::controller('restaurants', 'RestaurantController');
 
-Route::get('/table/add', 'TableController@create');
+Route::get('/tables/add-bulk', function(){
+    return "Add tables here";
+});
