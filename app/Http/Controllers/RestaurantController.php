@@ -4,86 +4,55 @@ namespace Resly\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Validator;
+use Resly\Restaurant;
 use Resly\Http\Requests;
 use Resly\Http\Controllers\Controller;
 
 class RestaurantController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
+    *  Display the restaurant listing
+    */
+    public function getIndex()
     {
-        //
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
+    /** 
+    *  Display the form for adding a restaurant
+    */
 
+    public function getAdd()
+    {
         return view('restaurant.add');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    *  Receive post requests from the add form submission
+    */
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
+    public function postAdd(Request $request)
     {
-        //
-    }
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'opening_time' => array('regex:/^[0-9]{2}:[0-9]{2}.*$/'),
+                'closing_time' => array('regex:/^[0-9]{2}:[0-9]{2}.*$/'),
+                'location' => 'required',
+                'telephone' => 'required|numeric',
+                'email' => 'required|email',
+                'address' => 'required'
+            ]
+        );
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        if($validator->fails()) {
+            return redirect('/restaurants/add')
+                ->withErrors($validator);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        $restaurant = Restaurant::create($request->all());
+        return redirect('tables/add-bulk');
     }
 }

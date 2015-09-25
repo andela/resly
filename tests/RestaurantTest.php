@@ -1,33 +1,61 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class RestaurantTest extends TestCase
 {
     /**
-     * A basic functional test example.
+     * Test the adding of restaurants
      *
      * @return void
      */
 
-    public function testAddRestaurantPageIsSeen()
+    public function testAddRestaurantPageIsLoaded()
     {
-        $this->visit('/restaurant/add')
-            ->see('Add restaurant here');
+        $this->visit('/restaurants/add')
+            ->see('Add the details of the restaurant');
     }
 
-    // public function testRestaurantIsAdded()
-    // {
-    //     $this->visit('/restaurant/add')
-    //         ->type('restaurant_name', 'My First Restaurant')
-    //         ->type('description', 'We are awesome')
-    //         ->type('opening_time', '08:00:00')
-    //         ->type('closing_time', '17:00:00')
-    //         ->type('location', 'Nairobi West')
-    //         ->type('telephone', '+2517238293')
-    //         ->type('email', 'first.rest@resly.com')
-    //         ->type('address', '50504, Nairobi')
-    //         ->press('Next')
-    //         ->see('/table/add');
-    // }
+    // suspended tests...fix database connection issue.
 
-    /** Add tests for restaurant controller here */
+    public function _testRestaurantIsAdded()
+    {
+
+        $this->visit('/restaurants/add')
+            ->type('My First Restaurant', 'name')
+            ->type('We are awesome', 'description')
+            ->type('08:00:00', 'opening_time')
+            ->type('17:00:00', 'closing_time')
+            ->type('Nairobi West', 'location')
+            ->type('+2517238293', 'telephone')
+            ->type('first.rest@resly.com', 'email')
+            ->type('50504, Nairobi', 'address')
+            ->press('Next')
+            ->see('Add tables');
+
+        $this->seeInDatabase('Restaurant', 
+            ['email' => 'first.rest@resly.com']);
+
+        // Return the database to its state before the adding
+        
+        DB::table('Restaurant')->where('email', '')
+          ->delete('first.rest@resly.com');
+
+    }
+
+    // suspended...fix test db connection issue.
+    
+    public function _testRestaurantDatabase()
+    {
+        DB::transaction(function () {
+            // Seed some data and delete it afterwards
+            $restaurant = factory('Resly\Restaurant')->make();
+            
+            DB::table('Restaurant')->insert($restaurant);
+            $this->seeInDatabase('email', $restaurant->email);
+            
+            DB::table('Restaurant')->where('email', $restaurant->email)
+                ->delete();
+        });
+    }
 }
