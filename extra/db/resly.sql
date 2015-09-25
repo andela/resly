@@ -24,11 +24,18 @@ CREATE TABLE IF NOT EXISTS `resly`.`Restaurant` (
   `restaurant_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(45) NOT NULL COMMENT '',
   `location` VARCHAR(200) NOT NULL COMMENT '',
-  `restaurateur_id` INT NOT NULL COMMENT '',
+  -- `restaurateur_id` INT NOT NULL COMMENT '',
   `description` VARCHAR(200) NULL,
   `cuisines` VARCHAR(200) NULL,
-  PRIMARY KEY (`restaurant_id`)  COMMENT '',
-  FOREIGN KEY (`restaurateur_id`) REFERENCES Restaurateur(`restaurateur_id`))
+  `opening_time` TIME NOT NULL,
+  `closing_time` TIME NOT NULL,
+  `telephone` VARCHAR(20) NOT NULL,
+  `email` VARCHAR(20) NOT NULL,
+  `address` VARCHAR(50) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT '2000-01-01 00:00:00',
+  `updated_at` TIMESTAMP NOT NULL DEFAULT '2000-01-01 00:00:00',
+  PRIMARY KEY (`restaurant_id`)  COMMENT '')
+  -- FOREIGN KEY (`restaurateur_id`) REFERENCES Restaurateur(`restaurateur_id`))
 ENGINE = InnoDB;
 
 
