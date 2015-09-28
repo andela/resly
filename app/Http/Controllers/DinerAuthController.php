@@ -48,7 +48,7 @@ class DinerAuthController extends Controller
         ]);
         if (!Auth::diner()->attempt($request->only(['email', 'password']),
             $request->has('remember'))) {
-            return redirect('dinerhome')->back()->with('info', 'Could not sign you 
+            return redirect()->route('dinerhome')->with('info', 'Could not sign you 
                 in with those credentials.');
         }
         return redirect()->route('dinerhome')->with('info', 'You are now signed in');
