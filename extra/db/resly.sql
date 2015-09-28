@@ -63,12 +63,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `resly`.`Table` (
   `table_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `restaurant_id` INT NOT NULL COMMENT '',
-  `position` VARCHAR(45) NOT NULL COMMENT '',
+  -- `restaurant_id` INT NOT NULL COMMENT '',
+  -- `position` VARCHAR(45) NOT NULL COMMENT '',
   `seats_number` INT NOT NULL COMMENT '',
-  PRIMARY KEY (`table_id`)  COMMENT '',
-  FOREIGN KEY (`restaurant_id`) REFERENCES 
-    Restaurant(`restaurant_id`))
+  `created_at` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00',
+  `updated_at` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00',
+  PRIMARY KEY (`table_id`)  COMMENT '')
+  -- FOREIGN KEY (`restaurant_id`) REFERENCES 
+  --  Restaurant(`restaurant_id`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
