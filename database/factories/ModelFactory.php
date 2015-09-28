@@ -19,3 +19,16 @@ $factory->define(Resly\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(Resly\Restaurant::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->sentence,
+        'email' => $faker->email,
+        'opening_time' => $faker->time,
+        'closing_time' => $faker->time,
+        'telephone' => $faker->phone,
+        'address' => $faker->address,
+        'location' => $faker->name
+    ];
+});
