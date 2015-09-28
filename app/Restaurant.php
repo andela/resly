@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
-    protected $table = "Restaurant";
+    protected $primary_key = 'id';
+    protected $table = 'Restaurant';
 
-    protected $fillable = 
+    protected $fillable =
         [
             'name',
             'description',
@@ -17,6 +18,11 @@ class Restaurant extends Model
             'location',
             'telephone',
             'email',
-            'address'
+            'address',
         ];
+
+    public function tables()
+    {
+        $this->hasMany('Resly/Table');
+    }
 }

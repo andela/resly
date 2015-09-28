@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Table extends Model
 {
-    
     protected $table = 'Table';
 
-    // public function restaurant()
-    // {
-    //     $this->belongsTo('Resly\\Restaurant');
-    // }
+    public function restaurants()
+    {
+        $this->belongsTo('Resly\Restaurant', 'restaurant_id');
+    }
 }

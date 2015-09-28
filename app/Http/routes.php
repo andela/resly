@@ -18,8 +18,4 @@ Route::get('/', function () {
 
 Route::controller('restaurants', 'RestaurantController');
 
-Route::get('/tables/add-bulk', function(){
-    return "Add tables here";
-});
-
 Route::controller('tables', 'TableController');

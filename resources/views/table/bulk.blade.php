@@ -23,6 +23,8 @@
         <input type = "text" class = "form-control" id = "tables_number" placeholder = "10">
       </div>
 
+      <input hidden id="rest_id" value="{{ $restaurant_id }}"/>
+
       <!-- add button for table field -->
       <button type = "button" class = "btn btn-primary" id="add_table">Add</button>
 

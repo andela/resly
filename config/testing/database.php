@@ -1,9 +1,9 @@
 <?php
- 
+
 return [
- 
+
     'default' => 'mysql',
- 
+
     'connections' => [
         'mysql' => [
             'driver'   => 'mysql',
@@ -16,5 +16,5 @@ return [
             'prefix'    => '',
             'strict'    => false,
         ],
-    ]
+    ],
 ];

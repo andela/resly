@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
-  var tableTrack = {};
+  var tableTrack = {
+    addedTables : {}
+  };
 
   /**
    *   This function takes the table data and
@@ -8,7 +10,7 @@ $(document).ready(function() {
    */
 
   function updateTable() {
-    var keys = Object.keys(tableTrack);
+    var keys = Object.keys(tableTrack.addedTables);
     var tableView = $("#added_tables");
     if (keys.length === 0) {
       tableView.html("");
@@ -22,7 +24,7 @@ $(document).ready(function() {
 
     for (var i = 0; i < keys.length; i++) {
       var row = "<tr><td> " + keys[i] + " </td>";
-      row += "<td> " + tableTrack[keys[i]] + " </td></tr>"
+      row += "<td> " + tableTrack.addedTables[keys[i]] + " </td></tr>"
       tableView.append(row);
     }
   }
@@ -32,21 +34,21 @@ $(document).ready(function() {
    */
 
   var prompt = function(msg) {
-    $('#prompt').show();
-    $('#prompt').html(msg);
+    $("#prompt").show();
+    $("#prompt").html(msg);
 
     // Hide the alert
-    $('#prompt').fadeOut(1600);
+    $("#prompt").fadeOut(1600);
   };
 
 
-  $('#add_table').click(function() {
-    var seats = parseInt($('#seats').val());
-    var tablesNumber = parseInt($('#tables_number').val());
+  $("#add_table").click(function() {
+    var seats = parseInt($("#seats").val());
+    var tablesNumber = parseInt($("#tables_number").val());
 
     // Clear the input fields
-    $('#seats').val("");
-    $('#tables_number').val("");
+    $("#seats").val("");
+    $("#tables_number").val("");
 
     if (isNaN(seats) || isNaN(tablesNumber)) {
       prompt("Please Input numbers only.");
@@ -55,14 +57,13 @@ $(document).ready(function() {
 
     var index = seats + "";
 
-    if (!tableTrack[index]) {
-      tableTrack[index] = tablesNumber;
+    if (!tableTrack.addedTables[index]) {
+      tableTrack.addedTables[index] = tablesNumber;
     } else {
-      tableTrack[index] += tablesNumber;
+      tableTrack.addedTables[index] += tablesNumber;
     }
 
-    prompt(tablesNumber + ", " + seats +
-      +"-seater tables added");
+    prompt(tablesNumber + ", " + seats + "-seater tables added");
     updateTable();
   });
 
@@ -73,11 +74,15 @@ $(document).ready(function() {
       return false;
     }
 
+    tableTrack.restaurant_id = parseInt($("#rest_id").val());
+
+    console.dir(tableTrack);
+    
     var request = $.ajax({
       url: "/tables/add-bulk",
       method: "POST",
       data: JSON.stringify(tableTrack),
-      contentType: 'application/json'
+      contentType: "application/json"
     });
 
     request.done(function(msg) {
