@@ -5,12 +5,12 @@ return [
     'multi-auth' => [
         'restaurateur' => [
             'driver' => 'eloquent',
-            'model'  => Resly\Restaurateur::class
+            'model'  => Resly\Restaurateur::class,
         ],
         'diner' => [
             'driver' => 'eloquent',
-            'model'  => Resly\Diner::class
-        ]
+            'model'  => Resly\Diner::class,
+        ],
     ],
     /*
     |--------------------------------------------------------------------------

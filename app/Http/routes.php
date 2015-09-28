@@ -77,3 +77,12 @@ Route::get('/diner/logout', [
 	'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignout',
 	'as' => 'dinersignout',
 ]);
+
+/**
+* Search
+*/
+
+Route::get('/diner/search', [
+	'uses' => '\Resly\Http\Controllers\SearchController@getResults',
+	'as' => 'dinersearch',
+]);

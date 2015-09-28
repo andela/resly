@@ -14,7 +14,7 @@ class Restaurateur extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
 {
-   use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, Authorizable, CanResetPassword;
 
     /**
      * The database table used by the model.
@@ -33,7 +33,7 @@ class Restaurateur extends Model implements AuthenticatableContract,
         'lname', 
         'email', 
         'password',
-        'confirm-password'
+        'confirm-password',
     ];
 
     /**
@@ -44,6 +44,6 @@ class Restaurateur extends Model implements AuthenticatableContract,
     protected $hidden = [
         'password', 
         'confirm-password',
-        'remember_token'
+        'remember_token',
     ];
 }

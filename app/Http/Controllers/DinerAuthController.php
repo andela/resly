@@ -10,7 +10,7 @@ use Resly\Diner;
 
 class DinerAuthController extends Controller
 {
-   public function getDinerSignup()
+    public function getDinerSignup()
     {
         return view('auth.diner.signup');
     }
@@ -29,7 +29,7 @@ class DinerAuthController extends Controller
             'fname' => $request->input('fname'),
             'lname' => $request->input('lname'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'))
+            'password' => bcrypt($request->input('password')),
         ]);
 
         return redirect()->route('dinerhome')->with('info', 'You can now login');
@@ -46,7 +46,7 @@ class DinerAuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if (!Auth::diner()->attempt($request->only(['email', 'password']),
+        if (! Auth::diner()->attempt($request->only(['email', 'password']),
             $request->has('remember'))) {
             return redirect()->route('dinerhome')->with('info', 'Could not sign you 
                 in with those credentials.');

@@ -29,7 +29,7 @@ class RestAuthController extends Controller
             'fname' => $request->input('fname'),
             'lname' => $request->input('lname'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'))
+            'password' => bcrypt($request->input('password')),
         ]);
 
         return redirect()->route('resthome')->with('info', 'You can now login');
@@ -46,7 +46,7 @@ class RestAuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if (!Auth::restaurateur()->attempt($request->only(['email', 'password']),
+        if (! Auth::restaurateur()->attempt($request->only(['email', 'password']),
             $request->has('remember'))) {
             return redirect()->back()->with('info', 'Could not sign you 
                 in with those credentials.');
