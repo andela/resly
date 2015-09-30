@@ -28,11 +28,10 @@ class Restaurant extends Model
 
     public function getName()
     {
-        if($this->name)
-        {
+        if ($this->name) {
             return $this->name;
         }
-        return null;
+        return;
     }
 
     public function getRestName()
