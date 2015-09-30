@@ -16,12 +16,11 @@ Route::get('/', function () {
 
 });
 
-
 Route::controller('restaurants', 'RestaurantController');
 
 Route::controller('tables', 'TableController');
 
-/**
+/*
  *  Restaurateur routes
  */
 Route::get('/rest', [
@@ -52,7 +51,7 @@ Route::get('/rest/logout', [
     'as' => 'restsignout',
 ]);
 
-/**
+/*
  *  Diner Routes
  */
 Route::get('/diner', [
@@ -83,7 +82,7 @@ Route::get('/diner/logout', [
     'as' => 'dinersignout',
 ]);
 
-/**
+/*
  *  Search
  */
 Route::get('/diner/search', [
