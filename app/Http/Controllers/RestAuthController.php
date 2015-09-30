@@ -58,7 +58,7 @@ class RestAuthController extends Controller
     public function getRestSignout()
     {
         Auth::restaurateur()->logout();
-        
+
         return redirect()->route('restsignin');
     }
 }
