@@ -26,8 +26,7 @@ CREATE TABLE IF NOT EXISTS `resly`.`Restaurant` (
   `location` VARCHAR(200) NOT NULL COMMENT '',
   -- `restaurateur_id` INT NOT NULL COMMENT '',
   `description` VARCHAR(200) NULL,
-  `cuisines` VARCHAR(200) NULL,
-  PRIMARY KEY (`id`)  COMMENT '')
+  PRIMARY KEY (`id`)  COMMENT ''
   -- FOREIGN KEY (`restaurateur_id`) REFERENCES Restaurateur(`restaurateur_id`))
 ENGINE = InnoDB;
 
