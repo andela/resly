@@ -1,0 +1,12 @@
+fieldset{
+	border: 1px groove;
+	padding:0 10px 10px 10px;
+	margin: 0 0 10px 0;
+}
+legend{
+	font-weight: bold;
+	text-align: left;
+	width: inherit;
+	padding: 0 10px;
+	border-bottom: none;
+}

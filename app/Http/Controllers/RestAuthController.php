@@ -4,13 +4,11 @@ namespace Resly\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
-use Resly\Http\Requests;
-use Resly\Http\Controllers\Controller;
 use Resly\Restaurateur;
 
 class RestAuthController extends Controller
 {
-   public function getRestSignup()
+    public function getRestSignup()
     {
         return view('auth.rest.signup');
     }
@@ -24,7 +22,7 @@ class RestAuthController extends Controller
             'password' => 'required|min:6',
             'confirm-password' => 'required|same:password',
         ]);
-        
+
         Restaurateur::create([
             'fname' => $request->input('fname'),
             'lname' => $request->input('lname'),
@@ -46,17 +44,21 @@ class RestAuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if (! Auth::restaurateur()->attempt($request->only(['email', 'password']),
-            $request->has('remember'))) {
+        if (! Auth::restaurateur()->attempt(
+            $request->only(['email', 'password']),
+            $request->has('remember')
+        )) {
             return redirect()->back()->with('info', 'Could not sign you 
                 in with those credentials.');
         }
+
         return redirect()->route('resthome')->with('info', 'You are now signed in');
     }
 
     public function getRestSignout()
     {
         Auth::restaurateur()->logout();
+
         return redirect()->route('restsignin');
     }
 }

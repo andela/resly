@@ -13,76 +13,79 @@
 
 Route::get('/', function () {
     return view('welcome');
+
 });
 
-/**
-* Restaurateur routes
-*/
+Route::controller('restaurants', 'RestaurantController');
 
+Route::controller('tables', 'TableController');
+
+/*
+ *  Restaurateur routes
+ */
 Route::get('/rest', [
-	'uses' => '\Resly\Http\Controllers\HomeController@resthome',
-	'as' => 'resthome',
+    'uses' => '\Resly\Http\Controllers\HomeController@resthome',
+    'as' => 'resthome',
 ]);
 
 Route::get('/rest/signup', [
-	'uses' => '\Resly\Http\Controllers\RestAuthController@getRestSignup',
-	'as' => 'restsignup',
+    'uses' => '\Resly\Http\Controllers\RestAuthController@getRestSignup',
+    'as' => 'restsignup',
 ]);
 
 Route::post('/rest/signup', [
-	'uses' => '\Resly\Http\Controllers\RestAuthController@postRestSignup',
+    'uses' => '\Resly\Http\Controllers\RestAuthController@postRestSignup',
 ]);
 
 Route::get('/rest/login', [
-	'uses' => '\Resly\Http\Controllers\RestAuthController@getRestSignin',
-	'as' => 'restsignin',
+    'uses' => '\Resly\Http\Controllers\RestAuthController@getRestSignin',
+    'as' => 'restsignin',
 ]);
 
 Route::post('/rest/login', [
-	'uses' => '\Resly\Http\Controllers\RestAuthController@postRestSignin',
+    'uses' => '\Resly\Http\Controllers\RestAuthController@postRestSignin',
 ]);
 
 Route::get('/rest/logout', [
-	'uses' => '\Resly\Http\Controllers\RestAuthController@getRestSignout',
-	'as' => 'restsignout',
+    'uses' => '\Resly\Http\Controllers\RestAuthController@getRestSignout',
+    'as' => 'restsignout',
 ]);
 
-/**
-* Diner Routes
-*/
+/*
+ *  Diner Routes
+ */
 Route::get('/diner', [
-	'uses' => '\Resly\Http\Controllers\HomeController@dinerhome',
-	'as' => 'dinerhome',
+    'uses' => '\Resly\Http\Controllers\HomeController@dinerhome',
+    'as' => 'dinerhome',
 ]);
 
 Route::get('/diner/signup', [
-	'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignup',
-	'as' => 'dinersignup',
+    'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignup',
+    'as' => 'dinersignup',
 ]);
 
 Route::post('/diner/signup', [
-	'uses' => '\Resly\Http\Controllers\DinerAuthController@postDinerSignup',
+    'uses' => '\Resly\Http\Controllers\DinerAuthController@postDinerSignup',
 ]);
 
 Route::get('/diner/login', [
-	'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignin',
-	'as' => 'dinersignin',
+    'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignin',
+    'as' => 'dinersignin',
 ]);
 
 Route::post('/diner/login', [
-	'uses' => '\Resly\Http\Controllers\DinerAuthController@postDinerSignin',
+    'uses' => '\Resly\Http\Controllers\DinerAuthController@postDinerSignin',
 ]);
 
 Route::get('/diner/logout', [
-	'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignout',
-	'as' => 'dinersignout',
+    'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignout',
+    'as' => 'dinersignout',
 ]);
 
-/**
-* Search
-*/
-
+/*
+ *  Search
+ */
 Route::get('/diner/search', [
-	'uses' => '\Resly\Http\Controllers\SearchController@getResults',
-	'as' => 'dinersearch',
+    'uses' => '\Resly\Http\Controllers\SearchController@getResults',
+    'as' => 'dinersearch',
 ]);
