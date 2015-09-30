@@ -17,8 +17,8 @@ class RestaurLoginTest extends TestCase
     public function testRestaurPageExists()
     {
         $this->visit('/')
-             ->click('restaur')
-             ->seePageIs('/restaur');
+             ->click('restauranter')
+             ->seePageIs('/rest');
     }
 
     /**
@@ -32,9 +32,9 @@ class RestaurLoginTest extends TestCase
      **/
     public function testLoginPageExists()
     {
-        $this->visit('/restaur')
+        $this->visit('/rest')
              ->click('login')
-             ->seePageIs('/restaur/login');
+             ->seePageIs('/rest/login');
     }
 
     /**
@@ -53,12 +53,12 @@ class RestaurLoginTest extends TestCase
      **/
     public function testLoginAcceptsCredentials()
     {
-        $this->visit('/restaur/login')
-             ->type('restaur@localhost.com', 'email')
+        $this->visit('/rest/login')
+             ->type('restauranteur@localhost.com', 'email')
              ->type('password', 'password')
              ->click('log in')
              ->seePageIs('/')
-             ->see('welcome, restaur');
+             ->see('welcome, restauranteur');
     }
 
     /**
@@ -74,8 +74,8 @@ class RestaurLoginTest extends TestCase
      **/
     public function testDinerRejectsCredentials()
     {
-        $this->visit('/restaur/login')
-             ->type('restaur@localhost.com', 'email')
+        $this->visit('/rest/login')
+             ->type('restauranteur@localhost.com', 'email')
              ->type('wrong password', 'password')
              ->click('log in')
              ->seePageIs('/login');
