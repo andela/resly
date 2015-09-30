@@ -25,4 +25,18 @@ class Restaurant extends Model
     {
         $this->hasMany('Resly/Table');
     }
+
+    public function getName()
+    {
+        if($this->name)
+        {
+            return $this->name;
+        }
+        return null;
+    }
+
+    public function getRestName()
+    {
+        return $this->getName();
+    }
 }

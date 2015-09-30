@@ -42,6 +42,12 @@
           <ul class="nav navbar-nav">
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
+            <form class="navbar-form navbar-left" role="search" action="{{ route('dinersearch') }}">
+                <div class="form-group">
+                    <input type="text" name="query" class="form-control" placeholder="Find Restaurant">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             @if (Auth::diner()->check()) 
@@ -56,7 +62,16 @@
     </nav>
 
     <div class="container">
-       Results
+      <h3>Results</h3>
+      @if (! $results->count())
+        <p>No results found, sorry</p>
+      @else
+        @foreach ($results as $result)
+          <ul>
+            <li>{{ $result->getRestName()}}</li>
+          </ul>
+        @endforeach
+      @endif
     </div>
 
   
