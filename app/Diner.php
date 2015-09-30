@@ -10,9 +10,10 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Kbwebs\MultiAuth\PasswordResets\CanResetPassword;
 use Kbwebs\MultiAuth\PasswordResets\Contracts\CanResetPassword as CanResetPasswordContract;
 
-class Diner extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+class Diner extends Model implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
@@ -30,8 +31,8 @@ class Diner extends Model implements AuthenticatableContract,
      */
     protected $fillable = [
         'fname',
-        'lname', 
-        'email', 
+        'lname',
+        'email',
         'password',
         'confirm-password',
     ];
@@ -42,7 +43,7 @@ class Diner extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = [
-        'password', 
+        'password',
         'confirm-password',
         'remember_token',
     ];

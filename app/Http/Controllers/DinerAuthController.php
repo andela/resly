@@ -4,8 +4,6 @@ namespace Resly\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
-use Resly\Http\Requests;
-use Resly\Http\Controllers\Controller;
 use Resly\Diner;
 
 class DinerAuthController extends Controller
@@ -24,7 +22,7 @@ class DinerAuthController extends Controller
             'password' => 'required|min:6',
             'confirm-password' => 'required|same:password',
         ]);
-        
+
         Diner::create([
             'fname' => $request->input('fname'),
             'lname' => $request->input('lname'),
@@ -46,17 +44,21 @@ class DinerAuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if (! Auth::diner()->attempt($request->only(['email', 'password']),
-            $request->has('remember'))) {
+        if (! Auth::diner()->attempt(
+            $request->only(['email', 'password']),
+            $request->has('remember')
+        )) {
             return redirect()->route('dinerhome')->with('info', 'Could not sign you 
                 in with those credentials.');
         }
+
         return redirect()->route('dinerhome')->with('info', 'You are now signed in');
     }
 
     public function getDinerSignout()
     {
         Auth::diner()->logout();
+
         return redirect()->route('dinerhome');
     }
 }

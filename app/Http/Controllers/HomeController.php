@@ -2,10 +2,6 @@
 
 namespace Resly\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Resly\Http\Requests;
-use Resly\Http\Controllers\Controller;
-
 class HomeController extends Controller
 {
     public function resthome()

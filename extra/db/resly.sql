@@ -21,14 +21,14 @@ USE `resly` ;
 -- Table `resly`.`Restaurant`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `resly`.`Restaurant` (
-  `restaurant_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(45) NOT NULL COMMENT '',
   `location` VARCHAR(200) NOT NULL COMMENT '',
-  `restaurateur_id` INT NOT NULL COMMENT '',
+  -- `restaurateur_id` INT NOT NULL COMMENT '',
   `description` VARCHAR(200) NULL,
   `cuisines` VARCHAR(200) NULL,
-  PRIMARY KEY (`restaurant_id`)  COMMENT '',
-  FOREIGN KEY (`restaurateur_id`) REFERENCES Restaurateur(`restaurateur_id`))
+  PRIMARY KEY (`id`)  COMMENT '')
+  -- FOREIGN KEY (`restaurateur_id`) REFERENCES Restaurateur(`restaurateur_id`))
 ENGINE = InnoDB;
 
 
@@ -64,11 +64,13 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `resly`.`Table` (
   `table_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `restaurant_id` INT NOT NULL COMMENT '',
-  `position` VARCHAR(45) NOT NULL COMMENT '',
+  -- `position` VARCHAR(45) NOT NULL COMMENT '',
   `seats_number` INT NOT NULL COMMENT '',
+  `created_at` TIMESTAMP NOT NULL DEFAULT '2000-01-01 00:00:00',
+  `updated_at` TIMESTAMP NOT NULL DEFAULT '2000-01-01 00:00:00',
   PRIMARY KEY (`table_id`)  COMMENT '',
   FOREIGN KEY (`restaurant_id`) REFERENCES 
-    Restaurant(`restaurant_id`))
+    Restaurant(`id`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -89,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `resly`.`Booking` (
   FOREIGN KEY (`diner_id`) REFERENCES
     Diner(`diner_id`),
   FOREIGN KEY (`restaurant_id`) REFERENCES
-    Restaurant(`restaurant_id`))
+    Restaurant(`id`))
 ENGINE = InnoDB;
 
 

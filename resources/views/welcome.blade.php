@@ -1,45 +1,54 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.master')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title', 'welcome')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+@section('content')
+    <div class="container">
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+      <div id="banner">
+        <div class="inner">
+            <h1>Welcome to resly <small>the new way to dine</small></h1>
         </div>
-    </body>
-</html>
+      </div>
+    </div>
+
+    <div id="content">
+            <div class="container">
+                <div class="row">
+                  <div class="col-xs-6 col-md-3">
+                    <div class="cell">
+                        <a href="#" class="thumbnail">
+                          <img src="/img/search.jpg" alt="...">
+                        </a>
+                    </div>
+                    
+                  </div>
+                  <div class="col-xs-6 col-md-3">
+                    <div class="cell">
+                        <a href="#" class="thumbnail">
+                          <img src="/img/reservation.jpg" alt="...">
+                        </a>
+                    </div>
+                    
+                  </div>
+                  <div class="col-xs-6 col-md-3">
+                    <div class="cell">
+                       <a href="#" class="thumbnail">
+                         <img src="/img/menu.jpg" alt="...">
+                       </a> 
+                    </div>
+                    
+                  </div>
+                  <div class="col-xs-6 col-md-3">
+                    <div class="cell">
+                        <a href="#" class="thumbnail">
+                          <img src="/img/wine.jpg" alt="...">
+                        </a>
+                    </div>
+                    
+                  </div>
+                </div>
+            </div>
+    </div>
+@endsection
