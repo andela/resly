@@ -16,7 +16,7 @@ class RestaurantController extends Controller
     {
     }
 
-    /** 
+    /**
      *  Display the form for adding a restaurant.
      */
     public function getAdd()

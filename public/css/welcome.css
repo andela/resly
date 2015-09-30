@@ -1,0 +1,33 @@
+body {
+    background:url('/img/pexels-photo.jpg');
+}
+
+#banner {
+    padding-top: 2.5em;
+    min-height: 500px;
+    background: rgba(255, 255, 255, 0.68);
+    color: #fff;
+}
+
+#banner .inner {
+    text-align: center;
+    padding: 2em;
+}
+
+#banner h1 {
+    color: rgb(177, 61, 114);
+    font-size: 10em;
+}
+
+#banner small {
+    color: #735E72;
+}
+
+#content {
+    padding: 2em 0;
+}
+
+.cell {
+    text-align: center;
+}
+/*# sourceMappingURL=welcome.css.map */

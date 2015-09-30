@@ -12,8 +12,10 @@ class TableController extends Controller
      */
     public function getAddBulk(Request $request)
     {
-        return view('table.bulk',
-            ['restaurant_id' => $request['id']]);
+        return view(
+            'table.bulk',
+            ['restaurant_id' => $request['id']]
+        );
     }
 
     /**
