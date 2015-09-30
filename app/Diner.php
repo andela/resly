@@ -47,4 +47,20 @@ class Diner extends Model implements
         'confirm-password',
         'remember_token',
     ];
+
+    public function getName()
+    {
+        if ($this->fname) {
+            return $this->fname;
+        } elseif ($this->lname) {
+            return $this->lname;
+        }
+
+        return;
+    }
+
+    public function getDinerName()
+    {
+        return $this->getName();
+    }
 }

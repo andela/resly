@@ -9,8 +9,7 @@ class Restaurant extends Model
     protected $primary_key = 'id';
     protected $table = 'Restaurant';
 
-    protected $fillable =
-        [
+    protected $fillable = [
             'name',
             'description',
             'opening_time',
@@ -19,7 +18,7 @@ class Restaurant extends Model
             'telephone',
             'email',
             'address',
-        ];
+    ];
 
     public function tables()
     {
@@ -31,6 +30,7 @@ class Restaurant extends Model
         if ($this->name) {
             return $this->name;
         }
+
         return;
     }
 

@@ -18,7 +18,7 @@ class DinerLoginTest extends TestCase
     public function testDinerPageExists()
     {
         $this->visit('/')
-             ->click('diner')
+             ->click('Diner')
              ->seePageIs('/diner');
     }
 
@@ -57,9 +57,9 @@ class DinerLoginTest extends TestCase
         $this->visit('/diner/login')
              ->type('diner@localhost.com', 'email')
              ->type('password', 'password')
-             ->click('Login')
-             ->seePageIs('/diner')
-             ->see('welcome, diner');
+             ->press('Sign in')
+             ->seePageIs('/diner');
+
     }
 
     /**

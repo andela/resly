@@ -17,9 +17,9 @@ class SearchTest extends TestCase
     public function testDinerSearchCanBeDone()
     {
         $this->visit('/diner')
-        	 ->type('restaurantName', 'query')
-        	 ->press('Search')
-        	 ->seePageIs('/diner/search')
-        	 ->see('Results');
+             ->type('name', 'query')
+             ->press('Search')
+             ->seePageIs('/diner/search?query=name')
+             ->see('Results');
     }
 }
