@@ -2,6 +2,8 @@
 
 namespace Resly\Http\Controllers;
 
+use Resly\Category;
+
 class MenuController extends Controller
 {
     /**
@@ -9,6 +11,8 @@ class MenuController extends Controller
      */
     public function getAddBulk()
     {
-        return view('menu.add');
+        $categories = Category::all();
+        return view('menu.bulk',
+            ['categories' => $categories]);
     }
 }
