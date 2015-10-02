@@ -2,6 +2,10 @@
 
 @section('title', 'welcome')
 
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{!! asset('css/welcome.css') !!}">
+@endsection;
+
 
 @section('content')
     <div class="container">
