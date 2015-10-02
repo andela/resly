@@ -72,10 +72,12 @@ $(document).ready(function() {
 
     if (name.length == 0 || category.length == 0) {
       prompt("Please provide a name and category");
+      clearFields();
       return false;
     }
     if (isNaN(parseInt(price))) {
       prompt("Please input a number for price");
+      clearFields();
       return false;
     }
 
