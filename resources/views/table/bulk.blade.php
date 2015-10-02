@@ -1,11 +1,33 @@
-@extends ('layouts.restaurant_setup')
+@extends ('layouts.master')
 
 @section('content')
-
+<style type="text/css">
+  fieldset {
+    border: 1px groove;
+    padding:0 10px 10px 10px;
+    margin: 0 0 10px 0;
+  }
+  legend {
+    font-weight: bold;
+    text-align: left;
+    width: inherit;
+    padding: 0 10px;
+    border-bottom: none;
+  }
+  .dark {
+    background-color: #FFF;
+    margin: 80px 20px 20px 30px;
+    padding: 20px 20px 20px 20px;
+  }
+  .alert {
+    color: #444444;
+    height: 10px;
+  }
+</style>
 <div class="row">
-  <h2> Add the Tables' details</h2>
-  <div class="col-sm-4">
-    <div class="alert" role="alert" id="prompt" hidden>
+  <div class="col-sm-4 dark">
+  <h4> Add the Tables' details</h4>
+    <div class="alert dark" role="alert" id="prompt" hidden>
     </div>
     <fieldset>
       <legend>Table Details</legend>
@@ -33,9 +55,9 @@
     <!--next button -->
     <button type = "button" class = "btn btn-primary btn-lg" id="submit">Next</button>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-4 dark">
+    <h4>Added Tables</h4>
     <table  id="added_tables" class="table">
-      
     </table>
   </div>
 </div>

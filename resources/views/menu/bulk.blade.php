@@ -8,6 +8,10 @@
     margin: 80px 20px 20px 30px;
     padding: 20px 20px 20px 20px;
   }
+  .alert {
+    color: #444444;
+    height: 10px;
+  }
 </style>
 <div class="row">
   <div class="col-sm-4 dark">
