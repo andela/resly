@@ -1,9 +1,26 @@
-@extends('layouts.restaurant_setup')
+@extends('layouts.master')
 
 @section('content')
-
-  <div class="col-sm-6">
-    <h2>Add the details of the restaurant</h2>
+<style type="text/css">
+  fieldset {
+    border: 1px groove;
+    padding:0 10px 10px 10px;
+    margin: 0 0 10px 0;
+  }
+  legend {
+    text-align: left;
+    width: inherit;
+    padding: 0 10px;
+    border-bottom: none;
+  }
+  .dark {
+    background-color: #FFF;
+    margin: 80px 20px 20px 30px;
+    padding: 20px 20px 20px 20px;
+  }
+</style>
+  <div class="col-sm-6 dark">
+    <h4>Add the details of the restaurant</h4>
         
     <form  method="POST" action="/restaurants/add">
     
@@ -31,7 +48,7 @@
       <!-- Add Description of restaurant -->
       <div class ="form-group">
         <label for= "cuisine" class= "control-label"> Description</label>
-        <textarea class = "form-control" name= "description" id = "cuisine" rows= "7" placeholder = "e.g. cuisine and selling point"></textarea>
+        <textarea class = "form-control" name= "description" id = "cuisine" rows= "5" placeholder = "e.g. cuisine and selling point"></textarea>
       </div>
 
       <!-- Add Opening and Closing Hours of restaurant -->
@@ -79,7 +96,7 @@
       </fieldset>
 
       <div class = "form-group">
-        <button type = "submit" class = "btn btn-primary btn-lg">Next</button>
+        <button type = "submit" class = "btn btn-primary btn-lg" style="float:right">Next</button>
       </div>  
     </form>
   </div>
