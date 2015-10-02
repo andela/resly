@@ -85,9 +85,9 @@ $(document).ready(function() {
       contentType: "application/json"
     });
 
-    request.done(function(msg) {
+    request.done(function(res_id) {
       // load the next page here
-      alert("The response: " + msg);
+      window.location.replace("/menus/add-bulk?res_id="+res_id);
     });
   });
 
