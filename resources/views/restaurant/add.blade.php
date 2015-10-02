@@ -2,13 +2,12 @@
 
 @section('content')
 <style type="text/css">
-  fieldset{
+  fieldset {
     border: 1px groove;
     padding:0 10px 10px 10px;
     margin: 0 0 10px 0;
   }
-  legend{
-    font-weight: bold;
+  legend {
     text-align: left;
     width: inherit;
     padding: 0 10px;

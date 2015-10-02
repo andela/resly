@@ -28,6 +28,10 @@ class MenuController extends Controller
             return 'false';
         }
 
+        if (0 === count($request->json()->get('menu_items'))) {
+            return 'Add some menus atleast';
+        }
+
         $json = $request->json();
         $menu_items = $json->get('menu_items');
         $restaurant_id = $json->get('restaurant_id');
