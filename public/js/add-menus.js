@@ -14,12 +14,6 @@ $(document).ready(function() {
       return false;
     }
 
-    var name = $("#name").html("");
-    var category = $("#categories").html("");
-    var description = $("#description").html("");
-    var price = $("#price").html("");
-    var tags = $("#tags").html("");
-
     tableView.html("<tr>" +
       "<th>Menu Item</th>" +
       "<th>Category</th>" +
@@ -37,6 +31,24 @@ $(document).ready(function() {
       row += "<td> " + menusTrack[i].tags + "</td>";
       tableView.append("<tr>" + row + "</tr>");
     }
+  }
+
+  function clearFields() {
+    $("#name").val("");
+    $("#description").val("");
+    $("#price").val("");
+    $("#tags").val("");
+  }
+
+  function serializeArray() {
+    var finalObj = { menu_items : {} };
+    for(var i = 0; i < menusTrack.length; i++) {
+      finalObj.menu_items["" + i] = menusTrack[i];
+    }
+
+    finalObj.restaurant_id = $("#restaurant_id").val();
+    menusTrack = finalObj;
+    console.dir(menusTrack);
   }
 
   /**
@@ -58,9 +70,12 @@ $(document).ready(function() {
     var price = $("#price").val();
     var tags = $("#tags").val();
 
-    if(name.length == 0 || category.length == 0)
-    {
+    if (name.length == 0 || category.length == 0) {
       prompt("Please provide a name and category");
+      return false;
+    }
+    if (isNaN(parseInt(price))) {
+      prompt("Please input a number for price");
       return false;
     }
 
@@ -76,6 +91,24 @@ $(document).ready(function() {
 
     prompt(JSON.stringify(record) + " added.");
     updateTable();
+    clearFields();
+  });
+
+  $("#next_link").submit(function(event) {
+    event.preventDefault();
+    serializeArray();
+
+    var request = $.ajax({
+      url: "/menus/add-bulk",
+      method: "POST",
+      data: JSON.stringify(menusTrack),
+      contentType: "application/json"
+    });
+
+    request.done(function(msg) {
+      // load the next page here, using window.location.replace()
+      alert("response: "+msg);
+    });
   });
 
 });

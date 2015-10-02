@@ -27,7 +27,7 @@
         <label for="category" class="control-label"> Category</label>
         <select type="text" class="form-control" id="categories">
           @foreach ($categories as $category)
-            <option id="{{ $category['id'] }}">{{ $category['name'] }}</option>
+            <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
           @endforeach
         </select>
       </div>
@@ -60,7 +60,10 @@
     </table>
     <p>Click to Finish Setup</p>
     <!--next button -->
-    <button type="button" class="btn btn-primary">Next</button>
+    <form method="get" id="next_link">
+    <input type="text" id="restaurant_id" value="{{ $restaurant_id }}" hidden>
+    <button type="submit" class="btn btn-primary" id="next">Next</button>
+    </form>
   </div>
 </div>
 
