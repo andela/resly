@@ -89,3 +89,5 @@ Route::get('/diner/search', [
     'uses' => '\Resly\Http\Controllers\SearchController@getResults',
     'as' => 'dinersearch',
 ]);
+
+Route::controller('menus', 'MenuController');

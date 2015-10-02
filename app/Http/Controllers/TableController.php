@@ -43,6 +43,6 @@ class TableController extends Controller
             }
         }
 
-        return 'success';
+        return $res_id;
     }
 }
