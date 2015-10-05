@@ -9,8 +9,7 @@ class Restaurant extends Model
     protected $primary_key = 'id';
     protected $table = 'Restaurant';
 
-    protected $fillable =
-        [
+    protected $fillable = [
             'name',
             'description',
             'opening_time',
@@ -19,10 +18,24 @@ class Restaurant extends Model
             'telephone',
             'email',
             'address',
-        ];
+    ];
 
     public function tables()
     {
         $this->hasMany('Resly/Table');
+    }
+
+    public function getName()
+    {
+        if ($this->name) {
+            return $this->name;
+        }
+
+        return;
+    }
+
+    public function getRestName()
+    {
+        return $this->getName();
     }
 }
