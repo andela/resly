@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DinerLoginTest extends TestCase
 {
+    use DatabaseMigrations;
 
     /**
      * A link to the diner page must be present
@@ -78,7 +79,7 @@ class DinerLoginTest extends TestCase
         $this->visit('/diner/login')
              ->type('diner@localhost.com', 'email')
              ->type('wrong password', 'password')
-             ->click('Login')
-             ->seePageIs('/diner/login');
+             ->press('Sign in')
+             ->seePageIs('/diner');
     }
 }

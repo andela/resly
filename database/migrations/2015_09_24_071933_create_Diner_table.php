@@ -19,7 +19,7 @@ class CreateDinerTable extends Migration
             $table->string('password');
             $table->string('email');
             $table->string('remember_token')->nullable();
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

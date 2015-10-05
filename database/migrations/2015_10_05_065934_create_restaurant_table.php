@@ -22,7 +22,7 @@ class CreateRestaurantTable extends Migration
             $table->string('telephone', 20);
             $table->string('email', 20);
             $table->string('address', 50);
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 
