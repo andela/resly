@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DinerLoginTest extends TestCase
 {
+    use DatabaseMigrations;
 
     /**
      * A link to the diner page must be present

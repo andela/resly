@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SearchTest extends TestCase
 {
+    use DatabaseMigrations;
+    
     /**
      * The diner can search for restaurants by name
      *

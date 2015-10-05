@@ -19,7 +19,7 @@ class CreateMenuItem extends Migration
             $table->string('price', 45);
             $table->integer('cat_id')->unsigned();
             $table->integer('restaurant_id')->unsigned();
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->foreign('cat_id')->references('id')->on('Category');
             $table->foreign('restaurant_id')->references('id')->on('Restaurant');
