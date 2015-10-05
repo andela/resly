@@ -17,7 +17,7 @@ class CreateTableTable extends Migration
             $table->integer('restaurant_id')->unsigned();
             $table->integer('seats_number');
             $table->string('name', 45);
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->foreign('restaurant_id')->references('id')
                 ->on('Restaurant');
