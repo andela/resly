@@ -79,7 +79,7 @@ class DinerLoginTest extends TestCase
         $this->visit('/diner/login')
              ->type('diner@localhost.com', 'email')
              ->type('wrong password', 'password')
-             ->click('Login')
-             ->seePageIs('/diner/login');
+             ->press('Sign in')
+             ->seePageIs('/diner');
     }
 }
