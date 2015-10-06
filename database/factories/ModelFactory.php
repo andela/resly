@@ -27,7 +27,7 @@ $factory->define(Resly\Restaurant::class, function (Faker\Generator $faker) {
         'email' => $faker->email,
         'opening_time' => $faker->time,
         'closing_time' => $faker->time,
-        'telephone' => $faker->phone,
+        'telephone' => $faker->phoneNumber,
         'address' => $faker->address,
         'location' => $faker->name,
     ];
