@@ -6,6 +6,17 @@
 <link rel="stylesheet" type="text/css" href="{!! asset('css/auth.css') !!}">
 @endsection
 
+@section('navbar')
+	<div class="navbar-header">
+      <a class="navbar-brand" href="{{ route('resthome')}}">Resly</a>
+   </div>
+   <div>
+   	 <ul class="nav navbar-nav navbar-right">
+       <li><a href="{{ route('restsignup')}}">Register</a></li>
+     </ul>
+   </div>
+@endsection
+
 @section('content')
 	<div class="container">
 	    <div class="col-lg-6 white">
