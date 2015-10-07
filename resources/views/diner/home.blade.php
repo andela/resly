@@ -52,7 +52,7 @@
           <ul class="nav navbar-nav navbar-right">
             @if (Auth::diner()->check())
             <li>Welcome {{ Auth::diner()->get()->fname }}</li> 
--           <li><a href="{{ route('dinersignout')}}">Signout</a></li>
+           <li><a href="{{ route('dinersignout')}}">Signout</a></li>
             @else
             <li><a href="{{ route('dinersignin')}}">Login</a></li>
             <li><a href="{{ route('dinersignup')}}">Register</a></li>
