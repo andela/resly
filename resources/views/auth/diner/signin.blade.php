@@ -6,18 +6,6 @@
 <link rel="stylesheet" type="text/css" href="{!! asset('css/auth.css') !!}">
 @endsection
 
-@section('navbar')
-	<div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-collapse collapse" id="navbar-main">
-        	<ul class="nav navbar-nav navbar-right">
-            	<li><a href="/diner" target="_blank">Register</a></li>
-          	</ul>
-        </div>
-      </div>
-    </div>
-@endsection 
-
 @section('content')
 	<div class="container">
 	    <div class="col-lg-6 white">
