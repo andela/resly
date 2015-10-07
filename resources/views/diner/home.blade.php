@@ -51,12 +51,8 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             @if (Auth::diner()->check())
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::diner()->get()->fname }} <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{{ route('dinersignout')}}">Signout</a></li>
-                </ul>
-              </li>
+            <li>Welcome {{ Auth::diner()->get()->fname }}</li> 
+-           <li><a href="{{ route('dinersignout')}}">Signout</a></li>
             @else
             <li><a href="{{ route('dinersignin')}}">Login</a></li>
             <li><a href="{{ route('dinersignup')}}">Register</a></li>

@@ -45,12 +45,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             @if (Auth::restaurateur()->check()) 
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::restaurateur()->get()->fname }} <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{{ route('restsignout')}}">Signout</a></li>
-                </ul>
-              </li>
+            <li><a href="{{ route('restsignout')}}">Signout</a></li>
             @else
             <li><a href="{{ route('restsignin')}}">Login</a></li>
             <li><a href="{{ route('restsignup')}}">Register</a></li>
