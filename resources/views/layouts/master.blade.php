@@ -23,8 +23,8 @@
           @yield('navbar')
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/diner" target="_blank">Diner</a></li>
-            <li><a href="/restaur" target="_blank">Restauranteur</a></li>
+            <li><a href="/diner">Diner</a></li>
+            <li><a href="/restaur">Restauranteur</a></li>
           </ul>
 
         </div>
