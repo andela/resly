@@ -6,6 +6,13 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('css/welcome.css') !!}">
 @endsection;
 
+@section('navbar')
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="/diner" target="_blank">Diner</a></li>
+    <li><a href="/rest" target="_blank">Restaurateur</a></li>
+  </ul>
+@endsection
+
 
 @section('content')
     <div class="container">

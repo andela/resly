@@ -45,7 +45,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             @if (Auth::restaurateur()->check()) 
-              <li><a href="{{ route('restsignout')}}">Signout</a></li>
+            <li><a href="{{ route('restsignout')}}">Signout</a></li>
             @else
             <li><a href="{{ route('restsignin')}}">Login</a></li>
             <li><a href="{{ route('restsignup')}}">Register</a></li>
@@ -62,5 +62,6 @@
   
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
 </html>
