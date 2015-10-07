@@ -30,7 +30,7 @@ class BookingController extends Controller
     {
         // Add validation of request here.
 
-        $diner_id = Auth::diner()->get()->id;
+        $diner_id = \Auth::diner()->get()->id;
         $seats_number = $request->input('seats_number');
         $booking_date = $request->input('booking_date');
 
@@ -83,7 +83,7 @@ class BookingController extends Controller
                 ->withErrors($validator);
         }
 
-        $diner_id = Auth::diner()->get()->id;
+        $diner_id = \Auth::diner()->get()->id;
 
         $booking = ['diner_id' => $diner_id];
         array_push($booking, $request->all());
