@@ -22,15 +22,9 @@
 
           @yield('navbar')
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/diner">Diner</a></li>
-            <li><a href="/restaur">Restauranteur</a></li>
-          </ul>
-
         </div>
       </div>
     </div>
-
 
     @yield('content')
 
