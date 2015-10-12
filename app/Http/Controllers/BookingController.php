@@ -31,7 +31,7 @@ class BookingController extends Controller
         // Add validation of request here.
 
         $diner_id = \Auth::diner()->get()->id;
-        $seats_number = $request->input('seats_number');
+        $seats_number = $request->input('number_of_table');
         $booking_date = $request->input('booking_date');
 
         $table = Table::where('seats_number', $seats_number)
@@ -45,19 +45,23 @@ class BookingController extends Controller
             'table_id' => $table->id,
             'booking_date' => $booking_date
         ];
-        $bookings = Bookings::where($match)
+        $bookings = Booking::where($match)
                     ->orderBy('booking_time')
                     ->get();
         $bookings = self::transformBooking($bookings);
 
-        // Grab a restaurant and make a slot
+        // Grab a restaurant from session and make a slot
+
+
+        $opening_time = '09:00:00';
+        $closing_time = '23:00:00';
 
         $slots = Slots::make(
             $opening_time,
             $closing_time,
             $bookings
         );
-        
+
         return view('bookings.create', ['slots' => $slots]);
     }
 
@@ -65,7 +69,6 @@ class BookingController extends Controller
      * Create and store a new booking from the provided
      * information.
      */
-
     public function postCreate(Request $request)
     {
         $validator = Validator::make(
