@@ -11,13 +11,12 @@ class Slots
 
         $interval = $opening->diff($closing);
         $hours = $interval->h;
-        
 
         $entries = [];
 
         $booking = null;
 
-        for ($current_hour=0; $current_hour < $hours; $current_hour++) {
+        for ($current_hour = 0; $current_hour < $hours; $current_hour++) {
             $start = clone $opening;
             $start->add(new \DateInterval("PT{$current_hour}H"));
 

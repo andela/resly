@@ -3,8 +3,6 @@
 namespace Resly\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Resly\Http\Requests;
-use Resly\Http\Controllers\Controller;
 use Resly\Booking;
 use Resly\Table;
 use Resly\Slots;
@@ -43,7 +41,7 @@ class BookingController extends Controller
 
         $match = [
             'table_id' => $table->table_id,
-            'booking_date' => $booking_date
+            'booking_date' => $booking_date,
         ];
         $bookings = Booking::where($match)
                     ->orderBy('booking_time')
@@ -51,7 +49,6 @@ class BookingController extends Controller
         $bookings = self::transformBooking($bookings);
 
         // Grab a restaurant from session and make a slot
-
 
         $opening_time = '09:00:00';
         $closing_time = '23:00:00';
@@ -66,17 +63,16 @@ class BookingController extends Controller
             'slots' => $slots,
             'booking_date' => $booking_date,
             'number_of_people' => $seats_number,
-            'table_id' => $table->table_id
+            'table_id' => $table->table_id,
         ]);
     }
 
     /**
-     *
-     *
+     *  Print out validation errors, if ever.
      */
     public function getCreate()
     {
-        return 'Gets here';
+        return 'Could not create booking';
     }
 
     /**
@@ -169,6 +165,7 @@ class BookingController extends Controller
         foreach ($bookings as $booking) {
             $final_bookings[] = $booking->time;
         }
+
         return $final_bookings;
     }
 }

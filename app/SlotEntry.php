@@ -15,8 +15,6 @@ class SlotEntry
         $this->free = $free;
     }
 
-
-
     public function isFree()
     {
         return $this->free;
