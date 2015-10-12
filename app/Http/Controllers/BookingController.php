@@ -42,7 +42,7 @@ class BookingController extends Controller
         }
 
         $match = [
-            'table_id' => $table->id,
+            'table_id' => $table->table_id,
             'booking_date' => $booking_date
         ];
         $bookings = Booking::where($match)
@@ -62,7 +62,12 @@ class BookingController extends Controller
             $bookings
         );
 
-        return view('bookings.create', ['slots' => $slots]);
+        return view('bookings.create', [
+            'slots' => $slots,
+            'booking_date' => $booking_date,
+            'number_of_people' => $seats_number,
+            'table_id' => $table->table_id
+        ]);
     }
 
     /**
