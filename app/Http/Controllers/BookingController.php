@@ -71,17 +71,26 @@ class BookingController extends Controller
     }
 
     /**
+     *
+     *
+     */
+    public function getCreate()
+    {
+        return 'Gets here';
+    }
+
+    /**
      * Create and store a new booking from the provided
      * information.
      */
     public function postCreate(Request $request)
     {
-        $validator = Validator::make(
+        $validator = \Validator::make(
             $request->all(),
             [
                 'table_id' => 'required|numeric',
                 'booking_date' => 'required',
-                'booking_time' => 'required|numeric',
+                'booking_time' => 'required',
                 'number_of_people' => 'required|required',
             ]
         );
@@ -93,13 +102,13 @@ class BookingController extends Controller
 
         $diner_id = \Auth::diner()->get()->id;
 
-        $booking = ['diner_id' => $diner_id];
-        array_push($booking, $request->all());
+        $booking = $request->all();
+        $booking['diner_id'] = $diner_id;
 
         $created_booking = Booking::create($booking);
 
         // Return success view here
-        return view('Booking made, <br>'+var_dump($created_booking));
+        return dd($created_booking);
     }
 
     /**
