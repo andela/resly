@@ -21,7 +21,7 @@ class CreateRestaurantTable extends Migration
             $table->time('closing_time');
             $table->string('telephone', 20);
             $table->string('email', 20);
-            $table->string('address', 50);
+            $table->string('address', 200);
             $table->nullableTimestamps();
         });
     }
