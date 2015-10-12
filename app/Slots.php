@@ -11,6 +11,7 @@ class Slots
 
         $interval = $opening->diff($closing);
         $hours = $interval->h;
+        
 
         $entries = [];
 
@@ -18,24 +19,25 @@ class Slots
 
         for ($current_hour=0; $current_hour < $hours; $current_hour++) {
             $start = clone $opening;
-            $start->add(new DateInterval("PT{$current_hour}H"));
+            $start->add(new \DateInterval("PT{$current_hour}H"));
 
             $finish = clone $opening;
             $next_hour = $current_hour + 1;
-            $finish->add(new DateInterval("PT{$next_hour}H"));
+            $finish->add(new \DateInterval("PT{$next_hour}H"));
 
-            $booking = null;
+            $free = true;
 
             foreach ($bookings as $booking) {
-                $booking_time = new Datetime($booking->booking_time);
+                $booking_time = new \Datetime($booking->booking_time);
 
-                if ($booking_time->diff($start)->h > 0) {
-                    $booking = $booking;
+                $interval = $start->diff($booking_time);
+
+                if ($interval->h == 0) {
+                    $free = false;
                     break;
                 }
             }
 
-            $free = $booking == null;
             $entries[] = new SlotEntry($start, $finish, $free);
         }
 

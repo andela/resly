@@ -21,4 +21,14 @@ class SlotEntry
     {
         return $this->free;
     }
+
+    public function startingTime()
+    {
+        return $this->starting;
+    }
+
+    public function finishingTime()
+    {
+        return $this->finishing;
+    }
 }
