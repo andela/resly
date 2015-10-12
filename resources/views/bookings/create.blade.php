@@ -8,19 +8,25 @@
 
 @section('content')
     <div class="container">
-    <table>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>starting</td>
+          <td>finishing</td>
+        </tr>
+      </thead>
       <tbody>
       @foreach ($slots as $slot)
         <tr>
-          <td>$slot->starting</td>
-          <td>$slot->finishing</td>
+          <td>@datetime( $slot->startingTime() )</td>
+          <td>@datetime( $slot->finishingTime() )</td>
           <td>
             @if ($slot->isFree())
               <form method="POST" action="/bookings/create">
                 {!! csrf_field() !!}
-                <input type="hidden" name="table_id" value="{{$table_id}}">
-                <input type="hidden" name="booking_time" value="{{$slot->starting}}">
-                <input type="submit">
+                {{-- <input type="hidden" name="table_id" value="{{$table_id}}"> --}}
+                <input type="hidden" name="booking_time" value="@datetime( $slot->startingTime() )">
+                <input type="submit" value="book this slot">
               </form>
             @else
               booked
@@ -29,6 +35,6 @@
         </tr>
       @endforeach
       </tbody>
-    <table>
+    </table>
     </div>
 @endsection

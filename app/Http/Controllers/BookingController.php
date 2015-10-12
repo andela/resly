@@ -31,7 +31,7 @@ class BookingController extends Controller
         // Add validation of request here.
 
         $diner_id = \Auth::diner()->get()->id;
-        $seats_number = $request->input('number_of_table');
+        $seats_number = $request->input('number_of_people');
         $booking_date = $request->input('booking_date');
 
         $table = Table::where('seats_number', $seats_number)

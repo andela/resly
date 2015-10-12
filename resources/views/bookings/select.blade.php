@@ -16,7 +16,7 @@
           </div>
           <div class="form-group">
             <label for="numberOfPeople">Number of people</label>
-            <input type="number" class="form-control" id="numberOfPeople" name="number_of_table" placeholder="1">
+            <input type="number" class="form-control" id="numberOfPeople" name="number_of_people" placeholder="1">
           </div>
           <button type="submit" class="btn btn-default">See availability</button>
         </form>
