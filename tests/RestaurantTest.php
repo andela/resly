@@ -20,7 +20,7 @@ class RestaurantTest extends TestCase
 
     // suspended tests...fix database connection issue.
 
-    public function _testRestaurantIsAdded()
+    public function testRestaurantIsAdded()
     {
 
         $this->visit('/restaurants/add')
@@ -33,7 +33,7 @@ class RestaurantTest extends TestCase
             ->type('first.rest@resly.com', 'email')
             ->type('50504, Nairobi', 'address')
             ->press('Next')
-            ->see('Add tables');
+            ->see('Add the Tables\' details');
 
         $this->seeInDatabase('Restaurant', 
             ['email' => 'first.rest@resly.com']);
@@ -47,15 +47,17 @@ class RestaurantTest extends TestCase
 
     // suspended...fix test db connection issue.
     
-    public function _testRestaurantDatabase()
+    public function testRestaurantDatabase()
     {
         DB::transaction(function () {
             // Seed some data and delete it afterwards
             $restaurant = factory('Resly\Restaurant')->make();
-            
-            DB::table('Restaurant')->insert($restaurant);
-            $this->seeInDatabase('email', $restaurant->email);
-            
+
+            DB::table('Restaurant')->insert($restaurant->getAttributes());
+            $this->seeInDatabase(
+                'Restaurant', ['email' => $restaurant->email]
+            );
+
             DB::table('Restaurant')->where('email', $restaurant->email)
                 ->delete();
         });
