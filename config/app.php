@@ -141,6 +141,7 @@ return [
          * Application Service Providers...
          */
         Resly\Providers\AppServiceProvider::class,
+        Resly\Providers\DatetimeServiceProvider::class,
         Resly\Providers\AuthServiceProvider::class,
         Resly\Providers\EventServiceProvider::class,
         Resly\Providers\RouteServiceProvider::class,

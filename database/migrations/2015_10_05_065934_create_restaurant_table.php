@@ -14,14 +14,14 @@ class CreateRestaurantTable extends Migration
     {
         Schema::create('Restaurant', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 45);
+            $table->string('name', 70);
             $table->string('location', 200);
             $table->string('description', 200);
             $table->time('opening_time');
             $table->time('closing_time');
-            $table->string('telephone', 20);
-            $table->string('email', 20);
-            $table->string('address', 50);
+            $table->string('telephone', 50);
+            $table->string('email', 50);
+            $table->string('address', 200);
             $table->nullableTimestamps();
         });
     }
