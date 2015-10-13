@@ -17,6 +17,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <a class="navbar-brand" href="/">Resly</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
 
@@ -28,6 +29,7 @@
 
     @yield('content')
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>

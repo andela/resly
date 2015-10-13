@@ -8,8 +8,8 @@
 
 @section('navbar')
   <ul class="nav navbar-nav navbar-right">
-    <li><a href="/diner" target="_blank">Diner</a></li>
-    <li><a href="/rest" target="_blank">Restaurateur</a></li>
+    <li><a href="/diner" target="_self">Diner</a></li>
+    <li><a href="/rest" target="_self">Restaurateur</a></li>
   </ul>
 @endsection
 

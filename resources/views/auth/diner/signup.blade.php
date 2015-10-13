@@ -7,9 +7,6 @@
 @endsection
 
 @section('navbar')
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{{ route('dinerhome')}}">Resly</a>
-   </div>
    <div>
      <ul class="nav navbar-nav navbar-right">
        <li><a href="{{ route('dinersignin')}}">Login</a></li>
