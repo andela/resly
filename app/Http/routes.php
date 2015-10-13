@@ -91,3 +91,5 @@ Route::get('/diner/search', [
 ]);
 
 Route::controller('menus', 'MenuController');
+
+Route::controller('bookings', 'BookingController');

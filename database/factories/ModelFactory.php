@@ -32,3 +32,13 @@ $factory->define(Resly\Restaurant::class, function (Faker\Generator $faker) {
         'location' => $faker->name,
     ];
 });
+
+$factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
+    return [
+        'number_of_people' => rand(2, 8),
+        'booking_date' => $faker->date,
+        'booking_time' => $faker->time,
+        'diner_id' => 1,
+        'table_id' => 1,
+    ];
+});
