@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Resly | Results</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{!! asset('css/app.css') !!}">
-    <link href="{{ asset('css/navbar-fixed-top.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/paper/bootstrap.min.css">
-</head>
-<body>
+@extends('layouts.master')
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+@section('title', 'Results')
+
+@section('styles')
+<link rel="stylesheet" type="text/css" href="{!! asset('css/navbar-fixed-top.css') !!}">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+@endsection
+
+@section('navbar')
+<nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -33,8 +31,13 @@
             </form>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            @if (Auth::diner()->check()) 
-              <li><a href="{{ route('dinersignout')}}">Signout</a></li>
+            @if (Auth::diner()->check())
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::diner()->get()->fname }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ route('dinersignout')}}">Signout</a></li>
+                </ul>
+              </li>
             @else
             <li><a href="{{ route('dinersignin')}}">Login</a></li>
             <li><a href="{{ route('dinersignup')}}">Register</a></li>
@@ -43,8 +46,10 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+@endsection
 
-    <div class="container white">
+@section('content')
+  <div class="container white">
       <h3>Results</h3>
       @if (! $results->count())
         <p>No results found, sorry</p>
@@ -56,7 +61,4 @@
         @endforeach
       @endif
     </div>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection
