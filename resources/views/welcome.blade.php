@@ -19,8 +19,24 @@
 
       <div id="banner">
         <div class="inner">
-            <h1>Welcome to resly <small>the new way to dine</small></h1>
+            <h1>The new way of dining</h1>
         </div>
+
+        <div class = "search-form">
+          <form role="form" action="{{ route('searchsite') }}">
+            <div class="form-group">
+             <div class="input-group input-group-lg col-lg-6 searching">
+               <span class="input-group-addon">
+                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+               </span>
+               <input type="text" name="query" class="form-control" placeholder="Location or Restaurant" dir = "auto">
+               <span class = "input-group-btn">
+                  <button type="submit" class="btn btn-primary">Find</button>
+               </span>
+             </div>
+            </div>
+          </form>
+        </div> 
       </div>
     </div>
 

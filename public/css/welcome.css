@@ -16,7 +16,7 @@ body {
 
 #banner h1 {
     color: rgb(177, 61, 114);
-    font-size: 10em;
+    font-size: 8em;
 }
 
 #banner small {
@@ -30,4 +30,17 @@ body {
 .cell {
     text-align: center;
 }
+
+.search-form {
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+    width: 80%;
+}
+
+.searching {
+    background: #fefefe;
+}
+
 /*# sourceMappingURL=welcome.css.map */

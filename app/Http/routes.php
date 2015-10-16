@@ -85,9 +85,9 @@ Route::get('/diner/logout', [
 /*
  *  Search
  */
-Route::get('/diner/search', [
+Route::get('/search', [
     'uses' => '\Resly\Http\Controllers\SearchController@getResults',
-    'as' => 'dinersearch',
+    'as' => 'searchsite',
 ]);
 
 Route::controller('menus', 'MenuController');
