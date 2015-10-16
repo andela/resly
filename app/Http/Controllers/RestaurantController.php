@@ -9,11 +9,9 @@ use Resly\Http\Requests;
 
 class RestaurantController extends Controller
 {
-    /**
-     *  Display the restaurant listing.
-     */
-    public function getIndex()
+    public function __construct()
     {
+        $this->authorize('setup-restaurant');
     }
 
     /**
@@ -44,12 +42,13 @@ class RestaurantController extends Controller
 
         if ($validator->fails()) {
             return redirect('/restaurants/add')
+                ->withInput()
                 ->withErrors($validator);
         }
 
         $restaurant = Restaurant::create($request->all());
+        $request->session()->put('restaurant_id', $restaurant->id);
 
-        return redirect('tables/add-bulk/?id='
-            .$restaurant->id);
+        return redirect('tables/add-bulk');
     }
 }

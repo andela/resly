@@ -42,13 +42,13 @@
       <div class= "form-group">
         <label for= "name" class= "control-label"> Name of restaurant</label>
         <input type = "text" class = "form-control" id= "restaurant_name" 
-            placeholder = "Enter name" name= "name">
+            placeholder = "Enter name" name= "name" value="{{ old('name') }}">
       </div>
 
       <!-- Add Description of restaurant -->
       <div class ="form-group">
         <label for= "cuisine" class= "control-label"> Description</label>
-        <textarea class = "form-control" name= "description" id = "cuisine" rows= "5" placeholder = "e.g. cuisine and selling point"></textarea>
+        <textarea class = "form-control" name= "description" id = "cuisine" rows= "5" placeholder = "e.g. cuisine and selling point">{{ old('description') }}</textarea>
       </div>
 
       <!-- Add Opening and Closing Hours of restaurant -->
@@ -56,12 +56,12 @@
         <div class = "row">
           <div class = "col-sm-6">
             <label for = "opening-hours" class = "control-label"> Opening Time</label>
-            <input class = "form-control" id = "opening-hours" name="opening_time" placeholder = "09:00 (In 24hr system)"></input>
+            <input class = "form-control" id = "opening-hours" name="opening_time" placeholder = "09:00 (In 24hr system)" value="{{ old('opening_time') }}">
           </div>
           
           <div class = "col-sm-6">
             <label for = "closing-time" class = "control-label"> Closing Time</label>
-            <input class = "form-control" id = "closing-time" name="closing_time" placeholder = "22:00"></input>
+            <input class = "form-control" id = "closing-time" name="closing_time" placeholder = "22:00" value="{{ old('closing_time') }}">
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
         <!-- Add where restaurant is located -->
       <div class= "form-group">
         <label for = "location" class= "control-label"> Location</label>
-        <input type = "text" class = "form-control" id= "location" name="location" placeholder = "Enter physical location">
+        <input type = "text" class = "form-control" id= "location" name="location" placeholder = "Enter physical location" value="{{ old('location') }}">
       </div>
 
       <!-- Add contact information of restaurant -->
@@ -79,19 +79,22 @@
         <!-- Telephone number -->
         <div class = "form-group">
           <label for = "telephone" class = "control-label"> Telephone Number</label>
-          <input type = "tel" class = "form-control" id = "telephone" name="telephone" placeholder = "Enter phone number">
+          <input type = "tel" class = "form-control" id = "telephone" 
+            name="telephone" placeholder = "Enter phone number" value="{{ old('telephone') }}">
         </div>
 
         <!-- Email address -->
         <div class = "form-group">
           <label for = "email-address" class = "control-label"> Email address</label>
-          <input type = "email" class = "form-control" name="email" id = "email-address" placeholder = "Enter email address">
+          <input type = "email" class = "form-control" name="email" id = "email-address" 
+            value="{{ old('email') }}" placeholder = "Enter email address">
         </div>
         
          <!-- Postal address -->
         <div class = "form-group">
           <label for = "postal" class = "control-label"> Postal address</label>
-          <input type = "text" class = "form-control" name="address" id = "postal" placeholder = "Enter postal address">
+          <input type = "text" class = "form-control" name="address" id = "postal" 
+            value="{{ old('address') }}" placeholder = "Enter postal address">
         </div>  
       </fieldset>
 

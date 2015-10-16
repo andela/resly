@@ -8,16 +8,25 @@ use Resly\MenuItem;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorize('setup-restaurant');
+    }
+
     /**
      * GET view for adding a menu.
      */
     public function getAddBulk(Request $request)
     {
         $categories = Category::all();
+        $restaurant_id = $request->session()->get('restaurant_id');
 
         return view(
             'menu.bulk',
-            ['categories' => $categories, 'restaurant_id' => $request->res_id]
+            [
+                'categories' => $categories,
+                'restaurant_id' => $restaurant_id,
+            ]
         );
     }
 
