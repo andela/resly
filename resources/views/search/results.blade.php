@@ -13,9 +13,7 @@
         <p>No results found, sorry</p>
       @else
         @foreach ($results as $result)
-          <ul>
-            <li>{{ $result->getRestName()}}</li>
-          </ul>
+          <h3><a href="{{ route('restprofile', ['id' => $result->id])}}">{{ $result->getRestName()}}</a></h3>
         @endforeach
       @endif
       <a class = "btn btn-primary" href="/">Back</a>

@@ -93,3 +93,11 @@ Route::get('/search', [
 Route::controller('menus', 'MenuController');
 
 Route::controller('bookings', 'BookingController');
+
+/*
+ * Restaurant Profile
+ */
+Route::get('/rest/{id}', [
+    'uses' => '\Resly\Http\Controllers\ProfileController@getProfile',
+    'as' => 'restprofile',
+]);
