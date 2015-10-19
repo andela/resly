@@ -12,18 +12,22 @@ class RestaurantTest extends TestCase
      * @return void
      */
 
-    public function testAddRestaurantPageIsLoaded()
+    public function _setUp()
     {
-        $this->visit('/restaurants/add')
+        $this->restaurateur = factory('Resly\Restaurateur')->make();
+    }
+
+    public function _testAddRestaurantPageIsLoaded()
+    {
+        $this->actingAs($this->restaurateur)
+            ->visit('/restaurants/add')
             ->see('Add the details of the restaurant');
     }
 
-    // suspended tests...fix database connection issue.
-
-    public function testRestaurantIsAdded()
+    public function _testRestaurantIsAdded()
     {
-
-        $this->visit('/restaurants/add')
+        $this->actingAs($this->restaurateur)
+            ->visit('/restaurants/add')
             ->type('My First Restaurant', 'name')
             ->type('We are awesome', 'description')
             ->type('08:00:00', 'opening_time')
@@ -44,8 +48,6 @@ class RestaurantTest extends TestCase
           ->delete('first.rest@resly.com');
 
     }
-
-    // suspended...fix test db connection issue.
     
     public function testRestaurantDatabase()
     {

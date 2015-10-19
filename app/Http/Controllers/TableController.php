@@ -7,14 +7,21 @@ use Resly\Table;
 
 class TableController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorize('setup-restaurant');
+    }
+
     /**
      * Add tables in bulk.
      */
     public function getAddBulk(Request $request)
     {
+        $restaurant_id = $request->session()->get('restaurant_id');
+
         return view(
             'table.bulk',
-            ['restaurant_id' => $request['id']]
+            ['restaurant_id' => $restaurant_id]
         );
     }
 

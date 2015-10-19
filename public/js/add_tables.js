@@ -87,7 +87,7 @@ $(document).ready(function() {
 
     request.done(function(res_id) {
       // load the next page here
-      window.location.replace("/menus/add-bulk?res_id="+res_id);
+      window.location.replace("/menus/add-bulk");
     });
   });
 
