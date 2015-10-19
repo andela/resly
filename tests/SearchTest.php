@@ -9,19 +9,19 @@ class SearchTest extends TestCase
     use DatabaseMigrations;
     
     /**
-     * The diner can search for restaurants by name
+     * Anyone can search for restaurants by name
      *
-     * Go to the diner page, enter the restaurants name and
-     * click the search button, to display the results page.
+     * Enter the restaurants name and
+     * click the Go button, to display the results page.
      *
      * @return void
      */
-    public function testDinerSearchCanBeDone()
+    public function testSearchCanBeDone()
     {
-        $this->visit('/diner')
+        $this->visit('/')
              ->type('name', 'query')
-             ->press('Search')
-             ->seePageIs('/diner/search?query=name')
+             ->press('Find')
+             ->seePageIs('/search?query=name')
              ->see('Results');
     }
 }
