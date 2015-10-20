@@ -51,19 +51,19 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
     ]);
 
     $restaurant = factory('Resly\Restaurant')->create([
-        'restaurateur_id' => $restaurateur->id
+        'restaurateur_id' => $restaurateur->id,
     ]);
     $menuItem = factory('Resly\MenuItem')->create([
-        'restaurant_id' => $restaurant->id
+        'restaurant_id' => $restaurant->id,
     ]);
     $menuItemTag = factory('Resly\MenuItemTag')->create([
-        'menu_item_id' => $menuItem->id
+        'menu_item_id' => $menuItem->id,
     ]);
 
     return [
         'restaurant_id' => $restaurant->id,
         'seats_number' => $faker->randomDigit,
-        'name' => $faker->word
+        'name' => $faker->word,
     ];
 });
 
@@ -79,7 +79,7 @@ $factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
 
 $factory->define(Resly\Category::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word
+        'name' => $faker->word,
     ];
 });
 
@@ -100,9 +100,8 @@ $factory->define(Resly\MenuItemTag::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->define(Resly\Tag::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word
+        'name' => $faker->word,
     ];
 });
