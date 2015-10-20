@@ -14,6 +14,7 @@ class CreateRestaurantTable extends Migration
     {
         Schema::create('Restaurant', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('restaurateur_id')->unsigned();
             $table->string('name', 70);
             $table->string('location', 200);
             $table->string('description', 200);
@@ -23,6 +24,9 @@ class CreateRestaurantTable extends Migration
             $table->string('email', 50);
             $table->string('address', 200);
             $table->nullableTimestamps();
+
+            $table->foreign('restaurateur_id')->references('id')
+                ->on('Restaurateur');
         });
     }
 

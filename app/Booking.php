@@ -8,14 +8,13 @@ class Booking extends Model
 {
     protected $table = 'Booking';
 
-    protected $fillable =
-        [
+    protected $fillable = [
             'number_of_people',
             'booking_date',
             'booking_time',
             'diner_id',
             'table_id',
-        ];
+    ];
 
     public function diner()
     {
