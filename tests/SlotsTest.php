@@ -8,6 +8,8 @@ use Resly\Slots;
 
 class SlotsTest extends TestCase
 {
+    use DatabaseMigrations;
+    
     public function testCanCreateEntries()
     {
         $booking1 = factory('Resly\Booking')->make([

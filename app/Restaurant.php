@@ -11,6 +11,7 @@ class Restaurant extends Model
 
     protected $fillable = [
             'name',
+            'restauranteur_id',
             'description',
             'opening_time',
             'closing_time',
@@ -23,6 +24,11 @@ class Restaurant extends Model
     public function tables()
     {
         $this->hasMany('Resly/Table');
+    }
+
+    public function restaurateur()
+    {
+        $this->belongsTo('Resly\Restaurateur');
     }
 
     public function getName()

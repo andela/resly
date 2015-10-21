@@ -18,6 +18,6 @@ class MenuItem extends Model
 
     public function category()
     {
-        $this->hasMany('Resly\Category');
+        return $this->hasMany('Resly\Category');
     }
 }

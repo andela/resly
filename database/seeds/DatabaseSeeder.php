@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        factory('Resly\Booking', 5)->create();
 
         Model::reguard();
     }
