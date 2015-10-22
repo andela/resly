@@ -101,3 +101,8 @@ Route::get('/rest/{id}', [
     'uses' => '\Resly\Http\Controllers\ProfileController@getProfile',
     'as' => 'restprofile',
 ]);
+
+/*
+ * Diner Profile
+ */
+Route::controller('profile', 'DinerProfileController');

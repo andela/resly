@@ -38,7 +38,7 @@
                 <span class = "caret"></span>
               </button>
               <ul class="dropdown-menu" role = "menu">
-                <li><a href="#">Your Profile</a></li>
+                <li><a href="/profile">Your Profile</a></li>
                 <li><a href="#">Help</a></li>
                 <li class="divider"></li>
                 <li><a href="#">Settings</a></li>
