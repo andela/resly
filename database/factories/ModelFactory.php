@@ -76,8 +76,9 @@ $factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Resly\Category::class, function (Faker\Generator $faker) {
+    $number = rand(100, 1000);
     return [
-        'name' => $faker->word,
+        'name' => "{$faker->word}_$number",
     ];
 });
 
