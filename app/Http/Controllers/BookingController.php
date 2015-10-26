@@ -65,11 +65,10 @@ class BookingController extends Controller
         $bookings = Booking::where($match)
                     ->orderBy('booking_time')
                     ->get();
-        $bookings = self::transformBooking($bookings);
 
         $opening_time = $restaurant->opening_time;
         $closing_time = $restaurant->closing_time;
-
+        
         $slots = Slots::make(
             $opening_time,
             $closing_time,
@@ -114,22 +113,5 @@ class BookingController extends Controller
 
         // Return success view here
         return dd($created_booking);
-    }
-
-    /**
-     *  Take the bookings returned from an eloquent querry
-     *  and passed in, and return an array of times.
-     */
-    private static function transformBooking($bookings = null)
-    {
-        if (empty($bookings)) {
-            return false;
-        }
-        $final_bookings = [];
-        foreach ($bookings as $booking) {
-            $final_bookings[] = $booking->time;
-        }
-
-        return $final_bookings;
     }
 }
