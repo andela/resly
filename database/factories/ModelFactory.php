@@ -60,7 +60,7 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
 
     return [
         'restaurant_id' => $restaurant->id,
-        'seats_number' => $faker->randomDigit,
+        'seats_number' => 5,
         'name' => $faker->word,
     ];
 });

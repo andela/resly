@@ -18,7 +18,7 @@ class Slots
 
         for ($current_hour = 0; $current_hour < $hours; $current_hour++) {
             $start = clone $opening;
-            $start->add(new \DateInterval("PT{$current_hour}H1M"));
+            $start->add(new \DateInterval("PT{$current_hour}H"));
 
             $finish = clone $opening;
             $next_hour = $current_hour + 1;
