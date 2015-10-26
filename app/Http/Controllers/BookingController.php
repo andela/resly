@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Resly\Booking;
 use Resly\Table;
 use Resly\Slots;
+use Validator;
+use Resly\Restaurant;
 
 class BookingController extends Controller
 {
@@ -29,7 +31,7 @@ class BookingController extends Controller
         if ($validator->fails()) {
             return redirect()
                 ->back()
-                ->withErrors($validator)
+                ->withErrors($validator);
         }
         
         $seats_number = $request->input('number_of_people');
@@ -48,7 +50,7 @@ class BookingController extends Controller
         if (empty($table)) {
             return redirect()
                 ->back()
-                ->with('msg', 'No table available on that day.');
+                ->with('info', 'No table available on that day.');
         }
 
         $match = [
