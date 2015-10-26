@@ -10,33 +10,45 @@ use Resly\Slots;
 class BookingController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getIndex()
-    {
-        return view('bookings.select');
-    }
-
-    /**
      * Show the form for creating a new booking.
      *
      * @return \Illuminate\Http\Response
      */
     public function postBegin(Request $request)
     {
-        // Add validation of request here.
+        // Receives restaurant Id, number of tables
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'restaurant_id' => 'required|numeric',
+                'number_of_people' => 'required|numeric',
+                'booking_date' => 'required|date',
+            ]
+        );
 
-        $diner_id = \Auth::diner()->get()->id;
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+        }
+        
         $seats_number = $request->input('number_of_people');
         $booking_date = $request->input('booking_date');
+        $restaurant_id = $request->input('restaurant_id');
 
-        $table = Table::where('seats_number', $seats_number)
+        $match = [
+                    'seats_number' => $seats_number,
+                    'restaurant_id' => $restaurant_id
+                ];
+
+        $table = Table::where($match)
                         ->first();
+        $restaurant = Restaurant::findOrFail($restaurant_id);
 
         if (empty($table)) {
-            return view('bookings.create', ['slots' => []]);
+            return redirect()
+                ->back()
+                ->with('msg', 'No table available on that day.');
         }
 
         $match = [
@@ -48,10 +60,8 @@ class BookingController extends Controller
                     ->get();
         $bookings = self::transformBooking($bookings);
 
-        // Grab a restaurant from session and make a slot
-
-        $opening_time = '09:00:00';
-        $closing_time = '23:00:00';
+        $opening_time = $restaurant->opening_time;
+        $closing_time = $restaurant->closing_time;
 
         $slots = Slots::make(
             $opening_time,
@@ -105,51 +115,6 @@ class BookingController extends Controller
 
         // Return success view here
         return dd($created_booking);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     /**
