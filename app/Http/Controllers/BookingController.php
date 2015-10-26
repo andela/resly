@@ -11,10 +11,15 @@ use Resly\Restaurant;
 
 class BookingController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorize('book');
+    }
+
     /**
-     * Show the form for creating a new booking.
-     *
-     * @return \Illuminate\Http\Response
+     * Begin creating of a new booking.
+     * Checks whether a table is available from the provided
+     * restaurant, date and people.
      */
     public function postBegin(Request $request)
     {
@@ -77,14 +82,6 @@ class BookingController extends Controller
             'number_of_people' => $seats_number,
             'table_id' => $table->table_id,
         ]);
-    }
-
-    /**
-     *  Print out validation errors, if ever.
-     */
-    public function getCreate()
-    {
-        return 'Could not create booking';
     }
 
     /**
