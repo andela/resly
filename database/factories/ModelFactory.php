@@ -17,7 +17,6 @@ $factory->define(Resly\Diner::class, function (Faker\Generator $faker) {
         'lname' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt('resly'),
-        'remember_token' => str_random(10),
     ];
 });
 
@@ -26,8 +25,7 @@ $factory->define(Resly\Restaurateur::class, function (Faker\Generator $faker) {
         'fname' => $faker->name,
         'lname' => $faker->name,
         'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'password' => bcrypt('resly'),
     ];
 });
 
@@ -62,7 +60,7 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
 
     return [
         'restaurant_id' => $restaurant->id,
-        'seats_number' => $faker->randomDigit,
+        'seats_number' => 5,
         'name' => $faker->word,
     ];
 });
@@ -78,8 +76,10 @@ $factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Resly\Category::class, function (Faker\Generator $faker) {
+    $number = rand(100, 1000);
+
     return [
-        'name' => $faker->word,
+        'name' => "{$faker->word}_$number",
     ];
 });
 

@@ -51,6 +51,7 @@ class DinerAuthController extends Controller
             return redirect()->route('dinerhome')->with('info', 'Could not sign you 
                 in with those credentials.');
         }
+        $request->session()->put('user_id', Auth::diner()->get()->id);
 
         return redirect()->route('dinerhome')->with('info', 'You are now signed in');
     }

@@ -5,6 +5,7 @@ namespace Resly\Providers;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Resly\Restaurateur;
+use Resly\Diner;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,9 +28,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         parent::registerPolicies($gate);
 
-        //
         $gate->define('setup-restaurant', function ($user) {
             return $user instanceof Restaurateur;
+        });
+
+        $gate->define('book', function ($user) {
+            return $user instanceof Diner;
         });
     }
 }
