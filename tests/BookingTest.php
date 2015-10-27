@@ -3,23 +3,19 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Resly\Diner;
 
 class BookingTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function testCanSeeAllBookings()
-    {
-        //..
-    }
-
-    public function testCanCreateBooking()
+    public function testQuerryReservationAvailability()
     {
         Session::start();
 
-         $this->seed('DatabaseSeeder');
+        $this->seed('DatabaseSeeder');
 
-         $diner = factory('Resly\Diner')->create();
+        $diner = factory('Resly\Diner')->create();
 
         $response = $this->actingAs($diner)->call('POST', 'bookings/begin', [
             'restaurant_id' => 1,
@@ -31,18 +27,28 @@ class BookingTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
 
-    public function testCanViewSingleBooking()
+    public function testCanCreateBooking()
     {
-        //..
-    }
+        Session::start();
 
-    public function testCanUpdateBooking()
-    {
-        //..
-    }
+        $this->seed('DatabaseSeeder');
 
-    public function testCanDeleteBooking()
-    {
-        //..
+        $diner = Diner::find(1);
+
+        $response = $this->actingAs($diner)
+            ->withSession(['user_id' => $diner->id])
+            ->call(
+                'POST',
+                'bookings/create', 
+                [
+                    'table_id' => 1,
+                    'booking_time' => '16:00:00',
+                    'booking_date' => '12/12/2015',
+                    'number_of_people' => 6,
+                    '_token' => csrf_token()
+                ]
+            );
+
+        $this->assertEquals(200, $response->status());
     }
 }

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Resly\Booking;
 use Resly\Table;
 use Resly\Slots;
-use Validator;
 use Resly\Restaurant;
 
 class BookingController extends Controller
@@ -24,7 +23,7 @@ class BookingController extends Controller
     public function postBegin(Request $request)
     {
         // Receives restaurant Id, number of tables
-        $validator = Validator::make(
+        $validator = \Validator::make(
             $request->all(),
             [
                 'restaurant_id' => 'required|numeric',
@@ -38,14 +37,14 @@ class BookingController extends Controller
                 ->back()
                 ->withErrors($validator);
         }
-        
+
         $seats_number = $request->input('number_of_people');
         $booking_date = $request->input('booking_date');
         $restaurant_id = $request->input('restaurant_id');
 
         $match = [
                     'seats_number' => $seats_number,
-                    'restaurant_id' => $restaurant_id
+                    'restaurant_id' => $restaurant_id,
                 ];
 
         $table = Table::where($match)
@@ -68,7 +67,7 @@ class BookingController extends Controller
 
         $opening_time = $restaurant->opening_time;
         $closing_time = $restaurant->closing_time;
-        
+
         $slots = Slots::make(
             $opening_time,
             $closing_time,
@@ -95,7 +94,7 @@ class BookingController extends Controller
                 'table_id' => 'required|numeric',
                 'booking_date' => 'required',
                 'booking_time' => 'required',
-                'number_of_people' => 'required|required',
+                'number_of_people' => 'required|numeric',
             ]
         );
 
@@ -104,7 +103,7 @@ class BookingController extends Controller
                 ->withErrors($validator);
         }
 
-        $diner_id = \Auth::diner()->get()->id;
+        $diner_id = $request->session()->get('user_id');
 
         $booking = $request->all();
         $booking['diner_id'] = $diner_id;
@@ -112,6 +111,6 @@ class BookingController extends Controller
         $created_booking = Booking::create($booking);
 
         // Return success view here
-        return dd($created_booking);
+        return \Response::make('Booking successful', 200);
     }
 }
