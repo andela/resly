@@ -51,4 +51,29 @@ class BookingTest extends TestCase
 
         $this->assertEquals(200, $response->status());
     }
+
+    public function testDinerCanViewReservations()
+    {
+        // create a reservation first
+        $booking = factory('Resly\Booking')->create();
+
+        $diner = $booking->diner;
+
+        $this->actingAs($diner)
+            ->visit('bookings')
+            ->see($booking->booking_date);
+    }
+
+    public function testRestaurantReservationsCanBeViewed()
+    {
+        $this->seed('DatabaseSeeder');
+
+        $booking = factory('Resly\Booking')->create();
+
+        $restaurateur = $booking->table->restaurant->restaurateur;
+
+        $this->actingAs($restaurateur)
+            ->visit('bookings')
+            ->see($booking->booking_date);
+    }
 }

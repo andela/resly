@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
-    protected $primary_key = 'id';
+    protected $primaryKey = 'id';
     protected $table = 'Restaurant';
 
     protected $fillable = [
@@ -23,12 +23,22 @@ class Restaurant extends Model
 
     public function tables()
     {
-        $this->hasMany('Resly/Table');
+        return $this->hasMany('Resly\Table', 'table_id');
     }
 
     public function restaurateur()
     {
-        $this->belongsTo('Resly\Restaurateur');
+        return $this->belongsTo('Resly\Restaurateur');
+    }
+
+    public function bookings()
+    {
+        return $this->hasManyThrough(
+            'Resly\Booking',
+            'Resly\Table',
+            'restaurant_id',
+            'table_id'
+        );
     }
 
     public function getName()

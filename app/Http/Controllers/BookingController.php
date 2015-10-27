@@ -7,12 +7,32 @@ use Resly\Booking;
 use Resly\Table;
 use Resly\Slots;
 use Resly\Restaurant;
+use Resly\Restaurateur;
+use Resly\Diner;
 
 class BookingController extends Controller
 {
-    public function __construct()
+    /**
+     * View the listings for bookings already made.
+     * Responds to GET /bookings
+     */
+    public function getIndex()
     {
-        $this->authorize('book');
+        // Check if authenticated user is Restaurateur.
+        $user = \Auth::user();
+        if ($user instanceof Restaurateur) {
+            $restaurant = $user->restaurant;
+
+            return view(
+                'bookings.all',
+                ['bookings' => $restaurant->bookings]
+            );
+        }
+
+        return view(
+            'bookings.all',
+            ['bookings' => $user->bookings]
+        );
     }
 
     /**
@@ -22,6 +42,8 @@ class BookingController extends Controller
      */
     public function postBegin(Request $request)
     {
+        $this->authorize('book');
+
         // Receives restaurant Id, number of tables
         $validator = \Validator::make(
             $request->all(),
@@ -88,6 +110,8 @@ class BookingController extends Controller
      */
     public function postCreate(Request $request)
     {
+        $this->authorize('book');
+
         $validator = \Validator::make(
             $request->all(),
             [
