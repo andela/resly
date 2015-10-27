@@ -9,3 +9,11 @@ body {
     margin-top: 60px;
     padding: 10px 20px;
 }
+
+.or {
+    padding-bottom: 5%;
+    text-align: center;
+    margin: 20px 0;
+    color: #808080;
+    font-variant: small-caps;
+}

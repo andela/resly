@@ -33,6 +33,7 @@
             <div class = "btn-group flow-group">
               <button type="button" class="btn btn-default">
                 {{ Auth::diner()->get()->fname }}
+                {{ Auth::diner()->get()->name }}
               </button>
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle = "dropdown">
                 <span class = "caret"></span>

@@ -5,6 +5,8 @@ namespace Resly\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use Resly\Diner;
+use Socialite;
+use Redirect;
 
 class DinerAuthController extends Controller
 {
@@ -44,7 +46,7 @@ class DinerAuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if (! Auth::diner()->attempt(
+        if (!Auth::diner()->attempt(
             $request->only(['email', 'password']),
             $request->has('remember')
         )) {
@@ -61,5 +63,56 @@ class DinerAuthController extends Controller
         Auth::diner()->logout();
 
         return redirect()->route('dinerhome');
+    }
+
+    /**
+     * Redirect the user to the google authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from google.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback()
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+        } catch (Exception $e) {
+            return Redirect::to('auth/google');
+        }
+
+        $authUser = $this->findOrCreateUser($user);
+
+        Auth::diner()->login($authUser, true);
+
+        return redirect()->route('dinerhome');
+    }
+
+    /**
+     * Return user if exists; create and return if doesn't.
+     *
+     * @param $googleUser
+     *
+     * @return User
+     */
+    private function findOrCreateUser($googleUser)
+    {
+        if ($authUser = Diner::where('google_id', $googleUser->id)->first()) {
+            return $authUser;
+        }
+
+        return Diner::create([
+            'name' => $googleUser->name,
+            'email' => $googleUser->email,
+            'google_id' => $googleUser->id,
+            'avatar' => $googleUser->avatar,
+        ]);
     }
 }
