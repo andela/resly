@@ -76,4 +76,17 @@ class BookingTest extends TestCase
             ->visit('bookings')
             ->see($booking->booking_date);
     }
+
+    public function testDinerCanCancelReservation()
+    {
+        // create a reservation first
+        $booking = factory('Resly\Booking')->create();
+
+        $diner = $booking->diner;
+
+        $this->actingAs($diner)
+            ->visit('bookings')
+            ->press('Cancel')
+            ->see('Booking cancelled successfully.');
+    }
 }

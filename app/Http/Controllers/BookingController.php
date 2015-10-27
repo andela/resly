@@ -13,8 +13,8 @@ use Resly\Diner;
 class BookingController extends Controller
 {
     /**
-     * View the listings for bookings already made.
      * Responds to GET /bookings
+     * View the listings for bookings already made.
      */
     public function getIndex()
     {
@@ -140,7 +140,7 @@ class BookingController extends Controller
 
     /**
      *  responds to POST bookings/cancel
-     *  removes the passed booking{$id} from DB
+     *  removes the passed booking{$id} from DB.
      */
     public function postCancel(Request $request)
     {
@@ -149,7 +149,7 @@ class BookingController extends Controller
         // validate request
         $validator = \Validator::make(
             $request->all(),
-            [ 'booking_id' => 'required|numeric']
+            ['booking_id' => 'required|numeric']
         );
 
         if ($validator->fails()) {
