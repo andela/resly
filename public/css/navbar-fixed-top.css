@@ -1,0 +1,16 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+  background:url('/img/pexels-photo.jpg');
+}
+
+.white {
+    background: #fefefe;
+    opacity: .8;
+    margin-top: 60px;
+    padding: 10px 20px;
+}
+
+.flow-group {
+	padding: 15px;
+}

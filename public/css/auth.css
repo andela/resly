@@ -1,0 +1,11 @@
+body {
+  padding-top: 70px;
+  background:url('/img/pexels-photo.jpg');
+}
+
+.white {
+    background: #fefefe;
+    opacity: .8;
+    margin-top: 60px;
+    padding: 10px 20px;
+}

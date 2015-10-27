@@ -1,0 +1,8 @@
+machine:
+  php:
+    version: 5.5.9
+deployment:
+  staging:
+    branch: develop
+    heroku:
+      appname: resly

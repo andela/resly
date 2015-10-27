@@ -1,0 +1,46 @@
+body {
+    background:url('/img/pexels-photo.jpg');
+}
+
+#banner {
+    padding-top: 2.5em;
+    min-height: 500px;
+    background: rgba(255, 255, 255, 0.68);
+    color: #fff;
+}
+
+#banner .inner {
+    text-align: center;
+    padding: 2em;
+}
+
+#banner h1 {
+    color: rgb(177, 61, 114);
+    font-size: 8em;
+}
+
+#banner small {
+    color: #735E72;
+}
+
+#content {
+    padding: 2em 0;
+}
+
+.cell {
+    text-align: center;
+}
+
+.search-form {
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+    width: 80%;
+}
+
+.searching {
+    background: #fefefe;
+}
+
+/*# sourceMappingURL=welcome.css.map */

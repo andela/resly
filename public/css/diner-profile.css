@@ -1,0 +1,38 @@
+.right {
+	float: right;
+	padding: 10px 15px;
+}
+
+.content-diner-tab {
+	margin-top: 20px;
+}
+
+.left-half {
+float: left;
+width: 45%;
+}
+
+.right-half {
+float: right;
+width: 45%;
+}
+
+.profile {
+	background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+   min-height: 230px;
+   min-width: 600px;
+}
+
+.cancel-tab {
+	 margin-left: auto;
+    margin-right: auto;
+}
+
+.thematic-style {
+	border: 0;
+	height: 0;
+	border-top: 1px solid rgba(0, 0, 0,0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
