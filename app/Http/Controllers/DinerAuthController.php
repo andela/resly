@@ -46,7 +46,7 @@ class DinerAuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if (!Auth::diner()->attempt(
+        if (! Auth::diner()->attempt(
             $request->only(['email', 'password']),
             $request->has('remember')
         )) {
