@@ -66,26 +66,26 @@ class DinerAuthController extends Controller
     }
 
     /**
-     * Redirect the user to the google authentication page.
+     * Redirect the user to the social authentication page.
      *
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider($provider)
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
     /**
-     * Obtain the user information from google.
+     * Obtain the user information from social.
      *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($provider)
     {
         try {
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver($provider)->user();
         } catch (Exception $e) {
-            return Redirect::to('auth/google');
+            return Redirect::to('auth/{provider}');
         }
 
         $authUser = $this->findOrCreateUser($user);
@@ -98,21 +98,21 @@ class DinerAuthController extends Controller
     /**
      * Return user if exists; create and return if doesn't.
      *
-     * @param $googleUser
+     * @param $socialUser
      *
      * @return User
      */
-    private function findOrCreateUser($googleUser)
+    private function findOrCreateUser($socialUser)
     {
-        if ($authUser = Diner::where('google_id', $googleUser->id)->first()) {
+        if ($authUser = Diner::where('social_id', $socialUser->id)->first()) {
             return $authUser;
         }
 
         return Diner::create([
-            'name' => $googleUser->name,
-            'email' => $googleUser->email,
-            'google_id' => $googleUser->id,
-            'avatar' => $googleUser->avatar,
+            'name' => $socialUser->name,
+            'email' => $socialUser->email,
+            'social_id' => $socialUser->id,
+            'avatar' => $socialUser->avatar,
         ]);
     }
 }
