@@ -7,12 +7,32 @@ use Resly\Booking;
 use Resly\Table;
 use Resly\Slots;
 use Resly\Restaurant;
+use Resly\Restaurateur;
+use Resly\Diner;
 
 class BookingController extends Controller
 {
-    public function __construct()
+    /**
+     * Responds to GET /bookings
+     * View the listings for bookings already made.
+     */
+    public function getIndex()
     {
-        $this->authorize('book');
+        // Check if authenticated user is Restaurateur.
+        $user = \Auth::user();
+        if ($user instanceof Restaurateur) {
+            $restaurant = $user->restaurant;
+
+            return view(
+                'bookings.rest',
+                ['bookings' => $restaurant->bookings]
+            );
+        }
+
+        return view(
+            'bookings.diner',
+            ['bookings' => $user->bookings]
+        );
     }
 
     /**
@@ -22,6 +42,8 @@ class BookingController extends Controller
      */
     public function postBegin(Request $request)
     {
+        $this->authorize('book');
+
         // Receives restaurant Id, number of tables
         $validator = \Validator::make(
             $request->all(),
@@ -88,6 +110,8 @@ class BookingController extends Controller
      */
     public function postCreate(Request $request)
     {
+        $this->authorize('book');
+
         $validator = \Validator::make(
             $request->all(),
             [
@@ -112,5 +136,30 @@ class BookingController extends Controller
 
         // Return success view here
         return \Response::make('Booking successful', 200);
+    }
+
+    /**
+     *  responds to POST bookings/cancel
+     *  removes the passed booking{$id} from DB.
+     */
+    public function postCancel(Request $request)
+    {
+        $this->authorize('book');
+
+        // validate request
+        $validator = \Validator::make(
+            $request->all(),
+            ['booking_id' => 'required|numeric']
+        );
+
+        if ($validator->fails()) {
+            return redirect('/bookings')
+                ->withErrors($validator);
+        }
+
+        Booking::destroy($request->input('booking_id'));
+
+        return redirect('/bookings')
+            ->with('info', 'Booking cancelled successfully.');
     }
 }
