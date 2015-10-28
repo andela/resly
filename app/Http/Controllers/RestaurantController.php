@@ -46,9 +46,8 @@ class RestaurantController extends Controller
                 ->withErrors($validator);
         }
 
-        $res_details = $request->all();
-        $res_details->restaurateur_id = \Auth::user()->id;
-        $restaurant = Restaurant::create($res_details);
+        $restaurateur = \Auth::user();
+        $restaurant = $restaurateur->restaurant()->create($request->all());
         $request->session()->put('restaurant_id', $restaurant->id);
 
         return redirect('tables/add-bulk');
