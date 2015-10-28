@@ -13,10 +13,13 @@
 
 $factory->define(Resly\Diner::class, function (Faker\Generator $faker) {
     return [
+        'name' => $faker->name,
+        'avatar' => $faker->url,
         'fname' => $faker->name,
         'lname' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt('resly'),
+        'google_id' => $faker->word,
     ];
 });
 
