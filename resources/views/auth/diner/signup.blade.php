@@ -3,6 +3,7 @@
 @section('title', 'Dinner Sign Up')
 
 @section('styles')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="{!! asset('css/auth.css') !!}">
 @endsection
 
@@ -59,6 +60,16 @@
             </div>
             <input type="hidden" name="_token" value="{{ Session::token() }}">
         </form>
+        <div class="or">
+            <h2><span>OR</span></h2>
+            <div class="social">
+                <ul>
+                    <li><a href="{{ url('auth/facebook') }}"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="{{ url('auth/twitter') }}"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="{{ url('auth/google') }}"><i class="fa fa-google-plus"></i> </a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 @stop

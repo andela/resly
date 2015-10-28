@@ -16,6 +16,9 @@ Route::get('/', function () {
 
 });
 
+Route::get('auth/{provider}', 'DinerAuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'DinerAuthController@handleProviderCallback');
+
 Route::controller('restaurants', 'RestaurantController');
 
 Route::controller('tables', 'TableController');
