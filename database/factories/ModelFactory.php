@@ -19,7 +19,7 @@ $factory->define(Resly\Diner::class, function (Faker\Generator $faker) {
         'lname' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt('resly'),
-        'google_id' => $faker->word,
+        'social_id' => $faker->word,
     ];
 });
 
