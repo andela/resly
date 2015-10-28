@@ -18,9 +18,10 @@ class CreateDinerTable extends Migration
             $table->string('email');
             $table->string('remember_token')->nullable();
             $table->nullableTimestamps();
-            $table->string('google_id')->unique();
+            $table->string('social_id')->unique();
             $table->string('name');
             $table->string('avatar');
+            $table->string('social_email')->nullable();
         });
     }
 

@@ -36,7 +36,7 @@ class Diner extends Model implements
         'password',
         'confirm-password',
         'name',
-        'google_id',
+        'social_id',
         'avatar',
     ];
 

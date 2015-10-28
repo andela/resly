@@ -3,7 +3,7 @@
 @section('title', 'Dinner Sign In')
 
 @section('styles')
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="{!! asset('css/auth.css') !!}">
 @endsection
 
@@ -45,14 +45,13 @@
 	            <input type="hidden" name="_token" value="{{ Session::token() }}">
 	        </form>
             <div class="or">
-                <h3>OR</h3>
-                <div class="row">
-                    <div class="col-xs-8">
-                        <div class="btn-group">
-                            <a class='btn btn-danger disabled'><i class="fa fa-google-plus"></i></a>
-                            <a class='btn btn-danger' href="{{ url('auth/google') }}" > Sign in with Google</a>
-                        </div>
-                    </div>
+                <h2><span>OR</span></h2>
+                <div class="social">
+                    <ul>
+                        <li><a href="{{ url('auth/facebook') }}"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="{{ url('auth/twitter') }}"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="{{ url('auth/google') }}"><i class="fa fa-google-plus"></i> </a></li>
+                    </ul>
                 </div>
             </div>
 	    </div>
