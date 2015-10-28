@@ -12,6 +12,9 @@
 */
 
 $factory->define(Resly\Diner::class, function (Faker\Generator $faker) {
+    // prevent uniquness violations
+    $number = rand(100, 1000);
+
     return [
         'name' => $faker->name,
         'avatar' => $faker->url,
@@ -19,7 +22,7 @@ $factory->define(Resly\Diner::class, function (Faker\Generator $faker) {
         'lname' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt('resly'),
-        'social_id' => $faker->word,
+        'social_id' => "{$faker->word}_$number",
     ];
 });
 
