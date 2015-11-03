@@ -27,12 +27,12 @@
     </div>
     <div class="container">
         
-        <div class="col-lg-6 white">
+        <div class="col-lg-9 white">
             <h2>Welcome to {{$rest->name}}</h2>
             <p>{{$rest->location}}<p>
             <p>{{$rest-> opening_time}}</p>
         </div>
-        <div class="col-lg-6 white">
+        <div class="col-lg-3 white">
             <h2> Availability </h2>
 
             <form method="POST" action="/bookings/begin">
