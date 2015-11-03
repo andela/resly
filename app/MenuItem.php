@@ -16,8 +16,18 @@ class MenuItem extends Model
             'restaurant_id',
         ];
 
-    public function category()
+    public function categories()
     {
         return $this->hasMany('Resly\Category');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(
+            'Resly\Tag',
+            'Menu_item_tag',
+            'menu_item_id',
+            'tag_id'
+        );
     }
 }
