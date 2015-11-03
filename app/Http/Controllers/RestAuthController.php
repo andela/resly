@@ -10,7 +10,7 @@ class RestAuthController extends Controller
 {
     public function getRestSignup()
     {
-        return view('auth.rest.signup');
+        return view('rest.home');
     }
 
     public function postRestSignup(Request $request)
@@ -35,7 +35,7 @@ class RestAuthController extends Controller
 
     public function getRestSignin()
     {
-        return view('auth.rest.signin');
+        return view('rest.home');
     }
 
     public function postRestSignin(Request $request)
