@@ -12,7 +12,7 @@ class DinerAuthController extends Controller
 {
     public function getDinerSignup()
     {
-        return view('auth.diner.signup');
+        return view('diner.home');
     }
 
     public function postDinerSignup(Request $request)
@@ -37,7 +37,7 @@ class DinerAuthController extends Controller
 
     public function getDinerSignin()
     {
-        return view('auth.diner.signin');
+        return view('diner.home');
     }
 
     public function postDinerSignin(Request $request)
