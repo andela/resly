@@ -31,16 +31,25 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          @if (Auth::diner()->check()) 
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::diner()->get()->fname }} <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Settings</a></li>
-                <li><a href="/profile">Your Profile</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="{{ route('dinersignout')}}">Signout</a></li>
+          @if (Auth::diner()->check())
+            <div class = "btn-group flow-group">
+              <button type="button" class="btn btn-default">
+                {{ Auth::diner()->get()->fname }}
+                {{ Auth::diner()->get()->name }}
+              </button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle = "dropdown">
+                <span class = "caret"></span>
+              </button>
+              <ul class="dropdown-menu" role = "menu">
+                <li><a href="/profile"><span class="glyphicon glyphicon-user"></span> Your Profile</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
+                <li class="divider"></li>
+                <li><a href="{{ route('dinersignout')}}"><span class="glyphicon glyphicon-log-out"></span> Signout</a></li>
               </ul>
-            </li>
+            </div>
+          @else
+            <li><a href="{{ route('dinersignin')}}">Login</a></li>
+            <li><a href="{{ route('dinersignup')}}">Register</a></li>
           @endif
         </ul>
       </div><!--/.nav-collapse -->
