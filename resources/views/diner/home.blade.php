@@ -41,7 +41,7 @@
                 <span class = "caret"></span>
               </button>
               <ul class="dropdown-menu" role = "menu">
-                <li><a href="/profile"><span class="glyphicon glyphicon-user"></span> Your Profile</a></li>
+                <li><a href="{{ route('profile.show', $cust->fname) }}"><span class="glyphicon glyphicon-user"></span> Your Profile</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
                 <li class="divider"></li>
                 <li><a href="{{ route('dinersignout')}}"><span class="glyphicon glyphicon-log-out"></span> Signout</a></li>

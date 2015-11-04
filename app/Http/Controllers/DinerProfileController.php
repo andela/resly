@@ -2,15 +2,17 @@
 
 namespace Resly\Http\Controllers;
 
-use DB;
+use Resly\Diner;
 use Auth;
 
 class DinerProfileController extends Controller
 {
-    public function getIndex()
+    public function show($fname)
     {
-        $name = DB::table('Diner')->where('fname', Auth::diner()->get()->fname)->first();
+        //$name = DB::table('Diner')->where('fname', Auth::diner()->get()->fname)->first();
+        $cust = Diner::whereFname($fname)->first();
+        //dd($cust);
 
-        return view('profile.dinerProfile')->with('name', $name);
+        return view('diner.home')->with('cust', $cust);
     }
 }

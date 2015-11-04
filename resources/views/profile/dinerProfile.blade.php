@@ -16,14 +16,14 @@
                     <li>
                         <a href="#" class="img-thumbnail"><img src="/img/picture.jpg" width = "160" height ="200" alt="Diner picture"></a>
                     </li>
-                    <li><strong>Name:</strong> {{$name->fname ." ".$name->lname}}</li>
-                    <li><strong>Username:</strong> {{$name->fname}}</li>
+                    <li><strong>Name:</strong> {{ $cust->fname }} {{ $cust->lname }}</li>
+                    <li><strong>Username:</strong> {{ $cust->fname }}</li>
                 </ul>
             </div>
 
             <div class="right">
                 <a href="#edit-profile" class="btn btn-default">
-                       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     Edit profile
                 </a>
             </div>

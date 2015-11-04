@@ -71,4 +71,9 @@ class Diner extends Model implements
     {
         return $this->hasMany('Resly\Booking');
     }
+
+    /*public function getFullnameAttribute() 
+    {
+        return $this->fname . " " . $this->lname; 
+    }*/
 }
