@@ -109,7 +109,7 @@ $(document).ready(function() {
 
     request.done(function(msg) {
       // load the next page here, using window.location.replace()
-      alert("response: "+msg);
+      window.location.replace('/restaurateur/profile');
     });
   });
 
