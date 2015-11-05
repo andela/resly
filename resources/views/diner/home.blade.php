@@ -41,7 +41,9 @@
                 <span class = "caret"></span>
               </button>
               <ul class="dropdown-menu" role = "menu">
-                <li><a href="{{ route('profile.show', $cust->fname) }}"><span class="glyphicon glyphicon-user"></span> Your Profile</a></li>
+                <li><a href="{{ route('profile.show', ['username' => Auth::diner()->get()->username]) }}">
+                    <span class="glyphicon glyphicon-user"></span> Your Profile</a>
+                </li>
                 <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
                 <li class="divider"></li>
                 <li><a href="{{ route('dinersignout')}}"><span class="glyphicon glyphicon-log-out"></span> Signout</a></li>
@@ -59,6 +61,7 @@
 
 
 @section('content')
+  @include ('partials.alerts');
   @if (! Auth::diner()->check())
   <div class="container">
       
@@ -82,7 +85,7 @@
               <form class="form-vertical" role="form" method="post" action="{{ route('dinersignup') }}">
                   <div class="form-group{{ $errors->has('fname') ? ' has-error' : '' }}">
                       <label for="fname" class="control-label">First Name</label>
-                      <input type="text" name="fname" class="form-control" id="lname" value="{{ Request::old('fname') ?: '' }}">
+                      <input type="text" name="fname" class="form-control" id="fname" value="{{ Request::old('fname') ?: '' }}">
                       @if ($errors->has('fname'))
                           <span class="help-block">{{ $errors->first('fname') }}</span>
                       @endif
@@ -94,9 +97,16 @@
                           <span class="help-block">{{ $errors->first('lname') }}</span>
                       @endif
                   </div>
+                  <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                      <label for="username" class="control-label">Username</label>
+                      <input type="text" name="username" class="form-control" id="username" value="{{ Request::old('username') ?: '' }}">
+                      @if ($errors->has('username'))
+                          <span class="help-block">{{ $errors->first('username') }}</span>
+                      @endif
+                  </div>
                   <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                       <label for="email" class="control-label">Email</label>
-                      <input type="text" name="email" class="form-control" id="email" value="{{ Request::old('email') ?: '' }}">
+                      <input type="email" name="email" class="form-control" id="email" value="{{ Request::old('email') ?: '' }}">
                       @if ($errors->has('email'))
                           <span class="help-block">{{ $errors->first('email') }}</span>
                       @endif

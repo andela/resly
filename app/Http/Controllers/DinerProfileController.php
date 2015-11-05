@@ -2,17 +2,55 @@
 
 namespace Resly\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Resly\Diner;
-use Auth;
+use Validator;
 
 class DinerProfileController extends Controller
 {
-    public function show($fname)
+    public function show($username)
     {
-        //$name = DB::table('Diner')->where('fname', Auth::diner()->get()->fname)->first();
-        $cust = Diner::whereFname($fname)->first();
-        //dd($cust);
+        $diner = Diner::whereUsername($username)->firstOrFail();
 
-        return view('diner.home')->with('cust', $cust);
+        return view('profile.dinerProfile')->with('diner', $diner);
+    }
+
+    public function edit($username)
+    {
+        $diner = Diner::whereUsername($username)->firstOrFail();
+
+        return view('profile.editDinerProfile')->withDiner($diner);
+    }
+
+    public function update(Request $request, $username)
+    {
+        $diner = Diner::whereUsername($username)->firstOrFail();
+
+        $validator = Validator::make($request->all(), [
+            'fname' => 'required|max:20|alpha_dash',
+            'lname' => 'required|max:20|alpha_dash',
+            'username' => 'required|max:30|alpha_dash',
+            'email' => 'required|email|max:255',
+            //'password' => 'required|min:6',
+            //'confirm-password' => 'required|same:password',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('profile.edit', $diner->username)
+                ->withErrors($validator);
+        }
+
+        //$diner = Diner::where('email', $request->input('email'))->first();
+        $diner->update([
+            'fname' => $request->input('fname'),
+            'lname' => $request->input('lname'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            //'password' => bcrypt($request->input('password')),
+            ]);
+
+        return redirect()
+           ->route('profile.show', $diner->username)
+           ->with('info', 'You profile has been updated');
     }
 }
