@@ -5,12 +5,14 @@ namespace Resly\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use Resly\Diner;
+use Socialite;
+use Redirect;
 
 class DinerAuthController extends Controller
 {
     public function getDinerSignup()
     {
-        return view('auth.diner.signup');
+        return view('diner.home');
     }
 
     public function postDinerSignup(Request $request)
@@ -35,7 +37,7 @@ class DinerAuthController extends Controller
 
     public function getDinerSignin()
     {
-        return view('auth.diner.signin');
+        return view('diner.home');
     }
 
     public function postDinerSignin(Request $request)
@@ -61,5 +63,56 @@ class DinerAuthController extends Controller
         Auth::diner()->logout();
 
         return redirect()->route('dinerhome');
+    }
+
+    /**
+     * Redirect the user to the social authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from social.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        try {
+            $user = Socialite::driver($provider)->user();
+        } catch (Exception $e) {
+            return Redirect::to('auth/{provider}');
+        }
+
+        $authUser = $this->findOrCreateUser($user);
+
+        Auth::diner()->login($authUser, true);
+
+        return redirect()->route('dinerhome');
+    }
+
+    /**
+     * Return user if exists; create and return if doesn't.
+     *
+     * @param $socialUser
+     *
+     * @return User
+     */
+    private function findOrCreateUser($socialUser)
+    {
+        if ($authUser = Diner::where('social_id', $socialUser->id)->first()) {
+            return $authUser;
+        }
+
+        return Diner::create([
+            'name' => $socialUser->name,
+            'email' => $socialUser->email,
+            'social_id' => $socialUser->id,
+            'avatar' => $socialUser->avatar,
+        ]);
     }
 }

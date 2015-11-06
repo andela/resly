@@ -7,10 +7,7 @@
 @endsection;
 
 @section('navbar')
-  <ul class="nav navbar-nav navbar-right">
-    <li><a href="/diner" target="_self">Diner</a></li>
-    <li><a href="/rest" target="_self">Restaurateur</a></li>
-  </ul>
+  @include('partials.navbar')
 @endsection
 
 

@@ -12,21 +12,20 @@ class RestaurantTest extends TestCase
      * @return void
      */
 
-    public function _setUp()
+    public function testAddRestaurantPageIsLoaded()
     {
-        $this->restaurateur = factory('Resly\Restaurateur')->make();
-    }
+        $restaurateur = factory('Resly\Restaurateur')->create();
 
-    public function _testAddRestaurantPageIsLoaded()
-    {
-        $this->actingAs($this->restaurateur)
+        $this->actingAs($restaurateur)
             ->visit('/restaurants/add')
             ->see('Add the details of the restaurant');
     }
 
-    public function _testRestaurantIsAdded()
+    public function testRestaurantIsAdded()
     {
-        $this->actingAs($this->restaurateur)
+        $restaurateur = factory('Resly\Restaurateur')->create();
+
+        $this->actingAs($restaurateur)
             ->visit('/restaurants/add')
             ->type('My First Restaurant', 'name')
             ->type('We are awesome', 'description')
@@ -44,8 +43,8 @@ class RestaurantTest extends TestCase
 
         // Return the database to its state before the adding
         
-        DB::table('Restaurant')->where('email', '')
-          ->delete('first.rest@resly.com');
+        DB::table('Restaurant')->where('email', 'first.rest@resly.com')
+          ->delete();
 
     }
     

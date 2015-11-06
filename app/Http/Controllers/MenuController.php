@@ -5,6 +5,7 @@ namespace Resly\Http\Controllers;
 use Resly\Category;
 use Illuminate\Http\Request;
 use Resly\MenuItem;
+use Resly\Tag;
 
 class MenuController extends Controller
 {
@@ -52,8 +53,15 @@ class MenuController extends Controller
             $menu->restaurant_id = $restaurant_id;
             $menu->price = $menu_item['price'];
             $menu->description = $menu_item['description'];
-            // Include adding of tags here.
             $menu->save();
+            // Add tags
+            if (! empty($menu_item['tags'])) {
+                $tags = explode(',', $menu_item['tags']);
+                foreach ($tags as $tag) {
+                    $tag = Tag::firstOrCreate(['name' => $tag]);
+                    $menu->tags()->save($tag);
+                }
+            }
         }
 
         return 'success';

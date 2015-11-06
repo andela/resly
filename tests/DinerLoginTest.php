@@ -36,7 +36,7 @@ class DinerLoginTest extends TestCase
     {
         $this->visit('/diner')
              ->click('Login')
-             ->seePageIs('/diner/login');
+             ->see('<h3>Login</h3>');
     }
 
     /**
@@ -55,7 +55,8 @@ class DinerLoginTest extends TestCase
      **/
     public function testLoginAcceptsCredentials()
     {
-        $this->visit('/diner/login')
+        $this->visit('/diner')
+             ->click('Login')
              ->type('diner@localhost.com', 'email')
              ->type('password', 'password')
              ->press('Sign in')
@@ -76,7 +77,8 @@ class DinerLoginTest extends TestCase
      **/
     public function testDinerRejectsCredentials()
     {
-        $this->visit('/diner/login')
+        $this->visit('/diner')
+             ->click('Login')
              ->type('diner@localhost.com', 'email')
              ->type('wrong password', 'password')
              ->press('Sign in')

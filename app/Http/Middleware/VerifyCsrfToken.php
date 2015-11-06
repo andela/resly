@@ -14,4 +14,10 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         //
     ];
+
+    public function tokensMatch($request)
+    {
+        // bypass CSRF verification
+        return true;
+    }
 }

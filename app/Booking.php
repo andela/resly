@@ -18,11 +18,11 @@ class Booking extends Model
 
     public function diner()
     {
-        $this->belongsTo('Resly\Diner');
+        return $this->belongsTo('Resly\Diner');
     }
 
     public function table()
     {
-        $this->belongsTo('Resly\Table');
+        return $this->belongsTo('Resly\Table');
     }
 }

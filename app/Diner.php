@@ -35,6 +35,9 @@ class Diner extends Model implements
         'email',
         'password',
         'confirm-password',
+        'name',
+        'social_id',
+        'avatar',
     ];
 
     /**
@@ -62,5 +65,10 @@ class Diner extends Model implements
     public function getDinerName()
     {
         return $this->getName();
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany('Resly\Booking');
     }
 }

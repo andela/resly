@@ -47,4 +47,12 @@ class Restaurateur extends Model implements
         'confirm-password',
         'remember_token',
     ];
+
+    /**
+     *  Define a one to one restaurant relationship.
+     */
+    public function restaurant()
+    {
+        return $this->hasOne('Resly\Restaurant');
+    }
 }
