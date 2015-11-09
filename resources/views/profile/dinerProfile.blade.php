@@ -8,26 +8,26 @@
 @endsection
 
 @section('content')
-
+    @include ('partials.alerts');
     <div class="container  white">
         <div class="row">
             <div class="col-xs-6 col-sm-3"> 
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#" class="img-thumbnail"><img src="/img/picture.jpg" width = "160" height ="200" alt="Diner picture"></a>
+                        <a href="#" class="img-thumbnail"><img src="" width = "160" height ="200" alt="Diner picture"></a>
                     </li>
-                    <li><strong>Name:</strong> {{$name->fname ." ".$name->lname}}</li>
-                    <li><strong>Username:</strong> {{$name->fname}}</li>
+                    <li><strong>Name:</strong> {{ $diner->fname }} {{ $diner->lname }}</li>
+                    <li><strong>Username:</strong> {{ $diner->username }}</li>
                 </ul>
             </div>
 
             <div class="right">
-                <a href="#edit-profile" class="btn btn-default">
-                       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                <a href="{{ route('profile.edit', $diner->username) }}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     Edit profile
                 </a>
             </div>
-
+            
             <div class="col-xs-6 col-sm-3">
                 <ul class="nav nav-tabs">
                    <li class="active"><a href="#reserve" data-toggle = "tab">Reservations</a></li>

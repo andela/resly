@@ -108,7 +108,10 @@ Route::get('/rest/{id}', [
 /*
  * Diner Profile
  */
-Route::controller('profile', 'DinerProfileController');
+
+Route::resource('profile', 'DinerProfileController',
+    ['only' => ['show', 'edit', 'update'],
+]);
 
 /*
  * Restaurateur Profile
