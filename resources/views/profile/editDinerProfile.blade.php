@@ -96,6 +96,7 @@
                         <!-- Buttons -->
                         <div class="form-group">
                             {!! Form::submit('Save Changes', array('class' => 'btn btn-primary')) !!}
+                            {!! Form::reset('Reset', array('class' => 'btn btn-danger')) !!}
                         </div>
                     {!! Form::close() !!}
                 </div> <!-- col-md-9 -->       
