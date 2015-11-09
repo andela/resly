@@ -5,7 +5,7 @@
     color: #fff;
 }
 
-.home{
+.home {
     background:url('/img/home.jpg') center no-repeat;
     height: 520px;
     text-align: center;
@@ -13,12 +13,12 @@
 }
 
 
-.home-info{
+.home-info {
     padding-top: 5%;
     color: white;
 }
 
-.home-info h1,h4{
+.home-info h1, h4 {
     color: white;
 }
 
@@ -97,7 +97,6 @@
     opacity: .7;
 }
 
-
 footer {
     padding-top: 3%;
     color: #777;
@@ -106,7 +105,7 @@ footer {
     font-size: medium;
 }
 
-footer h4{
+footer h4 {
     color: #777;
 }
 
