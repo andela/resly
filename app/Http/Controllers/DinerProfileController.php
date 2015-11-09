@@ -31,8 +31,6 @@ class DinerProfileController extends Controller
             'lname' => 'required|max:20|alpha_dash',
             'username' => 'required|max:30|alpha_dash',
             'email' => 'required|email|max:255',
-            //'password' => 'required|min:6',
-            //'confirm-password' => 'required|same:password',
         ]);
 
         if ($validator->fails()) {
@@ -40,13 +38,11 @@ class DinerProfileController extends Controller
                 ->withErrors($validator);
         }
 
-        //$diner = Diner::where('email', $request->input('email'))->first();
         $diner->update([
             'fname' => $request->input('fname'),
             'lname' => $request->input('lname'),
             'username' => $request->input('username'),
             'email' => $request->input('email'),
-            //'password' => bcrypt($request->input('password')),
             ]);
 
         return redirect()
