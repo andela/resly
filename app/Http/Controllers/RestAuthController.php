@@ -52,7 +52,7 @@ class RestAuthController extends Controller
                 in with those credentials.');
         }
 
-        return redirect()->route('resthome')->with('info', 'You are now signed in');
+        return redirect()->route('restaurateur.profile')->with('info', 'You are now signed in');
     }
 
     public function getRestSignout()

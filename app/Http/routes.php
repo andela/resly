@@ -109,3 +109,10 @@ Route::get('/rest/{id}', [
  * Diner Profile
  */
 Route::controller('profile', 'DinerProfileController');
+
+/*
+ * Restaurateur Profile
+ */
+Route::controller('restaurateur', 'RestaurateurProfileController', [
+    'getProfile' => 'restaurateur.profile',
+]);
