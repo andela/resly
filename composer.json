@@ -10,7 +10,8 @@
         "fzaninotto/faker": "^1.5",
         "kbwebs/multiauth": "~1.0",
         "laravel/socialite": "^2.0",
-        "laravelcollective/html": "5.1.*"
+        "laravelcollective/html": "5.1.*",
+        "intervention/image": "~2.3"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

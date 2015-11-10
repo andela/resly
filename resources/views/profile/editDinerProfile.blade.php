@@ -4,6 +4,7 @@
 
 @section('styles')
 <link rel="stylesheet" type="text/css" href="{!! asset('css/diner-profile.css') !!}">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.css">
 @endsection
 
 @section('content')
@@ -15,12 +16,13 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-3">
-                    <div>
-                        <a href="#" class="img-circle"><img src="" width = "160" height ="200" alt="Diner picture"></a>
-                        <h6>Upload a different photo...</h6>
-              
-                        <input type="file" class="form-control">
-                    </div>
+                    <!-- form for uploading picture -->
+                    <form action="{{ route('diner_upload_photo', $diner->username) }}"
+                          method="POST" 
+                          class="dropzone"
+                          id="dinerPic"
+                    >
+                    </form>
                 </div> <!-- end of .col-md-3 -->
 
                 <!-- edit form column -->
@@ -104,4 +106,16 @@
         </div> <!--end of .profile -->
         <hr>
     </div> <!-- end of .container -->
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
+    <script>
+        Dropzone.options.dinerPic = {
+            paramName: 'photo',
+            maxFilesize: 1,
+            acceptedFiles: '.jpg, .jpeg, .png, .bmp',
+            maxFiles: 1
+        };
+    </script>
 @endsection

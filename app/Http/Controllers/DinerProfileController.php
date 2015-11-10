@@ -4,27 +4,30 @@ namespace Resly\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Resly\Diner;
+use DB;
+use Resly\DinerPhoto;
 use Validator;
 
 class DinerProfileController extends Controller
 {
     public function show($username)
     {
-        $diner = Diner::whereUsername($username)->firstOrFail();
+        $diner = Diner::dinerWithUsername($username);
+        $diner->photo = self::getLastInsertedPhoto($diner->id);
 
         return view('profile.dinerProfile')->with('diner', $diner);
     }
 
     public function edit($username)
     {
-        $diner = Diner::whereUsername($username)->firstOrFail();
+        $diner = Diner::dinerWithUsername($username);
 
         return view('profile.editDinerProfile')->withDiner($diner);
     }
 
     public function update(Request $request, $username)
     {
-        $diner = Diner::whereUsername($username)->firstOrFail();
+        $diner = Diner::dinerWithUsername($username);
 
         $validator = Validator::make($request->all(), [
             'fname' => 'required|max:20|alpha_dash',
@@ -48,5 +51,31 @@ class DinerProfileController extends Controller
         return redirect()
            ->route('profile.show', $diner->username)
            ->with('info', 'You profile has been updated');
+    }
+    
+    /*
+     * store the Diners profile picture
+     */
+    public function uploadPhoto(Request $request, $username)
+    {
+        $this->validate($request, [
+            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+        ]);
+
+        $photo = DinerPhoto::uploadedPicture($request->file('photo'));
+
+        Diner::dinerWithUsername($username)->addPhotos($photo);
+    }
+
+    /*
+     * Retrieve the last uploaded profile picture
+     */
+    private static function getLastInsertedPhoto($user_id)
+    {
+        $picture = DB::table('diner_photo')
+            ->where('diner_id', $user_id)
+            ->orderBy('id', 'desc')
+            ->first();
+        return $picture;
     }
 }
