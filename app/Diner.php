@@ -32,6 +32,7 @@ class Diner extends Model implements
     protected $fillable = [
         'fname',
         'lname',
+        'username',
         'email',
         'password',
         'confirm-password',

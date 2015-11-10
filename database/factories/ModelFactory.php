@@ -19,6 +19,7 @@ $factory->define(Resly\Diner::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'avatar' => $faker->url,
         'fname' => $faker->name,
+        'username' => $faker->name,
         'lname' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt('resly'),
