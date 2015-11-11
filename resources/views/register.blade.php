@@ -13,7 +13,7 @@
 
 @section('content')
   <div class="register">
-      <div class="container white">
+      <div class="container">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab_a" data-toggle="tab">Diner</a></li>
             <li><a href="#tab_b" data-toggle="tab">Restaurateur</a></li>
