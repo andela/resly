@@ -10,10 +10,6 @@
     <a class="navbar-brand" href="/">Resly</a>
   </div>
   <div id="navbar" class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
     <ul class="nav navbar-nav navbar-right">
       @if (Auth::restaurateur()->check()) 
         <li class="dropdown">
@@ -32,8 +28,8 @@
           </ul>
         </li>
       @else
-        <li><a href="/diner" target="_self">Diner</a></li>
-        <li><a href="/rest" target="_self">Restaurateur</a></li>
+        <li><a href="/login" target="_self">Login</a></li>
+        <li><a href="/register" target="_self">Register</a></li>
       @endif
     </ul>
   </div><!--/.nav-collapse -->
