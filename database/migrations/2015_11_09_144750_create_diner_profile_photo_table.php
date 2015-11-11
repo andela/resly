@@ -14,7 +14,9 @@ class CreateDinerProfilePhotoTable extends Migration
             $table->increments('id');
             $table->integer('diner_id')->unsigned();
             $table->foreign('diner_id')->references('id')->on('Diner')->onDelete('cascade');
+            $table->string('name');
             $table->string('path');
+            $table->string('thumbnail_path');
             $table->timestamps();
         });
     }

@@ -49,9 +49,6 @@
                 <li><a href="{{ route('dinersignout')}}"><span class="glyphicon glyphicon-log-out"></span> Signout</a></li>
               </ul>
             </div>
-          @else
-            <li><a href="{{ route('dinersignin')}}">Login</a></li>
-            <li><a href="{{ route('dinersignup')}}">Register</a></li>
           @endif
         </ul>
       </div><!--/.nav-collapse -->

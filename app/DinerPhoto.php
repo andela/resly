@@ -4,21 +4,22 @@ namespace Resly;
 
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Image;
 
 class DinerPhoto extends Model
 {
     /**
-     * The table associated with the model
+     * The table associated with the model.
      */
     protected $table = 'diner_photo';
 
     /**
-     * The attribute that is mass assignable.
+     * The attributes that are mass assignable.
      */
-    protected $fillable = ['path'];
+    protected $fillable = ['path', 'name', 'thumbnail_path'];
 
     /**
-     * Set a default file path to the photos folder
+     * Set a default file path to the photos folder.
      */
     protected $baseDir = 'img/photos';
 
@@ -31,24 +32,47 @@ class DinerPhoto extends Model
     }
 
     /**
-     * Create a photo destination path and move the uploaded file to a
-     * permanent location
-     *
+     * create a new instance of the class and name it whatever the name of the file is.
+     */
+    public static function named($name)
+    {
+        return (new static)->saveAs($name);
+    }
+
+    /**
+     * Set the proper values of the column in the diner_photo table.
      * Prefix the file name with the timestamp to avoid replacing existing
      * photos.
-     * Create the photo path.
-     * move the uploaded file to the /img/photos folder
+     * Create the photo and thumbnail path.
      */
-    public static function uploadedPicture(UploadedFile $file)
+    protected function saveAs($name)
     {
-        $photo = new static;
+        $this->name = sprintf('%s-%s', time(), $name);
+        $this->path = sprintf('%s/%s', $this->baseDir, $this->name);
+        $this->thumbnail_path = sprintf('%s/tn-%s', $this->baseDir, $this->name);
 
-        $name = time() . $file->getClientOriginalName();
+        return $this;
+    }
 
-        $photo->path = $photo->baseDir . '/' . $name;
+    /**
+     * Move the photo to its final resting place.
+     */
+    public function move(UploadedFile $file)
+    {
+        $file->move($this->baseDir, $this->name);
 
-        $file->move($photo->baseDir, $name);
+        $this->makeThumbnail();
 
-        return $photo;
+        return $this;
+    }
+
+    /**
+     * Make the thumbnail.
+     */
+    protected function makeThumbnail()
+    {
+        Image::make($this->path)
+            ->fit(200)
+            ->save($this->thumbnail_path);
     }
 }

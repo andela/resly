@@ -112,8 +112,7 @@ Route::get('/rest/{id}', [
 Route::resource(
     'profile',
     'DinerProfileController',
-    ['only' => ['show', 'edit', 'update', 'store'],
-    ]
+    ['only' => ['show', 'edit', 'update']]
 );
 
 /*
@@ -122,7 +121,7 @@ Route::resource(
 Route::post(
     '/profile/{username}/photo',
     ['uses' => 'DinerProfileController@uploadPhoto',
-    'as' => 'diner_upload_photo'
+    'as' => 'diner_upload_photo',
     ]
 );
 

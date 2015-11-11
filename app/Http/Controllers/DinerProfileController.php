@@ -7,9 +7,14 @@ use Resly\Diner;
 use DB;
 use Resly\DinerPhoto;
 use Validator;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class DinerProfileController extends Controller
 {
+    /*
+     * Display the diners profile.
+     */
+
     public function show($username)
     {
         $diner = Diner::dinerWithUsername($username);
@@ -18,12 +23,20 @@ class DinerProfileController extends Controller
         return view('profile.dinerProfile')->with('diner', $diner);
     }
 
+    /*
+     * Access the diners edit profile page.
+     */
+
     public function edit($username)
     {
         $diner = Diner::dinerWithUsername($username);
 
         return view('profile.editDinerProfile')->withDiner($diner);
     }
+
+    /*
+     * Update the diners profile.
+     */
 
     public function update(Request $request, $username)
     {
@@ -52,30 +65,44 @@ class DinerProfileController extends Controller
            ->route('profile.show', $diner->username)
            ->with('info', 'You profile has been updated');
     }
-    
+
     /*
-     * store the Diners profile picture
+     * Store the Diners profile picture.
+     * MakePhoto() makes a new photo and pass the uploaded file instance.
      */
+
     public function uploadPhoto(Request $request, $username)
     {
         $this->validate($request, [
-            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+            'photo' => 'required|mimes:jpg,jpeg,png,bmp',
         ]);
 
-        $photo = DinerPhoto::uploadedPicture($request->file('photo'));
+        $photo = $this->makePhoto($request->file('photo'));
 
         Diner::dinerWithUsername($username)->addPhotos($photo);
     }
 
     /*
+     * Get a new photo object with the given name; 
+     * then move it to its permanent location in the file system
+     */
+
+    protected function makePhoto(UploadedFile $file)
+    {
+        return DinerPhoto::named($file->getClientOriginalName())->move($file);
+    }
+
+    /*
      * Retrieve the last uploaded profile picture
      */
+
     private static function getLastInsertedPhoto($user_id)
     {
         $picture = DB::table('diner_photo')
             ->where('diner_id', $user_id)
             ->orderBy('id', 'desc')
             ->first();
+
         return $picture;
     }
 }
