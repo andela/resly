@@ -131,8 +131,9 @@
                     </ul>
                   </div>
                 </ul>
-                <div class="separator"></div>
-                <p class="text-center margin-clear">Copyright © 2015 Resly <a target="_blank" href="http://resly.me">Resly</a>. All Rights Reserved</p>
+                <div class="separator">
+                  <p class="text-center margin-clear">Copyright © 2015 Resly <a target="_blank" href="http://resly.me">Resly</a>. All Rights Reserved</p>
+                </div>
               </div>
             </div>
           </div>

@@ -16,6 +16,16 @@ Route::get('/', function () {
 
 });
 
+Route::get('/login', [
+    'uses' => '\Resly\Http\Controllers\HomeController@login',
+    'as' => 'login',
+]);
+
+Route::get('/register', [
+    'uses' => '\Resly\Http\Controllers\HomeController@register',
+    'as' => 'register',
+]);
+
 Route::get('auth/{provider}', 'DinerAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'DinerAuthController@handleProviderCallback');
 

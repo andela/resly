@@ -97,6 +97,18 @@
     opacity: .7;
 }
 
+.separator {
+    clear: both;
+}
+
+.login {
+    padding-top: 70px;
+}
+
+.register {
+    padding-top: 70px;
+}
+
 footer {
     padding-top: 3%;
     color: #777;
