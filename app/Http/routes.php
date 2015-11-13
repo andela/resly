@@ -119,9 +119,21 @@ Route::get('/rest/{id}', [
  * Diner Profile
  */
 
-Route::resource('profile', 'DinerProfileController',
-    ['only' => ['show', 'edit', 'update'],
-]);
+Route::resource(
+    'profile',
+    'DinerProfileController',
+    ['only' => ['show', 'edit', 'update']]
+);
+
+/*
+ * Upload the diner's profile picture
+ */
+Route::post(
+    '/profile/{username}/photo',
+    ['uses' => 'DinerProfileController@uploadPhoto',
+    'as' => 'diner_upload_photo',
+    ]
+);
 
 /*
  * Restaurateur Profile
