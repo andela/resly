@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class DinerProfileController extends Controller
 {
+
     /*
      * Display the diners profile.
      */
