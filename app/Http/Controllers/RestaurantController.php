@@ -7,8 +7,6 @@ use Validator;
 use Resly\Restaurant;
 use Resly\Http\Requests;
 
-use Auth;
-
 class RestaurantController extends Controller
 {
     public function __construct()
@@ -29,7 +27,7 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::find($restaurant_id);
         if ($restaurant) {
             return view('restaurant.edit', [
-                'restaurant' =>$restaurant,
+                'restaurant' => $restaurant,
             ]);
         } else {
             abort(404);
@@ -64,7 +62,6 @@ class RestaurantController extends Controller
             $restaurant->save();
 
             return redirect('restaurateur/profile');
-
         } else {
             abort(404);
         }
