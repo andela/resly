@@ -46,7 +46,7 @@ class DinerProfileController extends Controller
                 array_push($reserveFuture, $reservation);
             }
         }
-        
+
         return view('profile.dinerProfile')
             ->with(compact('diner', 'reservePast', 'reserveFuture'));
     }
