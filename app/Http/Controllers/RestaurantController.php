@@ -7,6 +7,8 @@ use Validator;
 use Resly\Restaurant;
 use Resly\Http\Requests;
 
+use Auth;
+
 class RestaurantController extends Controller
 {
     public function __construct()
@@ -20,6 +22,52 @@ class RestaurantController extends Controller
     public function getAdd()
     {
         return view('restaurant.add');
+    }
+
+    public function getEdit($restaurant_id)
+    {
+        $restaurant = Restaurant::find($restaurant_id);
+        if ($restaurant) {
+            return view('restaurant.edit', [
+                'restaurant' =>$restaurant
+            ]);
+        } else {
+            abort(404);
+        }
+    }
+
+    public function postEdit(Request $request, $restaurant_id)
+    {
+        $restaurant = Restaurant::find($restaurant_id);
+
+        if ($restaurant_id) {
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'name' => 'required',
+                    'opening_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
+                    'closing_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
+                    'location' => 'required',
+                    'telephone' => 'required|numeric',
+                    'email' => 'required|email',
+                    'address' => 'required',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return redirect('/restaurants/edit')
+                    ->withInput()
+                    ->withErrors($validator);
+            }
+
+            $restaurant->fill($request->all());
+            $restaurant->save();
+
+            return redirect('restaurateur/profile');
+
+        } else {
+            abort(404);
+        }
     }
 
     /**
