@@ -4,23 +4,51 @@ namespace Resly\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Resly\Diner;
+use Resly\Booking;
 use DB;
 use Resly\DinerPhoto;
 use Validator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use DateTime;
 
 class DinerProfileController extends Controller
 {
     /*
      * Display the diners profile.
+     *
+     * Also, categorize reservations as either past or future reservations
+     * and send the data to the profile view.
      */
 
     public function show($username)
     {
         $diner = Diner::dinerWithUsername($username);
         $diner->photo = self::getLastInsertedPhoto($diner->id);
+        $diner->cancellations = Booking::onlyTrashed()
+            ->where('diner_id', $diner->id)
+            ->get();
+        $diner->reservations = Booking::where('diner_id', $diner->id)->get();
 
-        return view('profile.dinerProfile')->with('diner', $diner);
+        $reserveFuture = [];
+        $reservePast = [];
+
+        foreach ($diner->reservations as $reservation) {
+            date_default_timezone_set('Africa/Nairobi');
+
+            $dateDatabase = $reservation->booking_date.$reservation->booking_time;
+            $date1 = new DateTime($dateDatabase);
+
+            $date2 = new DateTime('now');
+
+            if ($date1 < $date2) {
+                array_push($reservePast, $reservation);
+            } else {
+                array_push($reserveFuture, $reservation);
+            }
+        }
+
+        return view('profile.dinerProfile')
+            ->with(compact('diner', 'reservePast', 'reserveFuture'));
     }
 
     /*
