@@ -60,6 +60,11 @@
                 </table>
             </div>
         </div>
+        <div class="actions">
+            <div class="container">
+                <a href="/restaurants/edit/{{$restaurant->id}}" class="btn btn-primary">edit restaurant</a>
+            </div>
+        </div>
         @else
             <a href="/restaurants/add" class="btn btn-primary">add restaurant</a>
         @endif
