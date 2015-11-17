@@ -56,6 +56,10 @@ class DinerAuthController extends Controller
                 in with those credentials.');
         }
         $request->session()->put('user_id', Auth::diner()->get()->id);
+        $redirect_route = $request->session()->get('redirect_url');
+        if (!empty($redirect_route)) {
+            return redirect($redirect_route);
+        }
 
         return redirect()->route('dinerhome')->with('info', 'You are now signed in');
     }
