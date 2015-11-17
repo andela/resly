@@ -19,6 +19,7 @@ class CreateBookingTable extends Migration
             $table->date('booking_date');
             $table->integer('diner_id')->unsigned();
             $table->integer('table_id')->unsigned();
+            $table->softDeletes();
             $table->nullableTimestamps();
 
             $table->foreign('diner_id')->references('id')->on('Diner');

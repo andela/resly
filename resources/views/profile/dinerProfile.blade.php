@@ -9,6 +9,7 @@
 
 @section('content')
     @include ('partials.alerts');
+    @include ('partials.navbar');
     <div class="container  white">
         <div class="row">
             <div class="col-xs-6 col-sm-3"> 
@@ -46,32 +47,32 @@
                                 <div class="panel panel-primary left-half">
                                     <div class="panel-heading"> Past reservations</div>
                                     <ul class="list-group">
-                                        <li class="list-group-item">XX restaurant</li>
-                                        <li class="list-group-item">qui restaurant</li>
-                                        <li class="list-group-item">zzz restaurant</li>
+                                        @foreach ($reservePast as $reservation)
+                                            <li class="list-group-item"> {{ $reservation->table->restaurant->name }}</li>
+                                        @endforeach
                                     </ul>
                                 </div> <!--.left-half-->
 
                                 <div class="panel panel-primary right-half">
                                     <div class="panel-heading"> Future reservations</div>
                                     <div class="list-group">
-                                        <a href ="#" class="list-group-item">YU restaurant</a>
-                                        <a  href ="#" class="list-group-item">cui restaurant</a>
-                                        <a href ="#" class="list-group-item">yzz restaurant</a>
+                                        @foreach ($reserveFuture as $reservation)
+                                            <li class="list-group-item"> {{ $reservation->table->restaurant->name }}</li>
+                                        @endforeach
                                     </div>
                                 </div> <!--.right-half-->
                             </div> <!---.profile-->
-                        </div> <!---.tab-pane #reserve-->   
+                        </div> <!---.tab-pane #reserve--> 
 
                         <div class="tab-pane" id="cancel">
                             <div class="cancel-tab">
                                 <ul class="list-unstyled">
-                                    <li><a href = "#">Restaurant 1</a></li>
-                                    <hr class="thematic-style">
-                                    <li><a href="#">Restaurant 2</a></li>
-                                    <hr class="thematic-style">
-                                    <li><a href="#">Restaurant 3</a></li>
-                                    <hr class="thematic-style">
+                                    @if ($diner->cancellations)
+                                        @foreach ($diner->cancellations as $booking)
+                                            <li><a href = "#"> {{ $booking->table->restaurant->name }} </a></li>
+                                            <hr class="thematic-style">
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div> <!--.tab-pane #cancel-->
@@ -79,6 +80,10 @@
                 </div> <!---.content-diner-tab-->
             </div> <!---.col-xs-6 .col-sm-3-->
         </div><!---.row-->
+        <div class="row col-xs-offset-6 col-sm-offset-3">
+            <hr>
+            <a href="{{ url('bookings') }}"> See Reservation Details Or Cancel a Reservation</a>
+        </div>
     </div><!---.container-->
     
 @endsection

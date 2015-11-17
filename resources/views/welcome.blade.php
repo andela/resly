@@ -80,28 +80,28 @@
         <div class="col-xs-6 col-md-3">
           <div class="cell">
               <a href="#" class="thumbnail">
-                <img src="/img/search.jpg" alt="...">
+                <img src="/img/pe.jpg" alt="...">
               </a>
           </div>
         </div>
         <div class="col-xs-6 col-md-3">
           <div class="cell">
               <a href="#" class="thumbnail">
-                <img src="/img/reservation.jpg" alt="...">
+                <img src="/img/eating.jpg" alt="...">
               </a>
           </div>
         </div>
         <div class="col-xs-6 col-md-3">
           <div class="cell">
            <a href="#" class="thumbnail">
-             <img src="/img/menu.jpg" alt="...">
+             <img src="/img/vintage.jpeg" alt="...">
            </a> 
           </div>    
         </div>
         <div class="col-xs-6 col-md-3">
           <div class="cell">
             <a href="#" class="thumbnail">
-              <img src="/img/wine.jpg" alt="...">
+              <img src="/img/image.jpg" alt="...">
             </a>
           </div>  
         </div>
