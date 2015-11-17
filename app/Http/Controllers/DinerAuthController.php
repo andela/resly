@@ -57,7 +57,7 @@ class DinerAuthController extends Controller
         }
         $request->session()->put('user_id', Auth::diner()->get()->id);
         $redirect_route = $request->session()->get('redirect_url');
-        if (!empty($redirect_route)) {
+        if (! empty($redirect_route)) {
             return redirect($redirect_route);
         }
 

@@ -51,7 +51,7 @@ class BookingController extends Controller
         if (Gate::denies('book')) {
             $request->session()->put(
                 'redirect_url',
-                '/rest/' . $restaurant_id
+                '/rest/'.$restaurant_id
             );
 
             return redirect('/login')
