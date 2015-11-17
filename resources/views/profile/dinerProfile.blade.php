@@ -14,7 +14,13 @@
             <div class="col-xs-6 col-sm-3"> 
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#" class="img-thumbnail"><img src="" width = "160" height ="200" alt="Diner picture"></a>
+                        <!-- use php error suspension operator, @ -->
+                        <!-- so as not to get an error when table is empty --> 
+                        @if(@$diner->photo)
+                            <img src="/{{ $diner->photo->thumbnail_path }}">
+                        @else
+                            <img src="/img/person_avatar.png" class = "img-thumbnail" width = "200" height ="200" alt="Diner picture">
+                        @endif
                     </li>
                     <li><strong>Name:</strong> {{ $diner->fname }} {{ $diner->lname }}</li>
                     <li><strong>Username:</strong> {{ $diner->username }}</li>
