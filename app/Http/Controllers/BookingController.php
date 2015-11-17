@@ -157,7 +157,8 @@ class BookingController extends Controller
                 ->withErrors($validator);
         }
 
-        Booking::destroy($request->input('booking_id'));
+        $booking = Booking::findOrFail($request->input('booking_id'));
+        $booking->delete();
 
         return redirect('/bookings')
             ->with('info', 'Booking cancelled successfully.');
