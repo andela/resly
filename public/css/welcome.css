@@ -291,3 +291,6 @@ footer h4 {
 .social ul li a i:hover {
     opacity: .7;
 }
+body {
+  padding-top: 60px;
+}
