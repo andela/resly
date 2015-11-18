@@ -21,6 +21,11 @@ class Restaurant extends Model
             'address',
     ];
 
+    public function wine()
+    {
+        return $this->hasMany('Resly\Wine');
+    }
+
     public function tables()
     {
         return $this->hasMany('Resly\Table', 'table_id');

@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
 
         factory('Resly\Booking', 5)->create();
 
+        factory('Resly\Wine', 5)->create();
+        
         Model::reguard();
     }
 }

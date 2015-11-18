@@ -107,6 +107,8 @@ Route::controller('menus', 'MenuController');
 
 Route::controller('bookings', 'BookingController');
 
+Route::resource('wines', 'WineController');
+
 /*
  * Restaurant Profile
  */
