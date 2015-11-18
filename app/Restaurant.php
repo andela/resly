@@ -28,7 +28,7 @@ class Restaurant extends Model
 
     public function tables()
     {
-        return $this->hasMany('Resly\Table', 'table_id');
+        return $this->hasMany('Resly\Table', 'restaurant_id');
     }
 
     public function restaurateur()

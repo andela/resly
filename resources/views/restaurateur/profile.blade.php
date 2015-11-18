@@ -61,6 +61,11 @@
             </div>
             <a href="/wines" class="btn btn-primary">View Wine</a>
         </div>
+        <div class="actions">
+            <div class="container">
+                <a href="/restaurants/edit/{{$restaurant->id}}" class="btn btn-primary">edit restaurant</a>
+            </div>
+        </div>
         @else
             <a href="/restaurants/add" class="btn btn-primary">add restaurant</a>
             <a href="/wines" class="btn btn-primary">Add Wine selection</a>

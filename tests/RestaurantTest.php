@@ -47,6 +47,30 @@ class RestaurantTest extends TestCase
           ->delete();
 
     }
+
+    public function testRestaurantIsEdited()
+    {
+        $restaurateur = factory('Resly\Restaurateur')->create();
+        $restaurant = factory('Resly\Restaurant')->create();
+
+        $this->actingAs($restaurateur)
+            ->visit("/restaurants/edit/{$restaurant->id}")
+            ->type('My First Restaurant', 'name')
+            ->type('We are awesome', 'description')
+            ->type('08:00:00', 'opening_time')
+            ->type('17:00:00', 'closing_time')
+            ->type('Nairobi West', 'location')
+            ->type('+2517238293', 'telephone')
+            ->type('edited.rest@resly.com', 'email')
+            ->type('50504, Nairobi', 'address')
+            ->press('Next');
+
+        $this->seeInDatabase(
+            'Restaurant',
+            ['email' => 'edited.rest@resly.com']
+        );
+
+    }
     
     public function testRestaurantDatabase()
     {
