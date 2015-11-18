@@ -28,11 +28,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         parent::registerPolicies($gate);
 
-        $gate->define('setup-restaurant', function ($user) {
+        $gate->define('restaurateur', function ($user) {
             return $user instanceof Restaurateur;
         });
 
-        $gate->define('book', function ($user) {
+        $gate->define('diner', function ($user) {
             return $user instanceof Diner;
         });
     }
