@@ -6,9 +6,7 @@ use Auth;
 use Request;
 use Resly\Wine;
 use Resly\Restaurateur;
-use Resly\Http\Requests;
 use Resly\Http\Requests\WineRequest;
-use Resly\Http\Controllers\Controller;
 
 class WineController extends Controller
 {
@@ -37,17 +35,18 @@ class WineController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(WineRequest $request)
     {
-        $wine = new Wine;
+        $wine = new Wine();
         $wine->restaurateur_id = Auth::restaurateur()->get()->id;
-        $wine->name            = $request['name'];
-        $wine->year            = $request['year'];
-        $wine->description     = $request['description'];
-        $wine->price           = $request['price'];
+        $wine->name = $request['name'];
+        $wine->year = $request['year'];
+        $wine->description = $request['description'];
+        $wine->price = $request['price'];
         $wine->save();
 
         return redirect('wines');
@@ -56,7 +55,8 @@ class WineController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,25 +67,25 @@ class WineController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-
         return view('wine.edit', ['wine' => $this->findById($id)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-
         $wineUpdateValues = Request::all();
 
         $this->findById($id)->update($wineUpdateValues);
@@ -96,17 +96,16 @@ class WineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-
         $this->findById($id)->delete();
 
         return redirect('wines');
     }
-
 
     private function findById($id)
     {

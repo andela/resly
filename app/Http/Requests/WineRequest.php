@@ -2,8 +2,6 @@
 
 namespace Resly\Http\Requests;
 
-use Resly\Http\Requests\Request;
-
 class WineRequest extends Request
 {
     /**
