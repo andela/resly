@@ -13,7 +13,7 @@
     height: 10px;
   }
 </style>
-<div class="row">
+<div class="content">
   <div class="col-sm-4 dark">
     <div class="alert" role="alert" id="prompt" hidden>
     </div>
