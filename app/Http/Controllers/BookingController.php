@@ -48,7 +48,7 @@ class BookingController extends Controller
     {
         $restaurant_id = $request->input('restaurant_id');
 
-        if (Gate::denies('book')) {
+        if (Gate::denies('diner')) {
             $request->session()->put(
                 'redirect_url',
                 '/rest/'.$restaurant_id
@@ -120,7 +120,7 @@ class BookingController extends Controller
      */
     public function postCreate(Request $request)
     {
-        $this->authorize('book');
+        $this->authorize('diner');
 
         $validator = Validator::make(
             $request->all(),
@@ -154,7 +154,7 @@ class BookingController extends Controller
      */
     public function postCancel(Request $request)
     {
-        $this->authorize('book');
+        $this->authorize('diner');
 
         // validate request
         $validator = Validator::make(

@@ -11,7 +11,7 @@ class RestaurantController extends Controller
 {
     public function __construct()
     {
-        $this->authorize('setup-restaurant');
+        $this->authorize('restaurateur');
     }
 
     /**
