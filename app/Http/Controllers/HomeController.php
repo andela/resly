@@ -13,4 +13,14 @@ class HomeController extends Controller
     {
         return view('diner.home');
     }
+
+    public function register()
+    {
+        return view('register');
+    }
+
+    public function login()
+    {
+        return view('login');
+    }
 }

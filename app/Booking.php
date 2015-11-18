@@ -3,9 +3,12 @@
 namespace Resly;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Booking extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'Booking';
 
     protected $fillable = [
@@ -15,6 +18,8 @@ class Booking extends Model
             'diner_id',
             'table_id',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function diner()
     {

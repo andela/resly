@@ -11,6 +11,6 @@ class Table extends Model
 
     public function restaurant()
     {
-        return $this->belongsTo('Resly\Restaurant', 'restaurant_id');
+        return $this->belongsTo('Resly\Restaurant');
     }
 }

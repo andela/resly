@@ -2,13 +2,17 @@
 
 namespace Resly\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Resly\Booking;
-use Resly\Table;
+use Auth;
+use Gate;
+use Response;
+use Validator;
 use Resly\Slots;
+use Resly\Table;
+use Resly\Diner;
+use Resly\Booking;
 use Resly\Restaurant;
 use Resly\Restaurateur;
-use Resly\Diner;
+use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
@@ -19,7 +23,7 @@ class BookingController extends Controller
     public function getIndex()
     {
         // Check if authenticated user is Restaurateur.
-        $user = \Auth::user();
+        $user = Auth::user();
         if ($user instanceof Restaurateur) {
             $restaurant = $user->restaurant;
 
@@ -42,10 +46,20 @@ class BookingController extends Controller
      */
     public function postBegin(Request $request)
     {
-        $this->authorize('book');
+        $restaurant_id = $request->input('restaurant_id');
+
+        if (Gate::denies('book')) {
+            $request->session()->put(
+                'redirect_url',
+                '/rest/'.$restaurant_id
+            );
+
+            return redirect('/login')
+                ->with('info', 'Login as Diner first.');
+        }
 
         // Receives restaurant Id, number of tables
-        $validator = \Validator::make(
+        $validator = Validator::make(
             $request->all(),
             [
                 'restaurant_id' => 'required|numeric',
@@ -62,8 +76,6 @@ class BookingController extends Controller
 
         $seats_number = $request->input('number_of_people');
         $booking_date = $request->input('booking_date');
-        $restaurant_id = $request->input('restaurant_id');
-
         $match = [
                     'seats_number' => $seats_number,
                     'restaurant_id' => $restaurant_id,
@@ -86,10 +98,8 @@ class BookingController extends Controller
         $bookings = Booking::where($match)
                     ->orderBy('booking_time')
                     ->get();
-
         $opening_time = $restaurant->opening_time;
         $closing_time = $restaurant->closing_time;
-
         $slots = Slots::make(
             $opening_time,
             $closing_time,
@@ -112,7 +122,7 @@ class BookingController extends Controller
     {
         $this->authorize('book');
 
-        $validator = \Validator::make(
+        $validator = Validator::make(
             $request->all(),
             [
                 'table_id' => 'required|numeric',
@@ -135,7 +145,7 @@ class BookingController extends Controller
         $created_booking = Booking::create($booking);
 
         // Return success view here
-        return \Response::make('Booking successful', 200);
+        return Response::make('Booking successful', 200);
     }
 
     /**
@@ -147,7 +157,7 @@ class BookingController extends Controller
         $this->authorize('book');
 
         // validate request
-        $validator = \Validator::make(
+        $validator = Validator::make(
             $request->all(),
             ['booking_id' => 'required|numeric']
         );
@@ -157,7 +167,8 @@ class BookingController extends Controller
                 ->withErrors($validator);
         }
 
-        Booking::destroy($request->input('booking_id'));
+        $booking = Booking::findOrFail($request->input('booking_id'));
+        $booking->delete();
 
         return redirect('/bookings')
             ->with('info', 'Booking cancelled successfully.');

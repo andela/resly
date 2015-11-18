@@ -16,6 +16,16 @@ Route::get('/', function () {
 
 });
 
+Route::get('/login', [
+    'uses' => '\Resly\Http\Controllers\HomeController@login',
+    'as' => 'login',
+]);
+
+Route::get('/register', [
+    'uses' => '\Resly\Http\Controllers\HomeController@register',
+    'as' => 'register',
+]);
+
 Route::get('auth/{provider}', 'DinerAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'DinerAuthController@handleProviderCallback');
 
@@ -109,9 +119,21 @@ Route::get('/rest/{id}', [
  * Diner Profile
  */
 
-Route::resource('profile', 'DinerProfileController',
-    ['only' => ['show', 'edit', 'update'],
-]);
+Route::resource(
+    'profile',
+    'DinerProfileController',
+    ['only' => ['show', 'edit', 'update']]
+);
+
+/*
+ * Upload the diner's profile picture
+ */
+Route::post(
+    '/profile/{username}/photo',
+    ['uses' => 'DinerProfileController@uploadPhoto',
+    'as' => 'diner_upload_photo',
+    ]
+);
 
 /*
  * Restaurateur Profile

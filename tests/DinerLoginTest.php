@@ -9,37 +9,6 @@ class DinerLoginTest extends TestCase
     use DatabaseMigrations;
 
     /**
-     * A link to the diner page must be present
-     *
-     * On the home page there should be a link
-     * to a page specifically for diners
-     *
-     * @return void
-     **/
-    public function testDinerPageExists()
-    {
-        $this->visit('/')
-             ->click('Diner')
-             ->seePageIs('/diner');
-    }
-
-    /**
-     * A link to the login page must be present
-     *
-     * On the diner page there should be link
-     * to a page specifically for the login
-     * of diners.
-     *
-     * @return void
-     **/
-    public function testLoginPageExists()
-    {
-        $this->visit('/diner')
-             ->click('Login')
-             ->see('<h3>Login</h3>');
-    }
-
-    /**
      * The login form should authenticate valid
      * credentials
      *

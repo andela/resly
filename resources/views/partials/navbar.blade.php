@@ -10,10 +10,6 @@
     <a class="navbar-brand" href="/">Resly</a>
   </div>
   <div id="navbar" class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
     <ul class="nav navbar-nav navbar-right">
       @if (Auth::restaurateur()->check()) 
         <li class="dropdown">
@@ -24,16 +20,26 @@
           </ul>
         </li>
       @elseif (Auth::diner()->check())
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::diner()->get()->fname }} <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/profile">Your Profile</a></li>
-            <li><a href="{{ route('dinersignout')}}">Signout</a></li>
+        <div class = "btn-group flow-group">
+          <button type="button" class="btn btn-default">
+            {{ Auth::diner()->get()->fname }}
+            {{ Auth::diner()->get()->name }}
+          </button>
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle = "dropdown">
+            <span class = "caret"></span>
+          </button>
+          <ul class="dropdown-menu" role = "menu">
+            <li><a href="{{ route('profile.show', ['username' => Auth::diner()->get()->username]) }}">
+              <span class="glyphicon glyphicon-user"></span> Your Profile</a>
+            </li>
+            <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
+            <li class="divider"></li>
+            <li><a href="{{ route('dinersignout')}}"><span class="glyphicon glyphicon-log-out"></span> Signout</a></li>
           </ul>
-        </li>
+        </div>
       @else
-        <li><a href="/diner" target="_self">Diner</a></li>
-        <li><a href="/rest" target="_self">Restaurateur</a></li>
+        <li><a href="/login" target="_self">Login</a></li>
+        <li><a href="/register" target="_self">Register</a></li>
       @endif
     </ul>
   </div><!--/.nav-collapse -->

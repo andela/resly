@@ -72,4 +72,28 @@ class Diner extends Model implements
     {
         return $this->hasMany('Resly\Booking');
     }
+
+    /**
+     * Persist the photo to the database .
+     */
+    public function addPhotos(DinerPhoto $photo)
+    {
+        return $this->photos()->save($photo);
+    }
+
+    /**
+     * Get the photos associated with the diner.
+     */
+    public function photos()
+    {
+        return $this->hasMany('Resly\DinerPhoto');
+    }
+
+    /**
+     * Get the diner with the unique username.
+     */
+    public static function dinerWithUsername($username)
+    {
+        return static::whereUsername($username)->firstOrFail();
+    }
 }
