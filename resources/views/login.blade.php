@@ -5,7 +5,7 @@
 @section('styles')
   <link rel="stylesheet" type="text/css" href="{!! asset('css/welcome.css') !!}">
   <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
-@endsection;
+@endsection
 
 @section('navbar')
   @include('partials.navbar')
