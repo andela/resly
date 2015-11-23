@@ -26,8 +26,8 @@ Route::get('/register', [
     'as' => 'register',
 ]);
 
-Route::get('auth/{provider}', 'DinerAuthController@redirectToProvider');
-Route::get('auth/{provider}/callback', 'DinerAuthController@handleProviderCallback');
+Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
 
 Route::controller('restaurants', 'RestaurantController');
 
