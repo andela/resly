@@ -36,6 +36,21 @@ $factory->define(Resly\Restaurateur::class, function (Faker\Generator $faker) {
     ];
 });
 
+/**
+ * Create a model factory for the general user, in this case diner.
+ */
+$factory->define(Resly\User::class, function (Faker\Generator $faker) {
+    return [
+        'fname' => $faker->firstName,
+        'lname' => $faker->lastName,
+        'username' => $faker->userName,
+        'email' => $faker->email,
+        'password' => bcrypt('resly'),
+        'role' => 'diner',
+        'remember_token' => str_random(10),
+    ];
+});
+
 $factory->define(Resly\Restaurant::class, function (Faker\Generator $faker) {
     return [
         'restaurateur_id' => factory('Resly\Restaurateur')->create()->id,
