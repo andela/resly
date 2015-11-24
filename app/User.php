@@ -10,10 +10,9 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
+class User extends Model implements AuthenticatableContract,
+                                    AuthorizableContract,
+                                    CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
@@ -23,11 +22,11 @@ class User extends Model implements
     'lname',
     'username',
     'email',
-    'gravatarURL',
-    'avatarURL',
+    'avatar_url',
     'provider_id',
     'provider_name',
     ];
+
     protected $hidden = ['password', 'remember_token'];
 
     public function getAvatarUrl()

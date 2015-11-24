@@ -27,13 +27,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(GateContract $gate)
     {
         parent::registerPolicies($gate);
-
-        $gate->define('restaurateur', function ($user) {
-            return $user instanceof Restaurateur;
-        });
-
-        $gate->define('diner', function ($user) {
-            return $user instanceof Diner;
-        });
     }
 }

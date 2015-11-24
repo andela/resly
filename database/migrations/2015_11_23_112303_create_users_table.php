@@ -19,9 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email');
             $table->string('password')->nullable();
-            $table->string('gravatarURL')->nullable();
-            $table->string('avatarURL')->nullable();
-            $table->string('role');
+            $table->string('avatar_url')->nullable();
+            $table->string('role')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('provider_name')->nullable();
             $table->rememberToken()->nullable();

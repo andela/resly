@@ -4,12 +4,12 @@ namespace Resly\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 
+use Socialite;
+use Auth;
+
 use Resly\Http\Requests;
 use Resly\Http\Controllers\Controller;
 use Resly\User;
-
-use Socialite;
-use Auth;
 
 class SocialAuthController extends Controller
 {
@@ -22,34 +22,32 @@ class SocialAuthController extends Controller
     {
         $socialUser = Socialite::driver($provider)->user();
 
-        $nativeUsers = User::where([
+        $nativeUser = User::firstOrNew([
             'provider_name' => $provider,
             'provider_id' => $socialUser->id,
-        ])->take(1)->get();
+        ]);
 
-        if (count($nativeUsers) == 0) {
-            $nativeUser = new User();
-
+        if (!$nativeUser->exists) {
             $nativeUser->username = $socialUser->name;
             $nativeUser->email = $socialUser->email;
-            $nativeUser->role = 'undecided';
-            $nativeUser->avatarURL = $socialUser->avatar;
+            $nativeUser->avatar_url = $socialUser->avatar;
             $nativeUser->provider_name = 'google';
             $nativeUser->provider_id = $socialUser->id;
 
             $nativeUser->save();
-
-            return redirect()->route('register');
-        } else {
-            $nativeUser = $nativeUsers[0];
         }
 
         Auth::login($nativeUser);
 
         if ($nativeUser->role == "restarateur") {
             return redirect()->route('resthome');
+
         } else if ($nativeUser->role == "diner") {
             return redirect()->route('dinerhome');
+
+        } else {
+            return redirect()->route('register');
+
         }
 
         return redirect('/');
