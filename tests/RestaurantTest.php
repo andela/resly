@@ -14,7 +14,9 @@ class RestaurantTest extends TestCase
 
     public function testAddRestaurantPageIsLoaded()
     {
-        $restaurateur = factory('Resly\User')->create();
+        $restaurateur = factory('Resly\User')->create(
+            ['role' => 'restaurateur']
+        );
 
         $this->actingAs($restaurateur)
             ->visit('/restaurants/add')
@@ -23,7 +25,9 @@ class RestaurantTest extends TestCase
 
     public function testRestaurantIsAdded()
     {
-        $restaurateur = factory('Resly\Restaurateur')->create();
+        $restaurateur = factory('Resly\User')->create(
+            ['role' => 'restaurateur']
+        );
 
         $this->actingAs($restaurateur)
             ->visit('/restaurants/add')
@@ -52,7 +56,9 @@ class RestaurantTest extends TestCase
 
     public function testRestaurantIsEdited()
     {
-        $restaurateur = factory('Resly\Restaurateur')->create();
+        $restaurateur = factory('Resly\User')->create(
+            ['role' => 'restaurateur']
+        );
         $restaurant = factory('Resly\Restaurant')->create();
 
         $this->actingAs($restaurateur)
