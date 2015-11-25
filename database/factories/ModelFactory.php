@@ -90,6 +90,20 @@ $factory->define(Resly\Category::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(Resly\Wine::class, function ($faker) {
+    $restaurateur = factory('Resly\Restaurateur')->create([
+        'password' => bcrypt('resly'),
+    ]);
+
+    return [
+        'name'          => $faker->name,
+        'description'   => $faker->text,
+        'price'         => $faker->text,
+        'year'          => $faker->date,
+        'restaurateur_id' => $restaurateur->id,
+    ];
+});
+
 $factory->define(Resly\MenuItem::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->word,

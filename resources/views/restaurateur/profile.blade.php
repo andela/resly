@@ -59,6 +59,7 @@
                     </tbody>
                 </table>
             </div>
+            <a href="/wines" class="btn btn-primary">View Wine</a>
         </div>
         <div class="actions">
             <div class="container">
@@ -67,6 +68,7 @@
         </div>
         @else
             <a href="/restaurants/add" class="btn btn-primary">add restaurant</a>
+            <a href="/wines" class="btn btn-primary">Add Wine selection</a>
         @endif
     </div>
 @endsection

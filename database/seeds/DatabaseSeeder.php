@@ -7,14 +7,14 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
         Model::unguard();
 
         factory('Resly\Booking', 5)->create();
+
+        factory('Resly\Wine', 5)->create();
 
         Model::reguard();
     }
