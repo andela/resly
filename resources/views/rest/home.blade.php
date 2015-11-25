@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-  @if (! Auth::restaurateur()->check()) 
+  @if (! Auth::check())
     <div class="container">
       <div class="rest-home">
         <!-- Nav tabs -->
@@ -28,7 +28,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <div class="tab-pane fade active in" id="Register">
-              
+
             <div class="center">
               <div class="col-lg-6">
                 <h3>Register</h3>

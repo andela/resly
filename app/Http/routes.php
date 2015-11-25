@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-
-});
+Route::get('/', [
+    'uses' => '\Resly\Http\Controllers\HomeController@homepage',
+    'as' => 'homepage',
+]);
 
 Route::get('auth/login', [
     'uses' => '\Resly\Http\Controllers\HomeController@login',
@@ -25,6 +25,8 @@ Route::get('auth/register', [
     'uses' => '\Resly\Http\Controllers\HomeController@register',
     'as' => 'register',
 ]);
+
+Route::post('auth/register', 'Auth\AuthController@registerUser');
 
 Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
