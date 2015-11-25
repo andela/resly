@@ -35,10 +35,10 @@ class SocialRegistrationController extends Controller
 
         if ($user->role == 'diner') {
             return redirect()->route('dinerhome');
-        } else if ($user->role == 'restaurateur') {
+        }
+
+        if ($user->role == 'restaurateur') {
             return redirect()->route('resthome');
-        } else {
-            dd($user);
         }
     }
 }
