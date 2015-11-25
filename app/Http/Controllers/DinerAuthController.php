@@ -48,14 +48,14 @@ class DinerAuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if (! Auth::diner()->attempt(
+        if (! Auth::attempt(
             $request->only(['email', 'password']),
             $request->has('remember')
         )) {
             return redirect()->route('dinerhome')->with('info', 'Could not sign you 
                 in with those credentials.');
         }
-        $request->session()->put('user_id', Auth::diner()->get()->id);
+        $request->session()->put('user_id', Auth::get()->id);
         $redirect_route = $request->session()->get('redirect_url');
         if (! empty($redirect_route)) {
             return redirect($redirect_route);
@@ -66,7 +66,7 @@ class DinerAuthController extends Controller
 
     public function getDinerSignout()
     {
-        Auth::diner()->logout();
+        Auth::logout();
 
         return redirect()->route('dinerhome');
     }
@@ -96,7 +96,7 @@ class DinerAuthController extends Controller
 
         $authUser = $this->findOrCreateUser($user);
 
-        Auth::diner()->login($authUser, true);
+        Auth::login($authUser, true);
 
         return redirect()->route('dinerhome');
     }
