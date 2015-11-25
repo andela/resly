@@ -29,6 +29,16 @@ Route::get('auth/register', [
 Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
 
+Route::get('auth/social/register', [
+    'uses' => 'Auth\SocialRegistrationController@getRegistration',
+    'as' => 'getSocialRegister',
+]);
+
+Route::post('auth/social/register', [
+    'uses' => 'Auth\SocialRegistrationController@postRegistration',
+    'as' => 'postSocialRegister',
+]);
+
 Route::controller('restaurants', 'RestaurantController');
 
 Route::controller('tables', 'TableController');
