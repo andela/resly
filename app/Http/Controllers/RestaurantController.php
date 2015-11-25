@@ -11,7 +11,8 @@ class RestaurantController extends Controller
 {
     public function __construct()
     {
-        $this->authorize('restaurateur');
+        // Replace this with valid policy
+        // $this->authorize('restaurateur');
     }
 
     /**

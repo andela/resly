@@ -14,7 +14,7 @@ class RestaurantTest extends TestCase
 
     public function testAddRestaurantPageIsLoaded()
     {
-        $restaurateur = factory('Resly\Restaurateur')->create();
+        $restaurateur = factory('Resly\User')->create();
 
         $this->actingAs($restaurateur)
             ->visit('/restaurants/add')
@@ -38,8 +38,10 @@ class RestaurantTest extends TestCase
             ->press('Next')
             ->see('Add the Tables\' details');
 
-        $this->seeInDatabase('Restaurant', 
-            ['email' => 'first.rest@resly.com']);
+        $this->seeInDatabase(
+            'Restaurant',
+            ['email' => 'first.rest@resly.com']
+        );
 
         // Return the database to its state before the adding
         
@@ -80,7 +82,8 @@ class RestaurantTest extends TestCase
 
             DB::table('Restaurant')->insert($restaurant->getAttributes());
             $this->seeInDatabase(
-                'Restaurant', ['email' => $restaurant->email]
+                'Restaurant',
+                ['email' => $restaurant->email]
             );
 
             DB::table('Restaurant')->where('email', $restaurant->email)
