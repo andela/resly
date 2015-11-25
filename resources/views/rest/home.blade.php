@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-  @if (! Auth::restaurateur()->check()) 
+  @if (! Auth::check()) 
     <div class="container">
       <div class="rest-home">
         <!-- Nav tabs -->
