@@ -31,7 +31,7 @@ class SocialAuthController extends Controller
             $nativeUser->username = $socialUser->name;
             $nativeUser->email = $socialUser->email;
             $nativeUser->avatar_url = $socialUser->avatar;
-            $nativeUser->provider_name = 'google';
+            $nativeUser->provider_name = $provider;
             $nativeUser->provider_id = $socialUser->id;
 
             $nativeUser->save();
