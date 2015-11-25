@@ -16,12 +16,12 @@ Route::get('/', function () {
 
 });
 
-Route::get('/login', [
+Route::get('auth/login', [
     'uses' => '\Resly\Http\Controllers\HomeController@login',
     'as' => 'login',
 ]);
 
-Route::get('/register', [
+Route::get('auth/register', [
     'uses' => '\Resly\Http\Controllers\HomeController@register',
     'as' => 'register',
 ]);

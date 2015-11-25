@@ -7,10 +7,6 @@
   <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
 @endsection
 
-@section('navbar')
-  @include('partials.navbar')
-@endsection
-
 @section('content')
     <div class="login">
         <div class="container">
