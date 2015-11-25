@@ -11,7 +11,7 @@ class MenuController extends Controller
 {
     public function __construct()
     {
-        $this->authorize('restaurateur');
+       // $this->authorize('restaurateur');
     }
 
     /**
