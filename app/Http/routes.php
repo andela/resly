@@ -16,7 +16,7 @@ Route::get('/', function () {
 
 });
 
-Route::get('/login', [
+Route::get('auth/login', [
     'uses' => '\Resly\Http\Controllers\HomeController@login',
     'as' => 'login',
 ]);
