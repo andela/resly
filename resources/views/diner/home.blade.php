@@ -13,14 +13,10 @@
 <link rel="stylesheet" type="text/css" href="{!! asset('css/auth.css') !!}">
 @endsection
 
-@section('navbar')
-  @include ('partials.navbar');
-@endsection
-
 
 @section('content')
   @include ('partials.alerts');
-  @if (! Auth::diner()->check())
+  @if (! Auth::check())
   <div class="container">
       
     <!-- Nav tabs -->
