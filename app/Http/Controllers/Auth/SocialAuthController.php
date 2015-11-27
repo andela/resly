@@ -46,7 +46,7 @@ class SocialAuthController extends Controller
             return redirect()->route('dinerhome');
 
         } else {
-            return redirect()->route('register');
+            return redirect()->route('getSocialRegister');
 
         }
 
