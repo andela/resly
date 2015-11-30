@@ -2,43 +2,58 @@
 
 namespace Resly\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-
-use Resly\Http\Requests;
-use Resly\Http\Controllers\Controller;
-
 use Auth;
+use Socialite;
+use Resly\User;
+use Resly\Http\Requests;
+use Illuminate\Http\Request;
+use Resly\Http\Controllers\Controller;
 
 class SocialRegistrationController extends Controller
 {
-    public function __public()
-    {
-        $this->middleware('auth');
-    }
 
+    /**
+     * display the user registration form
+     * for those that wish to register using
+     * social registration.
+     *
+     * @return view social.register
+     */
     public function getRegistration()
     {
         return view('social.register');
     }
 
+    /**
+     * store registration data in preparation for registration
+     * after social authentication.
+     *
+     * @param  Requests\SocialRegistrationRequest request
+     * @return redirect to social provider
+     */
     public function postRegistration(Requests\SocialRegistrationRequest $request)
     {
-        $user = Auth::user();
+        $user = new User();
+        $user->username         =  session()->get('username');
+        $user->email            =  session()->get('email');
+        $user->avatar_url       =  session()->get('avatar_url');
+        $user->provider_name    =  session()->get('provider_name');
+        $user->provider_id      =  session()->get('id');
 
-        $user->role = $request->input('role');
-        $user->fname = $request->input('fname');
-        $user->lname = $request->input('lname');
+        $user->role             =  $request->input('role');
+        $user->fname            =  $request->input('fname');
+        $user->lname            =  $request->input('lname');
 
         $user->save();
 
-        Auth::logout($user);
+        session()->forget('name');
+        session()->forget('email');
+        session()->forget('avatar');
+        session()->forget('provider_name');
+        session()->forget('id');
 
-        if ($user->role == 'diner') {
-            return redirect()->route('dinerhome');
-        }
+        Auth::login($user);
 
-        if ($user->role == 'restaurateur') {
-            return redirect()->route('resthome');
-        }
+        return redirect('/');
     }
 }

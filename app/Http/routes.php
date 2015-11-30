@@ -30,19 +30,24 @@ Route::get('auth/register', [
     'as' => 'register',
 ]);
 
-Route::post('auth/register', 'Auth\AuthController@postRegister');
+/*
+ * Social Authentication
+ */
+Route::get('auth/{provider}', [
+    'uses' => 'Auth\SocialAuthController@redirectToProvider',
+    'as'   => 'social.login',
+]);
 
-Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
 
 Route::get('auth/social/register', [
     'uses' => 'Auth\SocialRegistrationController@getRegistration',
-    'as' => 'getSocialRegister',
+    'as'   => 'social.register'
 ]);
 
 Route::post('auth/social/register', [
     'uses' => 'Auth\SocialRegistrationController@postRegistration',
-    'as' => 'postSocialRegister',
+    'as'   => 'social.post.register'
 ]);
 
 Route::controller('restaurants', 'RestaurantController');
@@ -83,10 +88,12 @@ Route::resource(
  * Upload the diner's profile picture
  */
 Route::post(
-    '/profile/{username}/photo', [
-    'uses' => 'DinerProfileController@uploadPhoto',
-    'as' => 'diner_upload_photo',
-]);
+    '/profile/{username}/photo',
+    [
+        'uses' => 'DinerProfileController@uploadPhoto',
+        'as' => 'diner_upload_photo',
+    ]
+);
 
 /*
  * Restaurateur Profile

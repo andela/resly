@@ -12,7 +12,7 @@
       <div class="container">
             <h2>Register</h2>
             <hr />
-          <form class="form-vertical" role="form" method="POST" action="{{ route('postSocialRegister') }}">
+          <form class="form-vertical" role="form" method="POST" action="{{ route('social.post.register') }}">
             <div class="form-group{{ $errors->has('fname') ? ' has-error' : '' }}">
                 <label for="fname" class="control-label">First Name</label>
                 <input type="text" name="fname" class="form-control" id="fname" value="{{ Request::old('fname') ?: '' }}">
@@ -40,7 +40,7 @@
               </label>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Sign up</button>
+                <button type="submit" class="btn btn-primary">register</button>
             </div>
             <input type="hidden" name="_token" value="{{ Session::token() }}">
           </form>
