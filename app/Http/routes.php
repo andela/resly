@@ -18,20 +18,19 @@ Route::get('auth/login', [
     'as' => 'login',
 ]);
 
-Route::post('auth/login', [
-    'uses' => 'Auth\AuthController@postLogin',
-]);
+Route::post('auth/login', 'Auth\AuthController@postLogin');
 
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('auth/logout', [
+    'uses' => 'Auth\AuthController@getLogout',
+    'as' => 'logout'
+]);
 
 Route::get('auth/register', [
     'uses' => 'HomeController@register',
     'as' => 'register',
 ]);
 
-Route::post('auth/register', [
-    'uses' => 'Auth\AuthController@postRegister',
-]);
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
