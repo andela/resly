@@ -34,7 +34,7 @@ class User extends Model implements
     public function getAvatarUrl()
     {
         if (is_null($this->gravatarURL)) {
-            return $this->avatarURL;
+            return $this->avatar_url;
         }
     }
 
@@ -44,5 +44,16 @@ class User extends Model implements
     public function restaurant()
     {
         return $this->hasOne('Resly\Restaurant');
+    }
+
+    /**
+     *  Get the role of the user
+     *
+     *@return string
+     */
+
+    public function getRole()
+    {
+        return $this->role;
     }
 }
