@@ -52,7 +52,7 @@ class DinerAuthController extends Controller
             $request->only(['email', 'password']),
             $request->has('remember')
         )) {
-            return redirect()->route('dinerhome')->with('info', 'Could not sign you 
+            return redirect()->route('dinerhome')->with('info', 'Could not sign you
                 in with those credentials.');
         }
         $request->session()->put('user_id', Auth::get()->id);

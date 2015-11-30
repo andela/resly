@@ -11,20 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-
-});
+Route::get('/', 'HomeController@homepage');
 
 Route::get('auth/login', [
-    'uses' => '\Resly\Http\Controllers\HomeController@login',
+    'uses' => 'HomeController@login',
     'as' => 'login',
 ]);
 
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+
+Route::get('auth/logout', [
+    'uses' => 'Auth\AuthController@getLogout',
+    'as' => 'logout',
+]);
+
 Route::get('auth/register', [
-    'uses' => '\Resly\Http\Controllers\HomeController@register',
+    'uses' => 'HomeController@register',
     'as' => 'register',
 ]);
+
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
@@ -44,72 +50,10 @@ Route::controller('restaurants', 'RestaurantController');
 Route::controller('tables', 'TableController');
 
 /*
- *  Restaurateur routes
- */
-Route::get('/rest', [
-    'uses' => '\Resly\Http\Controllers\HomeController@resthome',
-    'as' => 'resthome',
-]);
-
-Route::get('/rest/signup', [
-    'uses' => '\Resly\Http\Controllers\RestAuthController@getRestSignup',
-    'as' => 'restsignup',
-]);
-
-Route::post('/rest/signup', [
-    'uses' => '\Resly\Http\Controllers\RestAuthController@postRestSignup',
-]);
-
-Route::get('/rest/login', [
-    'uses' => '\Resly\Http\Controllers\RestAuthController@getRestSignin',
-    'as' => 'restsignin',
-]);
-
-Route::post('/rest/login', [
-    'uses' => '\Resly\Http\Controllers\RestAuthController@postRestSignin',
-]);
-
-Route::get('/rest/logout', [
-    'uses' => '\Resly\Http\Controllers\RestAuthController@getRestSignout',
-    'as' => 'restsignout',
-]);
-
-/*
- *  Diner Routes
- */
-Route::get('/diner', [
-    'uses' => '\Resly\Http\Controllers\HomeController@dinerhome',
-    'as' => 'dinerhome',
-]);
-
-Route::get('/diner/signup', [
-    'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignup',
-    'as' => 'dinersignup',
-]);
-
-Route::post('/diner/signup', [
-    'uses' => '\Resly\Http\Controllers\DinerAuthController@postDinerSignup',
-]);
-
-Route::get('/diner/login', [
-    'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignin',
-    'as' => 'dinersignin',
-]);
-
-Route::post('/diner/login', [
-    'uses' => '\Resly\Http\Controllers\DinerAuthController@postDinerSignin',
-]);
-
-Route::get('/diner/logout', [
-    'uses' => '\Resly\Http\Controllers\DinerAuthController@getDinerSignout',
-    'as' => 'dinersignout',
-]);
-
-/*
  *  Search
  */
 Route::get('/search', [
-    'uses' => '\Resly\Http\Controllers\SearchController@getResults',
+    'uses' => 'SearchController@getResults',
     'as' => 'searchsite',
 ]);
 
@@ -121,7 +65,7 @@ Route::controller('bookings', 'BookingController');
  * Restaurant Profile
  */
 Route::get('/rest/{id}', [
-    'uses' => '\Resly\Http\Controllers\ProfileController@getProfile',
+    'uses' => 'ProfileController@getProfile',
     'as' => 'restprofile',
 ]);
 
@@ -139,11 +83,10 @@ Route::resource(
  * Upload the diner's profile picture
  */
 Route::post(
-    '/profile/{username}/photo',
-    ['uses' => 'DinerProfileController@uploadPhoto',
+    '/profile/{username}/photo', [
+    'uses' => 'DinerProfileController@uploadPhoto',
     'as' => 'diner_upload_photo',
-    ]
-);
+]);
 
 /*
  * Restaurateur Profile
