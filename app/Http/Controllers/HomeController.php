@@ -16,12 +16,12 @@ class HomeController extends Controller
 
     public function register()
     {
-        return view('register');
+        return view('auth_manual.register');
     }
 
     public function login()
     {
-        return view('login');
+        return view('auth_manual.login');
     }
 
     public function homepage()

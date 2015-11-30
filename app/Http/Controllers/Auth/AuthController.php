@@ -2,10 +2,9 @@
 
 namespace Resly\Http\Controllers\Auth;
 
+use Validator;
 use Resly\User;
-use Auth;
 use Resly\Http\Controllers\Controller;
-use Resly\Http\Requests\RegisterTraditionallyRequest;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -25,6 +24,12 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
+     * Redirect path after authentication
+     */
+
+    protected $redirectPath = '/';
+
+    /**
      * Create a new authentication controller instance.
      *
      * @return void
@@ -35,24 +40,39 @@ class AuthController extends Controller
     }
 
     /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'fname'             => 'required|max:20|alpha_dash',
+            'lname'             => 'required|max:20|alpha_dash',
+            'role'              => 'required|in:diner,restaurateur',
+            'username'          => 'required|unique:users|max:30|alpha_dash',
+            'email'             => 'required|unique:users|email|max:255',
+            'password'          => 'required|min:6',
+            'confirm-password'  => 'required|same:password'
+        ]);
+    }
+
+    /**
      * Create a new user instance after a valid registration.
      *
-     * @param  RegisterTraditionallyRequest $request
-     * @return response
+     * @param  array  $data
+     * @return User
      */
-    public function registerUser(RegisterTraditionallyRequest $request)
+    protected function create(array $data)
     {
-        User::create([
-            'fname' => $request->input('fname'),
-            'lname' => $request->input('lname'),
-            'username' => $request->input('username'),
-            'email' => $request->input('email'),
-            'role' => $request->input('role'),
-            'password' => bcrypt($request->input('password')),
+        return User::create([
+            'fname'     => $data['fname'],
+            'lname'     => $data['lname'],
+            'username'  => $data['username'],
+            'email'     => $data['email'],
+            'role'      => $data['role'],
+            'password'  => bcrypt($data['password']),
         ]);
-
-        return redirect()
-          ->route('homepage')
-          ->with('info', 'Registration successfull. Now log in');
     }
 }

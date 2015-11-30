@@ -2,41 +2,26 @@
 
 @section('title', 'register')
 
-@section('styles')
-  <link rel="stylesheet" type="text/css" href="{!! asset('css/welcome.css') !!}">
-  <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
-@endsection
-
 @section('content')
   <div class="register">
       <div class="container">
-            <form role="form" method="POST" action="/auth/register">
-                @if (count($errors) > 0)
-                    <div class="alert alert-success">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li> {{ $error }} </li>
-                            @endforeach
-                        </ul>
-
-                    </div>
-                @endif
-
+            <form role="form" method="POST" action=" {{ route('register') }}">
+                @include('partials.error')
                 <div class="form-group">
                     <label for="fname" class="control-label">First Name</label>
-                    <input type="text" name="fname" class="form-control" id="fname" value="{{ Request::old('fname') ?: '' }}">
+                    <input type="text" name="fname" class="form-control" id="fname" value="{{ old('fname') ?: '' }}">
                 </div>
                 <div class="form-group">
                     <label for="lname" class="control-label">Last Name</label>
-                    <input type="text" name="lname" class="form-control" id="lname" value="{{ Request::old('lname') ?: '' }}">
+                    <input type="text" name="lname" class="form-control" id="lname" value="{{ old('lname') ?: '' }}">
                 </div>
                 <div class="form-group">
                     <label for="username" class="control-label">Username</label>
-                    <input type="text" name="username" class="form-control" id="username" value="{{ Request::old('username') ?: '' }}">
+                    <input type="text" name="username" class="form-control" id="username" value="{{ old('username') ?: '' }}">
                 </div>
                 <div class="form-group">
                     <label for="email" class="control-label">Email</label>
-                    <input type="email" name="email" class="form-control" id="email" value="{{ Request::old('email') ?: '' }}">
+                    <input type="email" name="email" class="form-control" id="email" value="{{ old('email') ?: '' }}">
                 </div>
                 <div class="form-group">
                     <label for="password" class="control-label">Password</label>
@@ -61,7 +46,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Sign up</button>
                 </div>
-                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </form>
             <div class="or">
                 <h2><span>OR</span></h2>
