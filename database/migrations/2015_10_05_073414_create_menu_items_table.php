@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMenuItem extends Migration
+class CreateMenuItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateMenuItem extends Migration
      */
     public function up()
     {
-        Schema::create('Menu_item', function (Blueprint $table) {
+        Schema::create('menu_items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 45);
             $table->string('description', 200);
@@ -21,8 +21,8 @@ class CreateMenuItem extends Migration
             $table->integer('restaurant_id')->unsigned();
             $table->nullableTimestamps();
 
-            $table->foreign('cat_id')->references('id')->on('Category');
-            $table->foreign('restaurant_id')->references('id')->on('Restaurant');
+            $table->foreign('cat_id')->references('id')->on('categories');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateMenuItem extends Migration
      */
     public function down()
     {
-        SchemA::drop('Menu_item');
+        Schema::drop('menu_items');
     }
 }

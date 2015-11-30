@@ -44,7 +44,7 @@ class RestAuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if (! Auth::restaurateur()->attempt(
+        if (! Auth::attempt(
             $request->only(['email', 'password']),
             $request->has('remember')
         )) {
@@ -57,7 +57,7 @@ class RestAuthController extends Controller
 
     public function getRestSignout()
     {
-        Auth::restaurateur()->logout();
+        Auth::logout();
 
         return redirect()->route('resthome');
     }

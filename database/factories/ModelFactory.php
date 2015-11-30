@@ -36,9 +36,24 @@ $factory->define(Resly\Restaurateur::class, function (Faker\Generator $faker) {
     ];
 });
 
+/**
+ * Create a model factory for the general user, in this case diner.
+ */
+$factory->define(Resly\User::class, function (Faker\Generator $faker) {
+    return [
+        'fname' => $faker->firstName,
+        'lname' => $faker->lastName,
+        'username' => $faker->userName,
+        'email' => $faker->email,
+        'password' => bcrypt('resly'),
+        'role' => 'diner',
+        'remember_token' => str_random(10),
+    ];
+});
+
 $factory->define(Resly\Restaurant::class, function (Faker\Generator $faker) {
     return [
-        'restaurateur_id' => factory('Resly\Restaurateur')->create()->id,
+        'user_id' => factory('Resly\User')->create()->id,
         'name' => $faker->name,
         'description' => $faker->sentence,
         'email' => $faker->email,
@@ -51,7 +66,8 @@ $factory->define(Resly\Restaurant::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
-    $restaurateur = factory('Resly\Restaurateur')->create([
+    $restaurateur = factory('Resly\User')->create([
+        'role' => 'restaurateur',
         'password' => bcrypt('resly'),
     ]);
 
@@ -77,8 +93,8 @@ $factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
         'number_of_people' => rand(2, 8),
         'booking_date' => $faker->date,
         'booking_time' => $faker->time,
-        'diner_id' => factory('Resly\Diner')->create()->id,
-        'table_id' => factory('Resly\Table')->create()->table_id,
+        'diner_id' => factory('Resly\User')->create(['role' => 'diner'])->id,
+        'table_id' => factory('Resly\Table')->create()->id,
     ];
 });
 
