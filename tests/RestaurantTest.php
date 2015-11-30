@@ -43,7 +43,7 @@ class RestaurantTest extends TestCase
             ->see('Add the Tables\' details');
 
         $this->seeInDatabase(
-            'Restaurant',
+            'restaurants',
             ['email' => 'first.rest@resly.com']
         );
 
@@ -74,7 +74,7 @@ class RestaurantTest extends TestCase
             ->press('Next');
 
         $this->seeInDatabase(
-            'Restaurant',
+            'restaurants',
             ['email' => 'edited.rest@resly.com']
         );
 
@@ -86,13 +86,13 @@ class RestaurantTest extends TestCase
             // Seed some data and delete it afterwards
             $restaurant = factory('Resly\Restaurant')->make();
 
-            DB::table('Restaurant')->insert($restaurant->getAttributes());
+            DB::table('restaurants')->insert($restaurant->getAttributes());
             $this->seeInDatabase(
-                'Restaurant',
+                'restaurants',
                 ['email' => $restaurant->email]
             );
 
-            DB::table('Restaurant')->where('email', $restaurant->email)
+            DB::table('restaurants')->where('email', $restaurant->email)
                 ->delete();
         });
     }
