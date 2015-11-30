@@ -16,7 +16,6 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
-    protected $table = 'users';
     protected $fillable = [
     'fname',
     'lname',
@@ -34,5 +33,13 @@ class User extends Model implements AuthenticatableContract,
         if (is_null($this->gravatarURL)) {
             return $this->avatarURL;
         }
+    }
+
+    /**
+     *  Define a one to one restaurant relationship.
+     */
+    public function restaurant()
+    {
+        return $this->hasOne('Resly\Restaurant');
     }
 }

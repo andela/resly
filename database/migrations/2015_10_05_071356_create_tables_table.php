@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryTable extends Migration
+class CreateTablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,19 +12,16 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('Category', function (Blueprint $table) {
+        Schema::create('tables', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('restaurant_id')->unsigned();
+            $table->integer('seats_number');
             $table->string('name', 45);
             $table->nullableTimestamps();
 
-            $table->unique('name');
+            $table->foreign('restaurant_id')->references('id')
+                ->on('restaurants');
         });
-
-        DB::table('Category')->insert(
-            [
-                'name' => 'Soups',
-            ]
-        );
     }
 
     /**
@@ -34,6 +31,6 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Category');
+        Schema::drop('tables');
     }
 }

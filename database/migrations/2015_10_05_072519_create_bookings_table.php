@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookingTable extends Migration
+class CreateBookingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateBookingTable extends Migration
      */
     public function up()
     {
-        Schema::create('Booking', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('number_of_people');
             $table->time('booking_time');
@@ -22,8 +22,8 @@ class CreateBookingTable extends Migration
             $table->softDeletes();
             $table->nullableTimestamps();
 
-            $table->foreign('diner_id')->references('id')->on('Diner');
-            $table->foreign('table_id')->references('table_id')->on('Table');
+            $table->foreign('diner_id')->references('id')->on('users');
+            $table->foreign('table_id')->references('id')->on('tables');
         });
     }
 
@@ -34,6 +34,6 @@ class CreateBookingTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Booking');
+        Schema::drop('bookings');
     }
 }
