@@ -24,9 +24,8 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
-     * Redirect path after authentication
+     * Redirect path after authentication.
      */
-
     protected $redirectPath = '/';
 
     /**
@@ -54,7 +53,7 @@ class AuthController extends Controller
             'username'          => 'required|unique:users|max:30|alpha_dash',
             'email'             => 'required|unique:users|email|max:255',
             'password'          => 'required|min:6',
-            'confirm-password'  => 'required|same:password'
+            'confirm-password'  => 'required|same:password',
         ]);
     }
 

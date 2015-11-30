@@ -47,7 +47,7 @@ class User extends Model implements
     }
 
     /**
-     *  Get the role of the user
+     *  Get the role of the user.
      *
      *@return string
      */
