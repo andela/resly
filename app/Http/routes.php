@@ -112,9 +112,19 @@ Route::get('dashboard', [
 /*
  * User profile
  */
+Route::get('/user/profile/edit', [
+    'uses'        => 'UserProfileController@getEdit',
+    'as'          => 'userProfileEdit',
+    'middleware'  => 'auth',
+]);
+
+Route::post('/user/profile/edit', [
+    'uses'        => 'UserProfileController@postEdit',
+    'middleware'  => 'auth',
+]);
 
 Route::get('/user/{username}', [
-    'uses' => 'UserProfileController@getProfile',
-    'as'   => 'userProfile',
-    'middleware' => 'auth',
+    'uses'        => 'UserProfileController@getProfile',
+    'as'          => 'userProfile',
+    'middleware'  => 'auth',
 ]);
