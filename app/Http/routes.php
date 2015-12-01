@@ -105,6 +105,16 @@ Route::controller('restaurateur', 'RestaurateurProfileController', [
 ]);
 
 Route::get('dashboard', [
-    'uses'        => 'DashboardController@showDashboard',
-    'as'          => 'dashboard',
+    'uses' => 'DashboardController@showDashboard',
+    'as'   => 'dashboard',
+]);
+
+/*
+ * User profile
+ */
+
+Route::get('/user/{username}', [
+    'uses' => 'UserProfileController@getProfile',
+    'as'   => 'userProfile',
+    'middleware' => 'auth',
 ]);
