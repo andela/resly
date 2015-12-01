@@ -30,6 +30,8 @@ Route::get('auth/register', [
     'as' => 'register',
 ]);
 
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
 /*
  * Social Authentication
  */
