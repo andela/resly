@@ -38,7 +38,7 @@ class SocialRegistrationController extends Controller
         $user->email            =  session()->get('email');
         $user->avatar_url       =  session()->get('avatar_url');
         $user->provider_name    =  session()->get('provider_name');
-        $user->provider_id      =  session()->get('id');
+        $user->provider_id      =  session()->get('provider_id');
 
         $user->role             =  $request->input('role');
         $user->fname            =  $request->input('fname');

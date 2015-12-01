@@ -39,7 +39,7 @@ class SocialAuthController extends Controller
 
         // if this is the first time we are seeing
         // this we consider this to be a registration.
-        if (!$nativeUser->exists) {
+        if (!$nativeUser->exists()) {
             self::beginRegistration($socialUser, $provider);
             return redirect()->route('social.register')->with('you need to register first');
         }
