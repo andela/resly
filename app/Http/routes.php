@@ -103,3 +103,8 @@ Route::post(
 Route::controller('restaurateur', 'RestaurateurProfileController', [
     'getProfile' => 'restaurateur.profile',
 ]);
+
+Route::get('dashboard', [
+    'uses'        => 'DashboardController@showDashboard',
+    'as'          => 'dashboard',
+]);

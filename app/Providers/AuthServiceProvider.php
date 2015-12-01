@@ -40,5 +40,17 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('diner-user', function ($user) {
             return $user->getRole() === 'diner';
         });
+
+        $gate->define('rest-link', function ($user) {
+            if ($user->role === 'restaurateur') {
+                return true;
+            }
+        });
+
+        $gate->define('diner-link', function ($user) {
+            if ($user->role === 'diner') {
+                return true;
+            }
+        });
     }
 }
