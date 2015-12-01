@@ -51,9 +51,16 @@ class User extends Model implements
      *
      *@return string
      */
-
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     *  Diner users have a 1-many bookings relationship.
+     */
+    public function bookings()
+    {
+        return $this->hasMany('Resly\Booking', 'diner_id');
     }
 }

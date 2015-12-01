@@ -1,9 +1,9 @@
 <?php
 
+use Resly\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Resly\Diner;
 
 class BookingTest extends TestCase
 {
@@ -15,7 +15,7 @@ class BookingTest extends TestCase
 
         $this->seed('DatabaseSeeder');
 
-        $diner = factory('Resly\Diner')->create();
+        $diner = User::where('role', 'diner')->firstOrFail();
 
         $response = $this->actingAs($diner)->call('POST', 'bookings/begin', [
             'restaurant_id' => 1,
@@ -33,13 +33,13 @@ class BookingTest extends TestCase
 
         $this->seed('DatabaseSeeder');
 
-        $diner = Diner::find(1);
+        $diner = User::where('role', 'diner')->firstOrFail();
 
         $response = $this->actingAs($diner)
             ->withSession(['user_id' => $diner->id])
             ->call(
                 'POST',
-                'bookings/create', 
+                'bookings/create',
                 [
                     'table_id' => 1,
                     'booking_time' => '16:00:00',
@@ -57,9 +57,9 @@ class BookingTest extends TestCase
         // create a reservation first
         $booking = factory('Resly\Booking')->create();
 
-        $diner = $booking->diner;
+        $user = $booking->user;
 
-        $this->actingAs($diner)
+        $this->actingAs($user)
             ->visit('bookings')
             ->see($booking->booking_date);
     }
@@ -70,7 +70,7 @@ class BookingTest extends TestCase
 
         $booking = factory('Resly\Booking')->create();
 
-        $restaurateur = $booking->table->restaurant->restaurateur;
+        $restaurateur = $booking->table->restaurant->user;
 
         $this->actingAs($restaurateur)
             ->visit('bookings')
@@ -82,9 +82,9 @@ class BookingTest extends TestCase
         // create a reservation first
         $booking = factory('Resly\Booking')->create();
 
-        $diner = $booking->diner;
+        $user = $booking->user;
 
-        $this->actingAs($diner)
+        $this->actingAs($user)
             ->visit('bookings')
             ->press('Cancel')
             ->see('Booking cancelled successfully.');

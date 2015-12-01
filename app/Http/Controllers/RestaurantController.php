@@ -11,8 +11,7 @@ class RestaurantController extends Controller
 {
     public function __construct()
     {
-        // Replace this with valid policy
-        // $this->authorize('restaurateur');
+        $this->authorize('restaurateur-user');
     }
 
     /**
@@ -61,8 +60,9 @@ class RestaurantController extends Controller
 
             $restaurant->fill($request->all());
             $restaurant->save();
+            $username = auth()->user()->username;
 
-            return redirect('restaurateur/profile');
+            return redirect('user/'.$username.'/profile');
         } else {
             abort(404);
         }

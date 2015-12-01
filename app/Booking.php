@@ -19,9 +19,9 @@ class Booking extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function diner()
+    public function user()
     {
-        return $this->belongsTo('Resly\Diner');
+        return $this->belongsTo('Resly\User', 'diner_id');
     }
 
     public function table()
