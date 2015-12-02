@@ -44,12 +44,12 @@ Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProvider
 
 Route::get('auth/social/register', [
     'uses' => 'Auth\SocialRegistrationController@getRegistration',
-    'as'   => 'social.register'
+    'as'   => 'social.register',
 ]);
 
 Route::post('auth/social/register', [
     'uses' => 'Auth\SocialRegistrationController@postRegistration',
-    'as'   => 'social.post.register'
+    'as'   => 'social.post.register',
 ]);
 
 Route::controller('restaurants', 'RestaurantController');

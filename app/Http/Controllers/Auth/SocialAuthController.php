@@ -2,19 +2,15 @@
 
 namespace Resly\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-
-
 use Auth;
 use Socialite;
 use Resly\User;
-use Resly\Http\Requests;
 use Resly\Http\Controllers\Controller;
 
 class SocialAuthController extends Controller
 {
     /**
-     * redirect to provider oauth url
+     * redirect to provider oauth url.
      *
      * @param  $provider name of provider
      * @return redirect to provider oauth url
@@ -39,7 +35,7 @@ class SocialAuthController extends Controller
 
         // if this is the first time we are seeing
         // this we consider this to be a registration.
-        if (!$nativeUser->exists()) {
+        if (! $nativeUser->exists()) {
             self::beginRegistration($socialUser, $provider);
             return redirect()->route('social.register')->with('you need to register first');
         }
@@ -70,7 +66,7 @@ class SocialAuthController extends Controller
     }
 
     /**
-     * save social provider data to session
+     * save social provider data to session.
      *
      * @param  $user user from socialite
      * @param  $provider name of provider
