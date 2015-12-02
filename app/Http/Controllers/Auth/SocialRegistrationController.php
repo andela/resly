@@ -50,7 +50,7 @@ class SocialRegistrationController extends Controller
         session()->forget('email');
         session()->forget('avatar');
         session()->forget('provider_name');
-        session()->forget('id');
+        session()->forget('provider_id');
 
         Auth::login($user);
 

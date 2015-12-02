@@ -53,13 +53,6 @@ class DinerLoginTest extends TestCase
     {
         $this->seed('DatabaseSeeder');
 
-        $diner = new Diner();
-
-        $diner->username = 'dinerone';
-        $diner->email = 'diner@localhost.com';
-        $diner->password = Hash::make('password');
-        $diner->save();
-
         $this->visit('/')
              ->click('Login')
              ->type('diner@localhost.com', 'email')
