@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class MenuItemTag extends Model
 {
-    protected $table = 'Menu_item_tag';
+    protected $table = 'menu_item_tag';
 }
