@@ -20,7 +20,7 @@
                     <span class = "caret"></span>
                 </button>
                 <ul class="dropdown-menu" role = "menu">
-                    <li><a href="#">
+                    <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">
                       <span class="glyphicon glyphicon-user"></span> Your Profile</a>
                     </li>
                     <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
