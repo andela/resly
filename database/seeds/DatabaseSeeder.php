@@ -21,6 +21,11 @@ class DatabaseSeeder extends Seeder
             ['role' => 'restaurateur']
         );
 
+        factory(Resly\User::class)->create([
+            'email' => 'diner@localhost.com',
+            'password' => bcrypt('password'),
+        ]);
+
         Model::reguard();
     }
 }
