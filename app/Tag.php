@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    protected $table = 'Tag';
-
     protected $fillable = ['name'];
 
     public function menu_items()

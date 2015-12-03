@@ -6,12 +6,6 @@
 <link rel="stylesheet" type="text/css" href="{!! asset('css/auth.css') !!}">
 @endsection
 
-@section('navbar')
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{{ route('resthome')}}">Resly</a>
-   </div>
-@endsection
-
 @section('content')
     @include ('partials.alerts');
     <div class="row">

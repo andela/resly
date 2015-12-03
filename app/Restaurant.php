@@ -6,19 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
-    protected $primaryKey = 'id';
-    protected $table = 'Restaurant';
-
     protected $fillable = [
-            'name',
-            'restauranteur_id',
-            'description',
-            'opening_time',
-            'closing_time',
-            'location',
-            'telephone',
-            'email',
-            'address',
+        'name',
+        'restauranteur_id',
+        'description',
+        'opening_time',
+        'closing_time',
+        'location',
+        'telephone',
+        'email',
+        'address',
     ];
 
     public function tables()
@@ -26,9 +23,9 @@ class Restaurant extends Model
         return $this->hasMany('Resly\Table', 'restaurant_id');
     }
 
-    public function restaurateur()
+    public function user()
     {
-        return $this->belongsTo('Resly\Restaurateur');
+        return $this->belongsTo('Resly\User');
     }
 
     public function bookings()

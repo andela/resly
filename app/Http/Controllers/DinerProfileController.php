@@ -2,17 +2,29 @@
 
 namespace Resly\Http\Controllers;
 
-use Illuminate\Http\Request;
+use DB;
+use Gate;
+use DateTime;
+use Validator;
 use Resly\Diner;
 use Resly\Booking;
-use DB;
 use Resly\DinerPhoto;
-use Validator;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use DateTime;
 
 class DinerProfileController extends Controller
 {
+    /*
+     * Only allow authorized diners to access their profiles.
+     */
+
+    public function __construct()
+    {
+        if (Gate::denies('diner')) {
+            return redirect()->route('login')->send();
+        }
+    }
+
     /*
      * Display the diners profile.
      *
@@ -23,6 +35,7 @@ class DinerProfileController extends Controller
     public function show($username)
     {
         $diner = Diner::dinerWithUsername($username);
+
         $diner->photo = self::getLastInsertedPhoto($diner->id);
         $diner->cancellations = Booking::onlyTrashed()
             ->where('diner_id', $diner->id)
@@ -36,11 +49,11 @@ class DinerProfileController extends Controller
             date_default_timezone_set('Africa/Nairobi');
 
             $dateDatabase = $reservation->booking_date.$reservation->booking_time;
-            $date1 = new DateTime($dateDatabase);
+            $bookingDate = new DateTime($dateDatabase);
 
-            $date2 = new DateTime('now');
+            $currentDate = new DateTime('now');
 
-            if ($date1 < $date2) {
+            if ($bookingDate < $currentDate) {
                 array_push($reservePast, $reservation);
             } else {
                 array_push($reserveFuture, $reservation);

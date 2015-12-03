@@ -16,6 +16,16 @@ class DatabaseSeeder extends Seeder
 
         factory('Resly\Booking', 5)->create();
 
+        factory(Resly\User::class, 3)->create();
+        factory(Resly\User::class, 3)->create(
+            ['role' => 'restaurateur']
+        );
+
+        factory(Resly\User::class)->create([
+            'email' => 'diner@localhost.com',
+            'password' => bcrypt('password'),
+        ]);
+
         Model::reguard();
     }
 }

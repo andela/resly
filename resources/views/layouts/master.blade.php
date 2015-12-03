@@ -10,23 +10,7 @@
 </head>
 <body>
 
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Resly</a>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-
-          @yield('navbar')
-
-        </div>
-      </div>
-    </div>
+    @include('partials.navbar')
 
     @yield('content')
 
