@@ -24,12 +24,12 @@ class DinerLoginTest extends TestCase
      **/
     public function testLoginAcceptsCredentials()
     {
-        $this->visit('/diner')
+        $this->visit('/')
              ->click('Login')
              ->type('diner@localhost.com', 'email')
              ->type('password', 'password')
              ->press('Sign in')
-             ->seePageIs('/diner');
+             ->seePageIs('/');
 
     }
 
@@ -46,11 +46,11 @@ class DinerLoginTest extends TestCase
      **/
     public function testDinerRejectsCredentials()
     {
-        $this->visit('/diner')
+        $this->visit('/')
              ->click('Login')
              ->type('diner@localhost.com', 'email')
              ->type('wrong password', 'password')
              ->press('Sign in')
-             ->seePageIs('/diner');
+             ->seePageIs('/auth/login');
     }
 }
