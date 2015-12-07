@@ -49,13 +49,8 @@ class DinerLoginTest extends TestCase
      **/
     public function testDinerRejectsCredentials()
     {
-<<<<<<< HEAD
-        $this->seed('DatabaseSeeder');
-
-=======
         $this->seed('UserTableSeeder');
 
->>>>>>> 0213ed3024d95440e78373332b03228a4522c958
         $this->visit('/')
              ->click('Login')
              ->type('diner@localhost.com', 'email')
