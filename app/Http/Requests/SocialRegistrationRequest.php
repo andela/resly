@@ -26,7 +26,7 @@ class SocialRegistrationRequest extends Request
         return [
             'fname' => 'required',
             'lname' => 'required',
-            'role' => 'required|in:diner,restaurateur'
+            'role' => 'required|in:diner,restaurateur',
         ];
     }
 }
