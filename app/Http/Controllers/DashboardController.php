@@ -2,11 +2,6 @@
 
 namespace Resly\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Resly\Http\Requests;
-use Resly\Http\Controllers\Controller;
-
 class DashboardController extends Controller
 {
     public function __construct()

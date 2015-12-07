@@ -3,11 +3,8 @@
 namespace Resly\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Auth;
 use Resly\User;
-use Resly\Http\Requests;
-use Resly\Http\Controllers\Controller;
 
 class UserProfileController extends Controller
 {
@@ -25,8 +22,8 @@ class UserProfileController extends Controller
     {
         $this->validate($request, [
             'username' => 'alpha|max:50',
-            'fname'    => 'alpha|max:50',
-            'lname'    => 'alpha|max:50',
+            'fname' => 'alpha|max:50',
+            'lname' => 'alpha|max:50',
         ]);
 
         Auth::user()->update([

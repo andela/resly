@@ -7,8 +7,6 @@ class CreateMenuItemTagTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -23,9 +21,7 @@ class CreateMenuItemTagTable extends Migration
     }
 
     /**
-     * Reverse the migrations
-     *
-     * @return void
+     * Reverse the migrations.
      */
     public function down()
     {

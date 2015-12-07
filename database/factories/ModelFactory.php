@@ -36,7 +36,7 @@ $factory->define(Resly\Restaurateur::class, function (Faker\Generator $faker) {
     ];
 });
 
-/**
+/*
  * Create a model factory for the general user, in this case diner.
  */
 $factory->define(Resly\User::class, function (Faker\Generator $faker) {
