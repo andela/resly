@@ -8,6 +8,7 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function showDashboard()
     {
         return view('dashboard.index');
