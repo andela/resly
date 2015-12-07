@@ -7,8 +7,6 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -32,7 +30,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'restaurateur@localhost.com',
             'password' => bcrypt('password'),
         ]);
-
 
         Model::reguard();
     }
