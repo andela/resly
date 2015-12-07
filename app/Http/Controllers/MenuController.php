@@ -11,7 +11,7 @@ class MenuController extends Controller
 {
     public function __construct()
     {
-       // $this->authorize('restaurateur');
+        // $this->authorize('restaurateur');
     }
 
     /**
@@ -34,7 +34,7 @@ class MenuController extends Controller
     public function postAddBulk(Request $request)
     {
         // if the request has no data, return error code
-        if (! $request->isJson()) {
+        if (!$request->isJson()) {
             return 'false';
         }
 
@@ -55,7 +55,7 @@ class MenuController extends Controller
             $menu->description = $menu_item['description'];
             $menu->save();
             // Add tags
-            if (! empty($menu_item['tags'])) {
+            if (!empty($menu_item['tags'])) {
                 $tags = explode(',', $menu_item['tags']);
                 foreach ($tags as $tag) {
                     $tag = Tag::firstOrCreate(['name' => $tag]);
