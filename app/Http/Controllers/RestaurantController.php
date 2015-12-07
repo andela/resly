@@ -60,9 +60,10 @@ class RestaurantController extends Controller
 
             $restaurant->fill($request->all());
             $restaurant->save();
-            $username = auth()->user()->username;
+            $user = auth()->user();
+            $username = $user->username;
 
-            return redirect('user/'.$username.'/profile');
+            return redirect("restaurateur/profile/{$user->id}");
         } else {
             abort(404);
         }
