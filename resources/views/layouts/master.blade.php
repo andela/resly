@@ -24,7 +24,7 @@
       <div id="navbar" class="navbar-collapse collapse">
         @yield('navbar')
         <ul class="nav navbar-nav navbar-right">
-          @if (Auth::restaurateur()->check()) 
+          @if (Auth::restaurateur()->check())
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::restaurateur()->get()->fname }} <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -69,20 +69,6 @@
               <div class="col-md-6 col-md-offset-3">
                 <div class="footer-content text-center padding-ver-clear">
                   <p>Resly | Home for your reservation needs.</p>
-                  <ul class="list-inline mb-20">
-                    <li><i class="text-default fa fa-map-marker pr-5"></i>One infinity loop, 54100</li>
-                    <li><a href="tel:+00 1234567890" class="link-dark"><i class="text-default fa fa-phone pl-10 pr-5"></i>+00 1234567890</a></li>
-                    <li><a href="mailto:info@theproject.com" class="link-dark"><i class="text-default fa fa-envelope-o pl-10 pr-5"></i>info@resly.com</a></li>
-                  </ul>
-                  <ul class="social-links circle animated-effect-1 margin-clear">
-                    <div class="social">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i> </a></li>
-                      </ul>
-                    </div>
-                  </ul>
                   <div class="separator"></div>
                   <p class="text-center margin-clear">Copyright © 2015 Resly <a target="_blank" href="http://resly.me">Resly</a>. All Rights Reserved</p>
                 </div>
