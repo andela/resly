@@ -21,9 +21,9 @@
             <div class="row">
               <div class="col-md-6 col-md-offset-3">
                 <div class="footer-content text-center padding-ver-clear">
-                  <p>Resly | Home for your reservation needs.</p>
+                  <p><a target="_blank" href="/">Resly</a> | Home for your reservation needs.</p>
                   <div class="separator"></div>
-                  <p class="text-center margin-clear">Copyright © 2015 Resly <a target="_blank" href="http://resly.me">Resly</a>. All Rights Reserved</p>
+                  <p class="text-center margin-clear">Copyright © 2015. All Rights Reserved</p>
                 </div>
               </div>
             </div>
