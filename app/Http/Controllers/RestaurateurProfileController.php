@@ -10,7 +10,7 @@ class RestaurateurProfileController extends Controller
 {
     public function getProfile()
     {
-        $user = Auth::restaurateur()->get();
+        $user = Auth::get();
         $restaurant = $user->restaurant;
 
         return view('restaurateur.profile', [

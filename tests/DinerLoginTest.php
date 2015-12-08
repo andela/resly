@@ -4,6 +4,9 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use Resly\Diner;
+use Hash;
+
 class DinerLoginTest extends TestCase
 {
     use DatabaseMigrations;
@@ -24,12 +27,14 @@ class DinerLoginTest extends TestCase
      **/
     public function testLoginAcceptsCredentials()
     {
-        $this->visit('/diner')
+        $this->seed('DatabaseSeeder');
+
+        $this->visit('/')
              ->click('Login')
              ->type('diner@localhost.com', 'email')
              ->type('password', 'password')
              ->press('Sign in')
-             ->seePageIs('/diner');
+             ->seePageIs('/');
 
     }
 
@@ -46,11 +51,13 @@ class DinerLoginTest extends TestCase
      **/
     public function testDinerRejectsCredentials()
     {
-        $this->visit('/diner')
+        $this->seed('DatabaseSeeder');
+
+        $this->visit('/')
              ->click('Login')
              ->type('diner@localhost.com', 'email')
              ->type('wrong password', 'password')
              ->press('Sign in')
-             ->seePageIs('/diner');
+             ->seePageIs('/auth/login');
     }
 }

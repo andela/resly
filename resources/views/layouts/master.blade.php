@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<<<<<<< HEAD
     <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -58,6 +59,9 @@
       </div><!--/.nav-collapse -->
     </div>
     </nav>
+=======
+    @include('partials.navbar')
+>>>>>>> origin/develop
 
     @yield('content')
 
