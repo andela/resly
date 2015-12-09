@@ -15,6 +15,6 @@ dependencies:
 
 test:
   override:
-    - phpunit -c phpunit.xml
+    - phpunit --coverage-clover build/logs/clover.xml
   post:
     - php vendor/bin/coveralls
