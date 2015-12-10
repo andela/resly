@@ -22,7 +22,7 @@ class DinerLoginTest extends TestCase
      *
      * @return void
      **/
-    public function _testLoginAcceptsCredentials()
+    public function testLoginAcceptsCredentials()
     {
         $this->seed('DatabaseSeeder');
 
@@ -46,7 +46,7 @@ class DinerLoginTest extends TestCase
      *
      * @return void
      **/
-    public function _testDinerRejectsCredentials()
+    public function testDinerRejectsCredentials()
     {
         $this->seed('DatabaseSeeder');
 
