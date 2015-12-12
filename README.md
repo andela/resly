@@ -1,5 +1,7 @@
 # resly
 
+[![Join the chat at https://gitter.im/andela/resly](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/andela/resly?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Resly is a graphical reservations system for restaurants.
 
 ## installation instructions
