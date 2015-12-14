@@ -76,34 +76,6 @@ Route::get('/rest/{id}', [
     'as' => 'restprofile',
 ]);
 
-/*
- * Diner Profile
- */
-
-Route::resource(
-    'profile',
-    'DinerProfileController',
-    ['only' => ['show', 'edit', 'update']]
-);
-
-/*
- * Upload the diner's profile picture
- */
-Route::post(
-    '/profile/{username}/photo',
-    [
-        'uses' => 'DinerProfileController@uploadPhoto',
-        'as' => 'diner_upload_photo',
-    ]
-);
-
-/*
- * Restaurateur Profile
- */
-Route::controller('restaurateur', 'RestaurateurProfileController', [
-    'getProfile' => 'restaurateur.profile',
-]);
-
 Route::get('dashboard', [
     'uses' => 'DashboardController@showDashboard',
     'as' => 'dashboard',
