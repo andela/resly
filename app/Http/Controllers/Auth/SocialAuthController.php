@@ -13,6 +13,7 @@ class SocialAuthController extends Controller
      * redirect to provider oauth url.
      *
      * @param  $provider name of provider
+     *
      * @return redirect to provider oauth url
      */
     public function redirectToProvider($provider)
@@ -25,6 +26,7 @@ class SocialAuthController extends Controller
      *  with their social provider.
      *
      * @param  provider name of provider i.e 'google'
+     *
      * @return redirect to homepage
      */
     public function handleProviderCallback($provider)
@@ -54,13 +56,14 @@ class SocialAuthController extends Controller
      *
      * @param  $socialUser user returned by social provider
      * @param  $provider name of provider
+     *
      * @return $user
      */
     public static function findOrCreateUser($socialUser, $provider)
     {
         $user = User::firstOrNew([
             'provider_name' => $provider,
-            'provider_id'   => $socialUser->id,
+            'provider_id' => $socialUser->id,
         ]);
 
         return $user;
@@ -71,13 +74,12 @@ class SocialAuthController extends Controller
      *
      * @param  $user user from socialite
      * @param  $provider name of provider
-     * @return void
      */
     public static function beginRegistration($user, $provider)
     {
         session([
-            'username'   => $user->name,
-            'email'      => $user->email,
+            'username' => $user->name,
+            'email' => $user->email,
             'avatar_url' => $user->avatar,
             'provider_name' => $provider,
             'provider_id' => $user->id,

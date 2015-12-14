@@ -1,8 +1,8 @@
-@extends('layouts.master')
+@extends('dashboard.index')
 
 @section('title', 'Profile')
 
-@section('content')
+@section('details')
   <div class="container" style="padding-top:50px;">
       <div class="row">
           <div class="panel panel-info">
@@ -11,7 +11,9 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                  <div class="col-md-3 col-lg-3 " align="center">
+                    <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive">
+                  </div>
                   <div class=" col-md-9 col-lg-9 ">
                     <table class="table table-user-information">
                       <tbody>
@@ -33,7 +35,6 @@
                         </tr>
                       </tbody>
                     </table>
-                    <a href="/" class="btn btn-primary">Back to home</a>
                   </div>
               </div>
             </div>

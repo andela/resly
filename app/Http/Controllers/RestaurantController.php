@@ -60,6 +60,8 @@ class RestaurantController extends Controller
 
             $restaurant->fill($request->all());
             $restaurant->save();
+            $user = auth()->user();
+            $username = $user->username;
 
             return redirect('/dashboard');
         } else {
