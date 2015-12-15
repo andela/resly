@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/andela/resly/badge.svg?branch=develop&service=github)](https://coveralls.io/github/andela/resly?branch=develop)
+
 # resly
 
 Resly is a graphical reservations system for restaurants.
