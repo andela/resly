@@ -27,6 +27,7 @@ class SocialRegistrationController extends Controller
      * after social authentication.
      *
      * @param  Requests\SocialRegistrationRequest request
+     *
      * @return redirect to social provider
      */
     public function postRegistration(Requests\SocialRegistrationRequest $request)
