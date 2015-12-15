@@ -1,8 +1,8 @@
-@extends('layouts.master')
+@extends('dashboard.index')
 
 @section('title', 'Profile')
 
-@section('content')
+@section('details')
   <div class="container" style="padding-top:50px;">
       <div class="row">
           <div class="panel panel-info">
@@ -11,6 +11,7 @@
             </div>
             <div class="panel-body">
               <div class="row">
+
                 <div class="col-md-3 col-lg-3 " align="center">
                     @if(!is_null(auth()->user()->avatar_url))
                         <img alt="{{ auth()->user()->username }}" class="img-circle img-responsive" src="{{ auth()->user()->avatar_url }}" />
@@ -39,7 +40,6 @@
                         </tr>
                       </tbody>
                     </table>
-                    <a href="/" class="btn btn-primary">Back to home</a>
                   </div>
               </div>
             </div>
