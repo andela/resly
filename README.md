@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/andela/resly/badge.svg?branch=develop&service=github)](https://coveralls.io/github/andela/resly?branch=develop)
+
 # resly
 
 [![Join the chat at https://gitter.im/andela/resly](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/andela/resly?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
