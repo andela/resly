@@ -1,6 +1,8 @@
-@extends('layouts.master')
+@extends('dashboard.index')
 
-@section('content')
+@section('title', 'Add Restaurant')
+
+@section('details')
 <style type="text/css">
   fieldset {
     border: 1px groove;
@@ -20,11 +22,11 @@
   }
 </style>
   <div class="content">
-    <div class="col-sm-6 dark">
+    <div class="col-sm-12 dark">
       <h4>Add the details of the restaurant</h4>
-          
+
       <form  method="POST" action="/restaurants/add">
-      
+
         <div class="row">
           @if (count($errors) > 0)
           <div class="alert alert-danger">
@@ -42,7 +44,7 @@
         <!-- Add Name of restaurant -->
         <div class= "form-group">
           <label for= "name" class= "control-label"> Name of restaurant</label>
-          <input type = "text" class = "form-control" id= "restaurant_name" 
+          <input type = "text" class = "form-control" id= "restaurant_name"
               placeholder = "Enter name" name= "name" value="{{ old('name') }}">
         </div>
 
@@ -59,7 +61,7 @@
               <label for = "opening-hours" class = "control-label"> Opening Time</label>
               <input class = "form-control" id = "opening-hours" name="opening_time" placeholder = "09:00 (In 24hr system)" value="{{ old('opening_time') }}">
             </div>
-            
+
             <div class = "col-sm-6">
               <label for = "closing-time" class = "control-label"> Closing Time</label>
               <input class = "form-control" id = "closing-time" name="closing_time" placeholder = "22:00" value="{{ old('closing_time') }}">
@@ -76,32 +78,32 @@
         <!-- Add contact information of restaurant -->
         <fieldset>
           <legend>Contact information</legend>
-         
+
           <!-- Telephone number -->
           <div class = "form-group">
             <label for = "telephone" class = "control-label"> Telephone Number</label>
-            <input type = "tel" class = "form-control" id = "telephone" 
+            <input type = "tel" class = "form-control" id = "telephone"
               name="telephone" placeholder = "Enter phone number" value="{{ old('telephone') }}">
           </div>
 
           <!-- Email address -->
           <div class = "form-group">
             <label for = "email-address" class = "control-label"> Email address</label>
-            <input type = "email" class = "form-control" name="email" id = "email-address" 
+            <input type = "email" class = "form-control" name="email" id = "email-address"
               value="{{ old('email') }}" placeholder = "Enter email address">
           </div>
-          
+
            <!-- Postal address -->
           <div class = "form-group">
             <label for = "postal" class = "control-label"> Postal address</label>
-            <input type = "text" class = "form-control" name="address" id = "postal" 
+            <input type = "text" class = "form-control" name="address" id = "postal"
               value="{{ old('address') }}" placeholder = "Enter postal address">
-          </div>  
+          </div>
         </fieldset>
 
         <div class = "form-group">
           <button type = "submit" class = "btn btn-primary btn-lg" style="float:right">Next</button>
-        </div>  
+        </div>
       </form>
     </div>
   </div>
