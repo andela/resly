@@ -12,11 +12,11 @@
   <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right">
         @can('authenticated')
-            <div class = "btn-group">
-                <button type="button" class="btn btn-default nav-btn">
+            <div class = "btn-group nav-btn">
+                <button type="button" class="btn btn-default">
                     {{ auth()->user()->username }}
                 </button>
-                <button type="button" class="btn btn-default dropdown-toggle nav-btn" data-toggle = "dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle = "dropdown">
                     <span class = "caret"></span>
                 </button>
                 <ul class="dropdown-menu nav-ul" role = "menu">

@@ -307,5 +307,10 @@ body {
 
 .nav-btn {
   margin-top: 10%;
-  padding: 8% 0;
+}
+
+.alert-message {
+  width: 80%;
+  margin-left: 10%;
+  background-color: #333233;
 }
