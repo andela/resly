@@ -9,21 +9,19 @@ class Booking extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'Booking';
-
     protected $fillable = [
-            'number_of_people',
-            'booking_date',
-            'booking_time',
-            'diner_id',
-            'table_id',
+        'number_of_people',
+        'booking_date',
+        'booking_time',
+        'diner_id',
+        'table_id',
     ];
 
     protected $dates = ['deleted_at'];
 
-    public function diner()
+    public function user()
     {
-        return $this->belongsTo('Resly\Diner');
+        return $this->belongsTo('Resly\User', 'diner_id');
     }
 
     public function table()

@@ -24,7 +24,7 @@ class BookingController extends Controller
     {
         // Check if authenticated user is Restaurateur.
         $user = Auth::user();
-        if ($user instanceof Restaurateur) {
+        if ($user->role === 'restaurateur') {
             $restaurant = $user->restaurant;
 
             return view(
@@ -48,13 +48,14 @@ class BookingController extends Controller
     {
         $restaurant_id = $request->input('restaurant_id');
 
-        if (Gate::denies('book')) {
+        // Check if user is authenticated or redirect to login.
+        if (Gate::denies('diner-user')) {
             $request->session()->put(
                 'redirect_url',
                 '/rest/'.$restaurant_id
             );
 
-            return redirect('/login')
+            return redirect('/auth/login')
                 ->with('info', 'Login as Diner first.');
         }
 
@@ -120,7 +121,7 @@ class BookingController extends Controller
      */
     public function postCreate(Request $request)
     {
-        $this->authorize('book');
+        $this->authorize('diner-user');
 
         $validator = Validator::make(
             $request->all(),
@@ -154,7 +155,7 @@ class BookingController extends Controller
      */
     public function postCancel(Request $request)
     {
-        $this->authorize('book');
+        $this->authorize('diner-user');
 
         // validate request
         $validator = Validator::make(

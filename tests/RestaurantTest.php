@@ -14,7 +14,9 @@ class RestaurantTest extends TestCase
 
     public function testAddRestaurantPageIsLoaded()
     {
-        $restaurateur = factory('Resly\Restaurateur')->create();
+        $restaurateur = factory('Resly\User')->create(
+            ['role' => 'restaurateur']
+        );
 
         $this->actingAs($restaurateur)
             ->visit('/restaurants/add')
@@ -23,7 +25,9 @@ class RestaurantTest extends TestCase
 
     public function testRestaurantIsAdded()
     {
-        $restaurateur = factory('Resly\Restaurateur')->create();
+        $restaurateur = factory('Resly\User')->create(
+            ['role' => 'restaurateur']
+        );
 
         $this->actingAs($restaurateur)
             ->visit('/restaurants/add')
@@ -38,19 +42,23 @@ class RestaurantTest extends TestCase
             ->press('Next')
             ->see('Add the Tables\' details');
 
-        $this->seeInDatabase('Restaurant', 
-            ['email' => 'first.rest@resly.com']);
+        $this->seeInDatabase(
+            'restaurants',
+            ['email' => 'first.rest@resly.com']
+        );
 
         // Return the database to its state before the adding
         
-        DB::table('Restaurant')->where('email', 'first.rest@resly.com')
+        DB::table('restaurants')->where('email', 'first.rest@resly.com')
           ->delete();
 
     }
 
     public function testRestaurantIsEdited()
     {
-        $restaurateur = factory('Resly\Restaurateur')->create();
+        $restaurateur = factory('Resly\User')->create(
+            ['role' => 'restaurateur']
+        );
         $restaurant = factory('Resly\Restaurant')->create();
 
         $this->actingAs($restaurateur)
@@ -66,7 +74,7 @@ class RestaurantTest extends TestCase
             ->press('Next');
 
         $this->seeInDatabase(
-            'Restaurant',
+            'restaurants',
             ['email' => 'edited.rest@resly.com']
         );
 
@@ -78,12 +86,13 @@ class RestaurantTest extends TestCase
             // Seed some data and delete it afterwards
             $restaurant = factory('Resly\Restaurant')->make();
 
-            DB::table('Restaurant')->insert($restaurant->getAttributes());
+            DB::table('restaurants')->insert($restaurant->getAttributes());
             $this->seeInDatabase(
-                'Restaurant', ['email' => $restaurant->email]
+                'restaurants',
+                ['email' => $restaurant->email]
             );
 
-            DB::table('Restaurant')->where('email', $restaurant->email)
+            DB::table('restaurants')->where('email', $restaurant->email)
                 ->delete();
         });
     }

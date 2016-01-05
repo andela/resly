@@ -122,18 +122,18 @@
     font-variant: small-caps;
 }
 
-.or h2 { 
+.or h2 {
     width:100%;
     text-align:center;
     border-bottom: 1px solid #BBBBBB;
     line-height:0.1em;
     margin:10px 0 20px;
-    font-size: small; 
+    font-size: small;
 }
 
-.or h2 span { 
+.or h2 span {
     background:#fff;
-    padding:0 10px; 
+    padding:0 10px;
 }
 
 .social ul {
@@ -186,8 +186,7 @@
 }
 
 footer {
-    padding-top: 3%;
-    margin-top: 100px;
+    padding-top: 1%;
     color: #777;
     background: #222;
     border-top: 2px solid #444;
@@ -200,6 +199,11 @@ footer h4 {
     color: #777;
 }
 
+footer p {
+    margin: 0 0 0.3em;
+    font-size: 85%;
+}
+
 .flow-group {
     padding: 15px;
 }
@@ -208,7 +212,7 @@ footer h4 {
 .nav-tabs {
     margin: 0;
     padding: 0;
-    border: 0;    
+    border: 0;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover {
@@ -233,18 +237,18 @@ footer h4 {
     font-variant: small-caps;
 }
 
-.or h2 { 
+.or h2 {
     width:100%;
     text-align:center;
     border-bottom: 1px solid #BBBBBB;
     line-height:0.1em;
     margin:10px 0 20px;
-    font-size: small; 
+    font-size: small;
 }
 
-.or h2 span { 
+.or h2 span {
     background:#fff;
-    padding:0 10px; 
+    padding:0 10px;
 }
 
 .social ul {
@@ -290,4 +294,7 @@ footer h4 {
 }
 .social ul li a i:hover {
     opacity: .7;
+}
+body {
+  padding-top: 60px;
 }

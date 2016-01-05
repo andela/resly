@@ -5,13 +5,10 @@
 @section('styles')
   <link rel="stylesheet" type="text/css" href="{!! asset('css/welcome.css') !!}">
   <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
-@endsection;
-
-@section('navbar')
-  @include('partials.navbar')
 @endsection
 
 @section('content')
+@include ('partials.alerts');
   <div class="home">
     <div class="home-info">
       <h1>The new way of dining</h1>
@@ -34,7 +31,7 @@
                </div>
               </div>
             </form>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -60,8 +57,8 @@
           <div class="cell">
              <a href="#" class="thumbnail">
                <img src="/img/menu.jpg" alt="...">
-             </a> 
-          </div> 
+             </a>
+          </div>
         </div>
         <div class="col-xs-6 col-md-3">
           <div class="cell">
@@ -95,15 +92,15 @@
           <div class="cell">
            <a href="#" class="thumbnail">
              <img src="/img/vintage.jpeg" alt="...">
-           </a> 
-          </div>    
+           </a>
+          </div>
         </div>
         <div class="col-xs-6 col-md-3">
           <div class="cell">
             <a href="#" class="thumbnail">
               <img src="/img/image.jpg" alt="...">
             </a>
-          </div>  
+          </div>
         </div>
       </div>
     </div>

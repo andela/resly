@@ -24,7 +24,7 @@
     height: 10px;
   }
 </style>
-<div class="row">
+<div class="content">
   <div class="col-sm-4 dark">
   <h4> Add the Tables' details</h4>
     <div class="alert dark" role="alert" id="prompt" hidden>
