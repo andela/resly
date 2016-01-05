@@ -13,13 +13,13 @@
     <ul class="nav navbar-nav navbar-right">
         @can('authenticated')
             <div class = "btn-group">
-                <button type="button" class="btn btn-default">
+                <button type="button" class="btn btn-default nav-btn">
                     {{ auth()->user()->username }}
                 </button>
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle = "dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle nav-btn" data-toggle = "dropdown">
                     <span class = "caret"></span>
                 </button>
-                <ul class="dropdown-menu" role = "menu">
+                <ul class="dropdown-menu nav-ul" role = "menu">
                     <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">
                       <span class="glyphicon glyphicon-user"></span> Your Profile</a>
                     </li>
