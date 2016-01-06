@@ -3,9 +3,14 @@
 <head>
     <title>Resly &#187; @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{!! asset('css/welcome.css') !!}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/paper/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('wickedpicker/wickedpicker.min.css') !!}">
+    
+    <script type="text/javascript" src ="{!! asset('wickedpicker/wickedpicker.min.js') !!}"></script>
     @yield('styles')
 </head>
 <body>
