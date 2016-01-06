@@ -18,11 +18,12 @@
                 </li>
                 @can('rest-link')
                   <h3><small>Your Name</small></h3>
-                  <li><a href="#">Add Restaurant</a></li>
-                  <li><a href="#">Add Menu</a></li>
+                  <li><a href="/restaurants/add">Add Restaurant</a></li>
+                  <li><a href="/menus/add-bulk">Add Menu</a></li>
                   <li><a href="#">Add Wine</a></li>
                   <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">Your Profile</a></li>
                   <li><a href="{{ route('userProfileEdit') }}">Edit Your Profile</a></li>
+                  <li><a href="#">Gallery</a></li>
                 @endcan
                 @can('diner-link')
                   <h3><small>Your Name</small></h3>

@@ -1,6 +1,8 @@
-@extends('layouts.master')
+@extends('dashboard.index')
 
-@section('content')
+@section('title', 'Add Menu')
+
+@section('details')
 
 <style type="text/css">
   .dark {
@@ -14,7 +16,7 @@
   }
 </style>
 <div class="content">
-  <div class="col-sm-4 dark">
+  <div class="col-sm-6 dark">
     <div class="alert" role="alert" id="prompt" hidden>
     </div>
     <fieldset>
@@ -57,10 +59,10 @@
       <button type="button" class="btn btn-primary" id="add"> Add</button>
     </fieldset>
   </div>
-  <div class="col-sm-6 dark">
+  <div class="col-sm-4 dark">
     <h4>Added Dishes</h4>
     <table class="table" id="added_items">
-      
+
     </table>
     <p>Click to Finish Setup</p>
     <!--next button -->

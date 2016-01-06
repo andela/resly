@@ -295,6 +295,18 @@ footer p {
 .social ul li a i:hover {
     opacity: .7;
 }
+
 body {
-  padding-top: 60px;
+  padding-top: 40px;
+}
+
+.alert-message {
+  width: 80%;
+  margin-left: 10%;
+  background-color: #333233;
+}
+
+
+.btn-nav {
+  margin-top: 10%;
 }

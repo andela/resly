@@ -43,7 +43,7 @@ class SocialAuthController extends Controller
 
         Auth::login($nativeUser);
 
-        return redirect('/');
+        return redirect('/')->with('message', 'You are now logged in');
     }
 
     /**

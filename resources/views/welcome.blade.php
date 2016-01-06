@@ -10,6 +10,11 @@
 @section('content')
 @include ('partials.alerts');
   <div class="home">
+    @if (Session::has('message'))
+      <div class="alert alert-info alert-message" role="alert">
+          {{ Session::get('message') }}
+      </div>
+    @endif
     <div class="home-info">
       <h1>The new way of dining</h1>
       <h4><em>Make a reservation</em></h4>
