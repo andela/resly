@@ -38,71 +38,42 @@
   </div>
   <div id="content">
     <div class="container">
-      <div class="row">
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-              <a href="#" class="thumbnail">
-                <img src="/img/search.jpg" alt="...">
-              </a>
-          </div>
+        <div class="row">
+            <div class='col-xs-12 col-md-12 col-lg-12'>
+                <h5>Latest Restaurants</h5>
+            </div>
+            @foreach($latestRestaurants as $restaurnat)
+                <div class="col-xs-6 col-md-3">
+                  <div class="cell">
+                      <a href="#" class="thumbnail">
+                        <img src="http://www.hotwheels-elite.com/diecast-model-cars/images/Image/hot-wheels-elite/image_not_available.jpg" alt="...">
+                        <span class="label label-primary">{{$restaurnat->name}}</span>
+                      </a>
+                  </div>
+                </div>
+            @endforeach
         </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-              <a href="#" class="thumbnail">
-                <img src="/img/reservation.jpg" alt="...">
-              </a>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-             <a href="#" class="thumbnail">
-               <img src="/img/menu.jpg" alt="...">
-             </a>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-            <a href="#" class="thumbnail">
-              <img src="/img/wine.jpg" alt="...">
-            </a>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 
   <div id="content">
     <div class="container">
-      <div class="row">
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-              <a href="#" class="thumbnail">
-                <img src="/img/pe.jpg" alt="...">
-              </a>
-          </div>
+        <div class="row">
+            <div class='col-xs-12 col-md-12 col-lg-12'>
+                <h5>Featured Restaurants</h5>
+            </div>
+            @foreach($featuredRestaurants as $restaurnat)
+            <div class="col-xs-12 col-md-3">
+              <div class="cell">
+                  <a href="#" class="thumbnail">
+                    <img src="http://www.hotwheels-elite.com/diecast-model-cars/images/Image/hot-wheels-elite/image_not_available.jpg" alt="...">
+                      <span class="label label-primary">{{$restaurnat->name}}</span>
+                  </a>
+              </div>
+            </div>
+            @endforeach
         </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-              <a href="#" class="thumbnail">
-                <img src="/img/eating.jpg" alt="...">
-              </a>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-           <a href="#" class="thumbnail">
-             <img src="/img/vintage.jpeg" alt="...">
-           </a>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-            <a href="#" class="thumbnail">
-              <img src="/img/image.jpg" alt="...">
-            </a>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 @endsection
