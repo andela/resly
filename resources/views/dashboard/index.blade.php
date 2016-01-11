@@ -19,6 +19,8 @@
                 @can('rest-link')
                   <h3><small>Your Name</small></h3>
                   <li><a href="/restaurants/add">Add Restaurant</a></li>
+                  <li><a href="#">Add Restaurant</a></li>
+                  <li><a href="#">Gallery</a></li>
                   <li><a href="#">Add Menu</a></li>
                   <li><a href="#">Add Wine</a></li>
                   <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">Your Profile</a></li>
