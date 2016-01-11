@@ -43,7 +43,7 @@ class SocialAuthController extends Controller
 
         Auth::login($nativeUser);
 
-        return redirect('/')->with('flash_message', 'You are successfully logged in');;
+        return redirect('/')->with('flash_message', 'You are successfully logged in');
     }
 
     /**
