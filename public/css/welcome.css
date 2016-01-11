@@ -269,6 +269,7 @@ footer h4 {
     margin-right: 10px;
     padding-top: 15%;
 }
+
 .social .fa-facebook {
     background:#3b5998;
 }
@@ -288,9 +289,15 @@ footer h4 {
 .social ul li a i {
     transition: all 0.2s ease-in-out;
 }
+
 .social ul li a i:hover {
     opacity: .7;
 }
+
 body {
-  padding-top: 60px;
+  padding-top: 40px;
+}
+
+.btn-nav {
+  margin-top: 10%;
 }
