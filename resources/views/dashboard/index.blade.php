@@ -18,7 +18,7 @@
                 </li>
                 @can('rest-link')
                   <h3><small>Your Name</small></h3>
-                  <li><a href="{{ action('RestaurantController@getAdd') }}">Add Restaurant</a></li>
+                  <li><a href="/restaurants/add">Add Restaurant</a></li>
                   <li><a href="#">Add Menu</a></li>
                   <li><a href="#">Add Wine</a></li>
                   <li><a href="#">Edit Your Profile</a></li>
