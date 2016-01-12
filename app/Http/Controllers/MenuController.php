@@ -64,6 +64,6 @@ class MenuController extends Controller
             }
         }
 
-        return redirect()->route('restaurateur.profile')->with('info', 'menu items added');
+        return redirect()->route('dashboard')->with('info', 'menu items added');
     }
 }
