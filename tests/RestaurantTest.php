@@ -60,9 +60,9 @@ class RestaurantTest extends TestCase
             ['role' => 'restaurateur']
         );
         $restaurant = factory('Resly\Restaurant')->create();
-
+        
         $this->actingAs($restaurateur)
-            ->visit("/restaurants/edit/1")
+            ->visit("/restaurants/edit/{$restaurant->id}")
             ->type('My First Restaurant', 'name')
             ->type('We are awesome', 'description')
             ->type('08 : 00', 'opening_time')
