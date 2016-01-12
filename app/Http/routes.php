@@ -66,6 +66,8 @@ Route::get('/search', [
 
 Route::controller('menus', 'MenuController');
 
+Route::resource('gallery', 'RestaurantGalleryController');
+
 Route::controller('bookings', 'BookingController');
 
 /*
