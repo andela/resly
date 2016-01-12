@@ -1,6 +1,9 @@
-@extends ('layouts.master')
+@extends('dashboard.index')
 
-@section('content')
+@section('title', 'Add Tables')
+
+@section('details')
+
 <style type="text/css">
   fieldset {
     border: 1px groove;
@@ -25,7 +28,7 @@
   }
 </style>
 <div class="content">
-  <div class="col-sm-4 dark">
+  <div class="col-sm-6 dark">
   <h4> Add the Tables' details</h4>
     <div class="alert dark" role="alert" id="prompt" hidden>
     </div>
