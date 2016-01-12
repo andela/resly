@@ -88,6 +88,9 @@ Route::post('bookings/begin', 'BookingController@begin');
 Route::post('bookings/create', 'BookingController@create');
 Route::post('bookings/cancel', 'BookingController@cancel');
 
+Route::resource('gallery', 'RestaurantGalleryController');
+
+
 /*
  * Restaurant Profile
  */
