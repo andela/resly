@@ -12,7 +12,7 @@
   <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right">
         @can('authenticated')
-            <div class = "btn-group">
+            <div class = "btn-group btn-nav">
                 <button type="button" class="btn btn-default">
                     {{ auth()->user()->username }}
                 </button>
