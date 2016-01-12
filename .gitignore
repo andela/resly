@@ -3,5 +3,6 @@
 Homestead.yaml
 Homestead.json
 .env
+.env.example
 *.log
 .DS_Store
