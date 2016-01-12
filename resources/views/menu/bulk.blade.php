@@ -1,6 +1,8 @@
-@extends('layouts.master')
+@extends('dashboard.index')
 
-@section('content')
+@section('title', 'Add Menu')
+
+@section('details')
 
 <style type="text/css">
   .dark {
@@ -14,7 +16,7 @@
   }
 </style>
 <div class="content">
-  <div class="col-sm-4 dark">
+  <div class="col-sm-6 dark">
     <div class="alert" role="alert" id="prompt" hidden>
     </div>
     <fieldset>
@@ -57,16 +59,16 @@
       <button type="button" class="btn btn-primary" id="add"> Add</button>
     </fieldset>
   </div>
-  <div class="col-sm-6 dark">
+  <div class="col-sm-4 dark">
     <h4>Added Dishes</h4>
     <table class="table" id="added_items">
       
     </table>
     <p>Click to Finish Setup</p>
     <!--next button -->
-    <form method="get" id="next_link">
-    <input type="text" id="restaurant_id" value="{{ $restaurant_id }}" hidden>
-    <button type="submit" class="btn btn-primary" id="next">Next</button>
+    <form method="POST" id="next_link" action="{{ route('dashboard')}}">
+      <input type="text" id="restaurant_id" value="{{ $restaurant_id }}" hidden>
+      <button type="submit" class="btn btn-primary" id="next">Next</button>
     </form>
   </div>
 </div>
@@ -75,5 +77,6 @@
 <script type="text/javascript">
   $.ajaxSetup({ headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' } });
 </script>
+<script type="text/javascript">var username = "{{ auth()->user()->username }}"; </script>>
 <script type="text/javascript" src="/js/add-menus.js"></script>
 @endsection
