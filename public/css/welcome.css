@@ -302,6 +302,10 @@ body {
   padding-top: 40px;
 }
 
+.btn-nav {
+  margin-top: 10%;
+}
+
 .flash-message {
     width: 80%;
     margin-left: 10%;
