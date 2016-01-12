@@ -10,6 +10,12 @@
 @section('content')
 @include ('partials.alerts');
   <div class="home">
+    @if(Session::has('flash_message'))
+      <div class="alert flash-message">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{ Session::get('flash_message') }}
+      </div>
+    @endif
     <div class="home-info">
       <h1>The new way of dining</h1>
       <h4><em>Make a reservation</em></h4>
