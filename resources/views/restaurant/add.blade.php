@@ -68,12 +68,12 @@
           <div class = "row">
             <div class = "col-sm-6">
               <label for = "opening-hours" class = "control-label"> Opening Time</label>
-              <input class = "form-control" id = "opening-hours" name="opening_time" placeholder = "09:00 (In 24hr system)" value="{{ old('opening_time') }}">
+              <input class = "form-control" id = "opening-hours" name="opening_time" placeholder = "Pick Opening Time (24hrs format)" value="{{ old('opening_time') }}">
             </div>
             
             <div class = "col-sm-6">
               <label for = "closing-time" class = "control-label"> Closing Time</label>
-              <input class = "form-control" id = "closing-time" name="closing_time" placeholder = "22:00" value="{{ old('closing_time') }}">
+              <input class = "form-control" id = "closing-time" name="closing_time" placeholder = "Pick Closing Time (24hrs format)" value="{{ old('closing_time') }}">
             </div>
           </div>
         </div>

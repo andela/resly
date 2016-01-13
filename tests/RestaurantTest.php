@@ -59,7 +59,8 @@ class RestaurantTest extends TestCase
         $restaurateur = factory('Resly\User')->create(
             ['role' => 'restaurateur']
         );
-        $restaurant = factory('Resly\Restaurant')->create();
+        $restaurant = factory('Resly\Restaurant')->create(
+            ['user_id' => $restaurateur->id]);
         
         $this->actingAs($restaurateur)
             ->visit("/restaurants/edit/{$restaurant->id}")
