@@ -3,8 +3,12 @@
 @section('title', 'welcome')
 
 @section('styles')
+  <link href='https://fonts.googleapis.com/css?family=Pacifico|Lato:400,100' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="{!! asset('css/welcome.css') !!}">
   <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
+  <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.carousel.css') !!}">
+  <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.theme.css') !!}">
+  <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.transitions.css') !!}">
 @endsection
 
 @section('content')
@@ -42,44 +46,70 @@
       </div>
     </div>
   </div>
-  <div id="content">
-    <div class="container">
-        <div class="row">
-            <div class='col-xs-12 col-md-12 col-lg-12'>
-                <h5>Latest Restaurants</h5>
-            </div>
-            @foreach($latestRestaurants as $restaurnat)
-                <div class="col-xs-6 col-md-3">
-                  <div class="cell">
-                      <a href="#" class="thumbnail">
-                        <img src="http://www.hotwheels-elite.com/diecast-model-cars/images/Image/hot-wheels-elite/image_not_available.jpg" alt="...">
-                        <span class="label label-primary">{{$restaurnat->name}}</span>
-                      </a>
-                  </div>
-                </div>
-            @endforeach
-        </div>
-
+    <div class="belt">
+        <h5>Featured restaurants</h5>
     </div>
-  </div>
-
-  <div id="content">
+   <div id="contents">
     <div class="container">
-        <div class="row">
-            <div class='col-xs-12 col-md-12 col-lg-12'>
-                <h5>Featured Restaurants</h5>
-            </div>
-            @foreach($featuredRestaurants as $restaurnat)
-            <div class="col-xs-12 col-md-3">
+      <div class="row">
+        <div id='featured-restaurant-scroller' class='owl-carousel'>
+          @foreach($featuredRestaurants as $restaurant)
+            <div class="item">
               <div class="cell">
-                  <a href="#" class="thumbnail">
-                    <img src="http://www.hotwheels-elite.com/diecast-model-cars/images/Image/hot-wheels-elite/image_not_available.jpg" alt="...">
-                      <span class="label label-primary">{{$restaurnat->name}}</span>
-                  </a>
+                <a href="#" class="thumbnail">
+<!--                  <img src="{{asset('img/restaurant.jpg')}}"/>-->
+                  <img src="http://lorempixel.com/400/200/food"/>
+                  <div class='restaurant-info'>
+                    <h5 class='restaurant-title'>{{$restaurant->name}}</h5>
+                    <p class='info'>
+                      {{$restaurant->description}}orum arbitror,
+                      proident ab minim, non anim fabulas doctrina in ita sunt quo multos ut se elit
+                      fore e cupidatat, iis nescius iis consequat
+                    </p>
+                    <p class='price'>
+                      ${{number_format((rand(200, 2000)/10), 2)}}
+                    </p>
+                  </div>
+                </a>
               </div>
             </div>
-            @endforeach
+          @endforeach
         </div>
+        </div>
+
     </div>
   </div>
+<div class="belt">
+    <h5>Latest restaurants</h5>
+</div>
+<div id="latest-restaurants-section">
+    <div class='container'>
+        <div class='row'>
+            <?php $count=0; ?>
+        @foreach($latestRestaurants as $restaurant)
+            <div class='col col-md-4'>
+                @for($i=0;$i<=4;$i++)
+                    <ul class='latest-restaurant-items'>
+                        <li>
+                            <span class='title'><a href="#">{{$restaurant->name}}</a></span>
+                            <p class='info short'>
+                                Si ut domesticarum et e fugiat instituendarum o senserit an cernantur an noster
+                                et arbitror ita lorem, vidisse varias proident quamquam ita nescius non
+                                <strong class="pull-right price">${{number_format((rand(200, 2000)/10), 2)}}</strong>
+                            </p>
+                        </li>
+                    </ul>
+                @endfor
+            </div>
+        @endforeach
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+  <script type='text/javascript' src="{!! asset('owl-carousel/owl.carousel.min.js') !!}"></script>
+  <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
+  <script type='text/javascript' src="{!! asset('js/welcome.js') !!}"></script>
+
 @endsection
