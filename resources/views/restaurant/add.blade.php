@@ -1,6 +1,9 @@
-@extends('layouts.master')
+@extends('dashboard.index')
 
-@section('content')
+@section('title', 'Add Restaurant')
+
+@section('details')
+
 <style type="text/css">
   fieldset {
     border: 1px groove;
@@ -20,7 +23,7 @@
   }
 </style>
   <div class="content">
-    <div class="col-sm-6 dark">
+    <div class="col-sm-12 dark">
       <h4>Add the details of the restaurant</h4>
           
       <form  method="POST" action="/restaurants/add">
