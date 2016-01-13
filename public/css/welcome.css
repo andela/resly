@@ -300,6 +300,19 @@ footer p {
 
 body {
   padding-top: 40px;
+<<<<<<< HEAD
+}
+
+.btn-nav {
+  margin-top: 10%;
+}
+
+.flash-message {
+    width: 80%;
+    margin-left: 10%;
+    background-color: #424242;
+=======
+>>>>>>> e8b689c9051a35aa8ff49e4d785519d4610d1aed
 }
 
 .btn-nav {
