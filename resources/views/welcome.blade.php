@@ -57,6 +57,7 @@
             <div class="item">
               <div class="cell">
                 <a href="#" class="thumbnail">
+<!--                  <img src="{{asset('img/restaurant.jpg')}}"/>-->
                   <img src="http://lorempixel.com/400/200/food"/>
                   <div class='restaurant-info'>
                     <h5 class='restaurant-title'>{{$restaurant->name}}</h5>
@@ -68,7 +69,6 @@
                     <p class='price'>
                       ${{number_format((rand(200, 2000)/10), 2)}}
                     </p>
-
                   </div>
                 </a>
               </div>
