@@ -5,7 +5,7 @@
 </head>
 <body>
     <h2>
-        Hi {{ $user->fname}}!
+        Hi {{ $user->fname }}!
     </h2>
     <p>
         Thank you for creating an account with <strong>Resly</strong>.<br>

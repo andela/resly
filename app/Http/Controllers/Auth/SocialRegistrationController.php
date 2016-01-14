@@ -46,10 +46,9 @@ class SocialRegistrationController extends Controller
 
         $user->save();
 
-        Mail::send('email.welcome', ['user' => $user], function ($message) use ($user) {
-            $message->from('reslytesting@gmail.com', 'Resly, a new way to dine');
-
-            $message->to($user->email, $user->name)->subject('Welcome to Resly!');
+        Mail::queue('email.welcome', ['user' => $user], function ($message) use ($user) {
+            $message->to($user->email, $user->name)
+                    ->subject('Welcome to Resly!');
         });
 
         session()->forget('name');
