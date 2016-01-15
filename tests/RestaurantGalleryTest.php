@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 
 class RestaurantGalleryTest extends TestCase
 {
-	//use DatabaseMigrations;
+	use DatabaseMigrations;
     /**
      * A basic test example.
      *

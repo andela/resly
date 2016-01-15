@@ -8,7 +8,7 @@ use Resly\Slots;
 
 class SlotsTest extends TestCase
 {
-    //use DatabaseMigrations;
+    use DatabaseMigrations;
     
     public function testCanCreateEntries()
     {
