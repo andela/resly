@@ -32,7 +32,7 @@ class RestaurantGalleryTest extends TestCase
         );
 
         $caption = 'My New Beautiful Diner';
-        $res = $this->actingAs($restaurateur)
+        $this->actingAs($restaurateur)
         ->visit('/gallery')
         ->type($caption, 'caption')
         ->attach(public_path('img/diner.jpg'), 'image')
