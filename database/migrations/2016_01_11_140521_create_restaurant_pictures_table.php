@@ -12,7 +12,7 @@ class CreateRestaurantPicturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('restaurant_pictures', function(Blueprint $table){
+        Schema::create('restaurant_pictures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('filename');
             $table->string('caption')->nullable();
