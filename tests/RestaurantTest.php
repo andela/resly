@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class RestaurantTest extends TestCase
 {
-    //use DatabaseMigrations;
+    use DatabaseMigrations;
     /**
      * Test the adding of restaurants
      *

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class BookingTest extends TestCase
 {
-    //use DatabaseMigrations;
+    use DatabaseMigrations;
 
     public function testQuerryReservationAvailability()
     {

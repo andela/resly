@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SeeProfileTest extends TestCase
 {
-    //use DatabaseMigrations;
+    use DatabaseMigrations;
 
     /**
      * A basic test example.

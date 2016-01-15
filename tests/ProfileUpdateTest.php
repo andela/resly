@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProfileUpdateTest extends TestCase
 {
-    //use DatabaseMigrations;
+    use DatabaseMigrations;
 
     /**
      * A basic test example.
