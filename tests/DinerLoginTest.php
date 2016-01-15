@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DinerLoginTest extends TestCase
 {
-    use DatabaseMigrations;
+    //use DatabaseMigrations;
 
     /**
      * The login form should authenticate valid

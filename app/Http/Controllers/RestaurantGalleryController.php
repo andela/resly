@@ -2,7 +2,8 @@
 
 namespace Resly\Http\Controllers;
 
-use Resly\Http\Requests\GalleryPictureRequest;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Resly\RestaurantPictures;
 use Resly\User;
 use Resly\Http\Requests;
@@ -22,7 +23,8 @@ class RestaurantGalleryController extends Controller
      */
     public function index()
     {
-        $pictures = RestaurantPictures::all();
+        $restauranteur_id = User::where('username', auth()->user()->username)->first()->id;
+        $pictures = RestaurantPictures::where('restauranteur_id', intval($restauranteur_id))->get();
         return view('restaurant.gallery', ['pictures' => $pictures]);      
     }
 
@@ -42,29 +44,37 @@ class RestaurantGalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GalleryPictureRequest $request, RestaurantPictures $picture)
+    public function store(Request $request, RestaurantPictures $picture, Response $response)
     {
         //get restauranteur id
         $restauranteur_id = User::where('username', auth()->user()->username)->first()->id;
           
         //fetch file location and upload to cloudinary
-        $filepath = $_FILES['image']['tmp_name'];
+        $filepath = $request->file('image')->getPathName();
+
+        
         $uploaded = $this->upload($filepath);
 
         //save picture information to database
-        $picture->filename = $uploaded['public_id'];
+        $picture->filename = $uploaded['public_id'].".".$uploaded['format'];
         $picture->caption = $request->get('caption');
         $picture->restauranteur_id = $restauranteur_id;
         $picture->save();
+        $response->header('image-id', $picture->id);
         
         if (!$request->ajax()) {    
             //send flash message and redirect to gallery homepage
-            flash()->success('Picture Uploaded!! '.$restauranteur_id);
+            flash()->success('Picture Uploaded!!');
             return redirect()->action('RestaurantGalleryController@index');    
         } else {
-            return "ajax req";
+            //flash()->success('Picture Uploaded!!');
+            return json_encode([
+                'status' => 'successful',
+                'pic_id' => $picture->id, 
+                'filename' => $picture->filename, 
+                'caption' => $picture->caption
+            ]);
         }
-        
     }
 
     /**
@@ -75,7 +85,7 @@ class RestaurantGalleryController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -109,7 +119,14 @@ class RestaurantGalleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $picture = RestaurantPictures::find($id);
+        $result = $this->delete($picture);
+
+        if ($result['result'] == 'ok') {
+            echo 'Deleted successfully';
+        } else {
+            echo 'Failed to delete';
+        }
     }
 
     private function upload($filepath)
@@ -122,5 +139,21 @@ class RestaurantGalleryController extends Controller
         $upload = \Cloudinary\Uploader::upload($filepath);
         return $upload;
 
+    }
+
+    private function delete($image)
+    {
+        //delete image metadata from db
+        RestaurantPictures::destroy($image->id);
+
+        //delete image from cloudinary
+        $res = \Cloudinary::config(array( 
+          "cloud_name" => "ddnvpqjmh", 
+          "api_key" => "911597418222643", 
+          "api_secret" => "qgnRvc9ACfuMQjrm2dNmrKTCYqc" 
+        ));
+        $id = explode(".", $image->filename);
+        $delete = \Cloudinary\Uploader::destroy($id[0]);
+        return $delete;
     }
 }

@@ -17,8 +17,8 @@ class CreateRestaurantPicturesTable extends Migration
             $table->string('filename');
             $table->string('caption')->nullable();
             $table->integer('restauranteur_id')->unsigned();
-            $table->integer('restaurant_id')->unsigned();
-            $table->foreign('restaurant_id')->references('id')->on('restaurant');
+           // $table->integer('restaurant_id')->unsigned();
+            //$table->foreign('restaurant_id')->references('id')->on('restaurant');
             $table->timestamps();
         });
     }
