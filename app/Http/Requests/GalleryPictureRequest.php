@@ -2,8 +2,6 @@
 
 namespace Resly\Http\Requests;
 
-use Resly\Http\Requests\Request;
-
 class GalleryPictureRequest extends Request
 {
     /**
@@ -32,7 +30,7 @@ class GalleryPictureRequest extends Request
     public function messages()
     {
         return [
-            'image.required' => 'You need to select an image or the image you selected is invalid'
+            'image.required' => 'You need to select an image or the image you selected is invalid',
         ];
     }
 }

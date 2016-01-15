@@ -99,6 +99,4 @@ class RestaurantController extends Controller
 
         return redirect('tables/add-bulk');
     }
-
-
 }
