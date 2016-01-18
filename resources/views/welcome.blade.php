@@ -57,7 +57,6 @@
             <div class="item">
               <div class="cell">
                 <a href="#" class="thumbnail">
-<!--                  <img src="{{asset('img/restaurant.jpg')}}"/>-->
                   <img src="http://lorempixel.com/400/200/food"/>
                   <div class='restaurant-info'>
                     <h5 class='restaurant-title'>{{$restaurant->name}}</h5>
@@ -74,7 +73,7 @@
               </div>
             </div>
           @endforeach
-        </div>
+            </div>
         </div>
 
     </div>
@@ -85,10 +84,8 @@
 <div id="latest-restaurants-section">
     <div class='container'>
         <div class='row'>
-            <?php $count=0; ?>
-        @foreach($latestRestaurants as $restaurant)
-            <div class='col col-md-4'>
-                @for($i=0;$i<=4;$i++)
+            @foreach($latestRestaurants as $restaurant)
+                <div class='col col-md-4'>    
                     <ul class='latest-restaurant-items'>
                         <li>
                             <span class='title'><a href="#">{{$restaurant->name}}</a></span>
@@ -99,9 +96,8 @@
                             </p>
                         </li>
                     </ul>
-                @endfor
-            </div>
-        @endforeach
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
