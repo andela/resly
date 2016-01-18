@@ -22,7 +22,12 @@ input[type=text], input[type=password] {
     background: rgba(2,2,2, 0.3);
     padding-top: 70px;
     max-width: 330px;
-    margin:20px auto;
+
+    margin:40px auto 25px auto;
+    border:2px solid rgba(4,4,4,0.2);
+    box-shadow:1px 2px 4px rgba(99,99,99,0.7);
+    border-radius: 5px;
+    position: relative;
 }
 
 .login .info {
@@ -84,7 +89,6 @@ input[type=text], input[type=password] {
 
 
 footer{
-    position: absolute ;
     bottom: 0;
     width: 100%;
 }
