@@ -28,8 +28,9 @@ class HomeController extends Controller
 
     public function homepage()
     {
-        $latestRestaurants      = Restaurant::all()->sortByDesc('date_created')->take(12);
-        $featuredRestaurants    = Restaurant::all()->take(10);
+        $latestRestaurants = Restaurant::all()->sortByDesc('date_created')->take(12);
+        $featuredRestaurants = Restaurant::all()->take(10);
+
         return view('welcome', compact('latestRestaurants', 'featuredRestaurants'));
     }
 }
