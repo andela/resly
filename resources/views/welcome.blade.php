@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-@include ('partials.alerts');
+@include ('partials.alerts')
   <div class="home">
     @if(Session::has('flash_message'))
       <div class="alert flash-message">
@@ -101,6 +101,7 @@
         </div>
     </div>
 </div>
+@endsection
 @section('scripts')
   <script type='text/javascript' src="{!! asset('owl-carousel/owl.carousel.min.js') !!}"></script>
   <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
