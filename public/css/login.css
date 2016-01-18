@@ -88,6 +88,10 @@ input[type=text], input[type=password] {
 
 
 footer{
+<<<<<<< HEAD
+=======
+    position: absolute ;
+>>>>>>> f630ef42bd7d65880afc6954eac4c401e65b47fe
     bottom: 0;
     width: 100%;
 }
