@@ -13,8 +13,8 @@ class AddLongLatColToRestaurant extends Migration
     public function up()
     {
         Schema::table('restaurants', function($table){
-          $table->string('longitude', 100);
-          $table->string('latitude', 100);
+          $table->string('longitude', 100)->nullable();
+          $table->string('latitude', 100)->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddLongLatColToRestaurant extends Migration
     public function down()
     {
         Schema::table('restaurants', function($table){
-          $table->dropColumns(['longitude', 'latitude']);
+          $table->dropColumn(['longitude', 'latitude']);
         });
     }
 }
