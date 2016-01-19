@@ -85,7 +85,7 @@
     <div class='container'>
         <div class='row'>
             @foreach($latestRestaurants as $restaurant)
-                <div class='col col-md-4'>    
+                <div class='col col-md-4'>
                     <ul class='latest-restaurant-items'>
                         <li>
                             <span class='title'><a href="#">{{$restaurant->name}}</a></span>
@@ -101,6 +101,7 @@
         </div>
     </div>
 </div>
+@endsection
 @section('scripts')
   <script type='text/javascript' src="{!! asset('owl-carousel/owl.carousel.min.js') !!}"></script>
   <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
