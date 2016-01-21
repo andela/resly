@@ -85,18 +85,11 @@
     <h5>Restaurants Closeby</h5>
   </div>
   <div class="container">
-    <div class="row">
+    <div class="row" id="closeby-restaurants">
       <h5> 
         <i class="fa fa-spinner fa-spin"></i>
         Fetching restaurants close to you... 
       </h5>
-      <div class="col-md-3 text-center thumbnail">
-      <img src='http://cdn.londonandpartners.com/visit/london-organisations/sketch/84245-640x360-sketch-restaurant-david-shrigley-640.jpg' 
-        width = 300 height = auto />
-        <h5 class="text-center"> Niccolo's Diner (3km) </h5>
-        <p style='color:#aa5555;'>This is our world class diner, you'd love it a try will convince you.</p>
-        <p><small>This is my address</small></p>
-      </div>
     </div>
   </div>
   
