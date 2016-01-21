@@ -13,8 +13,8 @@ class AddLongLatColToRestaurant extends Migration
     public function up()
     {
         Schema::table('restaurants', function($table){
-          $table->string('longitude', 100)->nullable();
-          $table->string('latitude', 100)->nullable();
+          $table->double('longitude', 100)->nullable();
+          $table->double('latitude', 100)->nullable();
         });
     }
 

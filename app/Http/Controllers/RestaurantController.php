@@ -97,6 +97,27 @@ class RestaurantController extends Controller
         $restaurant = $restaurateur->restaurant()->create($request->all());
         $request->session()->put('restaurant_id', $restaurant->id);
 
+        //add longitude and latitude coordinates to database
+        $location = $this->fetchCoordinates($restaurant->location);
+        $restaurant->longitude = $location['lng'];
+        $restaurant->latitude = $location['lat'];
+        $restaurant->save();
+
         return redirect('tables/add-bulk');
+    }
+
+
+
+    /**
+     * fetch coordinates
+     */
+    private function fetchCoordinates($location)
+    {
+        $client = new \GuzzleHttp\Client(['base_uri'=> 'https://maps.googleapis.com/maps/api/geocode/']);
+        $getQueryStr = 'json?address=' . urlencode($location) . '&key=' . env('GOOGLE_API_KEY') ;
+        $response = $client->get($getQueryStr);
+
+        $results = json_decode($response->getBody(), true, 512);
+        return $results['results'][0]['geometry']['location'];
     }
 }
