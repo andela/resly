@@ -13,6 +13,7 @@
 
 @section('content')
 @include ('partials.alerts');
+@include('partials.geolocation');
   <div class="home">
     @if(Session::has('flash_message'))
       <div class="alert flash-message">
@@ -78,6 +79,28 @@
 
     </div>
   </div>
+  
+
+  <div class="belt">
+    <h5>Restaurants Closeby</h5>
+  </div>
+  <div class="container">
+    <div class="row">
+      <h5> 
+        <i class="fa fa-spinner fa-spin"></i>
+        Fetching restaurants close to you... 
+      </h5>
+      <div class="col-md-3 text-center thumbnail">
+      <img src='http://cdn.londonandpartners.com/visit/london-organisations/sketch/84245-640x360-sketch-restaurant-david-shrigley-640.jpg' 
+        width = 300 height = auto />
+        <h5 class="text-center"> Niccolo's Diner (3km) </h5>
+        <p style='color:#aa5555;'>This is our world class diner, you'd love it a try will convince you.</p>
+        <p><small>This is my address</small></p>
+      </div>
+    </div>
+  </div>
+  
+
 <div class="belt">
     <h5>Latest restaurants</h5>
 </div>
@@ -105,6 +128,5 @@
 @section('scripts')
   <script type='text/javascript' src="{!! asset('owl-carousel/owl.carousel.min.js') !!}"></script>
   <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
-
   <script type='text/javascript' src="{!! asset('js/welcome.js') !!}"></script>
 @endsection
