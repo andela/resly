@@ -15,7 +15,7 @@ class TableController extends Controller
     /**
      * Add tables in bulk.
      */
-    public function getAddBulk(Request $request)
+    public function addBulk(Request $request)
     {
         $restaurant_id = $request->session()->get('restaurant_id');
 
@@ -29,7 +29,7 @@ class TableController extends Controller
      *   Receive a POST request with
      *   JSON data containing tables to be added.
      */
-    public function postAddBulk(Request $request)
+    public function createAddBulk(Request $request)
     {
         // if the request has no data, return error code
         if (! $request->isJson()) {

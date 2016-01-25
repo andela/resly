@@ -51,10 +51,19 @@ Route::post('auth/social/register', [
     'uses' => 'Auth\SocialRegistrationController@postRegistration',
     'as'   => 'social.post.register',
 ]);
+/*
+ * Restaurants Routes
+ */
+Route::get('restaurants/add', 'RestaurantController@add');
+Route::post('restaurants/add', 'RestaurantController@createAdd');
+Route::get('restaurants/edit', 'RestaurantController@edit');
+Route::post('restaurants/edit', 'RestaurantController@createEdit');
 
-Route::controller('restaurants', 'RestaurantController');
-
-Route::controller('tables', 'TableController');
+/*
+ * Tables Routes
+ */
+Route::get('tables/addbulk', 'TableController@addBulk');
+Route::post('tables/addbulk', 'TableController@createAddBulk');
 
 /*
  *  Search
@@ -64,9 +73,20 @@ Route::get('/search', [
     'as' => 'searchsite',
 ]);
 
-Route::controller('menus', 'MenuController');
+/*
+ * Menus Routes
+ */
+Route::get('menus/addbulk', 'MenuController@addBulk');
+Route::post('menus/addbulk', 'MenuController@createAddBulk');
 
-Route::controller('bookings', 'BookingController');
+
+/*
+ * Booking Routes
+ */
+Route::get('menus/addbulk', 'BookingController@addBulk');
+Route::post('menus/begin', 'BookingController@begin');
+Route::post('menus/create', 'BookingController@create');
+Route::post('menus/cancel', 'BookingController@cancel');
 
 /*
  * Restaurant Profile
