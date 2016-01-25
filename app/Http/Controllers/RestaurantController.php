@@ -22,7 +22,7 @@ class RestaurantController extends Controller
         return view('restaurant.add');
     }
 
-    public function edit($restaurant_id)
+    public function edit(Request $request, $restaurant_id)
     {
         $restaurant = Restaurant::find($restaurant_id);
         if ($restaurant) {

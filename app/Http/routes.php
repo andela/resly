@@ -56,14 +56,14 @@ Route::post('auth/social/register', [
  */
 Route::get('restaurants/add', 'RestaurantController@add');
 Route::post('restaurants/add', 'RestaurantController@createAdd');
-Route::get('restaurants/edit', 'RestaurantController@edit');
-Route::post('restaurants/edit', 'RestaurantController@createEdit');
+Route::get('restaurants/edit/{restaurant_id}', 'RestaurantController@edit');
+Route::post('restaurants/edit/{restaurant_id}', 'RestaurantController@createEdit');
 
 /*
  * Tables Routes
  */
-Route::get('tables/addbulk', 'TableController@addBulk');
-Route::post('tables/addbulk', 'TableController@createAddBulk');
+Route::get('tables/add-bulk', 'TableController@addBulk');
+Route::post('tables/add-bulk', 'TableController@createAddBulk');
 
 /*
  *  Search
@@ -83,10 +83,11 @@ Route::post('menus/addbulk', 'MenuController@createAddBulk');
 /*
  * Booking Routes
  */
-Route::get('menus/addbulk', 'BookingController@addBulk');
-Route::post('menus/begin', 'BookingController@begin');
-Route::post('menus/create', 'BookingController@create');
-Route::post('menus/cancel', 'BookingController@cancel');
+Route::get('bookings/', 'BookingController@index');
+Route::get('bookings/addbulk', 'BookingController@addBulk');
+Route::post('bookings/begin', 'BookingController@begin');
+Route::post('bookings/create', 'BookingController@create');
+Route::post('bookings/cancel', 'BookingController@cancel');
 
 /*
  * Restaurant Profile
