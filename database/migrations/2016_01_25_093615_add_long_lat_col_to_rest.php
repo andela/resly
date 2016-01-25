@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddLongLatColToRest extends Migration
@@ -12,7 +11,7 @@ class AddLongLatColToRest extends Migration
      */
     public function up()
     {
-        Schema::table('restaurants', function($table){
+        Schema::table('restaurants', function ($table) {
           $table->double('longitude', 100)->nullable();
           $table->double('latitude', 100)->nullable();
         });
@@ -25,7 +24,7 @@ class AddLongLatColToRest extends Migration
      */
     public function down()
     {
-        Schema::table('restaurants', function($table){
+        Schema::table('restaurants', function ($table) {
           $table->dropColumn(['longitude', 'latitude']);
         });
     }
