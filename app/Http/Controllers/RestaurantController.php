@@ -12,7 +12,7 @@ class RestaurantController extends Controller
 {
     public function __construct()
     {
-        $this->authorize('restaurateur-user');
+        
     }
 
     /**
@@ -20,11 +20,14 @@ class RestaurantController extends Controller
      */
     public function getAdd()
     {
+        $this->authorize('restaurateur-user');
         return view('restaurant.add');
     }
 
     public function getEdit($restaurant_id)
     {
+        $this->authorize('restaurateur-user');
+
         $restaurant = Restaurant::find($restaurant_id);
         if ($restaurant) {
             return view('restaurant.edit', [
@@ -37,6 +40,7 @@ class RestaurantController extends Controller
 
     public function postEdit(Request $request, $restaurant_id)
     {
+        $this->authorize('restaurateur-user');
         $restaurant = Restaurant::find($restaurant_id);
 
         if ($restaurant_id) {
@@ -75,6 +79,7 @@ class RestaurantController extends Controller
      */
     public function postAdd(Request $request)
     {
+        $this->authorize('restaurateur-user');
         $validator = Validator::make(
             $request->all(),
             [

@@ -36,7 +36,7 @@
 	    			//console.log(content);
 
 	    		} else {
-	    			$("#closeby-restaurants").html("Failed to load close by restaurants");
+	    			$("#closeby-restaurants").html("<h5>Unable to find Closeby Restaurants</h5>");
 	    		}
 	    	}
 	    });	
@@ -49,7 +49,7 @@
 	    	output = '';
 	    	for (var i=0; i<input.length; i++) {
 	    		output += '<div class="col-md-3">';
-	    		output += '<a href = "'+"{{ url('restaurants/')}}" + input[i].id + '">';
+	    		output += '<a href = "'+"{{ url('restaurants/')}}/" + input[i].id + '">';
 	    		output += '<div class="text-center thumbnail items">';
 	    		output += '<img src="http://cdn.londonandpartners.com/visit/london-organisations/sketch/84245-640x360-sketch-restaurant-david-shrigley-640.jpg"';
 				output += 'width = 300 height = auto />';
