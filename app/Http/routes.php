@@ -79,7 +79,6 @@ Route::get('/search', [
 Route::get('menus/addbulk', 'MenuController@addBulk');
 Route::post('menus/addbulk', 'MenuController@createAddBulk');
 
-
 /*
  * Booking Routes
  */
