@@ -17,7 +17,7 @@ class MenuController extends Controller
     /**
      * GET view for adding a menu.
      */
-    public function getAddBulk(Request $request)
+    public function addBulk(Request $request)
     {
         $categories = Category::all();
         $restaurant_id = $request->session()->get('restaurant_id');
@@ -31,7 +31,7 @@ class MenuController extends Controller
         );
     }
 
-    public function postAddBulk(Request $request)
+    public function createAddBulk(Request $request)
     {
         // if the request has no data, return error code
         if (! $request->isJson()) {
