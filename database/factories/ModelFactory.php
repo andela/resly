@@ -21,7 +21,7 @@ $factory->define(Resly\Diner::class, function (Faker\Generator $faker) {
         'fname' => $faker->name,
         'username' => $faker->name,
         'lname' => $faker->name,
-        'email' => $faker->email,
+        'email' => $faker->safeEmail,
         'password' => bcrypt('resly'),
         'social_id' => "{$faker->word}_$number",
     ];
@@ -31,7 +31,7 @@ $factory->define(Resly\Restaurateur::class, function (Faker\Generator $faker) {
     return [
         'fname' => $faker->name,
         'lname' => $faker->name,
-        'email' => $faker->email,
+        'email' => $faker->safeEmail,
         'password' => bcrypt('resly'),
     ];
 });
@@ -44,7 +44,7 @@ $factory->define(Resly\User::class, function (Faker\Generator $faker) {
         'fname' => $faker->firstName,
         'lname' => $faker->lastName,
         'username' => $faker->userName,
-        'email' => $faker->email,
+        'email' => $faker->safeEmail,
         'password' => bcrypt('resly'),
         'role' => 'diner',
         'remember_token' => str_random(10),
@@ -56,7 +56,7 @@ $factory->define(Resly\Restaurant::class, function (Faker\Generator $faker) {
         'user_id' => factory('Resly\User')->create()->id,
         'name' => $faker->name,
         'description' => $faker->sentence,
-        'email' => $faker->email,
+        'email' => $faker->safeEmail,
         'opening_time' => $faker->time,
         'closing_time' => $faker->time,
         'telephone' => $faker->phoneNumber,

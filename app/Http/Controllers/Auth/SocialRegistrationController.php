@@ -3,6 +3,7 @@
 namespace Resly\Http\Controllers\Auth;
 
 use Auth;
+use Mail;
 use Resly\User;
 use Resly\Http\Requests;
 use Illuminate\Http\Request;
@@ -44,6 +45,11 @@ class SocialRegistrationController extends Controller
         $user->lname = $request->input('lname');
 
         $user->save();
+
+        Mail::queue('email.welcome', ['user' => $user], function ($message) use ($user) {
+            $message->to($user->email, $user->name)
+                    ->subject('Welcome to Resly!');
+        });
 
         session()->forget('name');
         session()->forget('email');
