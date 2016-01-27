@@ -2,12 +2,11 @@
 
 namespace Resly\Http\Controllers;
 
-use \Auth;
+use Auth;
 use Illuminate\Http\Request;
 use Validator;
 use Resly\Restaurant;
 use Resly\Http\Requests;
-
 
 class RestaurantController extends Controller
 {
@@ -16,23 +15,23 @@ class RestaurantController extends Controller
         $this->authorize('restaurateur-user');
     }
 
-
     /**
-     * Display All restaurants
+     * Display All restaurants.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
         $restaurants = Restaurant::where('user_id', Auth::user()->id)->get();
+
         return view('restaurant.index', compact('restaurants'));
     }
 
     public function show(Request $request)
     {
         $restaurant = Restaurant::where('id', $request->restaurant_id)->get()->first();
+
         return view('restaurant.show', compact('restaurant'));
     }
-
 
     /**
      *  Display the form for adding a restaurant.
@@ -107,7 +106,6 @@ class RestaurantController extends Controller
                 'address' => 'required',
             ]
         );
-
 
         if ($validator->fails()) {
             return redirect('/restaurants/add')
