@@ -1,0 +1,13 @@
+.restaurants-list{
+    list-style-type: none;
+}
+.no-restaurant{
+    text-align: center;
+    padding:10px 40px;
+    list-style-type: none;
+}
+
+.restaurant-link{
+    font-size: 1.3em;
+    color: #ff6666;
+}
