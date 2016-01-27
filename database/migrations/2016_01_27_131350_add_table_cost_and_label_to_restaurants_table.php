@@ -13,8 +13,8 @@ class AddTableCostAndLabelToRestaurantsTable extends Migration
     public function up()
     {
         Schema::table('tables', function (Blueprint $table) {
-            $table->string('label');
-            $table->decimal('cost');
+            $table->string('label')->nullable();
+            $table->decimal('cost')->nullable();
         });
     }
 
