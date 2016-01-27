@@ -12,6 +12,11 @@ class TableController extends Controller
         // $this->authorize('restaurateur');
     }
 
+    public function index()
+    {
+        //TODO display tables belonging to this restaurant and link to page for adding tables
+    }
+
     /**
      * Add tables in bulk.
      */

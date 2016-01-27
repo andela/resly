@@ -58,53 +58,9 @@
     background: #fefefe;
 }
 
-.social ul li {
-    list-style: none;
-    float: left;
-    padding-left: 10%;
-    margin: 4%;
-}
-
-.social ul li a i {
-    background: #205D7A;
-    color: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 25px;
-    text-align: center;
-    margin-right: 10px;
-    padding-top: 15%;
-}
-.social .fa-facebook {
-    background:#3b5998;
-}
-
-.social .fa-linkedin {
-    background:#007bb6;
-}
-
-.social .fa-twitter {
-    background:#00aced;
-}
-
-.social .fa-google-plus {
-    background:#dd4b39;
-}
-
-.social ul li a i {
-    transition: all 0.2s ease-in-out;
-}
-.social ul li a i:hover {
-    opacity: .7;
-}
 
 .separator {
     clear: both;
-}
-
-.login {
-    padding-top: 70px;
 }
 
 .register {
@@ -138,64 +94,11 @@
     padding:0 10px;
 }
 
-.social ul {
-    overflow: auto;
-}
-
-.social ul li {
-    list-style: none;
-    float: left;
-    padding-left: 10%;
-    margin: 4%;
-}
-
-.social ul li a i {
-    background: #205D7A;
-    color: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 25px;
-    text-align: center;
-    margin-right: 10px;
-    padding-top: 15%;
-}
-.social .fa-facebook {
-    background:#3b5998;
-}
-
-.social .fa-linkedin {
-    background:#007bb6;
-}
-
-.social .fa-twitter {
-    background:#00aced;
-}
-
-.social .fa-google-plus {
-    background:#dd4b39;
-}
-
-.social ul li a i {
-    transition: all 0.2s ease-in-out;
-}
-.social ul li a i:hover {
-    opacity: .7;
-}
 
 .rest-footer {
     padding-bottom: 210px;
 }
 
-footer {
-    padding-top: 1%;
-    color: #777;
-    background: #222;
-    border-top: 2px solid #444;
-    font-size: medium;
-    clear: both;
-    position: relative;
-}
 
 footer h4 {
     color: #777;
@@ -251,53 +154,6 @@ footer p {
 .or h2 span {
     background:#fff;
     padding:0 10px;
-}
-
-.social ul {
-    overflow: auto;
-}
-
-.social ul li {
-    list-style: none;
-    float: left;
-    padding-left: 10%;
-    margin: 4%;
-}
-
-.social ul li a i {
-    background: #205D7A;
-    color: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 25px;
-    text-align: center;
-    margin-right: 10px;
-    padding-top: 15%;
-}
-
-.social .fa-facebook {
-    background:#3b5998;
-}
-
-.social .fa-linkedin {
-    background:#007bb6;
-}
-
-.social .fa-twitter {
-    background:#00aced;
-}
-
-.social .fa-google-plus {
-    background:#dd4b39;
-}
-
-.social ul li a i {
-    transition: all 0.2s ease-in-out;
-}
-
-.social ul li a i:hover {
-    opacity: .7;
 }
 
 body {
@@ -415,4 +271,26 @@ body {
 {
     color:rgba(232, 22, 12, 1);
     font-weight: bold;
+}
+
+
+footer
+{
+    position: absolute;
+    bottom:0;
+    color: #777;
+    background: #222;
+    border-top: 2px solid #444;
+    font-size: medium;
+    clear: both;
+    height: 60px;
+    width:100%;
+}
+
+html{
+    position: relative;
+    min-height: 100%;
+}
+.container{
+    height:100%
 }

@@ -11,7 +11,6 @@ class RestaurantTest extends TestCase
      *
      * @return void
      */
-
     public function testAddRestaurantPageIsLoaded()
     {
         $restaurateur = factory('Resly\User')->create(
@@ -19,9 +18,12 @@ class RestaurantTest extends TestCase
         );
 
         $this->actingAs($restaurateur)
-            ->visit('/restaurants/add')
-            ->see('Add the details of the restaurant');
+            ->visit('/restaurants')
+            ->see('You have no restaurants yet')
+            ->see('Create Your First Restaurant');
     }
+
+
 
     public function testRestaurantIsAdded()
     {
@@ -47,8 +49,8 @@ class RestaurantTest extends TestCase
             ['email' => 'first.rest@resly.com']
         );
 
-        // Return the database to its state before the adding
-        
+//         Return the database to its state before the adding
+
         DB::table('restaurants')->where('email', 'first.rest@resly.com')
           ->delete();
 
