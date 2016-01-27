@@ -115,8 +115,16 @@ Route::get('/user/profile/edit', [
 
 Route::post('/user/profile/edit', [
     'uses' => 'UserProfileController@postEdit',
+<<<<<<< 9389ee7f898d7a776657e9c64cadb48fae3ce5aa
     'middleware' => 'auth',
 ]);
+=======
+    'as' => 'userProfileEdit',
+    'middleware' => 'auth',
+]);
+
+
+>>>>>>> [Fix #111413546] Fixing the Booking test class
 
 Route::get('/user/{username}', [
     'uses' => 'UserProfileController@getProfile',
