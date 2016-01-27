@@ -2,12 +2,17 @@
 
 namespace Resly\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Resly\Restaurant;
 use DB;
+use Resly\Restaurant;
+use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
+    public function __construct(Restaurant $restaurant)
+    {
+        $this->restaurant = $restaurant;
+    }
+
     public function getResults(Request $request)
     {
         $query = $request->input('query');
@@ -17,7 +22,7 @@ class SearchController extends Controller
             ->with('info', 'Could not find what you searched for');
         }
 
-        $results = Restaurant::where(
+        $results = $this->restaurant->where(
             DB::raw('name'),
             'LIKE',
             "%{$query}%"

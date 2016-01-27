@@ -2,13 +2,20 @@
 
 namespace Resly\Http\Controllers;
 
-use Resly\Restaurant;
+use Resly\Repositories\RestaurantRepository;
 
 class ProfileController extends Controller
 {
+    protected $restaurant;
+
+    public function __construct(RestaurantRepository $restaurant)
+    {
+        $this->restaurant = $restaurant;
+    }
+
     public function getProfile($id)
     {
-        $rest = Restaurant::where('id', $id)->first();
+        $rest = $this->restaurant->getFirstBy('id', $id);
 
         return view('profile.index')
         ->with('rest', $rest);

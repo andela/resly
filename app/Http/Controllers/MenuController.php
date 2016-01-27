@@ -2,16 +2,20 @@
 
 namespace Resly\Http\Controllers;
 
-use Resly\Category;
-use Illuminate\Http\Request;
-use Resly\MenuItem;
 use Resly\Tag;
+use Resly\MenuItem;
+use Illuminate\Http\Request;
+use Resly\Repositories\CategoryRepository;
 
 class MenuController extends Controller
 {
-    public function __construct()
+    protected $category;
+    protected $tag;
+
+    public function __construct(CategoryRepository $category, Tag $tag)
     {
-        // $this->authorize('restaurateur');
+        $this->category = $category;
+        $this->tag = $tag;
     }
 
     /**
@@ -19,7 +23,7 @@ class MenuController extends Controller
      */
     public function addBulk(Request $request)
     {
-        $categories = Category::all();
+        $categories =  $this->category->getAll();
         $restaurant_id = $request->session()->get('restaurant_id');
 
         return view(
@@ -58,7 +62,7 @@ class MenuController extends Controller
             if (! empty($menu_item['tags'])) {
                 $tags = explode(',', $menu_item['tags']);
                 foreach ($tags as $tag) {
-                    $tag = Tag::firstOrCreate(['name' => $tag]);
+                    $tag = $this->tag->firstOrCreate(['name' => $tag]);
                     $menu->tags()->save($tag);
                 }
             }

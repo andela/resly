@@ -2,10 +2,17 @@
 
 namespace Resly\Http\Controllers;
 
-use Resly\Restaurant;
+use Resly\Repositories\RestaurantRepository;
 
 class HomeController extends Controller
 {
+    protected $restaurant;
+
+    public function __construct(RestaurantRepository $restaurant)
+    {
+        $this->restaurant = $restaurant;
+    }
+
     public function resthome()
     {
         return view('rest.home');
@@ -28,8 +35,9 @@ class HomeController extends Controller
 
     public function homepage()
     {
-        $latestRestaurants = Restaurant::all()->sortByDesc('date_created')->take(12);
-        $featuredRestaurants = Restaurant::all()->take(10);
+        $latestRestaurants = $this->restaurant->sortByDesc('date_created')->take(12);
+
+        $featuredRestaurants = $this->restaurant->getAll()->take(10);
 
         return view('welcome', compact('latestRestaurants', 'featuredRestaurants'));
     }

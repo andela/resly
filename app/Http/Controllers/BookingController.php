@@ -9,13 +9,30 @@ use Validator;
 use Resly\Slots;
 use Resly\Table;
 use Resly\Diner;
-use Resly\Booking;
 use Resly\Restaurant;
 use Resly\Restaurateur;
 use Illuminate\Http\Request;
+use Resly\Repositories\BookingRepository;
 
 class BookingController extends Controller
 {
+    protected $bookingIn;
+    protected $tableFind;
+    protected $slotAvail;
+    protected $restaurantCurrent;
+
+    public function __construct(
+        BookingRepository $booked,
+        Restaurant $rest,
+        Table $table,
+        Slots $slot
+    ) {
+        $this->bookingIn = $booked;
+        $this->restaurantCurrent = $rest;
+        $this->tableFind = $table;
+        $this->slotAvail = $slot;
+    }
+
     /**
      * Responds to GET /bookings
      * View the listings for bookings already made.
@@ -82,9 +99,9 @@ class BookingController extends Controller
                     'restaurant_id' => $restaurant_id,
                 ];
 
-        $table = Table::where($match)
-                        ->first();
-        $restaurant = Restaurant::findOrFail($restaurant_id);
+        $table = $this->tableFind->where($match)->first();
+
+        $restaurant = $this->restaurantCurrent->findOrFail($restaurant_id);
 
         if (empty($table)) {
             return redirect()
@@ -96,12 +113,11 @@ class BookingController extends Controller
             'table_id' => $table->table_id,
             'booking_date' => $booking_date,
         ];
-        $bookings = Booking::where($match)
-                    ->orderBy('booking_time')
-                    ->get();
+        $bookings = $this->bookingIn->orderBy($match, 'booking_time');
+
         $opening_time = $restaurant->opening_time;
         $closing_time = $restaurant->closing_time;
-        $slots = Slots::make(
+        $slots = $this->slotAvail->make(
             $opening_time,
             $closing_time,
             $bookings
@@ -143,7 +159,7 @@ class BookingController extends Controller
         $booking = $request->all();
         $booking['diner_id'] = $diner_id;
 
-        $created_booking = Booking::create($booking);
+        $this->bookingIn->createData($booking);
 
         // Return success view here
         return Response::make('Booking successful', 200);
@@ -168,7 +184,7 @@ class BookingController extends Controller
                 ->withErrors($validator);
         }
 
-        $booking = Booking::findOrFail($request->input('booking_id'));
+        $booking = $this->bookingIn->getOrFail($request->input('booking_id'));
         $booking->delete();
 
         return redirect('/bookings')

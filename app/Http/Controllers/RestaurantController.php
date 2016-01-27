@@ -2,16 +2,19 @@
 
 namespace Resly\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Validator;
-use Resly\Restaurant;
+use Illuminate\Http\Request;
 use Resly\Http\Requests;
+use Resly\Repositories\RestaurantRepository;
 
 class RestaurantController extends Controller
 {
-    public function __construct()
+    protected $restaurante;
+
+    public function __construct(RestaurantRepository $resto)
     {
         $this->authorize('restaurateur-user');
+        $this->restaurante = $resto;
     }
 
     /**
@@ -24,7 +27,7 @@ class RestaurantController extends Controller
 
     public function edit(Request $request, $restaurant_id)
     {
-        $restaurant = Restaurant::find($restaurant_id);
+        $restaurant = $this->restaurante->findById($restaurant_id);
         if ($restaurant) {
             return view('restaurant.edit', [
                 'restaurant' => $restaurant,
@@ -36,7 +39,7 @@ class RestaurantController extends Controller
 
     public function createEdit(Request $request, $restaurant_id)
     {
-        $restaurant = Restaurant::find($restaurant_id);
+        $restaurant = $this->restaurante->findById($restaurant_id);
 
         if ($restaurant_id) {
             $validator = Validator::make(

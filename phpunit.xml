@@ -17,6 +17,13 @@
     <filter>
         <whitelist>
             <directory suffix=".php">app/</directory>
+             <exclude>
+                <directory>app/Http/Controllers/Auth/</directory>
+                <directory>app/Console/</directory>
+                <directory>app/Exceptions/</directory>
+                <directory>app/Repositories/</directory>
+                <directory>app/Http/Middleware/</directory>
+            </exclude>
         </whitelist>
     </filter>
     <php>
