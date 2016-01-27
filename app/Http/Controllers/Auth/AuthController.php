@@ -2,6 +2,7 @@
 
 namespace Resly\Http\Controllers\Auth;
 
+use Mail;
 use Validator;
 use Resly\User;
 use Resly\Http\Controllers\Controller;
@@ -65,7 +66,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'username' => $data['username'],
@@ -73,5 +74,12 @@ class AuthController extends Controller
             'role' => $data['role'],
             'password' => bcrypt($data['password']),
         ]);
+
+        Mail::queue('email.welcome', ['user' => $user], function ($message) use ($user) {
+            $message->to($user->email, $user->name)
+                    ->subject('Welcome to Resly!');
+        });
+
+        return $user;
     }
 }

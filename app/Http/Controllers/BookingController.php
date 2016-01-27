@@ -20,7 +20,7 @@ class BookingController extends Controller
      * Responds to GET /bookings
      * View the listings for bookings already made.
      */
-    public function getIndex()
+    public function index()
     {
         // Check if authenticated user is Restaurateur.
         $user = Auth::user();
@@ -44,7 +44,7 @@ class BookingController extends Controller
      * Checks whether a table is available from the provided
      * restaurant, date and people.
      */
-    public function postBegin(Request $request)
+    public function begin(Request $request)
     {
         $restaurant_id = $request->input('restaurant_id');
 
@@ -119,7 +119,7 @@ class BookingController extends Controller
      * Create and store a new booking from the provided
      * information.
      */
-    public function postCreate(Request $request)
+    public function create(Request $request)
     {
         $this->authorize('diner-user');
 
@@ -153,7 +153,7 @@ class BookingController extends Controller
      *  responds to POST bookings/cancel
      *  removes the passed booking{$id} from DB.
      */
-    public function postCancel(Request $request)
+    public function cancel(Request $request)
     {
         $this->authorize('diner-user');
 
