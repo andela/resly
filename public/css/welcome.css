@@ -7,9 +7,11 @@
 
 .home {
     background:url('/img/home.jpg') center no-repeat;
-    height: 520px;
+    height: 620px;
     text-align: center;
     background-size: cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
 }
 
 
@@ -300,7 +302,6 @@ footer p {
 
 body {
   padding-top: 40px;
-<<<<<<< HEAD
 }
 
 .btn-nav {
@@ -311,16 +312,108 @@ body {
     width: 80%;
     margin-left: 10%;
     background-color: #424242;
-=======
->>>>>>> e8b689c9051a35aa8ff49e4d785519d4610d1aed
 }
 
-.btn-nav {
-  margin-top: 10%;
+/*Style for featured Restaurants*/
+#featured-restaurant-scroller .restaurant-info
+{
+    padding:10px;
+    text-align: center;
+    text-decoration: none;
 }
 
-.flash-message {
-    width: 80%;
-    margin-left: 10%;
-    background-color: #424242;
+#featured-restaurant-scroller .restaurant-title{
+    font-family: 'Pacifico', cursive;
+}
+
+#featured-restaurant-scroller .info
+{
+    color:#AA5555;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    height:150px;
+    overflow: hidden;
+}
+
+#featured-restaurant-scroller .price
+{
+    font-size: 20px;
+    color:rgba(232, 81, 12, 1);
+}
+
+
+#featured-restaurant-scroller a:hover
+{
+    text-decoration: none;
+}
+
+#featured-restaurant-scroller .cell
+{
+    margin: 5px;
+    color: #FFF;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+
+.belt
+{
+    padding: 2em 0;
+    background: rgba(232, 81, 12, 1);
+    color: #FFF;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+
+}
+.belt h5
+{
+    color: #FFF;
+}
+#latest-restaurants-section
+{
+    background: #333;
+    min-height: 300px;
+}
+.latest-restaurant-items
+{
+    text-align: center;
+    margin: 10px 5px;
+    color:#FFF;
+    font-weight: bold;
+    list-style-type: none;
+    height: 10em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+}
+
+.latest-restaurant-items li .title
+{
+    font-size: 1.5em;
+    font-family: 'Pacifico', cursive;
+    display: block;
+}
+
+.latest-restaurant-items li .title a
+{
+    color:#FFF;
+}
+
+.latest-restaurant-items li .title a:hover
+{
+    color:rgba(232, 81, 12, 1);
+}
+.latest-restaurant-items li .info
+{
+    display: block;
+    font-size: 12px;
+    font-weight: 100;
+}
+.latest-restaurant-items li .info .price
+{
+    color:rgba(232, 22, 12, 1);
+    font-weight: bold;
+>>>>>>> develop
 }

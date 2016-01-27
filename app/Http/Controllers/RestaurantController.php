@@ -17,12 +17,12 @@ class RestaurantController extends Controller
     /**
      *  Display the form for adding a restaurant.
      */
-    public function getAdd()
+    public function add()
     {
         return view('restaurant.add');
     }
 
-    public function getEdit($restaurant_id)
+    public function edit(Request $request, $restaurant_id)
     {
         $restaurant = Restaurant::find($restaurant_id);
         if ($restaurant) {
@@ -34,7 +34,7 @@ class RestaurantController extends Controller
         }
     }
 
-    public function postEdit(Request $request, $restaurant_id)
+    public function createEdit(Request $request, $restaurant_id)
     {
         $restaurant = Restaurant::find($restaurant_id);
 
@@ -72,7 +72,7 @@ class RestaurantController extends Controller
     /**
      *  Receive post requests from the add form submission.
      */
-    public function postAdd(Request $request)
+    public function createAdd(Request $request)
     {
         $validator = Validator::make(
             $request->all(),

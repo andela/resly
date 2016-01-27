@@ -3,8 +3,12 @@
 @section('title', 'welcome')
 
 @section('styles')
+  <link href='https://fonts.googleapis.com/css?family=Pacifico|Lato:400,100' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="{!! asset('css/welcome.css') !!}">
   <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
+  <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.carousel.css') !!}">
+  <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.theme.css') !!}">
+  <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.transitions.css') !!}">
 @endsection
 
 @section('content')
@@ -42,73 +46,64 @@
       </div>
     </div>
   </div>
-  <div id="content">
+    <div class="belt">
+        <h5>Featured restaurants</h5>
+    </div>
+   <div id="contents">
     <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-              <a href="#" class="thumbnail">
-                <img src="/img/search.jpg" alt="...">
-              </a>
-          </div>
+        <div id='featured-restaurant-scroller' class='owl-carousel'>
+          @foreach($featuredRestaurants as $restaurant)
+            <div class="item">
+              <div class="cell">
+                <a href="#" class="thumbnail">
+                  <img src="http://lorempixel.com/400/200/food"/>
+                  <div class='restaurant-info'>
+                    <h5 class='restaurant-title'>{{$restaurant->name}}</h5>
+                    <p class='info'>
+                      {{$restaurant->description}}orum arbitror,
+                      proident ab minim, non anim fabulas doctrina in ita sunt quo multos ut se elit
+                      fore e cupidatat, iis nescius iis consequat
+                    </p>
+                    <p class='price'>
+                      ${{number_format((rand(200, 2000)/10), 2)}}
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          @endforeach
+            </div>
         </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-              <a href="#" class="thumbnail">
-                <img src="/img/reservation.jpg" alt="...">
-              </a>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-             <a href="#" class="thumbnail">
-               <img src="/img/menu.jpg" alt="...">
-             </a>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-            <a href="#" class="thumbnail">
-              <img src="/img/wine.jpg" alt="...">
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div id="content">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-              <a href="#" class="thumbnail">
-                <img src="/img/pe.jpg" alt="...">
-              </a>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-              <a href="#" class="thumbnail">
-                <img src="/img/eating.jpg" alt="...">
-              </a>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-           <a href="#" class="thumbnail">
-             <img src="/img/vintage.jpeg" alt="...">
-           </a>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <div class="cell">
-            <a href="#" class="thumbnail">
-              <img src="/img/image.jpg" alt="...">
-            </a>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
+<div class="belt">
+    <h5>Latest restaurants</h5>
+</div>
+<div id="latest-restaurants-section">
+    <div class='container'>
+        <div class='row'>
+            @foreach($latestRestaurants as $restaurant)
+                <div class='col col-md-4'>    
+                    <ul class='latest-restaurant-items'>
+                        <li>
+                            <span class='title'><a href="#">{{$restaurant->name}}</a></span>
+                            <p class='info short'>
+                                Si ut domesticarum et e fugiat instituendarum o senserit an cernantur an noster
+                                et arbitror ita lorem, vidisse varias proident quamquam ita nescius non
+                                <strong class="pull-right price">${{number_format((rand(200, 2000)/10), 2)}}</strong>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+@section('scripts')
+  <script type='text/javascript' src="{!! asset('owl-carousel/owl.carousel.min.js') !!}"></script>
+  <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
+
+  <script type='text/javascript' src="{!! asset('js/welcome.js') !!}"></script>
 @endsection

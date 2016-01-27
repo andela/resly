@@ -7,3 +7,4 @@ Homestead.json
 *.log
 .git merge master
 .DS_Store
+.idea
