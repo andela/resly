@@ -13,6 +13,7 @@ class SocialAuthController extends Controller
      * redirect to provider oauth url.
      *
      * @param  $provider name of provider
+     *
      * @return redirect to provider oauth url
      */
     public function redirectToProvider($provider)
@@ -25,17 +26,16 @@ class SocialAuthController extends Controller
      *  with their social provider.
      *
      * @param  provider name of provider i.e 'google'
+     *
      * @return redirect to homepage
      */
     public function handleProviderCallback($provider)
     {
         $socialUser = Socialite::driver($provider)->user();
 
-        $nativeUser = self::findOrCreateUser($socialUser, $provider);
+        $nativeUser = User::where('email', $socialUser->email)->first();
 
-        // if this is the first time we are seeing
-        // this we consider this to be a registration.
-        if (! $nativeUser->exists()) {
+        if ($nativeUser == null) {
             self::beginRegistration($socialUser, $provider);
 
             return redirect()->route('social.register')->with('you need to register first');
@@ -71,13 +71,12 @@ class SocialAuthController extends Controller
      *
      * @param  $user user from socialite
      * @param  $provider name of provider
-     * @return void
      */
     public static function beginRegistration($user, $provider)
     {
         session([
-            'username'   => $user->name,
-            'email'      => $user->email,
+            'username' => $user->name,
+            'email' => $user->email,
             'avatar_url' => $user->avatar,
             'provider_name' => $provider,
             'provider_id' => $user->id,

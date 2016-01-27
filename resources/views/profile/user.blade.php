@@ -1,8 +1,8 @@
-@extends('layouts.master')
+@extends('dashboard.index')
 
 @section('title', 'Profile')
 
-@section('content')
+@section('details')
   <div class="container" style="padding-top:50px;">
       <div class="row">
           <div class="panel panel-info">
@@ -15,7 +15,7 @@
                     @if(!is_null(auth()->user()->avatar_url))
                         <img alt="{{ auth()->user()->username }}" class="img-circle img-responsive" src="{{ auth()->user()->avatar_url }}" />
                     @else
-                        <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive">
+                        <img alt="User Pic" src="http://www.expatica.com/images/default_avatar.jpg" class="img-circle img-responsive">
                     @endif
                   </div>
                   <div class=" col-md-9 col-lg-9 ">
@@ -39,7 +39,6 @@
                         </tr>
                       </tbody>
                     </table>
-                    <a href="/" class="btn btn-primary">Back to home</a>
                   </div>
               </div>
             </div>

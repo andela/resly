@@ -37,19 +37,19 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
  */
 Route::get('auth/{provider}', [
     'uses' => 'Auth\SocialAuthController@redirectToProvider',
-    'as'   => 'social.login',
+    'as' => 'social.login',
 ]);
 
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
 
 Route::get('auth/social/register', [
     'uses' => 'Auth\SocialRegistrationController@getRegistration',
-    'as'   => 'social.register',
+    'as' => 'social.register',
 ]);
 
 Route::post('auth/social/register', [
     'uses' => 'Auth\SocialRegistrationController@postRegistration',
-    'as'   => 'social.post.register',
+    'as' => 'social.post.register',
 ]);
 /*
  * Restaurants Routes
@@ -98,15 +98,25 @@ Route::get('/rest/{id}', [
 
 Route::get('dashboard', [
     'uses' => 'DashboardController@showDashboard',
-    'as'   => 'dashboard',
+    'as' => 'dashboard',
 ]);
 
 /*
  * User profile
  */
+Route::get('/user/profile/edit', [
+    'uses' => 'UserProfileController@getEdit',
+    'as' => 'userProfileEdit',
+    'middleware' => 'auth',
+]);
+
+Route::post('/user/profile/edit', [
+    'uses' => 'UserProfileController@postEdit',
+    'middleware' => 'auth',
+]);
 
 Route::get('/user/{username}', [
     'uses' => 'UserProfileController@getProfile',
-    'as'   => 'userProfile',
+    'as' => 'userProfile',
     'middleware' => 'auth',
 ]);
