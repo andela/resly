@@ -101,6 +101,7 @@
         </div>
     </div>
 </div>
+@endsection
 @section('scripts')
   <script type='text/javascript' src="{!! asset('owl-carousel/owl.carousel.min.js') !!}"></script>
   <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>

@@ -19,8 +19,9 @@ class RestaurantTest extends TestCase
         );
 
         $this->actingAs($restaurateur)
-            ->visit('/restaurants/add')
-            ->see('Add the details of the restaurant');
+            ->visit('/restaurants')
+            ->see('You have no restaurants yet')
+            ->see('Create Your First Restaurant');
     }
 
     public function testRestaurantIsAdded()
@@ -30,7 +31,7 @@ class RestaurantTest extends TestCase
         );
 
         $this->actingAs($restaurateur)
-            ->visit('/restaurants/add')
+            ->visit('/restaurants/create')
             ->type('My First Restaurant', 'name')
             ->type('We are awesome', 'description')
             ->type('08:00:00', 'opening_time')
@@ -39,15 +40,15 @@ class RestaurantTest extends TestCase
             ->type('+2517238293', 'telephone')
             ->type('first.rest@resly.com', 'email')
             ->type('50504, Nairobi', 'address')
-            ->press('Next')
-            ->see('Add the Tables\' details');
+            ->press('Save')
+            ->see('My First Restaurant');
 
         $this->seeInDatabase(
             'restaurants',
             ['email' => 'first.rest@resly.com']
         );
 
-        // Return the database to its state before the adding
+//         Return the database to its state before the adding
         
         DB::table('restaurants')->where('email', 'first.rest@resly.com')
           ->delete();
