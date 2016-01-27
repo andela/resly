@@ -49,7 +49,7 @@ class RestaurantTest extends TestCase
         );
 
 //         Return the database to its state before the adding
-        
+
         DB::table('restaurants')->where('email', 'first.rest@resly.com')
           ->delete();
 
