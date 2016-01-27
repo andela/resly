@@ -90,7 +90,6 @@ Route::post('bookings/cancel', 'BookingController@cancel');
 
 Route::resource('gallery', 'RestaurantGalleryController');
 
-
 /*
  * Restaurant Profile
  */
