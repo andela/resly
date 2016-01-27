@@ -113,6 +113,12 @@ Route::get('/user/profile/edit', [
     'middleware' => 'auth',
 ]);
 
+Route::post('/user/profile/edit', [
+    'uses' => 'UserProfileController@postEdit',
+    'as' => 'userProfileEdit',
+    'middleware' => 'auth',
+]);
+
 Route::get('/user/{username}', [
     'uses' => 'UserProfileController@getProfile',
     'as' => 'userProfile',
