@@ -2,16 +2,11 @@
 
 namespace Resly\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Resly\Table;
+use Illuminate\Http\Request;
 
 class TableController extends Controller
 {
-    public function __construct()
-    {
-        // $this->authorize('restaurateur');
-    }
-
     /**
      * Add tables in bulk.
      */

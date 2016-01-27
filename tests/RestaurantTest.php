@@ -48,7 +48,7 @@ class RestaurantTest extends TestCase
         );
 
         // Return the database to its state before the adding
-        
+
         DB::table('restaurants')->where('email', 'first.rest@resly.com')
           ->delete();
 
@@ -65,8 +65,8 @@ class RestaurantTest extends TestCase
             ->visit("/restaurants/edit/{$restaurant->id}")
             ->type('My First Restaurant', 'name')
             ->type('We are awesome', 'description')
-            ->type('08:00:00', 'opening_time')
-            ->type('17:00:00', 'closing_time')
+            ->type('08:00', 'opening_time')
+            ->type('17:00', 'closing_time')
             ->type('Nairobi West', 'location')
             ->type('+2517238293', 'telephone')
             ->type('edited.rest@resly.com', 'email')
@@ -79,7 +79,7 @@ class RestaurantTest extends TestCase
         );
 
     }
-    
+
     public function testRestaurantDatabase()
     {
         DB::transaction(function () {
