@@ -43,8 +43,8 @@ class RestaurantController extends Controller
                 $request->all(),
                 [
                     'name' => 'required',
-                    'opening_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
-                    'closing_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
+                    'opening_time' => ['regex:/^[0-9]{2} : [0-9]{2}.*$/'],
+                    'closing_time' => ['regex:/^[0-9]{2} : [0-9]{2}.*$/'],
                     'location' => 'required',
                     'telephone' => 'required|numeric',
                     'email' => 'required|email',
@@ -53,7 +53,7 @@ class RestaurantController extends Controller
             );
 
             if ($validator->fails()) {
-                return redirect('/restaurants/edit')
+                return redirect('/restaurants/edit/{$restaurant_id}')
                     ->withInput()
                     ->withErrors($validator);
             }
@@ -78,8 +78,8 @@ class RestaurantController extends Controller
             $request->all(),
             [
                 'name' => 'required',
-                'opening_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
-                'closing_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
+                'opening_time' => ['regex:/^[0-9]{2} : [0-9]{2}.*$/'],
+                'closing_time' => ['regex:/^[0-9]{2} : [0-9]{2}.*$/'],
                 'location' => 'required',
                 'telephone' => 'required|numeric',
                 'email' => 'required|email',

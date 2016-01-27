@@ -9,6 +9,53 @@
   <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.carousel.css') !!}">
   <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.theme.css') !!}">
   <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.transitions.css') !!}">
+  <style type="text/css">
+
+    #featured-restaurant-scroller .restaurant-info
+    {
+/*      background-color: rgba(232, 81, 12, 0.8);*/
+      padding:10px;
+      text-align: center;
+/*      color: #FFF;*/
+      text-decoration: none;
+    }
+
+    #featured-restaurant-scroller .restaurant-title{
+      font-family: 'Pacifico', cursive;
+    }
+
+    #featured-restaurant-scroller .info
+    {
+      color:#AA5555;
+/*      color:rgba(232,81,12,0.9);*/
+      font-weight: bold;
+      font-family: 'Lato', sans-serif;
+      height:150px;
+      overflow: hidden;
+    }
+
+    #featured-restaurant-scroller .price
+    {
+      font-size: 20px;
+      color:rgba(232, 81, 12, 1);
+    }
+
+
+    #featured-restaurant-scroller a:hover
+    {
+      text-decoration: none;
+    }
+
+    #featured-restaurant-scroller .cell
+    {
+        margin: 5px;
+        color: #FFF;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        text-align: center;
+    }
+  </style>
 @endsection
 
 @section('content')
@@ -46,17 +93,30 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
+   <div id="content">
+    <div class="container">
+      <div class="row">
+        <div class='col-xs-12 col-md-12 col-lg-12'>
+          <h5>Featured Restaurants</h5>
+        </div>
+=======
     <div class="belt">
         <h5>Featured restaurants</h5>
     </div>
    <div id="contents">
     <div class="container">
       <div class="row">
+>>>>>>> 16512dad1a5ec3ca56b3c1a583360a441b34b550
         <div id='featured-restaurant-scroller' class='owl-carousel'>
           @foreach($featuredRestaurants as $restaurant)
             <div class="item">
               <div class="cell">
                 <a href="#" class="thumbnail">
+<<<<<<< HEAD
+<!--                  <img src="{{asset('img/restaurant.jpg')}}"/>-->
+=======
+>>>>>>> 16512dad1a5ec3ca56b3c1a583360a441b34b550
                   <img src="http://lorempixel.com/400/200/food"/>
                   <div class='restaurant-info'>
                     <h5 class='restaurant-title'>{{$restaurant->name}}</h5>
@@ -73,11 +133,60 @@
               </div>
             </div>
           @endforeach
+<<<<<<< HEAD
+        </div>
+=======
             </div>
+>>>>>>> 16512dad1a5ec3ca56b3c1a583360a441b34b550
         </div>
 
     </div>
   </div>
+<<<<<<< HEAD
+  <div id="content">
+    <div class="container">
+        <div class="row">
+            <div class='col-xs-12 col-md-12 col-lg-12'>
+                <h5>Latest Restaurants</h5>
+            </div>
+            @foreach($latestRestaurants as $restaurnat)
+              <div class="col-xs-6 col-md-3">
+                  <div class="cell">
+                      <a href="#" class="thumbnail">
+                        <img src="http://www.hotwheels-elite.com/diecast-model-cars/images/Image/hot-wheels-elite/image_not_available.jpg" alt="...">
+                        <div class='restaurant-info'>
+                          <span class="label">{{$restaurnat->name}}</span>
+
+                        </div>
+                      </a>
+                  </div>
+                </div>
+            @endforeach
+        </div>
+
+    </div>
+  </div>
+@endsection
+
+@section('scripts')
+  <script type='text/javascript' src="{!! asset('owl-carousel/owl.carousel.min.js') !!}"></script>
+  <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#featured-restaurant-scroller").owlCarousel({
+          items: 4,
+          navigation:true,
+          lazyLoad:true,
+          stopOnHover:true,
+          autoPlay:3000
+        });
+
+        $('#featured-restaurant-scroller .info').ellipsis({
+          row:3
+        });
+      });
+    </script>
+=======
 <div class="belt">
     <h5>Latest restaurants</h5>
 </div>
@@ -85,7 +194,7 @@
     <div class='container'>
         <div class='row'>
             @foreach($latestRestaurants as $restaurant)
-                <div class='col col-md-4'>    
+                <div class='col col-md-4'>
                     <ul class='latest-restaurant-items'>
                         <li>
                             <span class='title'><a href="#">{{$restaurant->name}}</a></span>
@@ -106,4 +215,5 @@
   <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
 
   <script type='text/javascript' src="{!! asset('js/welcome.js') !!}"></script>
+>>>>>>> 16512dad1a5ec3ca56b3c1a583360a441b34b550
 @endsection

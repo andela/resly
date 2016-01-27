@@ -33,8 +33,8 @@ class RestaurantTest extends TestCase
             ->visit('/restaurants/add')
             ->type('My First Restaurant', 'name')
             ->type('We are awesome', 'description')
-            ->type('08:00:00', 'opening_time')
-            ->type('17:00:00', 'closing_time')
+            ->type('08 : 00', 'opening_time')
+            ->type('17 : 00', 'closing_time')
             ->type('Nairobi West', 'location')
             ->type('+2517238293', 'telephone')
             ->type('first.rest@resly.com', 'email')
@@ -59,14 +59,15 @@ class RestaurantTest extends TestCase
         $restaurateur = factory('Resly\User')->create(
             ['role' => 'restaurateur']
         );
-        $restaurant = factory('Resly\Restaurant')->create();
-
+        $restaurant = factory('Resly\Restaurant')->create(
+            ['user_id' => $restaurateur->id]);
+        
         $this->actingAs($restaurateur)
             ->visit("/restaurants/edit/{$restaurant->id}")
             ->type('My First Restaurant', 'name')
             ->type('We are awesome', 'description')
-            ->type('08:00:00', 'opening_time')
-            ->type('17:00:00', 'closing_time')
+            ->type('08 : 00', 'opening_time')
+            ->type('17 : 00', 'closing_time')
             ->type('Nairobi West', 'location')
             ->type('+2517238293', 'telephone')
             ->type('edited.rest@resly.com', 'email')

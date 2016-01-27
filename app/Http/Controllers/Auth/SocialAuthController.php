@@ -47,6 +47,26 @@ class SocialAuthController extends Controller
     }
 
     /**
+     *  returns a user from the database creating one
+     *  if none existed.
+     *
+     * user data is based on data returned by social authenticator.
+     *
+     * @param  $socialUser user returned by social provider
+     * @param  $provider name of provider
+     * @return $user
+     */
+    public static function findOrCreateUser($socialUser, $provider)
+    {
+        $user = User::firstOrNew([
+            'provider_name' => $provider,
+            'provider_id'   => $socialUser->id,
+        ]);
+
+        return $user;
+    }
+
+    /**
      * save social provider data to session.
      *
      * @param  $user user from socialite
