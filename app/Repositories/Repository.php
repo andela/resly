@@ -4,9 +4,6 @@ namespace Resly\Repositories;
 
 use Resly\Repositories\Contracts\BaseInterface;
 
-/**
-*
-*/
 abstract class Repository implements BaseInterface
 {
     public function getAll()
@@ -41,6 +38,6 @@ abstract class Repository implements BaseInterface
 
     public function getFirstBy($key, $value)
     {
-      return $this->model->where($key, $value)->first();
+        return $this->model->where($key, $value)->first();
     }
 }

@@ -23,7 +23,7 @@ class MenuController extends Controller
      */
     public function addBulk(Request $request)
     {
-        $categories =  $this->category->getAll();
+        $categories = $this->category->getAll();
         $restaurant_id = $request->session()->get('restaurant_id');
 
         return view(

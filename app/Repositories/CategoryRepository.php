@@ -3,12 +3,8 @@
 namespace Resly\Repositories;
 
 use Resly\Category;
-use Resly\Repositories\Repository;
 
-/**
-*
-*/
-class RestaurantRepository extends Repository
+class CategoryRepository extends Repository
 {
     /**
      * @var Model
@@ -16,7 +12,7 @@ class RestaurantRepository extends Repository
     protected $model;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(Category $category)
     {

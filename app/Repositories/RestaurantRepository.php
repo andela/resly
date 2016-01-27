@@ -3,11 +3,7 @@
 namespace Resly\Repositories;
 
 use Resly\Restaurant;
-use Resly\Repositories\Repository;
 
-/**
-*
-*/
 class RestaurantRepository extends Repository
 {
     /**
@@ -16,7 +12,7 @@ class RestaurantRepository extends Repository
     protected $model;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(Restaurant $resto)
     {
