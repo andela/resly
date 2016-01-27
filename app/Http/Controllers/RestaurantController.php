@@ -78,6 +78,7 @@ class RestaurantController extends Controller
             $request->all(),
             [
                 'name' => 'required',
+                'description' => 'required',
                 'opening_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
                 'closing_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
                 'location' => 'required',
@@ -87,12 +88,12 @@ class RestaurantController extends Controller
             ]
         );
 
+
         if ($validator->fails()) {
             return redirect('/restaurants/add')
                 ->withInput()
                 ->withErrors($validator);
         }
-
         $restaurateur = \Auth::user();
         $restaurant = $restaurateur->restaurant()->create($request->all());
         $request->session()->put('restaurant_id', $restaurant->id);
