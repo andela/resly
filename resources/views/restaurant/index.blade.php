@@ -1,8 +1,7 @@
 <link rel="stylesheet" type="text/css" href="{!! asset('css/restaurant.css') !!}">
 @extends('dashboard.index')
 
-@section('title', 'Restaurants') @endsection
-
+@section('title', 'Restaurants')
 @section('details')
         @if(count($restaurants) != 0)
             <div class="row">
