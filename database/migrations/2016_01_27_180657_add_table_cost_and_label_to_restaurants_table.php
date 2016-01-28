@@ -14,7 +14,7 @@ class AddTableCostAndLabelToRestaurantsTable extends Migration
     {
         Schema::table('tables', function (Blueprint $table) {
             $table->string('label')->nullable();
-            $table->double('cost')->nullable();
+            $table->string('cost')->nullable();
         });
     }
 
