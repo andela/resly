@@ -4,6 +4,7 @@ namespace Resly\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
+use Resly\Repositories\TablesRepository;
 use Validator;
 use Resly\Restaurant;
 use Resly\Http\Requests;
@@ -26,11 +27,11 @@ class RestaurantController extends Controller
         return view('restaurant.index', compact('restaurants'));
     }
 
-    public function show(Request $request)
+    public function show(Request $request, TablesRepository $tablesRepository)
     {
+        $tables = $tablesRepository->getRestaurantTables($request->restaurant_id);
         $restaurant = Restaurant::where('id', $request->restaurant_id)->get()->first();
-
-        return view('restaurant.show', compact('restaurant'));
+        return view('restaurant.show', compact('restaurant', "tables"));
     }
 
     /**

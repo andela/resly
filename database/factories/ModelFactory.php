@@ -84,7 +84,6 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
     return [
         'restaurant_id' => $restaurant->id,
         'seats_number' => 5,
-        'name' => $faker->word,
         'label' => $faker->streetName,
         'cost' => $faker->randomFloat(null, 5, 120),
     ];
