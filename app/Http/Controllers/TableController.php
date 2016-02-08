@@ -20,7 +20,7 @@ class TableController extends Controller
     }
 
     /**
-     * Displays form for adding table to restaurant
+     * Displays form for adding table to restaurant.
      * @param Request $request
      * @return view
      */
@@ -30,41 +30,43 @@ class TableController extends Controller
     }
 
     /**
-     * Handles saving a table data
+     * Handles saving a table data.
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $this->tableRepository->store($request->all());
+
         return redirect()->back()->with('success', 'Table Added');
     }
 
     /**
-     * Display update form
+     * Display update form.
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Request $request)
     {
         $table = $this->tableRepository->get($request->table_id);
+
         return view('table.edit', compact('table'));
     }
 
     public function update(Request $request)
     {
-        $data = array_filter($request->all(), function($var){return !is_null($var) || $var != "" || $var != 0;} );
+        $data = array_filter($request->all(), function ($var) {return ! is_null($var) || $var != '' || $var != 0; });
         $this->tableRepository->update($request->table_id, $data);
+
         return redirect()->back()->with('success', 'Table has been updated');
     }
 
     public function destroy(Request $request)
     {
         $this->tableRepository->delete($request->table_id);
+
         return redirect()->back()->with('success', 'Table has been deleted');
     }
-
-
 
     /**
      * Add tables in bulk.
