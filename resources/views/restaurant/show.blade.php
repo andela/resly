@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="{!! asset('css/restaurant.css') !!}">
 @extends('dashboard.index')
 
-@section('title', 'Restaurant') @endsection
+@section('title', 'Restaurant')
 
 @section('details')
     {!! link_to(url('/restaurants/'.$restaurant->id.'/tables'), 'Add Table', ['class'=>'btn btn-sm btn-primary']) !!}
