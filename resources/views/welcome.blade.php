@@ -34,7 +34,7 @@
                  <span class="input-group-addon">
                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                  </span>
-                 <input type="text" name="query" class="form-control" placeholder="Location or Restaurant" dir = "auto">
+                 <input type="text" id='query' name="query" class="form-control" placeholder="Location or Restaurant" dir = "auto">
                  <span class = "input-group-btn">
                     <button type="submit" class="btn btn-primary">Find</button>
                  </span>
@@ -85,7 +85,7 @@
     <div class='container'>
         <div class='row'>
             @foreach($latestRestaurants as $restaurant)
-                <div class='col col-md-4'>    
+                <div class='col col-md-4'>
                     <ul class='latest-restaurant-items'>
                         <li>
                             <span class='title'><a href="#">{{$restaurant->name}}</a></span>
@@ -106,4 +106,16 @@
   <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
 
   <script type='text/javascript' src="{!! asset('js/welcome.js') !!}"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('form').submit(function(){
+        if ($('#query').val().trim() == '') {
+            return false;
+        } else {
+          return true;
+        }
+      });
+    });
+  </script>
 @endsection
