@@ -1,6 +1,7 @@
 <?php
 
 namespace Resly\Repositories;
+
 use Resly\Table;
 
 class TablesRepository
@@ -11,11 +12,11 @@ class TablesRepository
     }
 
     /**
-     * Saves a table data to the database
+     * Saves a table data to the database.
      * @param array $data
      * @return static
      */
-    public function store(Array $data)
+    public function store(array $data)
     {
         return $this->table->create($data);
     }
@@ -25,7 +26,6 @@ class TablesRepository
         return $this->table->findOrFail($table_id);
     }
 
-
     public function getRestaurantTables($restaurant_id)
     {
         return $this->table->where('restaurant_id', $restaurant_id)->get();
@@ -34,12 +34,14 @@ class TablesRepository
     public function update($table_id, $data)
     {
         $table = $this->table->findOrFail($table_id);
+
         return $table->update($data);
     }
 
     public function delete($table_id)
     {
         $table = $this->table->findOrFail($table_id);
+
         return $table->delete();
     }
 }

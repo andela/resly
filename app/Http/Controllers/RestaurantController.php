@@ -31,7 +31,8 @@ class RestaurantController extends Controller
     {
         $tables = $tablesRepository->getRestaurantTables($request->restaurant_id);
         $restaurant = Restaurant::where('id', $request->restaurant_id)->get()->first();
-        return view('restaurant.show', compact('restaurant', "tables"));
+
+        return view('restaurant.show', compact('restaurant', 'tables'));
     }
 
     /**
