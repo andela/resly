@@ -73,9 +73,9 @@ class TableTest extends TestCase
 
     public function testDeleteTable()
     {
-         $restaurateur = factory('Resly\User')->create(
-             ['role' => 'restaurateur']
-         );
+        $restaurateur = factory('Resly\User')->create(
+            ['role' => 'restaurateur']
+        );
 
         $restaurant = factory(Resly\Restaurant::class)->create();
         $table = factory(Resly\Table::class)->create([

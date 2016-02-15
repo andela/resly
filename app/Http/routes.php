@@ -96,6 +96,8 @@ Route::post('bookings/begin', 'BookingController@begin');
 Route::post('bookings/create', 'BookingController@create');
 Route::post('bookings/cancel', 'BookingController@cancel');
 
+Route::resource('gallery', 'RestaurantGalleryController');
+
 /*
  * Restaurant Profile
  */
@@ -120,6 +122,7 @@ Route::get('/user/profile/edit', [
 
 Route::post('/user/profile/edit', [
     'uses' => 'UserProfileController@postEdit',
+    'as' => 'userProfileEdit',
     'middleware' => 'auth',
 ]);
 
