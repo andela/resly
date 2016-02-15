@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-@include ('partials.alerts');
+@include ('partials.alerts')
   <div class="home">
     @if(Session::has('flash_message'))
       <div class="alert flash-message">

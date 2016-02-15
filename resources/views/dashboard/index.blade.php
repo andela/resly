@@ -5,6 +5,7 @@
 @section('styles')
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
 @endsection
 
 @section('content')
@@ -19,6 +20,8 @@
                 @can('rest-link')
                   <h3><small>Your Name</small></h3>
                   <li><a href="/restaurants/add">Add Restaurant</a></li>
+                  <li><a href="#">Add Restaurant</a></li>
+                  <li><a href="{{ action('RestaurantGalleryController@index') }}">Gallery</a></li>
                   <li><a href="#">Add Menu</a></li>
                   <li><a href="#">Add Wine</a></li>
                   <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">Your Profile</a></li>
