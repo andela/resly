@@ -32,7 +32,7 @@ class RestaurantTest extends TestCase
         );
 
         $this->actingAs($restaurateur)
-            ->visit('/restaurants/add')
+            ->visit('/restaurants/create')
             ->type('My First Restaurant', 'name')
             ->type('We are awesome', 'description')
             ->type('08:00:00', 'opening_time')
@@ -41,8 +41,8 @@ class RestaurantTest extends TestCase
             ->type('+2517238293', 'telephone')
             ->type('first.rest@resly.com', 'email')
             ->type('50504, Nairobi', 'address')
-            ->press('Next')
-            ->see('Add the Tables\' details');
+            ->press('Save')
+            ->see('My First Restaurant');
 
         $this->seeInDatabase(
             'restaurants',
