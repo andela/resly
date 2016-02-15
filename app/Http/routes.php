@@ -58,6 +58,7 @@ Route::get('restaurants/add', 'RestaurantController@add');
 Route::post('restaurants/add', 'RestaurantController@createAdd');
 Route::get('restaurants/edit/{restaurant_id}', 'RestaurantController@edit');
 Route::post('restaurants/edit/{restaurant_id}', 'RestaurantController@createEdit');
+Route::post('restaurants/closeby', 'RestaurantController@postCloseBy');
 
 /*
  * Tables Routes
@@ -88,6 +89,8 @@ Route::post('bookings/begin', 'BookingController@begin');
 Route::post('bookings/create', 'BookingController@create');
 Route::post('bookings/cancel', 'BookingController@cancel');
 
+Route::resource('gallery', 'RestaurantGalleryController');
+
 /*
  * Restaurant Profile
  */
@@ -112,6 +115,7 @@ Route::get('/user/profile/edit', [
 
 Route::post('/user/profile/edit', [
     'uses' => 'UserProfileController@postEdit',
+    'as' => 'userProfileEdit',
     'middleware' => 'auth',
 ]);
 
