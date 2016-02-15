@@ -988,6 +988,7 @@
                 "uri"
             ],
             "time": "2016-01-23 01:23:02"
+<<<<<<< HEAD
         },
         {
             "name": "intervention/image",
@@ -1050,6 +1051,8 @@
                 "watermark"
             ],
             "time": "2016-01-02 19:15:13"
+=======
+>>>>>>> 3ffe5f751b0abf70080499e7d995dca1b396a921
         },
         {
             "name": "jakub-onderka/php-console-color",
