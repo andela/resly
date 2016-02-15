@@ -11,7 +11,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-
         factory(Resly\User::class)->create([
             'role' => 'diner',
             'email' => 'diner@localhost.com',
