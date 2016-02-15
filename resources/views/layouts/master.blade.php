@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('css/welcome.css') !!}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/paper/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     @yield('styles')
 </head>
 <body>

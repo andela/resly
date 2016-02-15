@@ -22,6 +22,12 @@
     padding: 20px 20px 20px 20px;
   }
 </style>
+<script type="text/javascript">
+  jQuery("document").ready(function($){
+    $('#opening-hours').wickedpicker({twentyFour: true});  
+    $('#closing-time').wickedpicker({twentyFour: true});  
+  });
+</script>
   <div class="content">
     <div class="col-sm-12 dark">
       <h4>Add the details of the restaurant</h4>
@@ -109,4 +115,8 @@
     </div>
   </div>
 
+@endsection
+@section('styles')
+  <link rel="stylesheet" type="text/css" href="{!! asset('wickedpicker/wickedpicker.min.css') !!}">
+  <script src="{!! asset('wickedpicker/wickedpicker.min.js') !!}"></script>
 @endsection
