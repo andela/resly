@@ -34,9 +34,9 @@
                  <span class="input-group-addon">
                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                  </span>
-                 <input type="text" name="query" class="form-control" placeholder="Location or Restaurant" dir = "auto">
+                 <input type="text" id='query' name="query" class="form-control" required placeholder="Location or Restaurant" dir = "auto">
                  <span class = "input-group-btn">
-                    <button type="submit" class="btn btn-primary">Find</button>
+                    <button type="submit" id='search-button' class="btn btn-default" disabled>Find</button>
                  </span>
                </div>
               </div>
@@ -85,7 +85,7 @@
     <div class='container'>
         <div class='row'>
             @foreach($latestRestaurants as $restaurant)
-                <div class='col col-md-4'>    
+                <div class='col col-md-4'>
                     <ul class='latest-restaurant-items'>
                         <li>
                             <span class='title'><a href="#">{{$restaurant->name}}</a></span>
@@ -105,6 +105,6 @@
 @section('scripts')
   <script type='text/javascript' src="{!! asset('owl-carousel/owl.carousel.min.js') !!}"></script>
   <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
-
   <script type='text/javascript' src="{!! asset('js/welcome.js') !!}"></script>
+  <script type="text/javascript" src="{!! asset('js/search_form_verification.js') !!}"></script>
 @endsection
