@@ -10,10 +10,10 @@
         "fzaninotto/faker": "^1.5",
         "laravel/socialite": "^2.0",
         "laravelcollective/html": "5.1.*",
+        "intervention/image": "~2.3",
+        "doctrine/dbal": "~2.3",
         "guzzlehttp/guzzle": "~6.0",
         "satooshi/php-coveralls": "^1.0",
-        "doctrine/dbal": "~2.3",
-        "intervention/image": "~2.3",
         "cloudinary/cloudinary_php": "dev-master",
         "laracasts/flash": "*"
     },

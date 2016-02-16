@@ -62,6 +62,7 @@ Route::get('restaurants/{restaurant_id}/tables', 'TableController@create');
 Route::get('restaurants/{restaurant_id}', 'RestaurantController@show');
 Route::get('restaurants/edit/{restaurant_id}', 'RestaurantController@edit');
 Route::post('restaurants/edit/{restaurant_id}', 'RestaurantController@createEdit');
+Route::post('restaurants/closeby', 'RestaurantController@postCloseBy');
 
 /*
  * Tables Routes

@@ -9,10 +9,11 @@
   <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.carousel.css') !!}">
   <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.theme.css') !!}">
   <link rel="stylesheet" type="text/css" href="{!! asset('owl-carousel/owl.transitions.css') !!}">
+  <link rel="stylesheet" type="text/css" href="{!! asset('css/rest-closeby.css') !!}">
 @endsection
 
 @section('content')
-@include ('partials.alerts')
+@include ('partials.alerts');
   <div class="home">
     @if(Session::has('flash_message'))
       <div class="alert flash-message">
@@ -78,6 +79,19 @@
 
     </div>
   </div>
+  
+
+  <div class="belt">
+    <h5>Restaurants Closeby</h5>
+  </div>
+  <div class="container">
+    <div class="row" id="closeby-restaurants">
+      <h5> 
+        <i class="fa fa-spinner fa-spin"></i>
+        Fetching restaurants close to you... 
+      </h5>
+    </div>
+  </div>
 <div class="belt">
     <h5>Latest restaurants</h5>
 </div>
@@ -107,4 +121,5 @@
   <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script>
   <script type='text/javascript' src="{!! asset('js/welcome.js') !!}"></script>
   <script type="text/javascript" src="{!! asset('js/search_form_verification.js') !!}"></script>
+  <script type="text/javascript" src="{!! asset('js/geolocation.js') !!}"></script>
 @endsection
