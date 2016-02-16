@@ -39,6 +39,7 @@ class RestaurantController extends Controller
     public function create()
     {
         $this->authorize('restaurateur-user');
+
         return view('restaurant.create');
     }
 
@@ -129,18 +130,10 @@ class RestaurantController extends Controller
 
         return redirect('restaurants');
     }
-    /**
-    public function getTest()
-    {
-        $address = '361, Herbert Macaulay Way, Yaba, Lagos, Nigeria';
-        $coord_1 = $this->fetchCoordinates($address);
-        $coord_2 = ['lat' => 6.5001035, 'lng' => 3.3788857];
 
-        return $this->calcDistance($coord_1['lat'], $coord_1['lng'],
-            $coord_2['lat'], $coord_2['lng'], 'km', 2
-        );
-    }
-    **/
+    /**
+     }
+     **/
 
     /**
      * Fetch Nearby restaurants.
