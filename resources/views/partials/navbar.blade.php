@@ -23,6 +23,9 @@
                     <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">
                       <span class="glyphicon glyphicon-user"></span> Your Profile</a>
                     </li>
+                    <li><a href="{{url('/restaurants')}}">
+                            <span class="fa fa-money"></span> My Restaurants</a>
+                    </li>
                     <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
                     <li class="divider"></li>
                     <li><a href="{{ route('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Signout</a></li>

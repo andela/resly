@@ -2,6 +2,7 @@
 
 namespace Resly\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use Validator;
 use Resly\Restaurant;
@@ -15,11 +16,29 @@ class RestaurantController extends Controller
     }
 
     /**
+     * Display All restaurants.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $restaurants = Restaurant::where('user_id', Auth::user()->id)->get();
+
+        return view('restaurant.index', compact('restaurants'));
+    }
+
+    public function show(Request $request)
+    {
+        $restaurant = Restaurant::where('id', $request->restaurant_id)->get()->first();
+
+        return view('restaurant.show', compact('restaurant'));
+    }
+
+    /**
      *  Display the form for adding a restaurant.
      */
-    public function add()
+    public function create()
     {
-        return view('restaurant.add');
+        return view('restaurant.create');
     }
 
     public function edit(Request $request, $restaurant_id)
@@ -78,6 +97,7 @@ class RestaurantController extends Controller
             $request->all(),
             [
                 'name' => 'required',
+                'description' => 'required',
                 'opening_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
                 'closing_time' => ['regex:/^[0-9]{2}:[0-9]{2}.*$/'],
                 'location' => 'required',
@@ -92,11 +112,10 @@ class RestaurantController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
-
         $restaurateur = \Auth::user();
         $restaurant = $restaurateur->restaurant()->create($request->all());
         $request->session()->put('restaurant_id', $restaurant->id);
 
-        return redirect('tables/add-bulk');
+        return redirect('restaurants');
     }
 }
