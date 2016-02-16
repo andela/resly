@@ -11,7 +11,6 @@ class RestaurantTest extends TestCase
      *
      * @return void
      */
-
     public function testAddRestaurantPageIsLoaded()
     {
         $restaurateur = factory('Resly\User')->create(
@@ -23,6 +22,8 @@ class RestaurantTest extends TestCase
             ->see('You have no restaurants yet')
             ->see('Create Your First Restaurant');
     }
+
+
 
     public function testRestaurantIsAdded()
     {
