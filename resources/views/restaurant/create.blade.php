@@ -103,7 +103,7 @@
         </fieldset>
 
         <div class = "form-group">
-          <button type = "submit" class = "btn btn-primary btn-lg" style="float:right">Next</button>
+          <button type = "submit" class = "btn btn-primary btn-lg" style="float:right">Save</button>
         </div>  
       </form>
     </div>

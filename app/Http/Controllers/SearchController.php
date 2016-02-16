@@ -12,9 +12,7 @@ class SearchController extends Controller
     {
         $query = $request->input('query');
         if (! $query) {
-            return redirect()
-            ->route('dinerhome')
-            ->with('info', 'Could not find what you searched for');
+            return redirect()->back();
         }
 
         $results = Restaurant::where(
