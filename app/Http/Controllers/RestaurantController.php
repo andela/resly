@@ -129,18 +129,6 @@ class RestaurantController extends Controller
 
         return redirect('restaurants');
     }
-    /**
-    public function getTest()
-    {
-        $address = '361, Herbert Macaulay Way, Yaba, Lagos, Nigeria';
-        $coord_1 = $this->fetchCoordinates($address);
-        $coord_2 = ['lat' => 6.5001035, 'lng' => 3.3788857];
-
-        return $this->calcDistance($coord_1['lat'], $coord_1['lng'],
-            $coord_2['lat'], $coord_2['lng'], 'km', 2
-        );
-    }
-    **/
 
     /**
      * Fetch Nearby restaurants.
@@ -197,10 +185,10 @@ class RestaurantController extends Controller
 
         // Calculate the distance in degrees using Hervasine formula
         $degrees = rad2deg(acos((sin(deg2rad($point1_lat)) *
-            sin(deg2rad($point2_lat))) +
-        (cos(deg2rad($point1_lat)) *
-            cos(deg2rad($point2_lat)) *
-            cos(deg2rad($point1_long - $point2_long)))));
+                    sin(deg2rad($point2_lat))) +
+                    (cos(deg2rad($point1_lat)) *
+                    cos(deg2rad($point2_lat)) *
+                    cos(deg2rad($point1_long - $point2_long)))));
 
         // Convert the distance in degrees to the chosen unit (kilometres, miles or nautical miles)
 
