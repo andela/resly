@@ -58,6 +58,7 @@ Route::get('restaurants/add', 'RestaurantController@add');
 Route::post('restaurants/add', 'RestaurantController@createAdd');
 Route::get('restaurants/edit/{restaurant_id}', 'RestaurantController@edit');
 Route::post('restaurants/edit/{restaurant_id}', 'RestaurantController@createEdit');
+Route::post('restaurants/{restaurant_id}/rate', 'RestaurantController@rateRestaurant');
 
 /*
  * Tables Routes

@@ -15,7 +15,8 @@
         "intervention/image": "~2.3",
         "cloudinary/cloudinary_php": "dev-master",
         "laracasts/flash": "*",
-        "satooshi/php-coveralls": "^1.0"
+        "satooshi/php-coveralls": "^1.0",
+        "willvincent/laravel-rateable": "~1.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

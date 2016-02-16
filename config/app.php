@@ -149,6 +149,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        willvincent\Rateable\RateableServiceProvider::class
 
     ],
 
