@@ -15,9 +15,6 @@
         "guzzlehttp/guzzle": "~6.0",
         "satooshi/php-coveralls": "^1.0",
         "cloudinary/cloudinary_php": "dev-master",
-        "laracasts/flash": "*",
-        "intervention/image": "~2.3",
-        "cloudinary/cloudinary_php": "dev-master",
         "laracasts/flash": "*"
     },
     "require-dev": {

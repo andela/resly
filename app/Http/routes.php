@@ -57,7 +57,7 @@ Route::post('auth/social/register', [
 Route::get('restaurants/', 'RestaurantController@index');
 Route::get('restaurants/create', 'RestaurantController@create');
 Route::post('restaurants/add', 'RestaurantController@createAdd');
-Route::get('restaurants/{restaurant_id}/tables', 'TableController@index');
+Route::get('restaurants/{restaurant_id}/tables', 'TableController@create');
 
 Route::get('restaurants/{restaurant_id}', 'RestaurantController@show');
 Route::get('restaurants/edit/{restaurant_id}', 'RestaurantController@edit');
@@ -67,6 +67,10 @@ Route::post('restaurants/closeby', 'RestaurantController@postCloseBy');
 /*
  * Tables Routes
  */
+Route::post('tables/', 'TableController@store');
+Route::get('tables/{table_id}/edit', 'TableController@edit');
+Route::put('tables/{table_id}/', 'TableController@update');
+Route::delete('tables/{table_id}/delete', 'TableController@destroy');
 Route::get('tables/add-bulk', 'TableController@addBulk');
 Route::post('tables/add-bulk', 'TableController@createAddBulk');
 
