@@ -16,7 +16,7 @@
       <div class="row result">
         <div class="col-lg-6">
           <h5>
-            <a href="{{ route('restprofile', ['id' => $result->id])}}">
+            <a href="{{ route('bookRestaurantTable', ['resturant_id' => $result->id])}}">
               {{ $result->getRestName()}}
             </a>
           </h5>
@@ -25,9 +25,9 @@
             {{ $result->location }} | {{ $result->address }}
           </p>
           <p class="description">
-            "{{ strlen($result->description) > 40 ? 
-              substr($result->description, 0, 40) . "..." : 
-              $result->description 
+            "{{ strlen($result->description) > 40 ?
+              substr($result->description, 0, 40) . "..." :
+              $result->description
             }}"
           </p>
         </div>

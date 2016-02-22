@@ -102,9 +102,9 @@ Route::resource('gallery', 'RestaurantGalleryController');
 /*
  * Restaurant Profile
  */
-Route::get('/rest/{id}', [
-    'uses' => 'ProfileController@getProfile',
-    'as' => 'restprofile',
+Route::get('/restaurant/{restaurant_id}/book/', [
+    'uses' => 'BookingController@book',
+    'as' => 'bookRestaurantTable',
 ]);
 
 Route::get('dashboard', [

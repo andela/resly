@@ -52,5 +52,9 @@ return [
         'client_secret' => env('FACEBOOK_SECRET'),
         'redirect' => env('FACEBOOK_URL'),
     ],
+    'stripe' => [
+        'model'  => Resly\User::class,
+        'secret' => env('STRIPE_API_SECRET'),
+    ],
 
 ];

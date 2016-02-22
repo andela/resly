@@ -174,4 +174,12 @@ class BookingController extends Controller
         return redirect('/bookings')
             ->with('info', 'Booking cancelled successfully.');
     }
+
+    public function book($restaurant_id)
+    {
+        $restaurant = Restaurant::where('id', $restaurant_id)->first();
+
+        return view('bookings.book')
+        ->with('restaurant', $restaurant);
+    }
 }
