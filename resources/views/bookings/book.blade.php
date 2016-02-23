@@ -4,6 +4,7 @@
 
 @section('styles')
 <link rel="stylesheet" type="text/css" href="{!! asset('css/auth.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset('css/jquery.datetimepicker.css') !!}">
 @endsection
 
 @section('content')
@@ -25,12 +26,13 @@
             <h2>Welcome to {{$restaurant->name}}</h2>
             <p>{{$restaurant->location}}<p>
             <p>{{$restaurant-> opening_time}}</p>
+            <p class=''>* please note that the cost shown is for only one hour</p>
             <table class="table">
                 <thead>
                     <th>SN</th>
                     <th>Table Name</th>
                     <th>Seats</th>
-                    <th>Cost</th>
+                    <th>Cost per hour</th>
                     <th>Book</th>
                 </thead>
                 <tbody>
@@ -40,7 +42,34 @@
                             <td>{{$table->label}}</td>
                             <td>{{$table->seats_number}}</td>
                             <td>$ {{number_format($table->cost)}}</td>
-                            <td></td>
+                            <td>
+                                <form action="{{url('/booking/table/'.$table->id.'/add')}}" method='post'>
+                                    {{csrf_field()}}
+                                    <div class="input-group">
+                                        <label>Date </label>
+                                        <input type='text' class='bookDate' name='date'>
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Duration</label>
+                                        <select name='duration'>
+                                            <option value="1"> 1 Hour </option>
+                                            <option value="2"> 2 Hours </option>
+                                            <option value="3"> 3 Hours </option>
+                                            <option value="4"> 4 Hours </option>
+                                            <option value="5"> 5 Hours </option>
+                                            <option value="6"> 6 Hours </option>
+                                            <option value="7"> 7 Hours </option>
+                                            <option value="8"> 8 Hours </option>
+                                            <option value="9"> 9 Hours </option>
+                                            <option value="10"> 10 Hours </option>
+                                        </select>
+                                    </div>
+                                    <button type='submit' class="btn btn-danger btn-xs">Add to cart</button>
+                                </form>
+                                {{-- <a href="" class='btn btn-danger btn-xs'>
+                                    Book
+                                </a> --}}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -68,4 +97,14 @@
     </div>
 
 
-@stop
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src='{!! asset('js/jquery.datetimepicker.full.min.js') !!}'></script>
+    <script type="text/javascript">
+    jQuery('.bookDate').datetimepicker({
+        format:'d.m.Y H:i',
+        lang:'eng'
+    });
+    </script>
+@endsection

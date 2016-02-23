@@ -91,10 +91,9 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
 
 $factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
     return [
-        'number_of_people' => rand(2, 8),
-        'booking_date' => $faker->date,
-        'booking_time' => $faker->time,
-        'diner_id' => factory('Resly\User')->create(['role' => 'diner'])->id,
+        'scheduled_date' => $faker->date,
+        'duration' => 1,
+        'user_id' => factory('Resly\User')->create(['role' => 'diner'])->id,
         'table_id' => factory('Resly\Table')->create()->id,
     ];
 });

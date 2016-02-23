@@ -99,6 +99,9 @@ Route::post('bookings/cancel', 'BookingController@cancel');
 
 Route::resource('gallery', 'RestaurantGalleryController');
 
+
+
+Route::get('cart/delete/{item_id}', 'BookingController@delteCartItem');
 /*
  * Restaurant Profile
  */
@@ -107,6 +110,9 @@ Route::get('/restaurant/{restaurant_id}/book/', [
     'as' => 'bookRestaurantTable',
 ]);
 
+Route::post('/booking/table/{table_id}/add', 'BookingController@addTable');
+Route::get('/booking/cart', 'BookingController@cart');
+Route::post('/cart/checkout','BookingController@checkout');
 Route::get('dashboard', [
     'uses' => 'DashboardController@showDashboard',
     'as' => 'dashboard',

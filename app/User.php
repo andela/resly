@@ -28,6 +28,9 @@ class User extends Model implements
         'avatar_url',
         'provider_id',
         'provider_name',
+        'stripe_id',
+        'card_brand',
+        'card_last_four'
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -62,6 +65,6 @@ class User extends Model implements
      */
     public function bookings()
     {
-        return $this->hasMany('Resly\Booking', 'diner_id');
+        return $this->hasMany('Resly\Booking');
     }
 }

@@ -12,6 +12,11 @@
   <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right">
         @can('authenticated')
+            <li>
+                <a href="{{url('/booking/cart')}}">
+                    <i class='fa fa-opencart'></i> {{Cart::getTotalQuantity()}}
+                </a>
+            </li>
             <div class = "btn-group btn-nav">
                 <button type="button" class="btn btn-default">
                     {{ auth()->user()->username }}
@@ -26,6 +31,7 @@
                     <li><a href="{{url('/restaurants')}}">
                             <span class="fa fa-money"></span> My Restaurants</a>
                     </li>
+                    <li><a href="#"><span class="fa fa-circle"></span> My Orders</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
                     <li class="divider"></li>
                     <li><a href="{{ route('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Signout</a></li>
