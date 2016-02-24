@@ -97,7 +97,9 @@ Route::post('bookings/begin', 'BookingController@begin');
 Route::post('bookings/create', 'BookingController@create');
 Route::post('bookings/cancel', 'BookingController@cancel');
 
-Route::resource('gallery', 'RestaurantGalleryController');
+Route::get('gallery/{rest_id}', 'RestaurantGalleryController@index');
+Route::post('/gallery', 'RestaurantGalleryController@store');
+Route::delete('/gallery/{id}', 'RestaurantGalleryController@destroy');
 
 
 
@@ -138,3 +140,11 @@ Route::get('/user/{username}', [
     'as' => 'userProfile',
     'middleware' => 'auth',
 ]);
+
+/** User reservations
+ *
+ */
+Route::get('/reservations/current', 'ReservationController@currentReservations');
+Route::get('/reservations/past', 'ReservationController@pastReservations');
+Route::get('/reservations/cancelled', 'ReservationController@cancelledReservations');
+Route::get('/reservations/cancel/{id}', 'ReservationController@cancelReservation');

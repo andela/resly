@@ -1,4 +1,4 @@
-@extends('dashboard.index')
+@extends('dashboard.restaurant')
 
 @section('title', 'Add Gallery')
 
@@ -6,7 +6,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 
-<script type="text/javascript" src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
+<script type="text/javascript" src="{{ asset('fancybox/source/jquery.fancybox.js') }}"></script>
 
 <script>
 
@@ -95,7 +95,7 @@ $('form').ajaxForm({
     });
     $(document).ready(function() {
         $('.fancybox').fancybox();
-        $(".delete-link").click(function(e){
+        $(document.body).on('click', '.delete-link', function(e){
             var element = $(this);
             $.ajax({
                 url: "{!! url('gallery') !!}/"+element.attr('data-id'),
@@ -134,6 +134,7 @@ $('form').ajaxForm({
 @endsection
 
 @section('details')
+    @parent
 	@if (Session::has('flash_notification.message'))
     <div class="alert alert-{{ Session::get('flash_notification.level') }}">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -152,13 +153,18 @@ $('form').ajaxForm({
 
     <div class="row">
         <div class="col-md-7">
-    	   <h3>Gallery</h3>
+    	    <p>
+                <a href='/restaurants'>Restaurants</a> >> 
+                <a href='/restaurants/{{$restaurant->id}}'>{{$restaurant->name}}</a> >> 
+                Gallery
+            </p>
     		<a href = # class = "fa fa-plus" id = "uploadFile"> Add a picture of your restaurant</a> <br /> <span id="filename" style="color:green"></span>
-    		{!! Form::open(['url' => action('RestaurantGalleryController@store'), 'method' => 'post', 'files' => true]) !!} 
+    		{!! Form::open(['url' => url('/gallery/'), 'method' => 'post', 'files' => true]) !!} 
     			<div class="form-group">
     				{!! Form::file('image', ['style' => 'display:none;', 'id' => 'fileUploadField']) !!}
     				{!! Form::text('caption', null, ['class' => 'form-control', 
     				'placeholder' => 'Enter a caption for this picture']) !!} <br>
+                    <input type='hidden' name='rest_id' value='{{$rest_id}}'>
     				{!! Form::submit('Upload file', ['class' => 'btn btn-primary']) !!}
     			</div>
     		{!! Form::close()!!}

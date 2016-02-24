@@ -6,6 +6,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Resly\RestaurantPictures;
 use Resly\User;
+use Resly\Restaurant;
 
 class RestaurantGalleryController extends Controller
 {
@@ -19,21 +20,12 @@ class RestaurantGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $restauranteur_id = User::where('username', auth()->user()->username)->first()->id;
-        $pictures = RestaurantPictures::where('restauranteur_id', intval($restauranteur_id))->get();
+        $restaurant = Restaurant::find($request->rest_id);
+        $pictures = $restaurant->pictures()->get();
 
-        return view('restaurant.gallery', ['pictures' => $pictures]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+        return view('restaurant.gallery', ['pictures' => $pictures, 'restaurant' => $restaurant, 'rest_id' => $request->rest_id]);
     }
 
     /**
@@ -56,6 +48,7 @@ class RestaurantGalleryController extends Controller
         $picture->filename = $uploaded['public_id'].'.'.$uploaded['format'];
         $picture->caption = $request->get('caption');
         $picture->restauranteur_id = $restauranteur_id;
+        $picture->restaurant_id = $request->get('rest_id');
         $picture->save();
         $response->header('image-id', $picture->id);
 
@@ -73,39 +66,6 @@ class RestaurantGalleryController extends Controller
                 'caption' => $picture->caption,
             ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -128,11 +88,13 @@ class RestaurantGalleryController extends Controller
 
     private function upload($filepath)
     {
+        //set cloudinary config options
         $res = \Cloudinary::config([
-          'cloud_name' => 'ddnvpqjmh',
-          'api_key' => '911597418222643',
-          'api_secret' => 'qgnRvc9ACfuMQjrm2dNmrKTCYqc',
+          'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+          'api_key'    => env('CLOUDINARY_API_KEY'),
+          'api_secret' => env('CLOUDINARY_API_SECRET'),
         ]);
+
         $upload = \Cloudinary\Uploader::upload($filepath);
 
         return $upload;
@@ -145,10 +107,11 @@ class RestaurantGalleryController extends Controller
 
         //delete image from cloudinary
         $res = \Cloudinary::config([
-          'cloud_name' => 'ddnvpqjmh',
-          'api_key' => '911597418222643',
-          'api_secret' => 'qgnRvc9ACfuMQjrm2dNmrKTCYqc',
+          'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+          'api_key'    => env('CLOUDINARY_API_KEY'),
+          'api_secret' => env('CLOUDINARY_API_SECRET'),
         ]);
+
         $id = explode('.', $image->filename);
         $delete = \Cloudinary\Uploader::destroy($id[0]);
 

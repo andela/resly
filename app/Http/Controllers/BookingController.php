@@ -228,14 +228,13 @@ class BookingController extends Controller
         $return = $user->charge(Cart::getTotal()*100, [
             'source' => $request->stripeToken,
             'receipt_email' => $user->email,
-
         ]);
 
         $cart = Cart::getContent();
 
         $data = [];
         foreach($cart as $item) {
-            $temp['scheduled_date'] = $item->attributes->date;
+            $temp['scheduled_date'] = date('Y-m-d h:i:s', strtotime($item->attributes->date));
             $temp['duration'] = $item->attributes->duration;
             $temp['type'] = $item->attributes->type;
             $temp['table_id'] = $item->attributes->item_id;
@@ -249,9 +248,16 @@ class BookingController extends Controller
 
 
 
-
-        $request->session()->forget('cart');
+        //clear cart
+        $this->clearCart();
         return redirect('/')->with('success', 'Payment complete');
+    }
 
+    private function clearCart()
+    {
+        $cart_contents = Cart::getContent();
+        foreach($cart_contents as $index => $item){
+            Cart::remove($item->id);
+        }
     }
 }

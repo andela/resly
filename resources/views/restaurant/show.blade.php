@@ -1,11 +1,15 @@
-<link rel="stylesheet" type="text/css" href="{!! asset('css/restaurant.css') !!}">
-@extends('dashboard.index')
+@extends('dashboard.restaurant')
 
 @section('title', 'Restaurant')
 
 @section('details')
+    @parent
+    <p>
+        <a href='/restaurants'>Restaurants</a> >> {{$restaurant->name}}
+    </p>
+    
     {!! link_to(url('/restaurants/'.$restaurant->id.'/tables'), 'Add Table', ['class'=>'btn btn-sm btn-primary']) !!}
-    {!! link_to(url('/restaurant/'.$restaurant->id.'/create'), 'Add Wine', ['class'=>'btn btn-sm btn-primary']) !!}
+    {!! link_to(url('/gallery/'.$restaurant->id), 'Gallery', ['class'=>'btn btn-sm btn-primary']) !!}
     @if(Session::has('success'))
         <div class="alert alert-success">{{Session::get('success')}}</div>
     @endif

@@ -5,5 +5,4 @@
 @section('details')
     <div class="row">
     </div>
-
 @endsection
