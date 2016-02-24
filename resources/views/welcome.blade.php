@@ -128,7 +128,7 @@
 
             </div>
         </div>
-        <h5 class="home-footer">#TeamResly</h5>
+        
     </div>
 @endsection
 @section('scripts')
