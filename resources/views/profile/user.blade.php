@@ -5,7 +5,7 @@
 @section('details')
     <div class="row ">
         <div class='col col-md-12 page-title'>
-            <h3>My Account <a href="#"><i class='fa fa-pencil'></i></a></h3>
+            <h3>My Account <a href="{{url('user/profile/edit')}}"><i class='fa fa-pencil'></i></a></h3>
         </div>
     </div>
     <div class='row'>

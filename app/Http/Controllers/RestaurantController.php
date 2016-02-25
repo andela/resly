@@ -8,6 +8,7 @@ use Resly\Repositories\TablesRepository;
 use Illuminate\Http\Response;
 use Validator;
 use Resly\Restaurant;
+use Resly\Booking;
 use Resly\Http\Requests;
 
 class RestaurantController extends Controller
@@ -33,6 +34,15 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::where('id', $request->restaurant_id)->get()->first();
 
         return view('restaurant.show', compact('restaurant', 'tables'));
+    }
+
+    public function visited(Request $request)
+    {
+
+        //$tables = $tablesRepository->getRestaurantTables($request->restaurant_id);
+        $visitedRestaurants = Booking::where('user_id', Auth::user()->id)->get();
+        
+        return view('restaurant.visited', compact('visitedRestaurants'));
     }
 
     /**

@@ -58,7 +58,7 @@ Route::get('restaurants/', 'RestaurantController@index');
 Route::get('restaurants/create', 'RestaurantController@create');
 Route::post('restaurants/add', 'RestaurantController@createAdd');
 Route::get('restaurants/{restaurant_id}/tables', 'TableController@create');
-
+Route::get('restaurants/visited', 'RestaurantController@visited');
 Route::get('restaurants/{restaurant_id}', 'RestaurantController@show');
 Route::get('restaurants/edit/{restaurant_id}', 'RestaurantController@edit');
 Route::post('restaurants/edit/{restaurant_id}', 'RestaurantController@createEdit');
