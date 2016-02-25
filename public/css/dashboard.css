@@ -152,3 +152,29 @@ body{
 {
     color:#777;
 }
+
+
+.restaurant-link{
+    color:#00b075;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    padding:5px 5px 5px 0px;
+}
+
+.restaurant-link:hover{
+    text-decoration: none;
+    color:#00b075;
+}
+
+.action-link{
+    color:#999;
+    padding: 5px 10px;
+}
+
+.action-link .fa-times:hover,
+.action-link .fa-times:active,
+.action-link .fa-times:focus,
+.action-link:hover .fa-times{
+    color:#771111;
+}

@@ -14,11 +14,11 @@
                 <div class='col col-md-12'>
                     @if(count($restaurants) != 0)
                         {!! link_to('/restaurants/create', 'Add New Restaurant', ['class'=>'btn btn-primary block pull-right'])!!}
-                        <table class="table">
+                        <table class="table table-item-list table-hover">
                             <thead>
                                 <tr>
-                                    <td>Name</td>
-                                    <td>Details</td>
+                                    <th>Name</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -27,7 +27,10 @@
                                         <td>
                                             {!! link_to('/restaurants/'.$restaurant->id, $restaurant->name, ['class'=>'restaurant-link'])!!}
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            <a href="#" class='action-link'><i class='fa fa-pencil'></i></a>
+                                            <a href="#" class='action-link'><i class='fa fa-times'></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
