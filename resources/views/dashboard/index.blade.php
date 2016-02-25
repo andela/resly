@@ -20,7 +20,7 @@
               </div>
 
 
-              <div class="col col-sm-9 col-md-9">
+              <div class="col col-sm-9 col-md-9 page">
                   @yield('details')
               </div>
           </div>

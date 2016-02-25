@@ -11,9 +11,16 @@ body{
     min-height: 100%;
 }
 
+
+[class*='col-'] {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .container-wrapper > .container{
     height: 100%;
     min-height: 100%;
+    padding: 0;
 }
 .navbar{
     background:rgba(235, 43, 54, 1);
@@ -30,6 +37,7 @@ body{
     border-top:6px solid #00b075;
     background: #FFF;
 }
+
 
 .nav-pills li a{
     color:#333;
@@ -72,4 +80,34 @@ body{
 
 .nav-side li > ul li a:hover{
     background: #e8e6e1;
+    text-decoration: none;
+}
+
+.page{
+    background: #FFF;
+    height: 100%;
+    min-height: 100%;
+
+}
+
+.page-title{
+    border-bottom: 4px solid #EBEBEB;
+    color:#555;
+    padding:5px 30px;
+}
+
+
+.page-title a{
+    color:#EBEBEB;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.page-title a:hover, .page-title:hover  a{
+    color:#00b075;
+    cursor: pointer;
+}
+
+.page-body{
+    padding:10px 30px 30px;;
 }
