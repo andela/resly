@@ -16,4 +16,8 @@
     <input type = "text"  value="{{old('cost')}}" class = "form-control" id = "cost" placeholder = "Eg. $100.00" name="cost">
 </div>
 
+<div class = "form-group">
+    <label for = "avatar" class = "control-label"> Avatar </label>
+    <input type = "file"  id = "avatar" name="avatar">
+</div>
 

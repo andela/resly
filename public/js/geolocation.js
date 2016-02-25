@@ -29,6 +29,8 @@ $(document).ready(function() {
     			//wrap the results in html and display it
     			content = constructHtml(results);
 
+                //make belt visible
+                $('#feature-rest').show();
     			//insert the new content into the page
     			$("#closeby-restaurants").html(content);
     			//console.log(content);
@@ -45,7 +47,7 @@ $(document).ready(function() {
     function constructHtml(input) {
     	output = '';
     	for (var i=0; i<input.length; i++) {
-    		output += '<div class="col-md-3">';
+    		output += '<div class="col-md-3" style="margin-top:1em;">';
     		output += '<a href = "'+"{{ url('restaurants/')}}/" + input[i].id + '">';
     		output += '<div class="text-center thumbnail items">';
     		output += '<img src="http://cdn.londonandpartners.com/visit/london-organisations/sketch/84245-640x360-sketch-restaurant-david-shrigley-640.jpg"';

@@ -26,7 +26,10 @@ class TableController extends Controller
      */
     public function create(Request $request)
     {
-        return view('table.create')->with(['restaurant_id' => $request->restaurant_id]);
+        return view('table.create')->with([
+            'restaurant_id' => $request->restaurant_id,
+            'restaurant' => \Resly\Restaurant::find($request->restaurant_id)
+            ]);
     }
 
     /**
@@ -36,7 +39,11 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        $this->tableRepository->store($request->all());
+        $table = $this->tableRepository->store($request->all());
+        $name = $table->label.'-'.$table->id;
+        if($request->hasFile('avatar')){
+            $this->saveAvatar($name, $table, $request);
+        }
 
         return redirect()->back()->with('success', 'Table Added');
     }
@@ -107,5 +114,47 @@ class TableController extends Controller
         }
 
         return $res_id;
+    }
+
+    private function saveAvatar($name, $table, $request)
+    {
+        //cloudinary public id for the image file
+        $public_id = $name;
+
+        //get path to file
+        $tmp_avatar_path = $request->file('avatar')->getPathName();
+
+        //upload file to cloudinary
+        $result = $this->upload($tmp_avatar_path, $public_id);
+
+        //save avatar in database
+        $table->avatar = $result['url'];
+        $table->save();
+
+        return;
+    }
+
+    private function upload($filepath, $public_id)
+    {
+        //set cloudinary config options
+        $res = \Cloudinary::config([
+          'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+          'api_key'    => env('CLOUDINARY_API_KEY'),
+          'api_secret' => env('CLOUDINARY_API_SECRET'),
+        ]);
+
+        //upload file
+        $upload = \Cloudinary\Uploader::upload(
+            $filepath,
+            [
+                'public_id' => $public_id,
+                'crop'      => 'fill',
+                'width'     => '400',
+                'height'    => '400',
+            ]
+        );
+
+        //return the uploaded file's meta
+        return $upload;
     }
 }
