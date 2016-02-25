@@ -221,3 +221,29 @@ body{
     text-decoration: none;
     color:#777;
 }
+
+.delete-form{
+    display: inline-block;
+}
+
+.delete-form button, .delete-form input[type=submit]{
+    background: none;
+    border:none;
+    color:#AA2222;
+}
+
+.delete-form button:hover, .delete-form input[type=submit]:hover{
+    color:#CC2222;
+}
+
+
+.status{
+    background: #555;
+    color:#fff;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.booked{
+    background: orange;
+}
