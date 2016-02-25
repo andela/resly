@@ -13,8 +13,8 @@
               <div class="row">
 
                 <div class="col-md-3 col-lg-3 " align="center">
-                    @if(!is_null(auth()->user()->avatar_url))
-                        <img alt="{{ auth()->user()->username }}" class="img-circle img-responsive" src="{{ auth()->user()->avatar_url }}" />
+                    @if(!is_null(auth()->user()->avatar))
+                        <img alt="{{ auth()->user()->username }}" class="img-circle img-responsive" src="{{ auth()->user()->avatar }}" />
                     @else
                         <img alt="User Pic" src="http://www.expatica.com/images/default_avatar.jpg" class="img-circle img-responsive">
                     @endif

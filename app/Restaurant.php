@@ -23,11 +23,6 @@ class Restaurant extends Model
         return $this->hasMany('Resly\Table', 'restaurant_id');
     }
 
-    public function pictures()
-    {
-        return $this->hasMany('Resly\Pictures', 'restauranteur_id');
-    }
-
     public function user()
     {
         return $this->belongsTo('Resly\User');
@@ -43,6 +38,11 @@ class Restaurant extends Model
         );
     }
 
+    public function pictures()
+    {
+        return $this->hasMany('Resly\RestaurantPictures', 'restaurant_id');
+    }
+
     public function getName()
     {
         if ($this->name) {
@@ -56,4 +56,5 @@ class Restaurant extends Model
     {
         return $this->getName();
     }
+
 }

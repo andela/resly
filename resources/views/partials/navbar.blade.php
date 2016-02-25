@@ -28,9 +28,11 @@
                     <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">
                       <span class="glyphicon glyphicon-user"></span> Your Profile</a>
                     </li>
-                    <li><a href="{{url('/restaurants')}}">
+                    @can('restauranteur-user')
+                      <li><a href="{{url('/restaurants')}}">
                             <span class="fa fa-money"></span> My Restaurants</a>
-                    </li>
+                      </li>
+                    @endcan
                     <li><a href="#"><span class="fa fa-circle"></span> My Orders</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
                     <li class="divider"></li>
