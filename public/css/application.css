@@ -16,12 +16,12 @@ body{
 }
 
 [class*='col-'] {
-  padding-left: 5px;
-  padding-right: 5px;
+  /* padding-left: 5px; */
+  /* padding-right: 5px; */
 }
 .navbar{
     -webkit-transition: all 0.4s ease;
-   transition: all 0.4s ease;
+    transition: all 0.4s ease;
     top:20px;
 }
 .navbar a{
@@ -207,7 +207,8 @@ body{
 {
     font-size: 1.8em;
     color: #FFF;
-    font-family: montez;
+    font-family: Lato;
+    font-size: 17px;
 }
 
 .restaurant-cell img{
@@ -304,12 +305,8 @@ footer {
     background: #000;
     padding:20px;
     margin:0;
+    color:#FFF;
     text-align: center;
     font-size: 20px;
     font-style: italic;
 }
-
-/*.container-wrapper {
-
-    margin: 0 auto -63px;
-}*/

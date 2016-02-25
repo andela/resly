@@ -1,102 +1,106 @@
-<div class="home">
-  @if(Session::has('flash_message'))
-    <div class="alert flash-message">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ Session::get('flash_message') }}
-    </div>
-  @endif
-  <div class="home-info">
-    <h1>The new way of dining</h1>
-    <h4><em>Make a reservation</em></h4>
-  </div>
-  <div class="container">
+ <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-        <div class = "search-form">
-          <form role="form" action="{{ route('searchsite') }}">
-            <div class="form-group">
-             <div class="input-group input-group-lg col-lg-12 searching">
-               <span class="input-group-addon">
-                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-               </span>
-               <input type="text" id='query' name="query" class="form-control" required placeholder="Location or Restaurant" dir = "auto">
-               <span class = "input-group-btn">
-                  <button type="submit" id='search-button' class="btn btn-default" disabled>Find</button>
-               </span>
-             </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ auth()->user()->username }}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
 
-<div class="belt">
-    <h5>Featured restaurants</h5>
-</div>
-<div id="contents">
-<div class="container">
-  <div class="row">
-    <div id='featured-restaurant-scroller' class='owl-carousel'>
-      @foreach($featuredRestaurants as $restaurant)
-        <div class="item">
-          <div class="cell">
-            <a href="#" class="thumbnail">
-              <img src="http://lorempixel.com/400/200/food"/>
-              <div class='restaurant-info'>
-                <h5 class='restaurant-title'>{{$restaurant->name}}</h5>
-                <p class='info'>
-                  {{$restaurant->description}}orum arbitror,
-                  proident ab minim, non anim fabulas doctrina in ita sunt quo multos ut se elit
-                  fore e cupidatat, iis nescius iis consequat
-                </p>
-                <p class='price'>
-                  ${{number_format((rand(200, 2000)/10), 2)}}
-                </p>
-              </div>
-            </a>
+              <div class="col-md-3 col-lg-3 " align="center">
+                 
+                </div>
+                <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>First Name:</td>
+                        <td>{{ auth()->user()->fname }}</td>
+                      </tr>
+                      <tr>
+                        <td>Last Name:</td>
+                        <td>{{ auth()->user()->lname }}</td>
+                      </tr>
+                      <tr>
+                        <td>Email:</td>
+                        <td>{{ auth()->user()->email }}</td>
+                      </tr>
+                      <tr>
+                        <td>Role:</td>
+                        <td>{{ auth()->user()->role }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
           </div>
         </div>
-      @endforeach
-        </div>
     </div>
-
-</div>
 </div>
 
 
-<div class="belt">
-<h5>Restaurants Closeby</h5>
-</div>
-<div class="container">
-<div class="row" id="closeby-restaurants">
-  <h5>
-    <i class="fa fa-spinner fa-spin"></i>
-    Fetching restaurants close to you...
-  </h5>
-</div>
-</div>
-<div class="belt">
-<h5>Latest restaurants</h5>
-</div>
-<div id="latest-restaurants-section">
-<div class='container'>
-    <div class='row'>
-        @foreach($latestRestaurants as $restaurant)
-            <div class='col col-md-4'>
-                <ul class='latest-restaurant-items'>
-                    <li>
-                        <span class='title'><a href="#">{{$restaurant->name}}</a></span>
-                        <p class='info short'>
-                            Si ut domesticarum et e fugiat instituendarum o senserit an cernantur an noster
-                            et arbitror ita lorem, vidisse varias proident quamquam ita nescius non
-                            <strong class="pull-right price">${{number_format((rand(200, 2000)/10), 2)}}</strong>
-                        </p>
-                    </li>
-                </ul>
+
+{{-- <ul class="nav nav-sidebar" >
+    <li style="margin-left:20px;">
+        <img src="http://placehold.it/350x150" height="50" width="50" style="border-radius:25px;" />
+    </li>
+    @can('rest-link')
+      <h3><small>Your Name</small></h3>
+      <li><a href="/restaurants/add">Add Restaurant</a></li>
+      <li><a href="#">Add Restaurant</a></li>
+      <li><a href="{{ action('RestaurantGalleryController@index') }}">Gallery</a></li>
+      <li><a href="#">Add Menu</a></li>
+      <li><a href="#">Add Wine</a></li>
+      <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">Your Profile</a></li>
+      <li><a href="{{ route('userProfileEdit') }}">Edit Your Profile</a></li>
+    @endcan
+    @can('diner-link')
+      <h3><small>Your Name</small></h3>
+      <li><a href="#">Current Reservations</a></li>
+      <li><a href="#">Past Reservations</a></li>
+      <li><a href="#">Cancelled Reservations</a></li>
+      <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">Your Profile</a></li>
+      <li><a href="{{ route('userProfileEdit') }}">Edit Your Profile</a></li>
+    @endcan
+</ul> --}}
+
+
+
+
+<<<<<<< HEAD
+=======
+                <div class="col-md-3 col-lg-3 " align="center">
+                    @if(!is_null(auth()->user()->avatar))
+                        <img alt="{{ auth()->user()->username }}" class="img-circle img-responsive" src="{{ auth()->user()->avatar }}" />
+                    @else
+                        <img alt="User Pic" src="http://www.expatica.com/images/default_avatar.jpg" class="img-circle img-responsive">
+                    @endif
+                  </div>
+                  <div class=" col-md-9 col-lg-9 ">
+                    <table class="table table-user-information">
+                      <tbody>
+                        <tr>
+                          <td>First Name:</td>
+                          <td>{{ auth()->user()->fname }}</td>
+                        </tr>
+                        <tr>
+                          <td>Last Name:</td>
+                          <td>{{ auth()->user()->lname }}</td>
+                        </tr>
+                        <tr>
+                          <td>Email:</td>
+                          <td>{{ auth()->user()->email }}</td>
+                        </tr>
+                        <tr>
+                          <td>Role:</td>
+                          <td>{{ auth()->user()->role }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
             </div>
-        @endforeach
-    </div>
-</div>
-</div>
+          </div>
+      </div>
+  </div>
+>>>>>>> eca85df1ebf8b7c35011bbede42a224ca09d097e
