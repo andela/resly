@@ -2,22 +2,44 @@
 @section('title', 'Current Reservations')
 
 @section('details')
-    <div class='panel panel-warning' >
-        <div class='panel-heading'>
-            Past Reservations
+    <div class="row ">
+        <div class='col col-md-12 page-title'>
+            <h3>Past Reservations</h3>
         </div>
-        <div class='panel-body'>
-        @if(count($reservations) == 0)
-            <p>You have no past reservations</p>
-        @else
-            @foreach($reservations as $res)
-                <p><strong>Restaurant Name: </strong> {{$res->restaurant()->name}}</p>
-                <p><strong>Scheduled Date: </strong> {{$res->scheduled_date}}</p>
-                <p><strong>Duration:</strong> {{$res->duration}} hrs</p>
-                <p><strong>Cost:</strong> ${{$res->cost}}</p>
-                <hr/>
-            @endforeach
-        @endif
+    </div>
+    <div class='row'>
+        <div class='col col-md-12 page-body'>
+            <div class="row">
+                <div class='col col-md-12'>
+                    @include('partials.alerts')
+                    @if(count($reservations) == 0)
+                        <div class='not-available-label'>
+                            <h3>You have no past reservations</h3>
+                        </div>
+                    @else
+                        <table class='table'>
+                        <thead>
+                            <tr>
+                                <th>Scheduled Date</th>
+                                <th>Restaurant Name</th>
+                                <th>Duration</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                @foreach($reservations as $res)
+                                        <tr>
+                                            <td>{{$res->scheduled_date}}</td>
+                                            <td>{{$res->restaurant()->name}}</td>
+                                            <td>{{$res->duration}} hrs</td>
+                                            <td>${{$res->cost}}</td>
+                                        </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 @endsection

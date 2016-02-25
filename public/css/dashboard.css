@@ -7,7 +7,6 @@ body{
     /*margin-top:40px;*/
     position: relative;
     top:40px;
-    height: 100%;
     min-height: 100%;
 }
 
@@ -17,6 +16,13 @@ body{
     border:rgba(235, 80, 67, 1);
 }
 
+.btn-upload{
+    background: #00b075;
+}
+
+.btn-upload:hover{
+    background: #008875 !important;
+}
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active{
     background: rgba(235, 80, 67, 1);
 }
@@ -43,7 +49,6 @@ body{
 }
 
 .container-wrapper > .container{
-    height: 100%;
     min-height: 100%;
     padding: 0;
 }
@@ -55,7 +60,6 @@ body{
 
 .page-content{
     background: #FFF;
-    height: 100%;
     min-height: 100%;
 }
 .nav-pills{
@@ -110,9 +114,8 @@ body{
 
 .page{
     background: #FFF;
-    height: 100%;
-    min-height: 100%;
-
+    /* height: 100%; */
+    /* min-height: 100%; */
 }
 
 .page-title{
@@ -177,4 +180,44 @@ body{
 .action-link .fa-times:focus,
 .action-link:hover .fa-times{
     color:#771111;
+}
+
+
+.gallery-thumbnail:hover{
+    opacity:0.7;
+    cursor:pointer;
+}
+.gallery-thumbnail{
+    margin-top:1em;
+    border:solid thick #000;
+    width:100%;
+    max-width: 400px;
+    height:auto;
+}
+
+.upload-section{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.upload-section  .fa{
+    display: block;
+    font-size: 200%;
+}
+.upload-section a{
+
+    width: 40%;
+    border:2px dashed #EBEBEB;
+    padding: 30px;
+    color:#EBEBEB;
+    text-decoration: none;
+    display: block;
+}
+
+.upload-section a:hover{
+    text-decoration: none;
+    color:#777;
 }
