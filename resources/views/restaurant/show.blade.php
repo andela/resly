@@ -5,7 +5,7 @@
 @section('details')
     <div class="row ">
         <div class='col col-md-12 page-title'>
-            <h3>Restaurant: {{$restaurant->name}}</h3>
+            <h3>Restaurant Tables: {{$restaurant->name}}</h3>
         </div>
     </div>
     <div class='row'>
@@ -32,7 +32,7 @@
                                     <td>Number of seats</td>
                                     <td>Cost</td>
                                     <td class='status'>Bookings</td>
-                                    <td>Action</td>
+                                    <td class='action'>Action</td>
 
                                 </tr>
                             </thead>
@@ -44,7 +44,7 @@
                                         <td>{{$table->seats_number}}</td>
                                         <td>$ {{number_format($table->cost, 2)}}</td>
                                         <td class='status booked'>10</td>
-                                        <td>
+                                        <td class='action'>
                                             <a href="{{url("/tables/$table->id/edit/")}}" title="Edit">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
