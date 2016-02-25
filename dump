@@ -8,7 +8,11 @@
             <div class="row">
 
               <div class="col-md-3 col-lg-3 " align="center">
-                 
+                  @if(!is_null(auth()->user()->avatar_url))
+                      <img alt="{{ auth()->user()->username }}" class="img-circle img-responsive" src="{{ auth()->user()->avatar_url }}" />
+                  @else
+                      <img alt="User Pic" src="http://www.expatica.com/images/default_avatar.jpg" class="img-circle img-responsive">
+                  @endif
                 </div>
                 <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
@@ -104,3 +108,61 @@
       </div>
   </div>
 >>>>>>> eca85df1ebf8b7c35011bbede42a224ca09d097e
+
+
+
+
+
+{{-- <div class="container" style="padding-top:50px;">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center">
+              @if(auth()->user()->avatar == null)
+                <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive">
+              @else
+                <img alt="User Pic" src="{{auth()->user()->avatar}}" class="img-circle img-responsive">
+              @endif
+            </div>
+            <div class=" col-md-9 col-lg-9 ">
+
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+
+<div class="row ">
+    <div class='col col-md-12 page-title'>
+        <h3>Update Account Details</h3>
+    </div>
+</div>
+<div class='row'>
+    <div class='col col-md-12 page-body'>
+        <div class="row">
+            <div class="col col-md-4">
+
+            </div>
+            <div class='col col-md-8'>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+                      <!-- Add Opening and Closing Hours of restaurant -->
+
+
+
+
+                      <!-- Add contact information of restaurant -->
+
+
+                      
