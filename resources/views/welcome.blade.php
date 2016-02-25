@@ -90,12 +90,12 @@
     </div>
 
 
-    <div class="belt">
+    <div class="belt" id='feature-rest' style="display:none">
         <h5>Restaurants Closeby</h5>
     </div>
     <div class="container">
         <div class="row" id="closeby-restaurants">
-            <h5>
+            <h5 style="display:none" id='feature-cont'>
                 <i class="fa fa-spinner fa-spin"></i>
                 Fetching restaurants close to you...
             </h5>
