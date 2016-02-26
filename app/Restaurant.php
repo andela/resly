@@ -57,4 +57,14 @@ class Restaurant extends Model
         return $this->getName();
     }
 
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
 }
