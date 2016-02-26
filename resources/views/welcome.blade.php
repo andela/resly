@@ -83,7 +83,7 @@
 
 
     <div class="belt" id='feature-rest' style="display:none">
-        <h5>Restaurants Closeby</h5>
+        <h5> <i class="fa fa-street-view"></i> Restaurants Closeby</h5>
     </div>
     <div class="container">
         <div class="row" id="closeby-restaurants">
@@ -96,7 +96,7 @@
 
 
     <div class="belt">
-        <h5>Latest restaurants</h5>
+        <h5><i class="fa fa-bolt"></i> Latest restaurants</h5>
     </div>
     <div id="latest-restaurants-section">
         <div class='container'>

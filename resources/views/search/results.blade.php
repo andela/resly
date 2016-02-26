@@ -1,45 +1,54 @@
-@extends('layouts.master')
+@extends('dashboard.search')
 
 @section('title', 'Results')
 
-@section('styles')
-  <link rel="stylesheet" type="text/css" href="{!! asset('css/navbar-fixed-top.css') !!}">
-@endsection
+@section('details')
+    <div class="row ">
+        <div class='col col-md-12 page-title'>
+            <h3>Results  <a class = "btn btn-primary pull-right" href="/">Back</a></h3>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col col-md-12 page-body'>
+            <div class="row">
+                <div class="col col-md-12">
+                    @if (! $results->count())
+                        <p>No results found, sorry</p>
+                    @else
+                            @foreach ($results as $result)
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h5>
+                                                    <a href="/restaurants/page/{{$result->id}}">
+                                                        {{ $result->getRestName()}}
+                                                    </a>
+                                                </h5>
+                                                <p class="description">
+                                                    "{{ strlen($result->description) > 40 ?
+                                                    substr($result->description, 0, 40) . "..." :
+                                                    $result->description
+                                                    }}"
+                                                </p>
+                                                <p>
+                                                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                                    {{ $result->location }} | {{ $result->address }}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <h2 style="color:#2196f3 " class='pull-right'>
+                                                    {{ $result->tables->count() }}
+                                                </h2>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
-@section('content')
-  <div class="container white">
-    <h4>Results</h4>
-    @if (! $results->count())
-      <p>No results found, sorry</p>
-    @else
-      @foreach ($results as $result)
-      <div class="row result">
-        <div class="col-lg-6">
-          <h5>
-            <a href="/restaurants/page/{{$result->id}}">
-              {{ $result->getRestName()}}
-            </a>
-          </h5>
-          <p>
-            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-            {{ $result->location }} | {{ $result->address }}
-          </p>
-          <p class="description">
-            "{{ strlen($result->description) > 40 ?
-              substr($result->description, 0, 40) . "..." :
-              $result->description
-            }}"
-          </p>
+                            @endforeach
+                    @endif
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6">
-          <p>Tables</p>
-          <h2 style="color:#2196f3">
-            {{ $result->tables->count() }}
-          </h2>
-        </div>
-      </div>
-      @endforeach
-    @endif
-    <a class = "btn btn-primary" href="/">Back</a>
-  </div>
+    </div>
 @endsection

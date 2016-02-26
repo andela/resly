@@ -3,20 +3,16 @@ body{
     background-image: url(http://lorempixel.com/1300/800/food);
     background-size: cover;
     background-repeat:no-repeat;
-    color:#FFF;
+    color:#333;
 }
 
-.navbar-brand{
+.page-title{
+    text-align: center;
+}
 
-}
-h3{
-    color:#EEE;
-    font-family: 'Pacifico', cursive;
-    font-weight: bold;
-}
 input[type=text], input[type=password], input[type=email], select, option {
     padding: 2px 15px !important;
-    color:#EFEFEF;
+    color:#333;
     font-weight: bold;
 }
 .registration-form {
@@ -30,8 +26,6 @@ input[type=text], input[type=password], input[type=email], select, option {
     margin-top:40px;
 }
 
-
-
 .registration .info {
     text-align: center;
     color:#FFF;
@@ -39,18 +33,9 @@ input[type=text], input[type=password], input[type=email], select, option {
     font-family: 'Lato', sans-serif;
 }
 
-.or{
-    margin: 0 auto;
-}
-
-.social
-{
-    display:flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-footer{
-    bottom: 0;
-    width: 100%;
+.social .or{
+    text-align: center;
+    font-size:30px;
+    display: block;
+    margin: 10px;
 }
