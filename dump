@@ -153,6 +153,7 @@
 
 
 
+
 Resly is an online application made to reduce the gap between diners and restaurant
 owners, Resly is built for comfort and convenience..
 1. So imagine a situation where
@@ -177,7 +178,7 @@ anybody that likes to dine and not just dine but dine with convenience.
                       <!-- Add contact information of restaurant -->
 
 
-                      
+
                       @if(Session::has('success'))
                           <div class="alert alert-success">{{Session::get('success')}}</div>
                       @endif
