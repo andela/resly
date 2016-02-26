@@ -33,9 +33,11 @@ input[type=text], input[type=password], input[type=email], select, option {
     font-family: 'Lato', sans-serif;
 }
 
+
 .social .or{
     text-align: center;
     font-size:30px;
     display: block;
     margin: 10px;
+
 }

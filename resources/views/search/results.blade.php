@@ -2,10 +2,12 @@
 
 @section('title', 'Results')
 
+
 @section('details')
     <div class="row ">
         <div class='col col-md-12 page-title'>
             <h3>Results  <a class = "btn btn-primary pull-right" href="/">Back</a></h3>
+
         </div>
     </div>
     <div class='row'>

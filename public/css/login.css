@@ -18,6 +18,7 @@ h5{
 input[type=text], input[type=password] {
     padding: 2px 15px !important;
     color:#333;
+
     font-weight: bold;
 }
 .login {
@@ -36,9 +37,11 @@ input[type=text], input[type=password] {
  .info {
     text-align: center;
     color:#333;
+
     font-weight: bold;
     font-family: 'Lato', sans-serif;
 }
+
 
  .info p{
 

@@ -2,6 +2,7 @@
 
 @section('title', 'login')
 @section('styles')
+
     @parent
     <link href='https://fonts.googleapis.com/css?family=Pacifico|Lato:400,100' rel='stylesheet' type='text/css'>
     <link rel='stylesheet' type="text/css" href="{!! asset('css/login.css') !!}"/>

@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+
 @section('title', 'Search')
 
 @section('styles')
