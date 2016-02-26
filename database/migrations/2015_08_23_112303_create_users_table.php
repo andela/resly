@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->string('role')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('provider_name')->nullable();
+            $table->string('stripe_id')->nullable();
+            $table->string('card_brand')->nullable();
+            $table->string('card_last_four')->nullable();
+            
             $table->rememberToken()->nullable();
             $table->nullableTimestamps();
         });

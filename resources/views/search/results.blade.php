@@ -1,45 +1,23 @@
 @extends('layouts.master')
 
 @section('title', 'Results')
-
 @section('styles')
-  <link rel="stylesheet" type="text/css" href="{!! asset('css/navbar-fixed-top.css') !!}">
+        <link rel="stylesheet" href="{{asset('css/dashboard.css')}}" media="screen" title="no title" charset="utf-8">
 @endsection
 
 @section('content')
-  <div class="container white">
-    <h4>Results</h4>
-    @if (! $results->count())
-      <p>No results found, sorry</p>
-    @else
-      @foreach ($results as $result)
-      <div class="row result">
-        <div class="col-lg-6">
-          <h5>
-            <a href="{{ route('restprofile', ['id' => $result->id])}}">
-              {{ $result->getRestName()}}
-            </a>
-          </h5>
-          <p>
-            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-            {{ $result->location }} | {{ $result->address }}
-          </p>
-          <p class="description">
-            "{{ strlen($result->description) > 40 ? 
-              substr($result->description, 0, 40) . "..." : 
-              $result->description 
-            }}"
-          </p>
+    <div class="row ">
+        <div class='col col-md-12 page-title'>
+            <h3>Results {{Request::query('query')}} <a class = "btn btn-primary pull-right" href="/">Back</a></h3>
         </div>
-        <div class="col-lg-6">
-          <p>Tables</p>
-          <h2 style="color:#2196f3">
-            {{ $result->tables->count() }}
-          </h2>
+    </div>
+    <div class='row'>
+        <div class='col col-md-12 page-body'>
+            <div class="row">
+                <div class='col col-md-12'>
+
+                </div>
+            </div>
         </div>
-      </div>
-      @endforeach
-    @endif
-    <a class = "btn btn-primary" href="/">Back</a>
-  </div>
+    </div>
 @endsection
