@@ -93,7 +93,8 @@ $factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
         'duration' => 1,
         'user_id' => factory('Resly\User')->create(['role' => 'diner'])->id,
         'table_id' => factory('Resly\Table')->create()->id,
-        'cost' => $faker->randomFloat(null, 5, 120)
+        'cost' => $faker->randomFloat(null, 5, 120),
+        'type' => $faker->word
 
     ];
 });
