@@ -15,6 +15,7 @@ class UserProfileController extends Controller
 
     public function getEdit()
     {
+        $this->authorize('authenticated');
         return view('profile.edit');
     }
 

@@ -15,6 +15,7 @@ use Resly\Restaurant;
 use Resly\Restaurateur;
 use Illuminate\Http\Request;
 use Resly\Repositories\TablesRepository;
+use URL;
 
 class BookingController extends Controller
 {
@@ -192,6 +193,11 @@ class BookingController extends Controller
 
     public function addTable(Request $request)
     {
+        if(Auth::guest()){
+            $request->session()->put('redirect_back', URL::previous());
+            return redirect('/auth/login');
+        }
+
         $table = $this->tableRepo->get($request->table_id);
         Cart::add([
             'id'=>time(),

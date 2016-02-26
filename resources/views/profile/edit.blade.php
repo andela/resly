@@ -12,8 +12,8 @@
         <div class='col col-md-12 page-body'>
             <div class="row">
                 <div class="col col-md-4">
-                    @if(!is_null(auth()->user()->avatar_url))
-                        <img alt="{{ auth()->user()->username }}" class=" thumbnail img-responsive" src="{{ auth()->user()->avatar_url }}" />
+                    @if(auth()->user()->avatar !== null)
+                        <img alt="{{ auth()->user()->username }}" class=" thumbnail img-responsive" src="{{ auth()->user()->avatar }}" />
                     @else
                         <img alt="User Pic" src="http://www.expatica.com/images/default_avatar.jpg" class="thumbnail img-responsive">
                     @endif

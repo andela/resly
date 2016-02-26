@@ -3,6 +3,7 @@
 
 @section('title', 'Restaurant')
 
+
 @section('details')
     <h2 style="margin-top: 0px;">{{$restaurant->name}}</h2>
 @endsection
