@@ -28,7 +28,7 @@
                                             {!! link_to('/restaurants/'.$restaurant->id, $restaurant->name, ['class'=>'restaurant-link'])!!}
                                         </td>
                                         <td>
-                                            <a href="#" class='action-link'><i class='fa fa-pencil'></i></a>
+                                            <a href="#" class='action-link'><i class='fa fa-pencil '></i></a>
                                             <a href="#" class='action-link'><i class='fa fa-times'></i></a>
                                         </td>
                                     </tr>

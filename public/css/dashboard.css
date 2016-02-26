@@ -235,8 +235,6 @@ body{
 .delete-form button:hover, .delete-form input[type=submit]:hover{
     color:#CC2222;
 }
-
-
 .status{
     background: #555;
     color:#fff;
@@ -246,4 +244,27 @@ body{
 
 .booked{
     background: orange;
+}
+
+.action{
+    background: #00b075;
+    color:#FFF;
+    text-align: center;
+}
+
+.action .fa{
+    color:#FFF;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+
+.action .fa-trash:hover{
+    color:#FF2222;
+    font-size: 140%;
+}
+
+.action .fa-pencil:hover{
+    color:#5555FF;
+    font-size: 140%;
 }
