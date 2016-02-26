@@ -2,11 +2,13 @@
 
 namespace Resly\Http\Controllers\Auth;
 
+use Mail;
 use Validator;
 use Resly\User;
 use Resly\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -26,14 +28,20 @@ class AuthController extends Controller
     /**
      * Redirect path after authentication.
      */
+
     protected $redirectPath = '/';
 
     /**
      * Create a new authentication controller instance.
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+
+        if ($request->session()->has('redirect_back')) {
+            $this->redirectPath = $request->session()->get('redirect_back');
+            $request->session()->forget('redirect_back');
+        }
     }
 
     /**
@@ -65,7 +73,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'username' => $data['username'],
@@ -73,5 +81,12 @@ class AuthController extends Controller
             'role' => $data['role'],
             'password' => bcrypt($data['password']),
         ]);
+
+        Mail::queue('email.welcome', ['user' => $user], function ($message) use ($user) {
+            $message->to($user->email, $user->name)
+                    ->subject('Welcome to Resly!');
+        });
+
+        return $user;
     }
 }

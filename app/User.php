@@ -9,13 +9,14 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Laravel\Cashier\Billable;
 
 class User extends Model implements
     AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, Authorizable, CanResetPassword, Billable;
 
     protected $fillable = [
         'fname',
@@ -27,6 +28,9 @@ class User extends Model implements
         'avatar_url',
         'provider_id',
         'provider_name',
+        'stripe_id',
+        'card_brand',
+        'card_last_four'
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -61,6 +65,6 @@ class User extends Model implements
      */
     public function bookings()
     {
-        return $this->hasMany('Resly\Booking', 'diner_id');
+        return $this->hasMany('Resly\Booking');
     }
 }
