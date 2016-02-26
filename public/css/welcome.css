@@ -7,9 +7,11 @@
 
 .home {
     background:url('/img/home.jpg') center no-repeat;
-    height: 520px;
+    height: 620px;
     text-align: center;
     background-size: cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
 }
 
 
@@ -56,53 +58,9 @@
     background: #fefefe;
 }
 
-.social ul li {
-    list-style: none;
-    float: left;
-    padding-left: 10%;
-    margin: 4%;
-}
-
-.social ul li a i {
-    background: #205D7A;
-    color: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 25px;
-    text-align: center;
-    margin-right: 10px;
-    padding-top: 15%;
-}
-.social .fa-facebook {
-    background:#3b5998;
-}
-
-.social .fa-linkedin {
-    background:#007bb6;
-}
-
-.social .fa-twitter {
-    background:#00aced;
-}
-
-.social .fa-google-plus {
-    background:#dd4b39;
-}
-
-.social ul li a i {
-    transition: all 0.2s ease-in-out;
-}
-.social ul li a i:hover {
-    opacity: .7;
-}
 
 .separator {
     clear: both;
-}
-
-.login {
-    padding-top: 70px;
 }
 
 .register {
@@ -136,64 +94,11 @@
     padding:0 10px;
 }
 
-.social ul {
-    overflow: auto;
-}
-
-.social ul li {
-    list-style: none;
-    float: left;
-    padding-left: 10%;
-    margin: 4%;
-}
-
-.social ul li a i {
-    background: #205D7A;
-    color: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 25px;
-    text-align: center;
-    margin-right: 10px;
-    padding-top: 15%;
-}
-.social .fa-facebook {
-    background:#3b5998;
-}
-
-.social .fa-linkedin {
-    background:#007bb6;
-}
-
-.social .fa-twitter {
-    background:#00aced;
-}
-
-.social .fa-google-plus {
-    background:#dd4b39;
-}
-
-.social ul li a i {
-    transition: all 0.2s ease-in-out;
-}
-.social ul li a i:hover {
-    opacity: .7;
-}
 
 .rest-footer {
     padding-bottom: 210px;
 }
 
-footer {
-    padding-top: 1%;
-    color: #777;
-    background: #222;
-    border-top: 2px solid #444;
-    font-size: medium;
-    clear: both;
-    position: relative;
-}
 
 footer h4 {
     color: #777;
@@ -251,50 +156,142 @@ footer p {
     padding:0 10px;
 }
 
-.social ul {
-    overflow: auto;
-}
-
-.social ul li {
-    list-style: none;
-    float: left;
-    padding-left: 10%;
-    margin: 4%;
-}
-
-.social ul li a i {
-    background: #205D7A;
-    color: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 25px;
-    text-align: center;
-    margin-right: 10px;
-    padding-top: 15%;
-}
-.social .fa-facebook {
-    background:#3b5998;
-}
-
-.social .fa-linkedin {
-    background:#007bb6;
-}
-
-.social .fa-twitter {
-    background:#00aced;
-}
-
-.social .fa-google-plus {
-    background:#dd4b39;
-}
-
-.social ul li a i {
-    transition: all 0.2s ease-in-out;
-}
-.social ul li a i:hover {
-    opacity: .7;
-}
 body {
-  padding-top: 60px;
+  /* padding-top: 40px; */
+}
+
+.btn-nav {
+  margin-top: 10%;
+}
+
+.flash-message {
+    width: 80%;
+    margin-left: 10%;
+    background-color: #424242;
+}
+
+/*Style for featured Restaurants*/
+#featured-restaurant-scroller .restaurant-info
+{
+    padding:10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#featured-restaurant-scroller .restaurant-title{
+    font-family: 'Pacifico', cursive;
+}
+
+#featured-restaurant-scroller .info
+{
+    color:#AA5555;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    height:150px;
+    overflow: hidden;
+}
+
+#featured-restaurant-scroller .price
+{
+    font-size: 20px;
+    color:rgba(232, 81, 12, 1);
+}
+
+
+#featured-restaurant-scroller a:hover
+{
+    text-decoration: none;
+}
+
+#featured-restaurant-scroller .cell
+{
+    margin: 5px;
+    color: #FFF;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+
+.belt
+{
+    padding: 2em 0;
+    background: rgba(232, 81, 12, 1);
+    color: #FFF;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+
+}
+.belt h5
+{
+    color: #FFF;
+}
+#latest-restaurants-section
+{
+    background: #333;
+    min-height: 300px;
+}
+.latest-restaurant-items
+{
+    text-align: center;
+    margin: 10px 5px;
+    color:#FFF;
+    font-weight: bold;
+    list-style-type: none;
+    height: 10em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+}
+
+.latest-restaurant-items li .title
+{
+    font-size: 1.5em;
+    font-family: 'Pacifico', cursive;
+    display: block;
+}
+
+.latest-restaurant-items li .title a
+{
+    color:#FFF;
+}
+
+.latest-restaurant-items li .title a:hover
+{
+    color:rgba(232, 81, 12, 1);
+}
+.latest-restaurant-items li .info
+{
+    display: block;
+    font-size: 12px;
+    font-weight: 100;
+}
+.latest-restaurant-items li .info .price
+{
+    color:rgba(232, 22, 12, 1);
+    font-weight: bold;
+}
+
+
+footer
+{
+    position: absolute;
+    bottom:0;
+    color: #777;
+    background: #222;
+    border-top: 2px solid #444;
+    font-size: medium;
+    clear: both;
+    height: 60px;
+    width:100%;
+}
+
+html{
+    position: relative;
+    min-height: 100%;
+}
+.container{
+    height:100%
+
 }

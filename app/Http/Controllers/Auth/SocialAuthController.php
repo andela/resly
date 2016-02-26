@@ -33,11 +33,9 @@ class SocialAuthController extends Controller
     {
         $socialUser = Socialite::driver($provider)->user();
 
-        $nativeUser = self::findOrCreateUser($socialUser, $provider);
+        $nativeUser = User::where('email', $socialUser->email)->first();
 
-        // if this is the first time we are seeing
-        // this we consider this to be a registration.
-        if (! $nativeUser->exists()) {
+        if ($nativeUser == null) {
             self::beginRegistration($socialUser, $provider);
 
             return redirect()->route('social.register')->with('you need to register first');
@@ -45,28 +43,7 @@ class SocialAuthController extends Controller
 
         Auth::login($nativeUser);
 
-        return redirect('/');
-    }
-
-    /**
-     *  returns a user from the database creating one
-     *  if none existed.
-     *
-     * user data is based on data returned by social authenticator.
-     *
-     * @param  $socialUser user returned by social provider
-     * @param  $provider name of provider
-     *
-     * @return $user
-     */
-    public static function findOrCreateUser($socialUser, $provider)
-    {
-        $user = User::firstOrNew([
-            'provider_name' => $provider,
-            'provider_id' => $socialUser->id,
-        ]);
-
-        return $user;
+        return redirect('/')->with('flash_message', 'You are now logged in');
     }
 
     /**

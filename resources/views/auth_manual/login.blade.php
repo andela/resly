@@ -1,10 +1,17 @@
 @extends('layouts.master')
 
 @section('title', 'login')
-
+@section('styles')
+    <link href='https://fonts.googleapis.com/css?family=Pacifico|Lato:400,100' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' type="text/css" href="{!! asset('css/login.css') !!}"/>
+@endsection
 @section('content')
-    <div class="login">
-        <div class="container">
+    <div class="container">
+        <div class="login">
+            <div class='info'>
+                <h5>Follow your taste</h5>
+                <p>Get to reserve the restaurant of your choice</p>
+            </div>
           <form "form-vertical" role="form" method="post" action="{{ route('login') }}">
            @include('partials.error')
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

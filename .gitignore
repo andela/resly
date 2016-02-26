@@ -3,5 +3,8 @@
 Homestead.yaml
 Homestead.json
 .env
+.env.example
 *.log
+.git merge master
 .DS_Store
+.idea

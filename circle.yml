@@ -11,6 +11,7 @@ dependencies:
   override:
     - mkdir -p build/logs
     - composer install --dev --no-interaction
+    - php artisan migrate:refresh --no-interaction
     - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
     - echo "xdebug.max_nesting_level=200" >> ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
 

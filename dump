@@ -1,0 +1,225 @@
+ <div class="container">
+    <div class="row">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ auth()->user()->username }}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+
+              <div class="col-md-3 col-lg-3 " align="center">
+                  @if(!is_null(auth()->user()->avatar_url))
+                      <img alt="{{ auth()->user()->username }}" class="img-circle img-responsive" src="{{ auth()->user()->avatar_url }}" />
+                  @else
+                      <img alt="User Pic" src="http://www.expatica.com/images/default_avatar.jpg" class="img-circle img-responsive">
+                  @endif
+                </div>
+                <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>First Name:</td>
+                        <td>{{ auth()->user()->fname }}</td>
+                      </tr>
+                      <tr>
+                        <td>Last Name:</td>
+                        <td>{{ auth()->user()->lname }}</td>
+                      </tr>
+                      <tr>
+                        <td>Email:</td>
+                        <td>{{ auth()->user()->email }}</td>
+                      </tr>
+                      <tr>
+                        <td>Role:</td>
+                        <td>{{ auth()->user()->role }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{-- <ul class="nav nav-sidebar" >
+    <li style="margin-left:20px;">
+        <img src="http://placehold.it/350x150" height="50" width="50" style="border-radius:25px;" />
+    </li>
+    @can('rest-link')
+      <h3><small>Your Name</small></h3>
+      <li><a href="/restaurants/add">Add Restaurant</a></li>
+      <li><a href="#">Add Restaurant</a></li>
+      <li><a href="{{ action('RestaurantGalleryController@index') }}">Gallery</a></li>
+      <li><a href="#">Add Menu</a></li>
+      <li><a href="#">Add Wine</a></li>
+      <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">Your Profile</a></li>
+      <li><a href="{{ route('userProfileEdit') }}">Edit Your Profile</a></li>
+    @endcan
+    @can('diner-link')
+      <h3><small>Your Name</small></h3>
+      <li><a href="#">Current Reservations</a></li>
+      <li><a href="#">Past Reservations</a></li>
+      <li><a href="#">Cancelled Reservations</a></li>
+      <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">Your Profile</a></li>
+      <li><a href="{{ route('userProfileEdit') }}">Edit Your Profile</a></li>
+    @endcan
+</ul> --}}
+
+
+
+
+<<<<<<< HEAD
+=======
+                <div class="col-md-3 col-lg-3 " align="center">
+                    @if(!is_null(auth()->user()->avatar))
+                        <img alt="{{ auth()->user()->username }}" class="img-circle img-responsive" src="{{ auth()->user()->avatar }}" />
+                    @else
+                        <img alt="User Pic" src="http://www.expatica.com/images/default_avatar.jpg" class="img-circle img-responsive">
+                    @endif
+                  </div>
+                  <div class=" col-md-9 col-lg-9 ">
+                    <table class="table table-user-information">
+                      <tbody>
+                        <tr>
+                          <td>First Name:</td>
+                          <td>{{ auth()->user()->fname }}</td>
+                        </tr>
+                        <tr>
+                          <td>Last Name:</td>
+                          <td>{{ auth()->user()->lname }}</td>
+                        </tr>
+                        <tr>
+                          <td>Email:</td>
+                          <td>{{ auth()->user()->email }}</td>
+                        </tr>
+                        <tr>
+                          <td>Role:</td>
+                          <td>{{ auth()->user()->role }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+>>>>>>> eca85df1ebf8b7c35011bbede42a224ca09d097e
+
+
+
+
+
+{{-- <div class="container" style="padding-top:50px;">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center">
+              @if(auth()->user()->avatar == null)
+                <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive">
+              @else
+                <img alt="User Pic" src="{{auth()->user()->avatar}}" class="img-circle img-responsive">
+              @endif
+            </div>
+            <div class=" col-md-9 col-lg-9 ">
+
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+
+<div class="row ">
+    <div class='col col-md-12 page-title'>
+        <h3>Update Account Details</h3>
+    </div>
+</div>
+<div class='row'>
+    <div class='col col-md-12 page-body'>
+        <div class="row">
+            <div class="col col-md-4">
+
+            </div>
+            <div class='col col-md-8'>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+Resly is an online application made to reduce the gap between diners and restaurant
+owners, Resly is built for comfort and convenience..
+1. So imagine a situation where
+diners never have to bother about finding space to dine with their loved ones or
+business partners, or sitting at the right position to set the right mood for conversation.
+With our application diners would be able to choose the exact position they intend to
+sit, this is because they get to see the position of table seats chairs before they even
+book the table.
+
+For the restaurant owners, Resly helps reduce the amount of time they use in managing
+diners, we handle everything for them from receiving payment for tables booked by diners
+to runnings polls for the restaurant on their performance. Resly is a great app for
+anybody that likes to dine and not just dine but dine with convenience.
+
+
+
+                      <!-- Add Opening and Closing Hours of restaurant -->
+
+
+
+
+                      <!-- Add contact information of restaurant -->
+
+
+                      
+                      @if(Session::has('success'))
+                          <div class="alert alert-success">{{Session::get('success')}}</div>
+                      @endif
+
+                      @if(count($tables) ==  0)
+                          <div class='not-available-label'>
+                              <h3 class="text-muted text-center">You have no tables in this restaurant</h3>
+                          </div>
+                      @else
+                          <table class="table">
+                              <thead>
+                                  <tr>
+                                      <td colspan="5"><h4 class="text-center">Seats in restaurant</h4></td>
+                                  </tr>
+                                  <tr>
+                                      <td>SN</td>
+                                      <td>Name</td>
+                                      <td>Number of seats</td>
+                                      <td>Number of seats taken</td>
+                                      <td>Cost</td>
+                                      <td>Action</td>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  @foreach($tables as $index=>$table)
+                                  <tr>
+                                      <td>{{$index+1}}</td>
+                                      <td>{{$table->label}}</td>
+                                      <td>{{$table->seats_number}}</td>
+                                      <td>{{$table->seats_taken}}</td>
+                                      <td>{{number_format($table->cost, 2)}}</td>
+                                      <td>
+                                          <a href="{{url("/tables/$table->id/edit/")}}" title="Edit">
+                                              <i class="fa fa-pencil"></i>
+                                          </a>
+                                          {!! Form::open(['url'=>url("/tables/$table->id/delete/"),
+                                                  'method'=>'delete','class'=>'inline-form']) !!}
+                                                  <button type="submit" name="delete"><i class="fa fa-trash"></i></button>
+                                          {!! Form::close()!!}
+                                      </td>
+                                  </tr>
+                              @endforeach
+                              </tbody>
+                          </table>
+                      @endif
