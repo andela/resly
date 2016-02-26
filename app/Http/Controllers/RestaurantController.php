@@ -28,12 +28,24 @@ class RestaurantController extends Controller
         return view('restaurant.index', compact('restaurants'));
     }
 
+    public function showRestaurant(Request $request){
+        $restaurant = Restaurant::find($request->id);
+        return view('restaurant.page', compact('restaurant'));
+    }
+
     public function show(Request $request, TablesRepository $tablesRepository)
     {
         $tables = $tablesRepository->getRestaurantTables($request->restaurant_id);
         $restaurant = Restaurant::where('id', $request->restaurant_id)->get()->first();
 
         return view('restaurant.show', compact('restaurant', 'tables'));
+    }
+
+    public function showGallery(Request $request)
+    {
+        $restaurant = Restaurant::find($request->id);
+        $pictures = $restaurant->pictures()->get();
+        return view('restaurant.show_gallery', compact('restaurant', 'pictures'));
     }
 
     public function visited(Request $request)

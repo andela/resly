@@ -16,7 +16,7 @@
       <div class="row result">
         <div class="col-lg-6">
           <h5>
-            <a href="{{ route('bookRestaurantTable', ['resturant_id' => $result->id])}}">
+            <a href="/restaurants/page/{{$result->id}}">
               {{ $result->getRestName()}}
             </a>
           </h5>

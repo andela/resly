@@ -36,7 +36,7 @@ $(document).ready(function() {
     			//console.log(content);
 
     		} else {
-    			$("#closeby-restaurants").html("<h5>Unable to find Closeby Restaurants</h5>");
+    			//$("#closeby-restaurants").html("<h5>Unable to find Closeby Restaurants</h5>");
     		}
     	}
     });	
