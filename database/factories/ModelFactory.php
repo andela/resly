@@ -77,9 +77,7 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
     $menuItem = factory('Resly\MenuItem')->create([
         'restaurant_id' => $restaurant->id,
     ]);
-    $menuItemTag = factory('Resly\MenuItemTag')->create([
-        'menu_item_id' => $menuItem->id,
-    ]);
+    
 
     return [
         'restaurant_id' => $restaurant->id,
