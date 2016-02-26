@@ -10,7 +10,7 @@ $(document).ready(function() {
     function setPosition(position) {
     	$.cookie('lat', position.coords.latitude);
     	$.cookie('lng', position.coords.longitude);
-    } 
+    }
 
     //make an ajax request to fetch near by restaurants
     setTimeout(function() {
@@ -39,16 +39,16 @@ $(document).ready(function() {
     			//$("#closeby-restaurants").html("<h5>Unable to find Closeby Restaurants</h5>");
     		}
     	}
-    });	
+    });
     }, 3000);
-    
+
 
     //constructs the nearby restaurants elements that would be dynamically
     function constructHtml(input) {
     	output = '';
     	for (var i=0; i<input.length; i++) {
     		output += '<div class="col-md-3" style="margin-top:1em;">';
-    		output += '<a href = "'+"{{ url('restaurants/')}}/" + input[i].id + '">';
+    		output += '<a href = "'+"restaurants/page/" + input[i].id + '">';
     		output += '<div class="text-center thumbnail items">';
     		output += '<img src="http://cdn.londonandpartners.com/visit/london-organisations/sketch/84245-640x360-sketch-restaurant-david-shrigley-640.jpg"';
 			output += 'width = 300 height = auto />';
