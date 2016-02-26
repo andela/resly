@@ -10,15 +10,15 @@
 
 <script>
 
-//jquery forms 
+//jquery forms
 (function() {
-    
+
 var bar = $('.progress-bar');
 var percent = $('.percent');
 var status = $('#status');
 var errStatus = $('#errStatus');
 var prog_bar = $('.progress');
-   
+
 $('form').ajaxForm({
     beforeSend: function() {
         status.empty();
@@ -78,11 +78,11 @@ $('form').ajaxForm({
         } else {
             console.log('completed but failed');
         }
-        
-    }
-}); 
 
-})();       
+    }
+});
+
+})();
 </script>
 <script type="text/javascript">
     $(function() {
@@ -99,7 +99,7 @@ $('form').ajaxForm({
             var element = $(this);
             $.ajax({
                 url: "{!! url('gallery') !!}/"+element.attr('data-id'),
-                type: "DELETE", 
+                type: "DELETE",
                 beforeSend: function(){
                     if (confirm("Are you sure you want to delete this picture?") == false) {
                         return false;
@@ -134,56 +134,61 @@ $('form').ajaxForm({
 @endsection
 
 @section('details')
-    @parent
-	@if (Session::has('flash_notification.message'))
-    <div class="alert alert-{{ Session::get('flash_notification.level') }}">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ Session::get('flash_notification.message') }}
+
+    <div class="row ">
+        <div class='col col-md-12 page-title'>
+            <h3> {{$restaurant->name}}: Gallery</h3>
+        </div>
     </div>
-	@endif
+    <div class='row'>
+        <div class='col col-md-12 page-body'>
+            <div class="row">
+                <div class="col col-md-12">
+                    <p>
+                        <a href='/restaurants'>Restaurants</a> &gt;&gt;
+                        <a href='/restaurants/{{$restaurant->id}}'>{{$restaurant->name}}</a> >>
+                        Gallery
+                    </p>
 
-	@if (count($errors) > 0)
-		<div class="alert alert-danger">
-        	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>	
-			@foreach ($errors->all() as $error) 
-				<li>{{ $error }}</li>
-			@endforeach
-		</div>
-	@endif
+                    <h3 class='upload-section'>
+                        <a href='#' id="uploadFile">
+                            <i class="fa fa-picture-o"> </i>
+                            Add a picture of your restaurant
+                        </a>
+                    </h3>
 
-    <div class="row">
-        <div class="col-md-7">
-    	    <p>
-                <a href='/restaurants'>Restaurants</a> >> 
-                <a href='/restaurants/{{$restaurant->id}}'>{{$restaurant->name}}</a> >> 
-                Gallery
-            </p>
-    		<a href = # class = "fa fa-plus" id = "uploadFile"> Add a picture of your restaurant</a> <br /> <span id="filename" style="color:green"></span>
-    		{!! Form::open(['url' => url('/gallery/'), 'method' => 'post', 'files' => true]) !!} 
-    			<div class="form-group">
-    				{!! Form::file('image', ['style' => 'display:none;', 'id' => 'fileUploadField']) !!}
-    				{!! Form::text('caption', null, ['class' => 'form-control', 
-    				'placeholder' => 'Enter a caption for this picture']) !!} <br>
-                    <input type='hidden' name='rest_id' value='{{$rest_id}}'>
-    				{!! Form::submit('Upload file', ['class' => 'btn btn-primary']) !!}
-    			</div>
-    		{!! Form::close()!!}
-            <div class="progress" style="height:18px; border-radius:10px; display:none;">
-                <div class="progress-bar progress-bar-striped active percent" role="progressbar"
-                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:1%;">
-                     0%
-                 </div>
-            </div>
-        
-            <div class="alert alert-success" id ="uploadSuccess" style="display:none">
-                <span id="status">Uploaded Successfully</span>
-            </div>
+                    <div class=' upload-section'>
+                        <div class="col col-md-5">
+                            {!! Form::open(['url' => url('/gallery/'), 'method' => 'post', 'files' => true]) !!}
+                    			<div class="form-group">
+                                    <span id="filename" style="color:green"></span>
+                    				{!! Form::file('image', ['style' => 'display:none;', 'id' => 'fileUploadField']) !!}
+                    				{!! Form::text('caption', null, ['class' => 'form-control',
+                    				'placeholder' => 'Enter a caption for this picture']) !!} <br>
+                                    <input type='hidden' name='rest_id' value='{{$rest_id}}'>
+                    				{!! Form::submit('Upload file', ['class' => 'btn btn-primary btn-upload']) !!}
+                    			</div>
+                    		{!! Form::close()!!}
+                        </div>
+                        <div class="progress" style="height:18px; border-radius:10px; display:none;">
+                            <div class="progress-bar progress-bar-striped active percent" role="progressbar"
+                                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:1%;">
+                                 0%
+                             </div>
+                        </div>
 
-            <div class="alert alert-danger" id ="uploadFailure" style="display:none">
-                <span id="errStatus"></span>
+                        <div class="alert alert-success" id ="uploadSuccess" style="display:none">
+                            <span id="status">Uploaded Successfully</span>
+                        </div>
+
+                        <div class="alert alert-danger" id ="uploadFailure" style="display:none">
+                            <span id="errStatus"></span>
+                        </div>
+                    </div>
+
+                    @include('partials.image')
+                </div>
             </div>
         </div>
     </div>
-	<hr/>
-	@include('partials.image')
 @endsection
