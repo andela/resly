@@ -10,6 +10,8 @@ use Validator;
 use Resly\Restaurant;
 use Resly\Booking;
 use Resly\Http\Requests;
+use willvincent\Rateable\Rating;
+use Auth;
 
 class RestaurantController extends Controller
 {
@@ -246,5 +248,31 @@ class RestaurantController extends Controller
         $results = json_decode($response->getBody(), true, 512);
 
         return $results['results'][0]['geometry']['location'];
+    }
+
+    public function rateRestaurant(Request $request)
+    {
+        //fetch restaurant instance and user rating
+        $restaurant = Restaurant::find($request->restaurant_id);
+        $user_rating = intval($request->input('rate'));
+
+        //if user has already rated update current rating, else save new rating
+        if ($restaurant->userHasNotRated()) {
+            $rating = new Rating;
+            $rating->rating = $user_rating;
+            $rating->user_id = Auth::user()->id;
+
+            $restaurant->ratings()->save($rating);
+        } else {
+            $rating = Rating::where('user_id', Auth::user()->id)
+                            ->where('rateable_id', $request->restaurant_id)->first();
+            $rating->rating = $user_rating;
+            $rating->save();
+        }
+
+        $output['status'] = 'success';
+        $output['avg_rating'] = $restaurant->averageRating();
+
+        return json_encode($output);
     }
 }

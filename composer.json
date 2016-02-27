@@ -18,7 +18,9 @@
         "laracasts/flash": "*",
         "gloudemans/shoppingcart": "~1.3",
         "darryldecode/cart": "^2.4",
-        "laravel/cashier": "~6.0"
+        "laravel/cashier": "~6.0",
+        "satooshi/php-coveralls": "^1.0",
+        "willvincent/laravel-rateable": "~1.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
