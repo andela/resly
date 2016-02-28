@@ -43,7 +43,7 @@
                                         <td>{{$table->label}}</td>
                                         <td>{{$table->seats_number}}</td>
                                         <td>$ {{number_format($table->cost, 2)}}</td>
-                                        <td class='status booked'>10</td>
+                                        <td class='status booked'>{{count($table->bookings()->get())}}</td>
                                         <td class='action'>
                                             <a href="{{url("/tables/$table->id/edit/")}}" title="Edit">
                                                 <i class="fa fa-pencil"></i>
@@ -52,6 +52,9 @@
                                              'method'=>'delete','class'=>'inline-form delete-form']) !!}
                                                 <button type="submit" name="delete"><i class="fa fa-trash"></i></button>
                                             {!! Form::close()!!}
+                                            <a href='/bookings/{{$table->id}}'>
+                                                <i class='fa fa-eye'></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
