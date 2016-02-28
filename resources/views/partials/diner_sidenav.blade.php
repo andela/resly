@@ -10,14 +10,6 @@
         </ul>
     </li>
     <li>
-        <a data-toggle="collapse" href="#RestaurantsSubMenu" aria-expanded="false" aria-controls="RestaurantsSubMenu">
-            <i class='fa fa-circle-o'></i>Restaurants
-        </a>
-        <ul id='RestaurantsSubMenu' class="collapse">
-            <li><a href="{{url('restaurants/visited')}}">Restaurants visited</a></li>
-        </ul>
-    </li>
-    <li>
         <a href="#"><i class='fa fa-user'></i> My Accont</a>
         <ul>
             <li>  <a href="{{url('user/profile/edit')}}">Account Settings</a></li>

@@ -27,9 +27,11 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{url('/restaurants')}}">
-                                 My Restaurants
-                             </a>
+                            @can('restaurateur-user')
+                                <a href="{{url('/restaurants')}}">
+                                     My Restaurants
+                                 </a>
+                             @endcan
                         </li>
 
                         <li class="divider"></li>
@@ -40,7 +42,15 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#"> Reservations</a></li>
+
+                <li>
+                    @can('restaurateur-user')
+                        <a href="{{url('restaurants')}}"> Reservations</a>
+                    @endcan
+                    @can('diner-user')
+                        <a href="{{url('reservations/current')}}"> Reservations</a>
+                    @endcan
+                </li>
             @else
                 <li><a href="{{ route('login') }}" target="_self">Login</a></li>
                 <li><a href="{{ route('register') }}" target="_self">Register</a></li>

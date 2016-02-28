@@ -3,9 +3,15 @@
 namespace Resly;
 
 use Illuminate\Database\Eloquent\Model;
+use willvincent\Rateable\Rateable;
+use Auth;
+use Resly\Rating;
 
 class Restaurant extends Model
 {
+    use Rateable;
+
+
     protected $fillable = [
         'name',
         'restauranteur_id',
@@ -57,6 +63,7 @@ class Restaurant extends Model
         return $this->getName();
     }
 
+
     public function getNameAttribute($value)
     {
         return ucwords($value);
@@ -65,6 +72,25 @@ class Restaurant extends Model
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = strtolower($value);
+    }
+
+
+
+    public function userHasNotRated()
+    {
+        if (Rating::where('user_id', Auth::user()->id)
+            ->where('rateable_id', $this->id)->first() == null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function userRating()
+    {
+        return Rating::where('user_id', Auth::user()->id)
+            ->where('rateable_id', $this->id)->first()->rating;
     }
 
 }
