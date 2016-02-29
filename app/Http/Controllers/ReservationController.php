@@ -16,6 +16,7 @@ class ReservationController extends Controller
      */
     public function currentReservations(Request $request)
     {
+        // $this->authorize('diner-user');
         $bookings = $request->user()->bookings()->where('status', 1)->where('scheduled_date', '>', \Carbon\Carbon::now()->toDateTimeString())->get();
         return view('reservations.current', ['user' => $request->user(), 'reservations' => $bookings]);
     }

@@ -11,6 +11,7 @@ use Resly\Restaurant;
 use Resly\Booking;
 use Resly\Http\Requests;
 use willvincent\Rateable\Rating;
+use Gate;
 
 class RestaurantController extends Controller
 {
@@ -24,24 +25,42 @@ class RestaurantController extends Controller
      */
     public function index()
     {
+        $this->authorize('restaurateur-user');
         $restaurants = Restaurant::where('user_id', Auth::user()->id)->get();
 
         return view('restaurant.index', compact('restaurants'));
     }
 
+    /**
+     * Displays view for all users, logged in or nothing
+     * @param  Request $request request oci_fetch_object
+     * @return View           view to display
+     */
     public function showRestaurant(Request $request){
         $restaurant = Restaurant::find($request->id);
         return view('restaurant.page', compact('restaurant'));
     }
 
+    /**
+     * Shows restaurants owned by a restaurant owner with given ID
+     * @param  Request          $request          request object
+     * @param  TablesRepository $tablesRepository repository for getting table properties
+     * @return View                             view to render
+     */
     public function show(Request $request, TablesRepository $tablesRepository)
     {
+        $this->authorize('restaurateur-user');
         $tables = $tablesRepository->getRestaurantTables($request->restaurant_id);
         $restaurant = Restaurant::where('id', $request->restaurant_id)->get()->first();
 
         return view('restaurant.show', compact('restaurant', 'tables'));
     }
 
+    /**
+     * Displays gallery of a restaurant
+     * @param  Request $request request object
+     * @return View           view to render
+     */
     public function showGallery(Request $request)
     {
         $restaurant = Restaurant::find($request->id);
@@ -49,17 +68,23 @@ class RestaurantController extends Controller
         return view('restaurant.show_gallery', compact('restaurant', 'pictures'));
     }
 
+    /**
+     * Displays list of visited restaurant by logged in user
+     * @param  Request $request request object
+     * @return View           view to render
+     */
     public function visited(Request $request)
     {
-
+        $this->authorize('diner-user');
         //$tables = $tablesRepository->getRestaurantTables($request->restaurant_id);
         $visitedRestaurants = Booking::where('user_id', Auth::user()->id)->get();
-        
+
         return view('restaurant.visited', compact('visitedRestaurants'));
     }
 
     /**
-     *  Display the form for adding a restaurant.
+     * Displays view for adding restaurant for a restaurateur
+     * @return View view to render
      */
     public function create()
     {
@@ -68,6 +93,12 @@ class RestaurantController extends Controller
         return view('restaurant.create');
     }
 
+    /**
+     * Renders view to edit a restaurant created by logged in user
+     * @param  Request $request       request object
+     * @param  int  $restaurant_id id of restaurnat to edit
+     * @return View                 View to render
+     */
     public function edit(Request $request, $restaurant_id)
     {
         $this->authorize('restaurateur-user');
@@ -82,6 +113,12 @@ class RestaurantController extends Controller
         }
     }
 
+    /**
+     * Saves a restaurant edit to the database
+     * @param  Request $request       request object
+     * @param  int  $restaurant_id restauant id to save
+     * @return View                 view to render
+     */
     public function createEdit(Request $request, $restaurant_id)
     {
         $this->authorize('restaurateur-user');
@@ -119,7 +156,9 @@ class RestaurantController extends Controller
     }
 
     /**
-     *  Receive post requests from the add form submission.
+     * Not currently used: Receive post requests from the add form submission.
+     * @param  Request $request request object
+     * @return View            view to render
      */
     public function createAdd(Request $request)
     {
@@ -157,7 +196,9 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Fetch Nearby restaurants.
+     * Fetch nearby restaurant
+     * @param  Request $request request object
+     * @return View           view to render
      */
     public function postCloseby(Request $request)
     {
@@ -184,7 +225,11 @@ class RestaurantController extends Controller
     }
 
     /**
-     * conver model results into assoc array.
+     * convert model results into assoc array.
+     * @param  array $records array to convert
+     * @param  int $lat     latitude
+     * @param  int $lng     longitude
+     * @return array          data result
      */
     private function constructAssoc($records, $lat, $lng)
     {
@@ -203,6 +248,16 @@ class RestaurantController extends Controller
         return $output;
     }
 
+    /**
+     * Calculate distance between
+     * @param  integer  $point1_lat  latitue of point 1
+     * @param  integer  $point1_long  longitude of point 1
+     * @param  integer  $point2_lat  latitude of point 2
+     * @param  integer  $point2_long longitude of point 2
+     * @param  string  $unit        unit of measurement
+     * @param  integer $decimals    [description]
+     * @return integer               distance between the two points
+     */
     private function calcDistance(
         $point1_lat, $point1_long,
         $point2_lat, $point2_long,
@@ -236,7 +291,9 @@ class RestaurantController extends Controller
     }
 
     /**
-     * fetch coordinates.
+     * Gets the coordinates of a point
+     * @param  string $location location of point to fetch coordinates for
+     * @return array           of longitude and latitude
      */
     private function fetchCoordinates($location)
     {

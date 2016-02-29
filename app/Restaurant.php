@@ -74,7 +74,6 @@ class Restaurant extends Model
         $this->attributes['name'] = strtolower($value);
     }
 
-
     public function userHasNotRated()
     {
         if (Rating::where('user_id', Auth::user()->id)
