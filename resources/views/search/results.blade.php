@@ -43,10 +43,15 @@
 
                                             <hr>
                                             <div>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
+                                                @if($result->averageRating() == null)
+                                                    <span id='avg_rating'><i class='fa fa-star' style='color:#999;'><small> unrated</small></i> </span>
+                                                @else
+                                                    <span id='avg_rating'>
+                                                        @for($i = 0; $i < intval($result->averageRating()); $i++)
+                                                            <i class='fa fa-star' style='color:#FFD700'></i>
+                                                        @endfor
+                                                    </span>
+                                                @endif
                                             </div>
 
                                             <p class="description">

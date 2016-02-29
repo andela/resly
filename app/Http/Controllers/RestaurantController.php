@@ -11,7 +11,6 @@ use Resly\Restaurant;
 use Resly\Booking;
 use Resly\Http\Requests;
 use willvincent\Rateable\Rating;
-use Auth;
 
 class RestaurantController extends Controller
 {

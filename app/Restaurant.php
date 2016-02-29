@@ -74,4 +74,10 @@ class Restaurant extends Model
             return false;
         }
     }
+
+    public function userRating()
+    {
+        return Rating::where('user_id', Auth::user()->id)
+            ->where('rateable_id', $this->id)->first()->rating;
+    }
 }
