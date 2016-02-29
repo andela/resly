@@ -23,52 +23,68 @@
                 </div>
                 @endif
 
-                 <div class="col-lg-9 white">
+                 <div class="col col-md-12">
                     <p>{{$restaurant->location}}</p>
-                    <p><i class='fa fa-clock-o'></i> {{$restaurant-> opening_time}}</p>
+                    <p>
+                        <i class='fa fa-clock-o'></i>
+                        {{$restaurant->opening_time}} -
+                        {{$restaurant->closing_time}}
+
+                    </p>
                     <p style="color:red;">* please note that the cost shown is for only one hour</p>
                     <table class="table">
-                        <thead>
-                            <th>SN</th>
-                            <th>Table Name</th>
-                            <th>Seats</th>
-                            <th>Cost per hour</th>
-                            <th>Book</th>
-                        </thead>
                         <tbody>
                             @foreach ($restaurant->tables as $index => $table )
                                 <tr>
-                                    <td>{{$index+1}}</td>
-                                    <td>{{$table->label}}</td>
-                                    <td>{{$table->seats_number}}</td>
-                                    <td>$ {{number_format($table->cost)}}</td>
+                                    <td class='table-image-holder'>
+                                        @if($table->avatar !== null)
+                                            <img src="{{$table->avatar}}" class='table-image'>
+                                        @else
+                                            <img src="{{asset('img/no-image-placeholder.jpg')}}" class='table-image'>
+
+                                        @endif
+
+                                    </td>
                                     <td>
+                                        <h3>{{$table->label}}</h3>
+                                        <hr>
+                                        <p>
+                                            <strong>Table Description: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                            {{$table->seats_number}} Seats on this table
+                                            <span class="price pull-right">$ {{number_format($table->cost)}}</span>
+                                        </p>
                                         <form action="{{url('/booking/table/'.$table->id.'/add')}}" method='post'>
                                             {{csrf_field()}}
-                                            <div class="input-group">
-                                                <label>Date </label>
-                                                <input type='text' class='bookDate' name='date'>
-                                            </div>
-                                            <div class="input-group">
-                                                <label>Duration</label>
-                                                <select name='duration'>
-                                                    <option value="1"> 1 Hour </option>
-                                                    <option value="2"> 2 Hours </option>
-                                                    <option value="3"> 3 Hours </option>
-                                                    <option value="4"> 4 Hours </option>
-                                                    <option value="5"> 5 Hours </option>
-                                                    <option value="6"> 6 Hours </option>
-                                                    <option value="7"> 7 Hours </option>
-                                                    <option value="8"> 8 Hours </option>
-                                                    <option value="9"> 9 Hours </option>
-                                                    <option value="10"> 10 Hours </option>
-                                                </select>
-                                            </div>
-                                            <button type='submit' class="btn btn-danger btn-xs">Add to cart</button>
+                                            <table class="table table-not-striped">
+                                              <tr>
+                                                  <td>Date</td>
+                                                  <td>Duration</td>
+                                                  <td></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><input type='text' class='bookDate form-control' name='date' placeholder="Dining Date"></td>
+                                                  <td>
+                                                      <select name='duration' placeholder='Duration' class='form-control'>
+                                                          <option value="1"> 1 Hour </option>
+                                                          <option value="2"> 2 Hours </option>
+                                                          <option value="3"> 3 Hours </option>
+                                                          <option value="4"> 4 Hours </option>
+                                                          <option value="5"> 5 Hours </option>
+                                                          <option value="6"> 6 Hours </option>
+                                                          <option value="7"> 7 Hours </option>
+                                                          <option value="8"> 8 Hours </option>
+                                                          <option value="9"> 9 Hours </option>
+                                                          <option value="10"> 10 Hours </option>
+                                                      </select>
+                                                  </td>
+                                                  <td>
+                                                      <button type='submit' class="btn btn-danger btn-xs">Add to cart</button>
+                                                  </td>
+                                              </tr>
+                                            </table>
+
                                         </form>
-                                        {{-- <a href="" class='btn btn-danger btn-xs'>
-                                            Book
-                                        </a> --}}
                                     </td>
                                 </tr>
                             @endforeach

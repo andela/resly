@@ -58,6 +58,11 @@ body{
     padding: 10px;
 }
 
+
+
+.navbar a:hover{
+    color: black !important;
+}
 .page-content{
     background: #FFF;
     min-height: 100%;
@@ -267,4 +272,23 @@ body{
 .action .fa-pencil:hover{
     color:#5555FF;
     font-size: 140%;
+}
+
+.table-image, .table-image > i{
+    width:100%;
+    display: block;
+}
+
+.table-image-holder{
+    width: 30%;
+}
+
+
+
+.table-not-striped>tbody>tr>td, .table-not-striped>tbody>tr>th,
+.table-not-striped>tfoot>tr>td, .table-not-striped>tfoot>tr>th,
+.table-not-striped>thead>tr>td,  .table-not-striped>thead>tr>th
+ {
+    border:none;
+    border-color: #FFF;
 }

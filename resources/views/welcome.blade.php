@@ -56,7 +56,7 @@
             <div id='featured-restaurant-scroller' class='owl-carousel'>
                 @foreach($featuredRestaurants as $index=>$restaurant)
                     <div class="restaurant-cell">
-                        <a href="#" >
+                        <a href="{{url('restaurants/page/'.$restaurant->id)}}" >
                             <img src="http://lorempixel.com/400/200/food/{{$index}}" class="thumbnail"/>
                             <div class='restaurant-info'>
                                 <h5 class='restaurant-title'>
@@ -106,7 +106,7 @@
                         <ul class='latest-restaurant-items'>
                             <li>
                                 <span class='title'>
-                                    <a href="#">{{$restaurant->name}}</a>
+                                    <a href="{{url('restaurants/page/'.$restaurant->id)}}">{{$restaurant->name}}</a>
                                     <strong class="pull-right price">${{number_format((rand(200, 2000)/10), 2)}}</strong>
                                 </span>
                                 <p class='info short'>

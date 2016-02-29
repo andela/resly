@@ -16,6 +16,7 @@ use Resly\Restaurateur;
 use Illuminate\Http\Request;
 use Resly\Repositories\TablesRepository;
 use URL;
+use Session;
 
 class BookingController extends Controller
 {
@@ -213,7 +214,8 @@ class BookingController extends Controller
             ]
         ]);
 
-        return redirect()->back()->with('success', 'Table added');
+        Session::flash('success', 'Table added to cart');
+        return redirect()->back();
     }
 
     public function cart(Request $request)
