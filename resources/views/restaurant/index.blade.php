@@ -19,6 +19,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Action</th>
+                                    <th>Reservations</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,6 +31,9 @@
                                         <td>
                                             <a href="#" class='action-link'><i class='fa fa-pencil '></i></a>
                                             <a href="#" class='action-link'><i class='fa fa-times'></i></a>
+                                        </td>
+                                        <td>
+                                            {{count($restaurant->bookings()->where('status', 1)->where('scheduled_date', '>', \Carbon\Carbon::now()->toDateTimeString())->get()) }} Reservations
                                         </td>
                                     </tr>
                                 @endforeach
