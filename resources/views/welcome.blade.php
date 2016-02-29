@@ -57,12 +57,16 @@
                 @foreach($featuredRestaurants as $index=>$restaurant)
                     <div class="restaurant-cell">
                         <a href="{{url('restaurants/page/'.$restaurant->id)}}" >
-                            <img src="http://lorempixel.com/400/200/food/{{$index}}" class="thumbnail"/>
+                            @if(count($restaurant->pictures) != 0)
+                                <img src="http://res.cloudinary.com/ddnvpqjmh/image/upload/c_fill,h_300,w_300/{{$restaurant->pictures->first()->filename}}" class="thumbnail"/>
+                            @else
+                                <img src="http://lorempixel.com/400/200/food/{{$index}}" class="thumbnail"/>
+                            @endif
                             <div class='restaurant-info'>
                                 <h5 class='restaurant-title'>
                                     {{$restaurant->name}}
                                     <span class='price pull-right'>
-                                        ${{number_format((rand(200, 2000)/10), 2)}}
+                                        ${{number_format((rand(20, 200)/10), 2)}}
                                     </span>
                                 </h5>
 
@@ -107,7 +111,7 @@
                             <li>
                                 <span class='title'>
                                     <a href="{{url('restaurants/page/'.$restaurant->id)}}">{{$restaurant->name}}</a>
-                                    <strong class="pull-right price">${{number_format((rand(200, 2000)/10), 2)}}</strong>
+                                    <strong class="pull-right price">${{number_format((rand(10, 50 )/10), 2)}}</strong>
                                 </span>
                                 <p class='info short'>
                                     {{$restaurant->description}} Si ut domesticarum et e fugiat instituendarum o senserit an cernantur an noster
