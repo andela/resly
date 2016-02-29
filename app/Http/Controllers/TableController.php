@@ -119,7 +119,7 @@ class TableController extends Controller
     public function showBookings(Request $request)
     {
         $table = Table::find($request->table_id);
-        $bookings = $table->bookings;
+        $bookings = $table->bookings()->where('status', 1)->where('scheduled_date', '>', \Carbon\Carbon::now()->toDateTimeString())->get();
 
         return view('bookings.list', [
             'table' => $table, 

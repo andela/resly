@@ -43,7 +43,7 @@
                                         <td>{{$table->label}}</td>
                                         <td>{{$table->seats_number}}</td>
                                         <td>$ {{number_format($table->cost, 2)}}</td>
-                                        <td class='status booked'>{{count($table->bookings()->get())}}</td>
+                                        <td class='status booked'>{{count($table->bookings()->where('status', 1)->where('scheduled_date', '>', \Carbon\Carbon::now()->toDateTimeString())->get())}}</td>
                                         <td class='action'>
                                             <a href="{{url("/tables/$table->id/edit/")}}" title="Edit">
                                                 <i class="fa fa-pencil"></i>
