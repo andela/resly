@@ -71,7 +71,7 @@
                                 </h5>
 
                                 <div class="info">
-                                    {{$restaurant->description}}
+                                    {{$restaurant->description}}s
                                 </div>
                             </div>
                         </a>
