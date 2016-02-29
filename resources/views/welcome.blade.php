@@ -60,7 +60,7 @@
                             @if(count($restaurant->pictures) != 0)
                                 <img src="http://res.cloudinary.com/ddnvpqjmh/image/upload/c_fill,h_300,w_300/{{$restaurant->pictures->first()->filename}}" class="thumbnail"/>
                             @else
-                                <img src="http://lorempixel.com/400/200/food/{{$index}}" class="thumbnail"/>
+                                <img src="http://lorempixel.com/300/300/food/{{$index}}" class="thumbnail"/>
                             @endif
                             <div class='restaurant-info'>
                                 <h5 class='restaurant-title'>
