@@ -12,4 +12,9 @@ class Table extends Model
     {
         return $this->belongsTo('Resly\Restaurant');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany('Resly\Booking', 'table_id');
+    }
 }

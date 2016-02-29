@@ -116,6 +116,18 @@ class TableController extends Controller
         return $res_id;
     }
 
+    public function showBookings(Request $request)
+    {
+        $table = Table::find($request->table_id);
+        $bookings = $table->bookings;
+
+        return view('bookings.list', [
+            'table' => $table, 
+            'bookings' => $bookings,
+            'restaurant' => $table->restaurant
+            ]);
+    }
+
     private function saveAvatar($name, $table, $request)
     {
         //cloudinary public id for the image file

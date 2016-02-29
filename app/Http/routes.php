@@ -100,6 +100,7 @@ Route::get('bookings/addbulk', 'BookingController@addBulk');
 Route::post('bookings/begin', 'BookingController@begin');
 Route::post('bookings/create', 'BookingController@create');
 Route::post('bookings/cancel', 'BookingController@cancel');
+Route::get('bookings/{table_id}', 'TableController@showBookings');
 
 Route::get('gallery/{rest_id}', 'RestaurantGalleryController@index');
 Route::post('/gallery', 'RestaurantGalleryController@store');
