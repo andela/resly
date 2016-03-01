@@ -49,7 +49,7 @@
 
                                     </td>
                                     <td>
-                                        <h3>{{$table->label}}</h3>
+                                        <h3>{{$table->label}}<span class='pull-right'>{{ $table->seats_number }} seats</span></h3>
                                         <hr>
                                         <p>
                                             <strong>Table Description: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
