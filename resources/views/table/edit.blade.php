@@ -18,7 +18,7 @@
                             {{Session::get('success')}}
                         </div>
                     @endif
-                    {!! Form::model($table, ['url'=>url("/tables/$table->id"), 'method'=>'put']) !!}
+                    {!! Form::model($table, ['url'=>url("/tables/$table->id"), 'method'=>'put', 'files' => true]) !!}
                         @include('table.partials._add_form')
                         <button type = "submit" class="btn btn-primary" id="add_table">Save</button>
                     {!! Form::close() !!}

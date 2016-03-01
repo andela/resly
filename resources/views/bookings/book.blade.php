@@ -3,6 +3,7 @@
 @section('styles')
     @parent
     <link rel="stylesheet" type="text/css" href="{!! asset('css/jquery.datetimepicker.css') !!}">
+    <link rel='stylesheet' href="{{ asset('fancybox/source/jquery.fancybox.css') }}" />
 @endsection
 
 @section('title-suffix', '- Tables')
@@ -38,7 +39,9 @@
                                 <tr>
                                     <td class='table-image-holder'>
                                         @if($table->avatar !== null)
+                                          <a href='{{$table->avatar}}' class='fancybox'>
                                             <img src="{{$table->avatar}}" class='table-image'>
+                                          </a>
                                         @else
                                             <img src="{{asset('img/no-image-placeholder.jpg')}}" class='table-image'>
 
@@ -124,4 +127,11 @@
         lang:'eng'
     });
     </script>
+    <script type="text/javascript" src="{{ asset('fancybox/source/jquery.fancybox.js') }}"></script>
+    <script>
+       $(document).ready(function() {
+            $('.fancybox').fancybox();
+        });
+    </script>
 @endsection
+

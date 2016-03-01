@@ -62,10 +62,18 @@ class TableController extends Controller
 
     public function update(Request $request)
     {
-        $data = array_filter($request->all(), function ($var) {return ! is_null($var) || $var != '' || $var != 0; });
+        $data = $this->generateUpdateData($request->all());
+        
         $this->tableRepository->update($request->table_id, $data);
+        $table = Table::find($request->table_id);
 
-        return redirect()->back()->with('success', 'Table has been updated');
+        $name = $table->label.'-'.$table->id;
+
+        if($request->hasFile('avatar')){
+            $this->saveAvatar($name, $table, $request);
+        }
+
+        return redirect('/restaurants/'.$table->restaurant->id)->with('success', 'Table has been updated');
     }
 
     public function destroy(Request $request)
@@ -168,5 +176,17 @@ class TableController extends Controller
 
         //return the uploaded file's meta
         return $upload;
+    }
+
+    private function generateUpdateData($data)
+    {
+        $output = [];
+        foreach ($data as $key => $var) {
+            if ((is_null($var) || $var != '' || $var != 0) && ($key !== '_token' &&  $key!=='avatar')) {
+                $output[$key] = $var;
+            }
+        }
+
+        return $output;
     }
 }
