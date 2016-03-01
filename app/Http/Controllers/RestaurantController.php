@@ -217,7 +217,6 @@ class RestaurantController extends Controller
         //prepare results in json and push
         if (count($restaurants) > 0) {
             $output = $this->constructAssoc($restaurants, $lat, $lng);
-
             return response(json_encode($output))->header('Content-Type', 'application/json');
         } else {
             return 'nothing found';
@@ -242,6 +241,9 @@ class RestaurantController extends Controller
             $output[$i]['location'] = $record->location;
             $output[$i]['distance'] = $this->calcDistance($lat, $lng,
                 $record->latitude, $record->longitude, 'km', 3);
+            $output[$i]['avatar'] = ($record->pictures()->first()) == null ? 
+                asset('img/no-image-placeholder.jpg') :
+                'http://res.cloudinary.com/ddnvpqjmh/image/upload/c_fill,h_300,w_300/'.$record->pictures()->first()->filename;
             $i++;
         }
 

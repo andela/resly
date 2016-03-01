@@ -45,15 +45,16 @@ $(document).ready(function() {
 
     //constructs the nearby restaurants elements that would be dynamically
     function constructHtml(input) {
+        console.log(input);
     	output = '';
     	for (var i=0; i<input.length; i++) {
     		output += '<div class="col-md-3" style="margin-top:1em;">';
-    		output += '<a href = "'+"restaurants/page/" + input[i].id + '">';
+    		output += '<a href = "'+"restaurants/page/" + input[i].id + '" class="geo-thumbnail">';
     		output += '<div class="text-center thumbnail items">';
-    		output += '<img src="http://cdn.londonandpartners.com/visit/london-organisations/sketch/84245-640x360-sketch-restaurant-david-shrigley-640.jpg"';
-			output += 'width = 300 height = auto />';
+    		output += '<img src="'+ input[i].avatar +'"';
+			output += 'width = 300 height = 200 />';
     		output += '<h5 class="text-center">'+ input[i].name + ' (' +  input[i].distance +' km)</h5>';
-    		output += '<p style=\'color:#aa5555;\'>' + input[i].description + '</p>';
+    		output += '<p class="geo-desc" style=\'color:#aa5555;\'>' + input[i].description + '</p>';
     		output += '<p><small>' + input[i].location + '</small></p>';
   			output += '</div></a></div>';
     	}
