@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'HomeController@homepage');
+Route::get('/aboutus', 'HomeController@aboutus');
+Route::get('/contactus', 'HomeController@contactus');
 
 Route::get('auth/login', [
     'uses' => 'HomeController@login',
