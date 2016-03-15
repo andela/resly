@@ -1,6 +1,7 @@
 <?php
 
 use Resly\User;
+use Resly\Table;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -9,7 +10,7 @@ class BookingTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function testQuerryReservationAvailability()
+    public function testQueryReservationAvailability()
     {
         Session::start();
 
@@ -34,21 +35,25 @@ class BookingTest extends TestCase
         $this->seed('DatabaseSeeder');
 
         $diner = User::where('role', 'diner')->firstOrFail();
-
+        $table = Table::all()->first();
         $response = $this->actingAs($diner)
             ->withSession(['user_id' => $diner->id])
             ->call(
                 'POST',
                 'bookings/create',
                 [
-                    'table_id' => 1,
+                    'table_id' => $table->id,
                     'booking_time' => '16:00:00',
                     'booking_date' => '12/12/2015',
+                    'scheduled_date' => '12/12/2016',
+                    'user_id' =>  $diner->id,
+                    'cost' =>  $table->cost,
+                    'type' =>  'table',
+                    'duration' => '1',
                     'number_of_people' => 6,
                     '_token' => csrf_token()
                 ]
             );
-
         $this->assertEquals(200, $response->status());
     }
 
