@@ -28,7 +28,7 @@ class TableController extends Controller
     {
         return view('table.create')->with([
             'restaurant_id' => $request->restaurant_id,
-            'restaurant' => \Resly\Restaurant::find($request->restaurant_id)
+            'restaurant' => \Resly\Restaurant::find($request->restaurant_id),
             ]);
     }
 
@@ -41,7 +41,7 @@ class TableController extends Controller
     {
         $table = $this->tableRepository->store($request->all());
         $name = $table->label.'-'.$table->id;
-        if($request->hasFile('avatar')){
+        if ($request->hasFile('avatar')) {
             $this->saveAvatar($name, $table, $request);
         }
 
@@ -63,13 +63,13 @@ class TableController extends Controller
     public function update(Request $request)
     {
         $data = $this->generateUpdateData($request->all());
-        
+
         $this->tableRepository->update($request->table_id, $data);
         $table = Table::find($request->table_id);
 
         $name = $table->label.'-'.$table->id;
 
-        if($request->hasFile('avatar')){
+        if ($request->hasFile('avatar')) {
             $this->saveAvatar($name, $table, $request);
         }
 
@@ -130,9 +130,9 @@ class TableController extends Controller
         $bookings = $table->bookings()->where('status', 1)->where('scheduled_date', '>', \Carbon\Carbon::now()->toDateTimeString())->get();
 
         return view('bookings.list', [
-            'table' => $table, 
+            'table' => $table,
             'bookings' => $bookings,
-            'restaurant' => $table->restaurant
+            'restaurant' => $table->restaurant,
             ]);
     }
 
@@ -150,8 +150,6 @@ class TableController extends Controller
         //save avatar in database
         $table->avatar = $result['url'];
         $table->save();
-
-        return;
     }
 
     private function upload($filepath, $public_id)
@@ -182,7 +180,7 @@ class TableController extends Controller
     {
         $output = [];
         foreach ($data as $key => $var) {
-            if ((is_null($var) || $var != '' || $var != 0) && ($key !== '_token' &&  $key!=='avatar')) {
+            if ((is_null($var) || $var != '' || $var != 0) && ($key !== '_token' &&  $key !== 'avatar')) {
                 $output[$key] = $var;
             }
         }

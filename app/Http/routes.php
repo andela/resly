@@ -67,7 +67,6 @@ Route::get('restaurants/page/{id}', 'RestaurantController@showRestaurant');
 Route::get('restaurant/{id}/gallery', 'RestaurantController@showGallery');
 Route::post('restaurants/{restaurant_id}/rate', 'RestaurantController@rateRestaurant');
 
-
 /*
  * Tables Routes
  */
@@ -106,8 +105,6 @@ Route::get('gallery/{rest_id}', 'RestaurantGalleryController@index');
 Route::post('/gallery', 'RestaurantGalleryController@store');
 Route::delete('/gallery/{id}', 'RestaurantGalleryController@destroy');
 
-
-
 Route::get('cart/delete/{item_id}', 'BookingController@delteCartItem');
 /*
  * Restaurant Profile
@@ -119,7 +116,7 @@ Route::get('/restaurant/{restaurant_id}/book/', [
 
 Route::post('/booking/table/{table_id}/add', 'BookingController@addTable');
 Route::get('/booking/cart', 'BookingController@cart');
-Route::post('/cart/checkout','BookingController@checkout');
+Route::post('/cart/checkout', 'BookingController@checkout');
 Route::get('dashboard', [
     'uses' => 'DashboardController@showDashboard',
     'as' => 'dashboard',
@@ -146,7 +143,7 @@ Route::get('/user/{username}', [
     'middleware' => 'auth',
 ]);
 
-/** User reservations
+/* User reservations
  *
  */
 Route::get('/reservations/current', 'ReservationController@currentReservations');

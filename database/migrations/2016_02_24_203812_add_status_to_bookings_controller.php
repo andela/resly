@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddStatusToBookingsController extends Migration
@@ -12,7 +11,7 @@ class AddStatusToBookingsController extends Migration
      */
     public function up()
     {
-        Schema::table('bookings', function($table){
+        Schema::table('bookings', function ($table) {
             $table->integer('status')->default(1);
         });
     }
@@ -24,7 +23,7 @@ class AddStatusToBookingsController extends Migration
      */
     public function down()
     {
-        Schema::table('bookings', function($table){
+        Schema::table('bookings', function ($table) {
             $table->dropColumn(['status']);
         });
     }
