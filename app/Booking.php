@@ -15,7 +15,7 @@ class Booking extends Model
         'user_id',
         'table_id',
         'cost',
-        'type'
+        'type',
     ];
 
     protected $dates = ['deleted_at'];
@@ -34,6 +34,7 @@ class Booking extends Model
     {
         $table = Table::find($this->table_id);
         $restaurant = Restaurant::find($table->restaurant_id);
+
         return $restaurant;
     }
 }

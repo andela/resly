@@ -11,7 +11,6 @@ use Resly\Restaurant;
 use Resly\Booking;
 use Resly\Http\Requests;
 use willvincent\Rateable\Rating;
-use Gate;
 
 class RestaurantController extends Controller
 {
@@ -32,17 +31,19 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Displays view for all users, logged in or nothing
+     * Displays view for all users, logged in or nothing.
      * @param  Request $request request oci_fetch_object
      * @return View           view to display
      */
-    public function showRestaurant(Request $request){
+    public function showRestaurant(Request $request)
+    {
         $restaurant = Restaurant::find($request->id);
+
         return view('restaurant.page', compact('restaurant'));
     }
 
     /**
-     * Shows restaurants owned by a restaurant owner with given ID
+     * Shows restaurants owned by a restaurant owner with given ID.
      * @param  Request          $request          request object
      * @param  TablesRepository $tablesRepository repository for getting table properties
      * @return View                             view to render
@@ -57,7 +58,7 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Displays gallery of a restaurant
+     * Displays gallery of a restaurant.
      * @param  Request $request request object
      * @return View           view to render
      */
@@ -65,11 +66,12 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::find($request->id);
         $pictures = $restaurant->pictures()->get();
+
         return view('restaurant.show_gallery', compact('restaurant', 'pictures'));
     }
 
     /**
-     * Displays list of visited restaurant by logged in user
+     * Displays list of visited restaurant by logged in user.
      * @param  Request $request request object
      * @return View           view to render
      */
@@ -83,7 +85,7 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Displays view for adding restaurant for a restaurateur
+     * Displays view for adding restaurant for a restaurateur.
      * @return View view to render
      */
     public function create()
@@ -94,7 +96,7 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Renders view to edit a restaurant created by logged in user
+     * Renders view to edit a restaurant created by logged in user.
      * @param  Request $request       request object
      * @param  int  $restaurant_id id of restaurnat to edit
      * @return View                 View to render
@@ -114,7 +116,7 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Saves a restaurant edit to the database
+     * Saves a restaurant edit to the database.
      * @param  Request $request       request object
      * @param  int  $restaurant_id restauant id to save
      * @return View                 view to render
@@ -196,7 +198,7 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Fetch nearby restaurant
+     * Fetch nearby restaurant.
      * @param  Request $request request object
      * @return View           view to render
      */
@@ -217,6 +219,7 @@ class RestaurantController extends Controller
         //prepare results in json and push
         if (count($restaurants) > 0) {
             $output = $this->constructAssoc($restaurants, $lat, $lng);
+
             return response(json_encode($output))->header('Content-Type', 'application/json');
         } else {
             return 'nothing found';
@@ -241,7 +244,7 @@ class RestaurantController extends Controller
             $output[$i]['location'] = $record->location;
             $output[$i]['distance'] = $this->calcDistance($lat, $lng,
                 $record->latitude, $record->longitude, 'km', 3);
-            $output[$i]['avatar'] = ($record->pictures()->first()) == null ? 
+            $output[$i]['avatar'] = ($record->pictures()->first()) == null ?
                 asset('img/no-image-placeholder.jpg') :
                 'http://res.cloudinary.com/ddnvpqjmh/image/upload/c_fill,h_300,w_300/'.$record->pictures()->first()->filename;
             $i++;
@@ -251,14 +254,14 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Calculate distance between
-     * @param  integer  $point1_lat  latitue of point 1
-     * @param  integer  $point1_long  longitude of point 1
-     * @param  integer  $point2_lat  latitude of point 2
-     * @param  integer  $point2_long longitude of point 2
+     * Calculate distance between.
+     * @param  int  $point1_lat  latitue of point 1
+     * @param  int  $point1_long  longitude of point 1
+     * @param  int  $point2_lat  latitude of point 2
+     * @param  int  $point2_long longitude of point 2
      * @param  string  $unit        unit of measurement
-     * @param  integer $decimals    [description]
-     * @return integer               distance between the two points
+     * @param  int $decimals    [description]
+     * @return int               distance between the two points
      */
     private function calcDistance(
         $point1_lat, $point1_long,
@@ -293,7 +296,7 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Gets the coordinates of a point
+     * Gets the coordinates of a point.
      * @param  string $location location of point to fetch coordinates for
      * @return array           of longitude and latitude
      */

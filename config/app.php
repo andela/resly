@@ -151,7 +151,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
-        willvincent\Rateable\RateableServiceProvider::class
+        willvincent\Rateable\RateableServiceProvider::class,
 
     ],
 
