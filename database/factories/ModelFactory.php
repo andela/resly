@@ -19,7 +19,6 @@ $factory->define(Resly\Diner::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'avatar' => $faker->url,
         'fname' => $faker->name,
-        'username' => $faker->name,
         'lname' => $faker->name,
         'email' => $faker->safeEmail,
         'password' => bcrypt('resly'),
@@ -43,7 +42,6 @@ $factory->define(Resly\User::class, function (Faker\Generator $faker) {
     return [
         'fname' => $faker->firstName,
         'lname' => $faker->lastName,
-        'username' => $faker->userName,
         'email' => $faker->safeEmail,
         'password' => bcrypt('resly'),
         'role' => 'diner',
@@ -77,7 +75,7 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
     $menuItem = factory('Resly\MenuItem')->create([
         'restaurant_id' => $restaurant->id,
     ]);
-    
+
 
     return [
         'restaurant_id' => $restaurant->id,

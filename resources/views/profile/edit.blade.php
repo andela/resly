@@ -22,10 +22,6 @@
                     <form class="form-vertical" role="form" method="post" action="{{ route('userProfileEdit') }}" enctype="multipart/form-data">
                       @include('partials.error')
                         <div class="form-group">
-                            <label for="username" class="control-label">Username</label>
-                            <input type="text" name="username" class="form-control" id="username" value="{{ old('username') ?: auth()->user()->username }}">
-                        </div>
-                        <div class="form-group">
                             <label for="fname" class="control-label">First name</label>
                             <input type="text" name="fname" class="form-control" id="fname" value="{{ old('fname') ?: auth()->user()->fname }}">
                         </div>

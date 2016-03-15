@@ -147,7 +147,6 @@ class RestaurantController extends Controller
             $restaurant->fill($request->all());
             $restaurant->save();
             $user = auth()->user();
-            $username = $user->username;
 
             return redirect('/dashboard');
         } else {
@@ -241,7 +240,7 @@ class RestaurantController extends Controller
             $output[$i]['location'] = $record->location;
             $output[$i]['distance'] = $this->calcDistance($lat, $lng,
                 $record->latitude, $record->longitude, 'km', 3);
-            $output[$i]['avatar'] = ($record->pictures()->first()) == null ? 
+            $output[$i]['avatar'] = ($record->pictures()->first()) == null ?
                 asset('img/no-image-placeholder.jpg') :
                 'http://res.cloudinary.com/ddnvpqjmh/image/upload/c_fill,h_300,w_300/'.$record->pictures()->first()->filename;
             $i++;
