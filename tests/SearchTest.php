@@ -20,7 +20,7 @@ class SearchTest extends TestCase
     {
         $this->visit('/')
              ->type('name', 'query')
-             ->press('Find')
+             ->press('Go!')
              ->seePageIs('/search?query=name')
              ->see('Results');
     }
