@@ -77,7 +77,6 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
     $menuItem = factory('Resly\MenuItem')->create([
         'restaurant_id' => $restaurant->id,
     ]);
-    
 
     return [
         'restaurant_id' => $restaurant->id,
@@ -94,7 +93,7 @@ $factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
         'user_id' => factory('Resly\User')->create(['role' => 'diner'])->id,
         'table_id' => factory('Resly\Table')->create()->id,
         'cost' => $faker->randomFloat(null, 5, 120),
-        'type' => $faker->word
+        'type' => $faker->word,
 
     ];
 });
