@@ -1,4 +1,4 @@
-@extends('dashboard.registration')
+@extends('layouts.inner')
 
 @section('title', 'About Us')
 @section('styles')

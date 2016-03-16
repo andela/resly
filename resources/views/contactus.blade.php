@@ -1,4 +1,4 @@
-@extends('dashboard.registration')
+@extends('layouts.inner')
 
 @section('title', 'Contact Us')
 @section('styles')
@@ -14,22 +14,22 @@
             <h3>Contact Us</h3>
         </div>
     </div>
-    <div class='row'>
+    <div class='row' id="contactus">
         <div class='col col-md-12 page-body'>
             <div class="row">
 	          
 				<table class="table table-striped">
                     <tr>
-                        <td><i class="fa fa-map-marker"></i> Location:</td>
+                        <td width="17%"><i class="fa fa-map-marker"></i> Location</td>
                         <td>55, Andela Street, Kenya, Nigeria</td>
                     </tr>
                     <tr>
-                        <td><i class="fa fa-phone"></i> Telephone:</td>
+                        <td width="17%"><i class="fa fa-phone"></i> Telephone</td>
                         <td>+234 (0) 803 837 8157, +234 (0) 803 671 6444</td>
                     </tr>
                     <tr>
-                        <td><i class="fa fa-envelope"></i> Email:</td>
-                        <td>contactus@resly.app</td>
+                        <td width="17%"><i class="fa fa-envelope"></i> Email</td>
+                        <td colspan="4">contactus@resly.app</td>
                     </tr>
                     
                 </table>
