@@ -33,7 +33,7 @@ body{
 }
 
 .navbar a:hover{
-    color: crimson;
+    color: #990000;
 }
 
 .navbar-brand{
@@ -49,7 +49,7 @@ body{
 .navbar-default .navbar-nav>.open>a, .navbar-default
 .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
     background:rgba(0,0,0,0.5);
-    color: crimson;
+    color: #990000;
 }
 
 .navbar-resly{
@@ -87,7 +87,7 @@ body{
 }
 
 .dropdown-menu li a:hover {
-    color: crimson;
+    color: #990000;
     background: none;
     display:block;
 }
@@ -313,7 +313,7 @@ footer {
   bottom: 0;
   width: 100%;
   height: 60px;
-  background-color: red;
+  background-color: #FF0000;
 
 }
 
