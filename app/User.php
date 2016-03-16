@@ -29,7 +29,7 @@ class User extends Model implements
         'provider_name',
         'stripe_id',
         'card_brand',
-        'card_last_four'
+        'card_last_four',
     ];
 
     protected $hidden = ['password', 'remember_token'];
