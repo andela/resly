@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddAvatarToTablesTable extends Migration
@@ -12,7 +11,7 @@ class AddAvatarToTablesTable extends Migration
      */
     public function up()
     {
-        Schema::table('tables', function($table){
+        Schema::table('tables', function ($table) {
             $table->string('avatar')->nullable();
         });
     }
@@ -24,7 +23,7 @@ class AddAvatarToTablesTable extends Migration
      */
     public function down()
     {
-        Schema::table('tables', function($table){
+        Schema::table('tables', function ($table) {
             $table->dropColumn(['avatar']);
         });
     }

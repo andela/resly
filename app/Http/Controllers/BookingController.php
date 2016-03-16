@@ -194,27 +194,28 @@ class BookingController extends Controller
 
     public function addTable(Request $request)
     {
-        if(Auth::guest()){
+        if (Auth::guest()) {
             $request->session()->put('redirect_back', URL::previous());
+
             return redirect('/auth/login');
         }
 
         $table = $this->tableRepo->get($request->table_id);
         Cart::add([
-            'id'=>time(),
-            'name'=>$table->label,
-            'quantity'=>1,
-            'price'=>round($table->cost, 2),
-            'attributes' =>
-            [
-                'item_id'=>$table->id,
-                'date'=>$request->date,
-                'duration'=>$request->duration,
-                'type'=>'table'
-            ]
+            'id' => time(),
+            'name' => $table->label,
+            'quantity' => 1,
+            'price' => round($table->cost, 2),
+            'attributes' => [
+                'item_id' => $table->id,
+                'date' => $request->date,
+                'duration' => $request->duration,
+                'type' => 'table',
+            ],
         ]);
 
         Session::flash('success', 'Table added to cart');
+
         return redirect()->back();
     }
 
@@ -226,6 +227,7 @@ class BookingController extends Controller
     public function delteCartItem($item_id)
     {
         Cart::remove($item_id);
+
         return redirect()->back()->with('success', 'Item removed');
     }
 
@@ -233,7 +235,7 @@ class BookingController extends Controller
     {
         $user = Auth::user();
 
-        $return = $user->charge(Cart::getTotal()*100, [
+        $return = $user->charge(Cart::getTotal() * 100, [
             'source' => $request->stripeToken,
             'receipt_email' => $user->email,
         ]);
@@ -241,7 +243,7 @@ class BookingController extends Controller
         $cart = Cart::getContent();
 
         $data = [];
-        foreach($cart as $item) {
+        foreach ($cart as $item) {
             $temp['scheduled_date'] = date('Y-m-d h:i:s', strtotime($item->attributes->date));
             $temp['duration'] = $item->attributes->duration;
             $temp['type'] = $item->attributes->type;
@@ -254,17 +256,16 @@ class BookingController extends Controller
 
         // Booking::create($data);
 
-
-
         //clear cart
         $this->clearCart();
+
         return redirect('/')->with('success', 'Payment complete');
     }
 
     private function clearCart()
     {
         $cart_contents = Cart::getContent();
-        foreach($cart_contents as $index => $item){
+        foreach ($cart_contents as $index => $item) {
             Cart::remove($item->id);
         }
     }
