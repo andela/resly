@@ -33,4 +33,14 @@ class HomeController extends Controller
 
         return view('welcome', compact('latestRestaurants', 'featuredRestaurants'));
     }
+
+    public function aboutUs()
+    {
+        return view('aboutus');
+    }
+
+    public function contactUs()
+    {
+        return view('contactus');
+    }
 }
