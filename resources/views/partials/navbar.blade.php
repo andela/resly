@@ -55,8 +55,8 @@
                 <li><a href="{{ route('login') }}" target="_self">Login</a></li>
                 <li><a href="{{ route('register') }}" target="_self">Register</a></li>
             @endcan
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">About us</a></li>
+            <li><a href="{{url('/contactus')}}">Contact us</a></li>
+            <li><a href="{{url('/aboutus')}}">About us</a></li>
 
             @can('authenticated')
                 <li>
