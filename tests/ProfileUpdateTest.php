@@ -31,9 +31,9 @@ class ProfileUpdateTest extends TestCase
         $user = factory('Resly\User')->create();
         $this->actingAs($user)
              ->visit('/user/profile/edit')
-             ->type('newUsername', 'username')
+             ->type('newFirstName', 'fname')
              ->press('Update');
 
-        $this->seeInDatabase('users', ['username' => 'newUsername']);
+        $this->seeInDatabase('users', ['fname' => 'newFirstName']);
     }
 }
