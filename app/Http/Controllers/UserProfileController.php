@@ -16,6 +16,7 @@ class UserProfileController extends Controller
     public function getEdit()
     {
         $this->authorize('authenticated');
+
         return view('profile.edit');
     }
 
@@ -24,7 +25,7 @@ class UserProfileController extends Controller
         $this->validate($request, [
             'fname' => 'alpha|max:50',
             'lname' => 'alpha|max:50',
-            'avatar' => 'mimes:jpg,jpeg,png|max:2000'
+            'avatar' => 'mimes:jpg,jpeg,png|max:2000',
         ]);
 
         Auth::user()->update([
@@ -34,13 +35,12 @@ class UserProfileController extends Controller
 
         $filename = $request->input('fname').'-'.$request->input('lname').'-'.Auth::user()->id;
 
-        if($request->hasFile('avatar')){
+        if ($request->hasFile('avatar')) {
             $this->saveAvatar($filename, $request);
         }
 
         return redirect()->route('userProfileEdit');
     }
-
 
     private function saveAvatar($name, $request)
     {
@@ -57,8 +57,6 @@ class UserProfileController extends Controller
         $user = Auth::user();
         $user->avatar = $result['url'];
         $user->save();
-
-        return;
     }
 
     private function upload($filepath, $public_id)
