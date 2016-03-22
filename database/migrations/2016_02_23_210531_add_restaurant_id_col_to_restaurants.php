@@ -11,7 +11,6 @@ class AddRestaurantIdColToRestaurants extends Migration
      */
     public function up()
     {
-
         Schema::table('restaurant_pictures', function ($table) {
             $table->integer('restaurant_id')->unsigned()->default(-1);
             $table->foreign('restaurant_id')->references('id')->on('restaurants');
