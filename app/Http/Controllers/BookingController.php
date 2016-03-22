@@ -244,7 +244,7 @@ class BookingController extends Controller
 
         $data = [];
         foreach ($cart as $item) {
-            $temp['scheduled_date'] = date('Y-m-d h:i:s', strtotime($item->attributes->date));
+            $temp['scheduled_date'] = date('Y-m-d H:i:s', strtotime($item->attributes->date));
             $temp['duration'] = $item->attributes->duration;
             $temp['type'] = $item->attributes->type;
             $temp['table_id'] = $item->attributes->item_id;
