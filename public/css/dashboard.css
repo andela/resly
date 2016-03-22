@@ -11,10 +11,18 @@ body{
 }
 
 .btn-primary{
-    border-radius: 0;
-    background: rgba(235, 43, 54, 1);
-    border:rgba(235, 80, 67, 1);
+     border-radius: 3px;
+     background: rgb(253, 43, 54);
+     border:rgba(235, 80, 67, 1);
+     color: #fff;
 }
+
+.btn-primary:hover{
+    background: rgba(235, 80, 67, 1);
+    color: #fff !important;
+}
+
+
 
 .btn-upload{
     background: #00b075;
@@ -23,8 +31,9 @@ body{
 .btn-upload:hover{
     background: #008875 !important;
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+.btn-primary:focus, .btn-primary:active{
     background: rgba(235, 80, 67, 1);
+/*     color:  #fff; */
 }
 
 .form-control, select{
@@ -53,15 +62,31 @@ body{
     padding: 0;
 }
 .navbar{
-    background:rgba(235, 43, 54, 1);
+    background:rgba(253, 43, 54, 1);
     top:0;
-    padding: 10px;
+    padding: 6px;
+}
+
+.navbar-right li a:hover{
+    background-color: #fed;
+    color: #990000;
+    border-radius: 3px;
 }
 
 
+.dropdown-menu li a:hover {
+    background: none;
+}
+
+.dropdown-menu {
+    background:rgba(0,0,0,0.69);
+}
 
 .navbar a:hover{
-    color: #BBB24D !important;
+    display: block;
+    color: #fff;
+    border-radius: 3px;
+    text-shadow: #7FFFD4;
 }
 .page-content{
     background: #FFF;

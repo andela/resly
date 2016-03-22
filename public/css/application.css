@@ -22,11 +22,10 @@ body{
 .navbar{
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease;
-    top:20px;
+    top:10px;
 }
 .navbar a{
     color:#FFF ;
-
 }
 
 .nav>li>a:hover, .nav>li>a:focus{
@@ -34,23 +33,23 @@ body{
 }
 
 .navbar a:hover{
-    color: #BBB24D;
+    color: #990000;
 }
 
 .navbar-brand{
     font-family: 'Montez', cursive;
     font-size: 3em !important;
     font-weight: bold;
-    color:#FEFEF4 !important;
     -webkit-transition: all 0.4s ease;
    transition: all 0.4s ease;
 }
+
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
 .navbar-default .navbar-nav>.open>a, .navbar-default
 .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
     background:rgba(0,0,0,0.5);
-    color:#BBB24D;
+    color: #990000;
 }
 
 .navbar-resly{
@@ -59,6 +58,10 @@ body{
     box-shadow: none;
 }
 
+.navbar {
+    position: absolute;
+    width: 100%;
+}
 .navbar-default{
     background:rgba(0,0,0,0.7) !important;
     padding: 10px 0px;
@@ -69,8 +72,13 @@ body{
     color:#FFF !important;
 }
 
+.navbar-default a:hover{
+    color:red !important;
+}
+
 .dropdown-menu {
-    background:rgba(0,0,0,0.9);
+    background:rgba(0,0,0,0.89);
+    width: 100%
 }
 
 .dropdown-menu li a{
@@ -79,16 +87,12 @@ body{
 }
 
 .dropdown-menu li a:hover {
-    color: #BBB24D;
+    color: #990000;
+    background: none;
+    display:block;
 }
 
-.dropdown-menu li:hover{
-    background: none;
-}
-.dropdown-menu li:hover a{
-    color:;
-    background: none;
-}
+
 #hero{
     height: 100%;
     min-width: 100%;
@@ -262,7 +266,7 @@ body{
 .restaurant-info .info, #latest-restaurants-section .info{
     padding:10px 0px;
     height: 150px;
-    text-align: center;
+    text-align: left;
     font-size:14px;
     color:#888;
     max-height: 150px;
@@ -309,7 +313,7 @@ footer {
   bottom: 0;
   width: 100%;
   height: 60px;
-  background-color: red;
+  background-color: #FF0000;
 
 }
 

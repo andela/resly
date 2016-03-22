@@ -25,7 +25,7 @@
                     <div class="col col-sm-5 col-lg-8 col-md-8">
                         <div class="input-group">
                             <span class='input-group-addon'><i class='fa fa-search'></i></span>
-                            <input type="text" class="form-control" name="query" placeholder="Search for restaurant... name or location">
+                            <input type="text" class="form-control" required id="query" name="query" placeholder="Search for restaurant... name or location">
                         </div>
                     </div>
 

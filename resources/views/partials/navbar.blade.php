@@ -1,4 +1,4 @@
-<nav class="navbar navbar-fixed-top navbar-resly">
+<nav class="navbar navbar-static-top navbar-resly">
     <div class="container">
 
 
@@ -18,11 +18,11 @@
             @can('authenticated')
                 <li class='dropdown'>
                     <a href="#" class='dropdown-toggle' data-toggle='dropdown' >
-                        {{ auth()->user()->username }} <span class = "caret"></span>
+                        {{ auth()->user()->fname }} <span class = "caret"></span>
                     </a>
                     <ul class="dropdown-menu " role = "menu">
                         <li>
-                            <a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">
+                            <a href="{{ route('userProfile', ['fname' => auth()->user()->fname]) }}">
                                 Your Profile
                             </a>
                         </li>
