@@ -199,7 +199,7 @@ class BookingController extends Controller
 
             return redirect('/auth/login');
         }
-       // var_dump($request->date);exit;
+       
         $validator = Validator::make(
             $request->all(),
             [
@@ -216,7 +216,9 @@ class BookingController extends Controller
 
         $table = $this->tableRepo->get($request->table_id);
 
-        //User can only book 30mins from time. A 2mins delay time is substracted in other to cater for any delay in tranferring the request to the server.
+        // User can only book 30mins from time. 
+        // A 2mins delay time is substracted in other to cater for any delay in 
+        // tranferring the request to the server.
         $allowedBookingDateTime = new \DateTime();
         $allowedBookingDateTime->add(new \DateInterval('PT28M'));
        
@@ -225,7 +227,7 @@ class BookingController extends Controller
         $interval = $allowedBookingDateTime->diff($bookingDateTime);
    
         // Calculate the seconds difference between the allowedBookingDateTime and bookingDateTime
-        //Reference: http://stackoverflow.com/questions/14277611/convert-dateinterval-object-to-seconds-in-php
+        // Reference: http://stackoverflow.com/questions/14277611/convert-dateinterval-object-to-seconds-in-php
         $seconds = date_create('@0')->add($interval)->getTimestamp();
        
         if($seconds < 0 ){

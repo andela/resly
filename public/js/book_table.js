@@ -1,8 +1,9 @@
 
 $(document).ready(function(){
-   //http://stackoverflow.com/questions/10087819/convert-date-to-another-timezone-in-javascript
-  function toTimeZone(time, zone) {
+   // Reference: http://stackoverflow.com/questions/10087819/convert-date-to-another-timezone-in-javascript
+   function toTimeZone(time, zone) {
     var format = 'DD/MM/YYYY H:mm';
+    
     return moment(time, format).tz(zone).format(format);
   }
 
@@ -11,7 +12,7 @@ $(document).ready(function(){
       var msg = "";
       //Parse the date from the form book date form field
       var bookDate = moment($('#bookDate').val(),"DD/MM/YYYY H:mm", true);
-      if(!bookDate.isValid()){
+      if (!bookDate.isValid()) {
         msg = "The date specified is not valid."
         alertify.error(msg);
         
@@ -21,7 +22,7 @@ $(document).ready(function(){
       var next30MinsFromNow = moment().add(30, 'minutes').seconds(0);
 
       var maxDate = moment.max(bookDate,next30MinsFromNow);
-      if(maxDate.diff(bookDate, 'minutes') > 0){
+      if (maxDate.diff(bookDate, 'minutes') > 0) {
         msg = "The specified date and time must be greater than or equal to the next 30mins from now.";
         alertify.error(msg);
 
@@ -30,10 +31,10 @@ $(document).ready(function(){
       //Convert to UTC for server
       $('#bookDate').val(toTimeZone($('#bookDate').val(),'UTC'));
     });
-    
-    jQuery('.bookDate').datetimepicker({
-      format:'d/m/Y H:i',
-      lang:'eng',
-      minDate: moment().format('YYYY/MM/D')
-    });
+
+  jQuery('.bookDate').datetimepicker({
+    format:'d/m/Y H:i',
+    lang:'eng',
+    minDate: moment().format('YYYY/MM/D')
+  });
 });
