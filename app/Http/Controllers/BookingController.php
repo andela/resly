@@ -221,17 +221,17 @@ class BookingController extends Controller
         // tranferring the request to the server.
         $allowedBookingDateTime = new \DateTime();
         $allowedBookingDateTime->add(new \DateInterval('PT28M'));
-       
-        $bookingDateTime = \DateTimeImmutable::createFromFormat('d/m/Y H:i',$request->date);
-       
+
+        $bookingDateTime = \DateTimeImmutable::createFromFormat('d/m/Y H:i', $request->date);
+
         $interval = $allowedBookingDateTime->diff($bookingDateTime);
-   
+
         // Calculate the seconds difference between the allowedBookingDateTime and bookingDateTime
         // Reference: http://stackoverflow.com/questions/14277611/convert-dateinterval-object-to-seconds-in-php
         $seconds = date_create('@0')->add($interval)->getTimestamp();
-       
-        if($seconds < 0 ){
-            Session::flash('error', 'The specified date and time must be greater than or equal to the next 30mins from now.');  
+
+        if ($seconds < 0) {
+            Session::flash('error', 'The specified date and time must be greater than or equal to the next 30mins from now.');
         } else {
             //Convert to correct format
             $request->date = str_replace('/', '-', $request->date);
@@ -247,7 +247,7 @@ class BookingController extends Controller
                     'type' => 'table',
                 ],
             ]);
-            Session::flash('success', 'Table added to cart');  
+            Session::flash('success', 'Table added to cart');
         }
 
         return redirect()->back();
