@@ -66,7 +66,7 @@
                                                   <td></td>
                                               </tr>
                                               <tr>
-                                                  <td><input type='text' class='bookDate form-control' name='date' placeholder="Dining Date"></td>
+                                                  <td><input type='text' class='bookDate form-control' name='date' id="bookDate" placeholder="Dining Date" required="required"></td>
                                                   <td>
                                                       <select name='duration' placeholder='Duration' class='form-control'>
                                                           <option value="1"> 1 Hour </option>
@@ -120,18 +120,12 @@
 
 
 @section('scripts')
-    <script type="text/javascript" src='{!! asset('js/jquery.datetimepicker.full.min.js') !!}'></script>
-    <script type="text/javascript">
-    jQuery('.bookDate').datetimepicker({
-        format:'d.m.Y H:i',
-        lang:'eng'
-    });
+    <script type="text/javascript" src='{!! asset('js/jquery.datetimepicker.full.min.js') !!}'>
     </script>
+    <script type="text/javascript" src='{!! asset('js/moment.min.js') !!}'></script>
+    <script type="text/javascript" src='{!! asset('js/moment-timezone.min.js') !!}'></script>
     <script type="text/javascript" src="{{ asset('fancybox/source/jquery.fancybox.js') }}"></script>
-    <script>
-       $(document).ready(function() {
-            $('.fancybox').fancybox();
-        });
-    </script>
+    <script type="text/javascript" src='{!! asset('js/book_table.js') !!}'></script>
+
 @endsection
 

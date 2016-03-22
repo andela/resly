@@ -71,7 +71,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cloudinary/cloudinary_php/zipball/3d82f544d6fd8e4135ab9712093840d20cec5bac",
+                "url": "https://api.github.com/repos/cloudinary/cloudinary_php/zipball/ecb37cc019dafd3512ab0c663f8201ae32d317ef",
                 "reference": "3d82f544d6fd8e4135ab9712093840d20cec5bac",
                 "shasum": ""
             },
@@ -2447,7 +2447,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/8c83ff9a2ffbed1e606bc816db11ddc2385a16ee",
+                "url": "https://api.github.com/repos/symfony/config/zipball/38711092665edc06ef55e842942fb813932ff4ac",
                 "reference": "8c83ff9a2ffbed1e606bc816db11ddc2385a16ee",
                 "shasum": ""
             },

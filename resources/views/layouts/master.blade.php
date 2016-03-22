@@ -27,7 +27,7 @@
             alertify.success("{{Session::get('success')}}");
             {{Session::forget('success')}}
         @elseif(Session::has('error'))
-            alertify.success("{{Session::get('error')}}");
+            alertify.error("{{Session::get('error')}}");
             {{Session::forget('error')}}
         @elseif(Session::has('info'))
             alertify.log("{{Session::get('info')}}");
