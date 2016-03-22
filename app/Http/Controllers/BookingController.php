@@ -199,7 +199,7 @@ class BookingController extends Controller
 
             return redirect('/auth/login');
         }
-       
+
         $validator = Validator::make(
             $request->all(),
             [
@@ -216,8 +216,8 @@ class BookingController extends Controller
 
         $table = $this->tableRepo->get($request->table_id);
 
-        // User can only book 30mins from time. 
-        // A 2mins delay time is substracted in other to cater for any delay in 
+        // User can only book 30mins from time.
+        // A 2mins delay time is substracted in other to cater for any delay in
         // tranferring the request to the server.
         $allowedBookingDateTime = new \DateTime();
         $allowedBookingDateTime->add(new \DateInterval('PT28M'));
