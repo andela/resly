@@ -22,6 +22,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="{!! asset('js/jquery.cookie.js') !!}"></script>
     <script src="{!! asset('js/alertify.js') !!}"></script>
+    <script src="{!! asset('js/search.js') !!}"></script>
     <script type="text/javascript">
         @if(Session::has('success'))
             alertify.success("{{Session::get('success')}}");
