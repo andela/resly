@@ -200,21 +200,55 @@ class BookingController extends Controller
             return redirect('/auth/login');
         }
 
-        $table = $this->tableRepo->get($request->table_id);
-        Cart::add([
-            'id' => time(),
-            'name' => $table->label,
-            'quantity' => 1,
-            'price' => round($table->cost, 2),
-            'attributes' => [
-                'item_id' => $table->id,
-                'date' => $request->date,
-                'duration' => $request->duration,
-                'type' => 'table',
-            ],
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'duration' => 'required|digits_between:1,10',
+                'date' => 'required|date_format:d/m/Y H:i',
+            ]
+        );
 
-        Session::flash('success', 'Table added to cart');
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator);
+        }
+
+        $table = $this->tableRepo->get($request->table_id);
+
+        // User can only book 30mins from time.
+        // A 2mins delay time is substracted in other to cater for any delay in
+        // tranferring the request to the server.
+        $allowedBookingDateTime = new \DateTime();
+        $allowedBookingDateTime->add(new \DateInterval('PT28M'));
+
+        $bookingDateTime = \DateTimeImmutable::createFromFormat('d/m/Y H:i', $request->date);
+
+        $interval = $allowedBookingDateTime->diff($bookingDateTime);
+
+        // Calculate the seconds difference between the allowedBookingDateTime and bookingDateTime
+        // Reference: http://stackoverflow.com/questions/14277611/convert-dateinterval-object-to-seconds-in-php
+        $seconds = date_create('@0')->add($interval)->getTimestamp();
+
+        if ($seconds < 0) {
+            Session::flash('error', 'The specified date and time must be greater than or equal to the next 30mins from now.');
+        } else {
+            //Convert to correct format
+            $request->date = str_replace('/', '-', $request->date);
+            Cart::add([
+                'id' => time(),
+                'name' => $table->label,
+                'quantity' => 1,
+                'price' => round($table->cost, 2),
+                'attributes' => [
+                    'item_id' => $table->id,
+                    'date' => $request->date,
+                    'duration' => $request->duration,
+                    'type' => 'table',
+                ],
+            ]);
+            Session::flash('success', 'Table added to cart');
+        }
 
         return redirect()->back();
     }
