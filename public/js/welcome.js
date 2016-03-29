@@ -17,7 +17,7 @@ $(document).ready(function() {
    if (startchange.length){
    $(document).scroll(function() {
       scroll_start = $(this).scrollTop();
-      
+
       if(scroll_start > 41) {
           $(".navbar-fixed-top").addClass('navbar-default');
        } else {

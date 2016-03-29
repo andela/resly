@@ -158,6 +158,10 @@ body{
     font-weight: 700;
 }
 
+.navbar-searche{
+    padding: 0px;
+    display: table;
+}
 
 .page-title a{
     color:#EBEBEB;
