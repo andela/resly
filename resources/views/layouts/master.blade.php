@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('css/alertify.default.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('css/application.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('css/changepassword.css') !!}">
     @yield('styles')
 </head>
 <body>
@@ -23,6 +24,7 @@
     <script src="{!! asset('js/jquery.cookie.js') !!}"></script>
     <script src="{!! asset('js/alertify.js') !!}"></script>
     <script src="{!! asset('js/search.js') !!}"></script>
+    <script src="{!! asset('js/changepassword.js') !!}"></script>
     <script type="text/javascript">
         @if(Session::has('success'))
             alertify.success("{{Session::get('success')}}");

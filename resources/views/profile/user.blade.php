@@ -37,4 +37,5 @@
             </div>
         </div>
     </div>
+    @include('partials.changePassword')
 @endsection
