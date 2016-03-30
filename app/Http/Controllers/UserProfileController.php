@@ -22,13 +22,13 @@ class UserProfileController extends Controller
 
     public function postEdit(Request $request)
     {
-        $this->validate($requestequest, [
+        $this->validate($request, [
             'fname' => 'alpha|max:50',
             'lname' => 'alpha|max:50',
             'avatar' => 'mimes:jpg,jpeg,png|max:2000',
         ]);
 
-        Auth::users()->update([
+        Auth::user()->update([
             'fname' => $request->input('fname'),
             'lname' => $request->input('lname'),
         ]);
