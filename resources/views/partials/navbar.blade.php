@@ -47,10 +47,10 @@
                                     </li>
                                     <li class='dropdown'>
                                         <a href="#" class='dropdown-toggle' data-toggle='dropdown' >
-                                            {{ auth()->user()->fname }} <span class = "caret"></span>
+                                            {{ auth()->user()->username }} <span class = "caret"></span>
                                         </a>
                                         <ul class="dropdown-menu " role = "menu">
-                                            <li><a href="{{ route('userProfile', ['fname' => auth()->user()->fname]) }}">Your Profile</a></li>
+                                            <li><a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}">Your Profile</a></li>
                                             <li>
                                                 @can('restaurateur-user')
                                                     <a href="{{url('/restaurants')}}">My Restaurants</a>

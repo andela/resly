@@ -8,7 +8,7 @@ use Resly\User;
 
 class UserProfileController extends Controller
 {
-    public function getProfile($fname)
+    public function getProfile($username)
     {
         return view('profile.user');
     }
@@ -23,12 +23,14 @@ class UserProfileController extends Controller
     public function postEdit(Request $request)
     {
         $this->validate($request, [
+            'username' => 'alpha|max:50',
             'fname' => 'alpha|max:50',
             'lname' => 'alpha|max:50',
             'avatar' => 'mimes:jpg,jpeg,png|max:2000',
         ]);
 
         Auth::user()->update([
+            'username' => $request->input('username'),
             'fname' => $request->input('fname'),
             'lname' => $request->input('lname'),
         ]);

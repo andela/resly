@@ -37,7 +37,7 @@ class RestaurantGalleryController extends Controller
     public function store(Request $request, RestaurantPictures $picture, Response $response)
     {
         //get restauranteur id
-        $restauranteur_id = User::where('fname', auth()->user()->fname)->first()->id;
+        $restauranteur_id = User::where('username', auth()->user()->username)->first()->id;
 
         //fetch file location and upload to cloudinary
         $filepath = $request->file('image')->getPathName();

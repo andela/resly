@@ -56,6 +56,7 @@ class AuthController extends Controller
             'fname' => 'required|max:20|alpha_dash',
             'lname' => 'required|max:20|alpha_dash',
             'role' => 'required|in:diner,restaurateur',
+            'username' => 'required|unique:users|max:30|alpha_dash',
             'email' => 'required|unique:users|email|max:255',
             'password' => 'required|min:6',
             'confirm-password' => 'required|same:password',
@@ -74,6 +75,7 @@ class AuthController extends Controller
         $user = User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'role' => $data['role'],
             'password' => bcrypt($data['password']),
