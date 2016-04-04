@@ -32,6 +32,11 @@ Route::get('auth/register', [
     'as' => 'register',
 ]);
 
+Route::post('changepassword', [
+    'uses' => 'PasswordController@changePassword',
+    'as' => 'changepassword',
+]);
+
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 /*
