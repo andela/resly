@@ -1,0 +1,26 @@
+.search-row {
+    margin: 0;
+    margin-left: 0px;
+    width: auto;
+    border-bottom: solid #fff 1px;
+    background: none;
+}
+
+.search-right {
+    padding: 0px;
+    text-align: left;
+}
+
+.search-left {
+    padding: 0px;
+    bottom: -6px;
+    text-align: center;
+}
+
+.search-text {
+    background: none;
+    border: none;
+}
+
+.search-icon {
+}
