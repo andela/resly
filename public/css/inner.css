@@ -52,17 +52,18 @@ body{
     /* min-height: 100%; */
     padding: 0;
 }
-.navbar{
-    background:rgba(235, 43, 54, 1);
-    top:0;
-    padding: 10px;
+.navbar {
+    background: rgba(253, 43, 54, 1);
+    top: 0;
+    padding: 6px;
 }
 
-
-
-.navbar a:hover{
-    color: #BBB24D !important;
+.navbar-right li a:hover {
+    background-color: #fed;
+    color: #990000;
+    border-radius: 3px;
 }
+
 .page-content{
     background: #FFF;
     min-height: 100%;

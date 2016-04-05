@@ -5,7 +5,6 @@
     @parent
     <link href='https://fonts.googleapis.com/css?family=Pacifico|Lato:400,100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700">
-    <link rel='stylesheet' type="text/css" href="{!! asset('css/registration.css') !!}"/>
     <link rel='stylesheet' type="text/css" href="{!! asset('css/bootstrap-social.css') !!}"/>
 @endsection
 @section('details')
