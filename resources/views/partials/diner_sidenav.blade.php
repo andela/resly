@@ -10,7 +10,7 @@
         </ul>
     </li>
     <li>
-        <a href="#"><i class='fa fa-user'></i> My Accont</a>
+        <a href="{{ route('userProfile', ['username' => auth()->user()->username]) }}"><i class='fa fa-user'></i> My Account</a>
         <ul>
             <li>  <a href="{{url('user/profile/edit')}}">Account Settings</a></li>
         </ul>
