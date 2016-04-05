@@ -58,8 +58,13 @@ body{
     padding: 6px;
 }
 
+.navbar a:hover {
+    display: block;
+    color: #fff;
+    border-radius: 3px;
+}
+
 .navbar-right li a:hover {
-    background-color: #fed;
     color: #990000;
     border-radius: 3px;
 }
@@ -72,7 +77,6 @@ body{
     border-top:6px solid #00b075;
     background: #FFF;
 }
-
 
 .nav-pills li a{
     color:#333;
@@ -296,4 +300,8 @@ body{
 
 #contactus i.fa {
     width: 20px;
+}
+
+.dropdown-menu {
+    background: rgba(0,0,0,0.69);
 }
