@@ -144,7 +144,7 @@ Route::post('/user/profile/edit', [
     'middleware' => 'auth',
 ]);
 
-Route::get('/user/{fname}', [
+Route::get('/user/{username}', [
     'uses' => 'UserProfileController@getProfile',
     'as' => 'userProfile',
     'middleware' => 'auth',
