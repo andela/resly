@@ -52,17 +52,23 @@ body{
     /* min-height: 100%; */
     padding: 0;
 }
-.navbar{
-    background:rgba(235, 43, 54, 1);
-    top:0;
-    padding: 10px;
+.navbar {
+    background: rgba(253, 43, 54, 1);
+    top: 0;
+    padding: 6px;
 }
 
-
-
-.navbar a:hover{
-    color: #BBB24D !important;
+.navbar a:hover {
+    display: block;
+    color: #fff;
+    border-radius: 3px;
 }
+
+.navbar-right li a:hover {
+    color: #990000;
+    border-radius: 3px;
+}
+
 .page-content{
     background: #FFF;
     min-height: 100%;
@@ -71,7 +77,6 @@ body{
     border-top:6px solid #00b075;
     background: #FFF;
 }
-
 
 .nav-pills li a{
     color:#333;
@@ -295,4 +300,8 @@ body{
 
 #contactus i.fa {
     width: 20px;
+}
+
+.dropdown-menu {
+    background: rgba(0,0,0,0.69);
 }
