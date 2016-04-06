@@ -36,9 +36,8 @@
                                     </li>
                                 @endcan
 
-                                <li><a href="{{url('/contactus')}}">Contact us</a></li>
-                                <li><a href="{{url('/aboutus')}}">About us</a></li>
-
+                                <li><a href="#">Restaurants</a></li>
+                               
                                 @can('authenticated')
                                     <li>
                                         <a href="{{url('/booking/cart')}}">

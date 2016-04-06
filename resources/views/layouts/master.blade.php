@@ -18,7 +18,19 @@
     @include('partials.navbar')
     @yield('content')
     {{-- <h5 class="home-footer">#TeamResly</h5> --}}
-
+    <style>
+        
+    </style>
+    <div id="footer" class="row">
+        <nav class="footer-nav">
+            <a href="/aboutus">About us</a>
+            <a href="#">Terms of service</a>
+            <a href="/contactus">Contact us</a>
+            <a href="#">Help</a>
+        </nav>
+        <p>© {{ date('Y') }} Resly.</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="{!! asset('js/jquery.cookie.js') !!}"></script>
