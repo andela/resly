@@ -17,7 +17,7 @@
             <h3>Past Reservations</h3>
         </div>
     </div>
-    <div class='row'>
+  <div class='row'>
         <div class='col col-md-12 page-body'>
             <div class="row">
                 <div class='col col-md-12'>
@@ -44,23 +44,14 @@
                                             <td>{{$res->restaurant()->name}}</td>
                                             <td>{{$res->duration}} hrs</td>
                                             <td>${{$res->cost}}</td>
-                                            <td id='user_rating_{{$res->restaurant()->id}}'>
-                                                @if($res->restaurant()->userHasNotRated())
-                                                    <fieldset id='demo1' class="rating" data-id="{{$res->restaurant()->id}}">
-                                                        <input class="stars" type="radio" id="star5" name="rating" value="5" />
-                                                        <label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                                        <input class="stars" type="radio" id="star4" name="rating" value="4" />
-                                                        <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                                        <input class="stars" type="radio" id="star3" name="rating" value="3" />
-                                                        <label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                                        <input class="stars" type="radio" id="star2" name="rating" value="2" />
-                                                        <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                                        <input class="stars" type="radio" id="star1" name="rating" value="1" />
-                                                        <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                            <td id='user_rating_{{$res->restaurant()->id}}_{{$res->id}}'>
+                                                @if($res->restaurant()->userHasNotRated($res->id))
+                                                    <fieldset id='demo1' class="rating" data-id="{{$res->restaurant()->id}}" booking="{{$res->id}}">
+                                                        @include('partials.rating_fields')
                                                     </fieldset>
-                                                    <div style="clear:both"></div>                                                
+                                                    <div style="clear:both"></div>
                                                 @else
-                                                    @for($i = 0; $i < $res->restaurant()->userRating(); $i++)
+                                                    @for($i = 0; $i < $res->restaurant()->userRating($res->id); $i++)
                                                         <i class='fa fa-star' style='color:#FFD700'></i>
                                                     @endfor
                                                 @endif
@@ -70,6 +61,48 @@
                             </tbody>
                         </table>
                     @endif
+
+
+
+<!-- Button trigger modal -->
+<a id="rateTrigger" data-toggle="modal"
+   data-target="#myModal" data-id="" style="display: none;">
+</a>
+<!-- Modal -->
+<div class="modal fade" style="display: none;" id="myModal" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title" id="myModalLabel">Rate this restaurant</h3>
+        </div>
+         <div class="modal-body">
+            <form id="rating_comment_form" method="post">
+            <div class="row">
+                <div class="col-md-4"><input type="text" id="rated_restaurant" hidden readonly value="" /></div>
+                <div class="col-md-4"><input type="text" id="rated_booking" hidden readonly value="" /></div>
+                <div class="col-md-4"><input type="text" id="rating_value" hidden readonly value="" /></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea required id="rating_comment" class="rating_comment" name="rating_comment" style="width: 100%; height: 20%;" placeholder="Enter a rating for this restaurant"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary pull-left" id="submitRating">Rate</button>
+                </div>
+                <div class="col-md-6 pull-right">
+                    <button type="button" class="btn btn-default pull-right" id="closeRating" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </form>
+         </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
                 </div>
             </div>
         </div>

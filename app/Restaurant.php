@@ -3,12 +3,11 @@
 namespace Resly;
 
 use Illuminate\Database\Eloquent\Model;
-use willvincent\Rateable\Rateable;
+use Resly\Rating;
 use Auth;
 
 class Restaurant extends Model
 {
-    use Rateable;
 
     protected $fillable = [
         'name',
@@ -69,19 +68,29 @@ class Restaurant extends Model
         $this->attributes['name'] = strtolower($value);
     }
 
-    public function userHasNotRated()
+    public function ratings()
     {
-        if (Rating::where('user_id', Auth::user()->id)
-            ->where('rateable_id', $this->id)->first() == null) {
+        return $this->hasMany('Resly\Rating', 'restaurant_id');
+    }
+
+    public function averageRating()
+    {
+        $result =  Rating::where('restaurant_id', '=', $this->id)->avg('rating');
+        return $result;
+    }
+
+    public function userHasNotRated($booking_id)
+    {
+        if (Rating::where('user_id', Auth::user()->id)->where('restaurant_id', $this->id)->where('booking_id', $booking_id)->first() == null) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function userRating()
+    public function userRating($booking_id)
     {
         return Rating::where('user_id', Auth::user()->id)
-            ->where('rateable_id', $this->id)->first()->rating;
+            ->where('restaurant_id', $this->id)->where('booking_id', $booking_id)->first()->rating;
     }
 }

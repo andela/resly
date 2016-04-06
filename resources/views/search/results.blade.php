@@ -19,11 +19,11 @@
                     @else
                         <table class="table">
                             <tbody>
-                                @foreach ($results as $result)
+                                @foreach ($results as $restaurant)
                                     <tr>
                                         <td class='table-image-holder'>
-                                            @if($result->pictures->first() !== null)
-                                                <img src="http://res.cloudinary.com/ddnvpqjmh/image/upload/c_fill,h_300,w_300/{{$result->pictures->first()->filename}}" class='table-image'>
+                                            @if($restaurant->pictures->first() !== null)
+                                                <img src="http://res.cloudinary.com/ddnvpqjmh/image/upload/c_fill,h_300,w_300/{{$restaurant->pictures->first()->filename}}" class='table-image'>
                                             @else
                                                 <img src="{{asset('img/no-image-placeholder.jpg')}}" class='table-image'>
 
@@ -32,42 +32,31 @@
                                         </td>
                                         <td>
                                             <h3>
-                                                <a href="/restaurants/page/{{$result->id}}">
-                                                    {{ $result->getRestName()}}
+                                                <a href="/restaurants/page/{{$restaurant->id}}">
+                                                    {{ $restaurant->getRestName()}}
                                                 </a>
 
                                                 <span style="color:#2196f3 " class='pull-right'>
-                                                    {{ $result->tables->count() }} tables
+                                                    {{ $restaurant->tables->count() }} tables
                                                 </span>
                                             </h3>
 
                                             <hr>
-                                            <div>
-                                                @if($result->averageRating() == null)
-                                                    <span id='avg_rating'><i class='fa fa-star' style='color:#999;'><small> unrated</small></i> </span>
-                                                @else
-                                                    <span id='avg_rating'>
-                                                        @for($i = 0; $i < intval($result->averageRating()); $i++)
-                                                            <i class='fa fa-star' style='color:#FFD700'></i>
-                                                        @endfor
-                                                    </span>
-                                                @endif
-                                            </div>
-
+                                            @include('search.average_rating')
                                             <p class="description">
-                                                "{{ strlen($result->description) > 40 ?
-                                                substr($result->description, 0, 40) . "..." :
-                                                $result->description
+                                                "{{ strlen($restaurant->description) > 40 ?
+                                                substr($restaurant->description, 0, 40) . "..." :
+                                                $restaurant->description
                                                 }}"
                                             </p>
                                             <p>
                                                 <span class="fa fa-map-marker" aria-hidden="true"></span>
-                                                {{ $result->location }} | {{ $result->address }}
+                                                {{ $restaurant->location }} | {{ $restaurant->address }}
                                             </p>
                                             <p>
                                                 <i class='fa fa-clock-o'></i>
-                                                {{$result->opening_time}} -
-                                                {{$result->closing_time}}
+                                                {{$restaurant->opening_time}} -
+                                                {{$restaurant->closing_time}}
                                             </p>
                                         </td>
                                     </tr>
