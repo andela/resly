@@ -3,12 +3,10 @@
 namespace Resly;
 
 use Illuminate\Database\Eloquent\Model;
-use Resly\Rating;
 use Auth;
 
 class Restaurant extends Model
 {
-
     protected $fillable = [
         'name',
         'restauranteur_id',
@@ -75,7 +73,8 @@ class Restaurant extends Model
 
     public function averageRating()
     {
-        $result =  Rating::where('restaurant_id', '=', $this->id)->avg('rating');
+        $result = Rating::where('restaurant_id', '=', $this->id)->avg('rating');
+
         return $result;
     }
 
