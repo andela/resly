@@ -36,9 +36,9 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">      
- -                            <label for="username" class="control-label">Username</label>      
- -                            <input type="text" name="username" class="form-control" id="username" value="{{ old('username') ?: '' }}">        
- -                        </div>
+                            <label for="username" class="control-label">Username</label>      
+                            <input type="text" name="username" class="form-control" id="username" value="{{ old('username') ?: '' }}">        
+                         </div>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="control-label">Email</label>
                             <input type="email" name="email" class="form-control" id="email" value="{{ old('email') ?: '' }}">
