@@ -16,7 +16,7 @@ $(document).ready(function () {
                     var result = JSON.parse(d);
                     if (result.status == 'success') {
                         updateStars(parseInt(result.avg_rating), parseInt(rating), restaurant_id, booking)
-                        alertify.success("Successful! Thank you for rating.");
+                        alertify.success("Thank you for rating.");
                         clearRatingForm();
                     } else if (result.status == 'failure') {
                         alertify.error(result.message);

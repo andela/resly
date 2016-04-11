@@ -86,15 +86,15 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <textarea required id="rating_comment" class="rating_comment" name="rating_comment" style="width: 100%; height: 20%;" placeholder="Enter a rating for this restaurant"></textarea>
+                    <textarea required id="rating_comment" class="rating_comment" name="rating_comment" placeholder="Enter a comment"></textarea>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-primary pull-left" id="submitRating">Rate</button>
-                </div>
-                <div class="col-md-6 pull-right">
-                    <button type="button" class="btn btn-default pull-right" id="closeRating" data-dismiss="modal">Close</button>
+                <div class="col-md-12">
+                    <div>
+                        <button type="button" class="btn btn-default pull-right rating_button" id="closeRating" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary pull-right rating_button" id="submitRating">Rate</button>
+                    </div>
                 </div>
             </div>
             </form>
