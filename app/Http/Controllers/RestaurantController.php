@@ -329,6 +329,7 @@ class RestaurantController extends Controller
         if (empty(trim($comment))) {
             $output['status'] = 'failure';
             $output['message'] = 'The comment must not be empty';
+
             return json_encode($output);
         }
 
