@@ -81,7 +81,7 @@ class RestaurantTest extends TestCase
         );
 
     }
-    
+
     public function testRestaurantDatabase()
     {
         DB::transaction(function () {

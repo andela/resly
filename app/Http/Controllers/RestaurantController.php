@@ -6,11 +6,12 @@ use Auth;
 use Illuminate\Http\Request;
 use Resly\Repositories\TablesRepository;
 use Illuminate\Http\Response;
+use Gate;
 use Validator;
 use Resly\Restaurant;
 use Resly\Booking;
 use Resly\Http\Requests;
-use willvincent\Rateable\Rating;
+use Resly\Rating;
 
 class RestaurantController extends Controller
 {
@@ -313,21 +314,40 @@ class RestaurantController extends Controller
 
     public function rateRestaurant(Request $request)
     {
+        // If the user is not signed, redirect to the login page.
+        if (Gate::denies('diner-user')) {
+            return redirect('/auth/login')
+                ->with('info', 'Login as Diner first.');
+        }
+
         //fetch restaurant instance and user rating
         $restaurant = Restaurant::find($request->restaurant_id);
         $user_rating = intval($request->input('rate'));
+        $comment = $request->input('comment');
+        $booking = intval($request->input('booking'));
+
+        // If the omment is empty, return false/failure.
+        if (empty(trim($comment))) {
+            $output['status'] = 'failure';
+            $output['message'] = 'The comment must not be empty';
+
+            return json_encode($output);
+        }
 
         //if user has already rated update current rating, else save new rating
-        if ($restaurant->userHasNotRated()) {
+        if ($restaurant->userHasNotRated($booking)) {
             $rating = new Rating;
             $rating->rating = $user_rating;
+            $rating->comment = $comment;
+            $rating->booking_id = $booking;
             $rating->user_id = Auth::user()->id;
 
             $restaurant->ratings()->save($rating);
         } else {
             $rating = Rating::where('user_id', Auth::user()->id)
-                            ->where('rateable_id', $request->restaurant_id)->first();
+                            ->where('restaurant_id', $request->restaurant_id)->where('booking_id', $booking)->first();
             $rating->rating = $user_rating;
+            $rating->comment = $comment;
             $rating->save();
         }
 

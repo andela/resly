@@ -15,9 +15,12 @@
                   </aside>
               </div>
               <div class="col col-sm-9 col-md-9 page">
-                  <div class="row ">
-                    <div class='col col-md-12 page-title'>
-                        <h3> {{ $restaurant->name }} @yield('title-suffix')</h3>
+                  <div class="row page-title">
+                    <div class='col col-md-9'>
+                        <h3> {{ $restaurant->name }} @yield('title-suffix') </h3>
+                    </div>
+                    <div class='col col-md-3' style="text-align: left; padding: 10px;">
+                         <h4><span>Rating: @include('search.average_rating')</span></h4>
                     </div>
                   </div>
                   @yield('details')

@@ -63,16 +63,16 @@
                                 <img src="http://lorempixel.com/300/300/food/{{$index}}" class="thumbnail"/>
                             @endif
                             <div class='restaurant-info'>
-                                <h5 class='restaurant-title'>
-                                    {{$restaurant->name}}
-                                    <span class='price pull-right'>
-                                        ${{number_format((rand(20, 200)/10), 2)}}
-                                    </span>
-                                </h5>
-
-                                <div class="info">
-                                    {{$restaurant->description}}s
+                                <h5 class='restaurant-title'>{{$restaurant->name}}</h5>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        @include('search.average_rating')
+                                    </div>
+                                    <div class="price col-md-3">
+                                            ${{number_format((rand(20, 200)/10), 2)}}
+                                    </div>
                                 </div>
+                                {{$restaurant->description}}s
                             </div>
                         </a>
                     </div>
@@ -106,10 +106,15 @@
                     <div class='col col-md-4'>
                         <ul class='latest-restaurant-items'>
                             <li>
-                                <span class='title'>
-                                    <a href="{{url('restaurants/page/'.$restaurant->id)}}">{{$restaurant->name}}</a>
-                                    <strong class="pull-right price">${{number_format((rand(10, 50 )/10), 2)}}</strong>
-                                </span>
+                            <a href="{{url('restaurants/page/'.$restaurant->id)}}">{{$restaurant->name}}</a>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            @include('search.average_rating')
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong class="pull-right price">${{number_format((rand(10, 50 )/10), 2)}}</strong>
+                                    </div>
+                                </div>
                                 <p class='info short'>
                                     {{$restaurant->description}} Si ut domesticarum et e fugiat instituendarum o senserit an cernantur an noster
                                     et arbitror ita lorem, vidisse varias proident quamquam ita nescius non
