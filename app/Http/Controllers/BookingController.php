@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Resly\Repositories\TablesRepository;
 use URL;
 use Session;
+use Resly\Refund;
 
 class BookingController extends Controller
 {
@@ -263,6 +264,41 @@ class BookingController extends Controller
         Cart::remove($item_id);
 
         return redirect()->back()->with('success', 'Item removed');
+    }
+
+    public function refund($id)
+    {
+        $res = Booking::find($id);#->with('id', 'cost', 'user_id');
+        if ($res == null) {
+            return redirect()->back()->with('error', 'Booking not found.');
+        }
+        $currentUser = Auth::user()->id;
+        $booker = $res->user_id;
+        $cost = $res->cost;
+        $credit = $this->getRefund($cost); // The refund is only 70% of what was paid before.
+        if (Auth::user()->id != $booker) {
+            return redirect()->back()->with('error', 'You can only cancel your own reservation.');
+        }
+        if ($res->isSoon()) {
+            return redirect()->back()->with('error', 'This reservation is too soon to be cancelled.');
+        }
+        if ($res->hasPassed()) {
+            return redirect()->back()->with('error', 'This reservation has passed.');
+        }
+        $refund = new Refund;
+        $refund->credits = $credit;
+        $refund->user_id = $booker;
+        $refund->booking_id = $res->id;
+        if ($refund->save()) {
+            $res->is_cancelled = 1; // Set the reservation to be cancelled.
+            $res->save();
+            return redirect()->back()->with('success', 'Booking Cancelled');
+        }
+    }
+
+    private function getRefund($cost)
+    {
+        return $cost * 0.7;
     }
 
     public function checkout(Request $request)

@@ -16,6 +16,7 @@ class Booking extends Model
         'table_id',
         'cost',
         'type',
+        'is_cancelled',
     ];
 
     protected $dates = ['deleted_at'];
@@ -23,6 +24,29 @@ class Booking extends Model
     public function user()
     {
         return $this->belongsTo('Resly\User', 'user_id');
+    }
+
+    public function refund()
+    {
+        return $this->hasOne('Resly\Refund');
+    }
+
+    public function isSoon()
+    {
+        $timeLeft = $this->timeLeft();
+        return ($timeLeft / 60) < 15;
+    }
+
+    public function timeLeft()
+    {
+        $scheduled_date = strtotime($this->scheduled_date);
+        $now = strtotime(date('Y-m-d H:m:s'));
+        return $time_left = $scheduled_date - $now;
+    }
+
+    public function hasPassed()
+    {
+        return $this->timeLeft() < 0;
     }
 
     public function table()

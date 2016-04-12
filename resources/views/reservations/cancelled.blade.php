@@ -16,7 +16,6 @@
                             <h3>You have no cancelled reservations</h3>
                         </div>
                     @else
-                        @foreach($reservations as $res)
                             <table class='table'>
                                 <thead>
                                     <tr>
@@ -24,6 +23,8 @@
                                         <th>Restaurant Name</th>
                                         <th>Duration</th>
                                         <th>Cost</th>
+                                        <th>Refund</th>
+                                        <th>Cancelled Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -33,11 +34,15 @@
                                             <td>{{$res->restaurant()->name}}</td>
                                             <td>{{$res->duration}} hrs</td>
                                             <td>${{$res->cost}}</td>
+                                            <td>${{$res->refund->credits}}</td>
+                                            <td>{{$res->refund->created_at}}</td>
                                         </tr>
                                     @endforeach
+                                        <tr>
+                                            <th colspan="6"><div class="">Total Refund - {{$user->totalRefund()}}</div></th>
+                                        </tr>
                                 </tbody>
                             </table>
-                        @endforeach
                     @endif
                 </div>
             </div>

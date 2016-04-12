@@ -113,6 +113,7 @@ Route::post('/gallery', 'RestaurantGalleryController@store');
 Route::delete('/gallery/{id}', 'RestaurantGalleryController@destroy');
 
 Route::get('cart/delete/{item_id}', 'BookingController@delteCartItem');
+Route::get('cancel/{id}', 'BookingController@refund');
 /*
  * Restaurant Profile
  */

@@ -33,6 +33,7 @@
                                         <td>{{$res->restaurant()->name}}</td>
                                         <td>{{$res->duration}} hrs</td>
                                         <td>${{$res->cost}}</td>
+                                        <td><a title="Cancel" class="confirm" id="{{$res->id}}"><i class='fa fa-times'></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
