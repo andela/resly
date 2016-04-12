@@ -281,7 +281,7 @@ class BookingController extends Controller
         $credit = $this->getRefund($cost); // The refund is only 70% of what was paid before.
         if (Auth::user()->id != $booker) {
             $output['status'] = 'failure';
-            $output['message'] = 'The comment must not be empty';
+            $output['message'] = 'You can only cancel your own reservation.';
             return json_encode($output);
         }
         $timeOff = $request->input('offset');
