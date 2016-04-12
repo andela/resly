@@ -266,24 +266,34 @@ class BookingController extends Controller
         return redirect()->back()->with('success', 'Item removed');
     }
 
-    public function refund($id)
+    public function refund(Request $request)
     {
-        $res = Booking::find($id);#->with('id', 'cost', 'user_id');
+        $id = $request->input('res');
+        $res = Booking::find($id);
         if ($res == null) {
-            return redirect()->back()->with('error', 'Booking not found.');
+            $output['status'] = 'failure';
+            $output['message'] = 'Booking not found.';
+            return json_encode($output);
         }
         $currentUser = Auth::user()->id;
         $booker = $res->user_id;
         $cost = $res->cost;
         $credit = $this->getRefund($cost); // The refund is only 70% of what was paid before.
         if (Auth::user()->id != $booker) {
-            return redirect()->back()->with('error', 'You can only cancel your own reservation.');
+            $output['status'] = 'failure';
+            $output['message'] = 'The comment must not be empty';
+            return json_encode($output);
         }
-        if ($res->isSoon()) {
-            return redirect()->back()->with('error', 'This reservation is too soon to be cancelled.');
+        $timeOff = $request->input('offset');
+        if ($res->isSoon($timeOff)) {
+            $output['status'] = 'failure';
+            $output['message'] = 'This reservation is too soon to be cancelled.';
+            return json_encode($output);
         }
-        if ($res->hasPassed()) {
-            return redirect()->back()->with('error', 'This reservation has passed.');
+        if ($res->hasPassed($timeOff)) {
+            $output['status'] = 'failure';
+            $output['message'] = 'This reservation has passed.';
+            return json_encode($output);
         }
         $refund = new Refund;
         $refund->credits = $credit;
@@ -292,7 +302,10 @@ class BookingController extends Controller
         if ($refund->save()) {
             $res->is_cancelled = 1; // Set the reservation to be cancelled.
             $res->save();
-            return redirect()->back()->with('success', 'Booking Cancelled');
+            $output['status'] = 'success';
+            $output['res'] = $id;
+            $output['message'] = 'Booking Cancelled';
+            return json_encode($output);
         }
     }
 

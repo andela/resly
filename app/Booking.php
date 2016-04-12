@@ -31,22 +31,24 @@ class Booking extends Model
         return $this->hasOne('Resly\Refund');
     }
 
-    public function isSoon()
+    public function isSoon($timeOff)
     {
-        $timeLeft = $this->timeLeft();
-        return ($timeLeft / 60) < 15;
+        $timeLeft = $this->timeLeft($timeOff);
+        return ($timeLeft / 60) < 15 && $timeLeft > 0;
     }
 
-    public function timeLeft()
+    private function timeLeft($timeOff)
     {
+
+        $now = strtotime($timeOff);
         $scheduled_date = strtotime($this->scheduled_date);
-        $now = strtotime(date('Y-m-d H:m:s'));
-        return $time_left = $scheduled_date - $now;
+        $time_left = $scheduled_date - $now;
+        return $time_left;
     }
 
-    public function hasPassed()
+    public function hasPassed($timeOff)
     {
-        return $this->timeLeft() < 0;
+        return $this->timeLeft($timeOff) < 0;
     }
 
     public function table()
