@@ -271,8 +271,10 @@ class BookingController extends Controller
         $id = $request->input('res');
         $res = Booking::find($id);
         if ($res == null) {
-            $output['status'] = 'failure';
-            $output['message'] = 'Booking not found.';
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'Booking not found.',
+            ];
             return json_encode($output);
         }
         $currentUser = Auth::user()->id;
@@ -280,37 +282,47 @@ class BookingController extends Controller
         $cost = $res->cost;
         $credit = $this->getRefund($cost); // The refund is only 70% of what was paid before.
         if (Auth::user()->id != $booker) {
-            $output['status'] = 'failure';
-            $output['message'] = 'You can only cancel your own reservation.';
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'You can only cancel your own reservation.',
+            ];
             return json_encode($output);
         }
         $timeOff = $request->input('offset');
         if ($res->isSoon($timeOff)) {
-            $output['status'] = 'failure';
-            $output['message'] = 'This reservation is too soon to be cancelled.';
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'This reservation is too soon to be cancelled.',
+            ];
             return json_encode($output);
         }
         if ($res->hasPassed($timeOff)) {
-            $output['status'] = 'failure';
-            $output['message'] = 'This reservation has passed.';
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'This reservation has passed.',
+            ];
             return json_encode($output);
         }
-        $refund = new Refund;
+        $refund = new Refund();
         $refund->credits = $credit;
         $refund->user_id = $booker;
         $refund->booking_id = $res->id;
         if ($refund->save()) {
             $res->is_cancelled = 1; // Set the reservation to be cancelled.
             $res->save();
-            $output['status'] = 'success';
-            $output['res'] = $id;
-            $output['message'] = 'Booking Cancelled';
+            $output = [
+                'status'    => 'success',
+                'red'       => $id,
+                'message'   => 'Booking Cancelled',
+            ];
             return json_encode($output);
         }
     }
 
     private function getRefund($cost)
     {
+        // Later versions will fetch the particular restaurant's refund rate.
+        // For now refund rate is set to 70%.
         return $cost * 0.7;
     }
 
@@ -342,7 +354,7 @@ class BookingController extends Controller
         //clear cart
         $this->clearCart();
 
-        return redirect('/')->with('success', 'Payment complete');
+        return redirect('/reservations/current')->with('success', 'Payment complete');
     }
 
     private function clearCart()

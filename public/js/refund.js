@@ -33,15 +33,6 @@ $(document).ready(function () {
             dialogClass: "modal-dialog modal-lg" // Bootstrap classes for large modal
     });
 
-    var updateStars = function (id) {
-        $('#'+id).html();
-        user_rating_output = '';
-        for (var i=0; i<user_rating; i++) {
-            user_rating_output += "<i class='fa fa-star' style='color:#FFD700'></i>";
-        }
-        $('#user_rating_'+res+'_'+booking).html(user_rating_output);
-    }
-
     var prepareDate = function () {
         time = new Date();
         Y = setFig(time.getFullYear());
@@ -50,12 +41,12 @@ $(document).ready(function () {
         H = setFig(time.getHours());
         i = setFig(time.getMinutes());
         s = setFig(time.getSeconds());
-        offset = Y+'-'+m+'-'+d+' '+H+':'+i+':'+s;
+        offset = Y + '-' + m + '-' + d + ' ' + H + ':' + i + ':' + s;
         return offset;
     }
 
     var setFig = function (fig) {
-        fig < 10 ? fig = (0+''+fig) : fig = fig;
+        fig < 10 ? fig = (0 + '' + fig) : fig = fig;
         return fig;
     }
 });
