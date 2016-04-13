@@ -1,3 +1,8 @@
+/*
+   Bloodhound is the typeahead.js suggestion engine. It offers advanced
+   functionalities such as prefetching, intelligent caching, fast lookups,
+   and backfilling with remote data.
+ */
 var restaurants = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.whitespace,
   queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -6,6 +11,7 @@ var restaurants = new Bloodhound({
     wildcard: '%QUERY',
   }
 });
+
 $(document).ready(function() {
     $('#query.typehead').typeahead({
       hint: true,
@@ -18,7 +24,6 @@ $(document).ready(function() {
       source: restaurants,
     });
     $('#query.typehead').bind('typeahead:select', function(ev, suggestion) {
-      window.location.href = "/search?query="+suggestion.name
+      window.location.href = "/search?query=" + suggestion.name;
     });
-    
 });

@@ -1,5 +1,5 @@
-.twitter-typeahead{
-  width:100%;
+.twitter-typeahead {
+  width: 100%;
 }
 
 .twitter-typeahead .tt-query,
@@ -23,7 +23,7 @@
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding;
   background-clip: padding-box;
-  width:102.1%;        
+  width: 102.1%;
 }
 .tt-suggestion:hover {
   background-color: #EB2A36;
@@ -56,6 +56,6 @@
 
 .search-form .tt-menu {
   margin-top: 2px;
-  width:100.1%;    
+  width: 100.1%;
   background-color: #fff;
 }
