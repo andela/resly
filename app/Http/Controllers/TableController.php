@@ -2,6 +2,7 @@
 
 namespace Resly\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use Resly\Repositories\TablesRepository;
 use Resly\Table;
@@ -58,6 +59,31 @@ class TableController extends Controller
         $table = $this->tableRepository->get($request->table_id);
 
         return view('table.edit', compact('table'));
+    }
+
+    public function getTable(Request $request)
+    {
+        $id = $request->table_id;
+        $table = Table::find($id);
+        return json_encode($table);
+    }
+
+    public function getTables(Request $request)
+    {
+        $user = Auth::user()->id . Auth::user()->username;
+        $tables = $request->session()->get($user, function () {
+            return array();
+        });
+        $ids = array_values($tables);
+        $bookedTables = array_map(function ($id) { return Table::find($id);}, $ids);
+        $sum = 0;
+        array_map(function ($bookedTable) use (&$sum) { return $sum = $sum + $bookedTable->cost;}, $bookedTables);
+        $output = [
+            'sum' => $sum,
+            'tables' => array_values($bookedTables),
+        ];
+
+        return json_encode($output);
     }
 
     public function update(Request $request)

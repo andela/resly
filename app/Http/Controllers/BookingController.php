@@ -188,11 +188,58 @@ class BookingController extends Controller
     {
         $restaurant = Restaurant::where('id', $restaurant_id)->first();
 
+        $user = Auth::user()->id . Auth::user()->username;
+        $bookedTablesIDs = Session::get($user, function () {
+            return array();
+        });
+        $count = count($bookedTablesIDs);
+
+        $bookedTables = array_map(function ($bookedTable) { return Table::find($bookedTable);}, $bookedTablesIDs);
+
         return view('bookings.book')
-        ->with('restaurant', $restaurant);
+        ->with(['restaurant' => $restaurant, 'bookedTables' => $bookedTables, 'count' => $count]);
     }
 
-    public function addTable(Request $request)
+    public function multipleBook(Request $request)
+    {
+        $user = Auth::user()->id . Auth::user()->username;
+        $tables = $request->session()->get($user, function () {
+            return array();
+        });
+
+        $table = $request->input('table');
+        $tables = $this->updateBookings($tables, $table);
+        $tables = array_unique($tables);
+        $request->session()->put($user, $tables);
+        return json_encode(array_values($tables));
+    }
+
+    private function updateBookings($tables, $table)
+    {
+        if (in_array($table, $tables)) {
+            $key = array_search($table, $tables);
+            unset($tables[$key]);
+            return $tables;
+        }
+        array_push($tables, $table);
+        return $tables;
+    }
+
+    public function clearTableFromSession(Request $request)
+    {
+        $user = $this->userSessionKey();
+        if ($request->session()->has($user)) {
+            $request->session()->forget($user);
+        }
+        return json_encode(true);
+    }
+
+    private function userSessionKey()
+    {
+        return $user = Auth::user()->id . Auth::user()->username;
+    }
+
+    public function addTables(Request $request)
     {
         if (Auth::guest()) {
             $request->session()->put('redirect_back', URL::previous());
@@ -209,9 +256,93 @@ class BookingController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator);
+            $output['message'] = "Date and Duration are required.";
+            $output['status'] = 'failure';
+            return json_encode($output);
+        }
+
+        // 14/04/2018 03:00
+
+        // User can only book 30mins from time.
+        // A 2mins delay time is substracted in other to cater for any delay in
+        // tranferring the request to the server.
+        $allowedBookingDateTime = new \DateTime();
+        $allowedBookingDateTime->add(new \DateInterval('PT28M'));
+
+        $bookingDateTime = \DateTimeImmutable::createFromFormat('d/m/Y H:i', $request->date);
+
+        $interval = $allowedBookingDateTime->diff($bookingDateTime);
+
+        // Calculate the seconds difference between the allowedBookingDateTime and bookingDateTime
+        // Reference: http://stackoverflow.com/questions/14277611/convert-dateinterval-object-to-seconds-in-php
+        $seconds = date_create('@0')->add($interval)->getTimestamp();
+
+
+        if ($seconds < 0) {
+            // $output['message'] = "Specify a date at least 30 minutes later.";
+            // $output['status'] = 'failure';
+        } else {
+            $user = Auth::user()->id . Auth::user()->username;
+            $bookedTablesIDs = Session::get($user, function () {
+                return array();
+            });
+
+            foreach ($bookedTablesIDs as $bookedTableID) {
+                $table = $this->tableRepo->get($bookedTableID);
+
+                //Convert to correct format
+                $request->date = str_replace('/', '-', $request->date);
+                Cart::add([
+                    'id' => time(),
+                    'name' => $table->label,
+                    'quantity' => 1,
+                    'price' => round($table->cost, 2),
+                    'attributes' => [
+                        'item_id' => $table->id,
+                        'date' => $request->date,
+                        'duration' => $request->duration,
+                        'type' => 'table',
+                    ],
+                ]);
+
+                $this->setTableToBooked($table);
+
+            }
+            $output = [
+                'message'   => 'Tables added to cart.',
+                'status'    => 'success',
+                'tables'    => array_values($bookedTablesIDs),
+            ];
+
+            return json_encode($output);
+        }
+    }
+
+    public function addTable(Request $request)
+    {
+        // return json_encode("hihihhih");
+
+        if (Auth::guest()) {
+            $request->session()->put('redirect_back', URL::previous());
+
+            Session::flash('error', 'Please Login');
+            return redirect('/auth/login');
+        }
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'duration' => 'required|digits_between:1,10',
+                'date' => 'required|date_format:d/m/Y H:i',
+            ]
+        );
+
+        if ($validator->fails()) {
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'Date and Duration are required.',
+            ];
+            return json_encode($output);
         }
 
         $table = $this->tableRepo->get($request->table_id);
@@ -232,6 +363,11 @@ class BookingController extends Controller
 
         if ($seconds < 0) {
             Session::flash('error', 'The specified date and time must be greater than or equal to the next 30mins from now.');
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'The specified date and time must be greater than or equal to the next 30mins from now.',
+            ];
+            return json_encode($output);
         } else {
             //Convert to correct format
             $request->date = str_replace('/', '-', $request->date);
@@ -247,10 +383,25 @@ class BookingController extends Controller
                     'type' => 'table',
                 ],
             ]);
-            Session::flash('success', 'Table added to cart');
+            $output = [
+                'status'    => 'success',
+                'message'   => 'Table added to cart',
+            ];
+
+            $this->setTableToBooked($table);
+
+            return json_encode($output);
         }
 
-        return redirect()->back();
+        // return redirect()->back();
+    }
+
+    public function setTableToBooked($table)
+    {
+        $table->is_booked = 1;
+        // $table->booked_date = date("Y-m-d H:i:s");
+        $table->save();
+
     }
 
     public function cart(Request $request)
@@ -302,5 +453,7 @@ class BookingController extends Controller
         foreach ($cart_contents as $index => $item) {
             Cart::remove($item->id);
         }
+        $user = Auth::user()->id . Auth::user()->username;
+        Session::forget($user);
     }
 }
