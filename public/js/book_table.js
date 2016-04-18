@@ -3,7 +3,7 @@ $(document).ready(function(){
    // Reference: http://stackoverflow.com/questions/10087819/convert-date-to-another-timezone-in-javascript
    function toTimeZone(time, zone) {
     var format = 'DD/MM/YYYY H:mm';
-    
+
     return moment(time, format).tz(zone).format(format);
   }
 
@@ -15,7 +15,7 @@ $(document).ready(function(){
       if (!bookDate.isValid()) {
         msg = "The date specified is not valid."
         alertify.error(msg);
-        
+
         return false;
       }
       //Get 30mins from now.

@@ -188,6 +188,14 @@ class BookingController extends Controller
     {
         $restaurant = Restaurant::where('id', $restaurant_id)->first();
 
+        $authUser = Auth::user();
+
+        if ($authUser == null) {
+            Session::put('redirect_back', URL::previous());
+
+            return redirect('/auth/login');
+        }
+
         $user = Auth::user()->id . Auth::user()->username;
         $bookedTablesIDs = Session::get($user, function () {
             return array();
@@ -197,7 +205,7 @@ class BookingController extends Controller
         $bookedTables = array_map(function ($bookedTable) { return Table::find($bookedTable);}, $bookedTablesIDs);
 
         return view('bookings.book')
-        ->with(['restaurant' => $restaurant, 'bookedTables' => $bookedTables, 'count' => $count]);
+        ->with(['restaurant' => $restaurant, 'bookedTables' => $bookedTables, 'tableIDs' => $bookedTablesIDs, 'count' => $count]);
     }
 
     public function multipleBook(Request $request)
@@ -287,27 +295,23 @@ class BookingController extends Controller
                 return array();
             });
 
+            $cartData = array();
+            $request->date = str_replace('/', '-', $request->date);
+
             foreach ($bookedTablesIDs as $bookedTableID) {
+                //Convert to correct format
                 $table = $this->tableRepo->get($bookedTableID);
 
-                //Convert to correct format
-                $request->date = str_replace('/', '-', $request->date);
-                Cart::add([
-                    'id' => time(),
-                    'name' => $table->label,
-                    'quantity' => 1,
-                    'price' => round($table->cost, 2),
-                    'attributes' => [
-                        'item_id' => $table->id,
-                        'date' => $request->date,
-                        'duration' => $request->duration,
-                        'type' => 'table',
-                    ],
-                ]);
+                $data = $this->prepareCartData($request, $table);
+                array_push($cartData, $data);
 
-                $this->setTableToBooked($table);
-
+                $this->setTableToOnHold($table);
             }
+
+            $this->addToCart($cartData);
+
+            $this->clearBookingSession();
+
             $output = [
                 'message'   => 'Tables added to cart.',
                 'status'    => 'success',
@@ -371,24 +375,19 @@ class BookingController extends Controller
         } else {
             //Convert to correct format
             $request->date = str_replace('/', '-', $request->date);
-            Cart::add([
-                'id' => time(),
-                'name' => $table->label,
-                'quantity' => 1,
-                'price' => round($table->cost, 2),
-                'attributes' => [
-                    'item_id' => $table->id,
-                    'date' => $request->date,
-                    'duration' => $request->duration,
-                    'type' => 'table',
-                ],
-            ]);
+
+            $cartData = $this->prepareCartData($request, $table);
+
+            $this->addToCart($cartData);
+
+            $this->clearBookingSession();
+
             $output = [
                 'status'    => 'success',
                 'message'   => 'Table added to cart',
             ];
 
-            $this->setTableToBooked($table);
+            $this->setTableToOnHold($table);
 
             return json_encode($output);
         }
@@ -396,12 +395,44 @@ class BookingController extends Controller
         // return redirect()->back();
     }
 
-    public function setTableToBooked($table)
+    private function prepareCartData($request ,$table)
+    {
+        $cartData = [
+                    'id'            => time() . '_' . $table->id,
+                    'name'          => $table->label,
+                    'quantity'      => 1,
+                    'price'         => round($table->cost, 2),
+                    'attributes'    => [
+                        'item_id'       => $table->id,
+                        'date'          => $request->date,
+                        'duration'      => $request->duration,
+                        'type'          => 'table',
+                        ],
+                    ];
+        return $cartData;
+    }
+
+    private function clearBookingSession()
+    {
+        $user = Auth::user()->id . Auth::user()->username;
+        Session::forget($user);
+    }
+
+    private function addToCart($cartData)
+    {
+        Cart::add($cartData);
+    }
+
+    private function setTableToOnHold($table)
+    {
+        $table->is_on_hold = 1;
+        $table->save();
+    }
+
+    private function setTableToBooked($table)
     {
         $table->is_booked = 1;
-        // $table->booked_date = date("Y-m-d H:i:s");
         $table->save();
-
     }
 
     public function cart(Request $request)
@@ -411,9 +442,23 @@ class BookingController extends Controller
 
     public function delteCartItem($item_id)
     {
+        $table = $this->getTableIDFromCart($item_id);
+        $this->setTableToNotOnHold($table);
         Cart::remove($item_id);
 
         return redirect()->back()->with('success', 'Item removed');
+    }
+
+    private function getTableIDFromCart($item_id)
+    {
+        $tableID = explode('_', $item_id)[1];
+        return $table = $this->tableRepo->get($tableID);
+    }
+
+    private function setTableToNotOnHold($table)
+    {
+        $table->is_on_hold = 0;
+        $table->save();
     }
 
     public function checkout(Request $request)
@@ -433,6 +478,8 @@ class BookingController extends Controller
             $temp['duration'] = $item->attributes->duration;
             $temp['type'] = $item->attributes->type;
             $temp['table_id'] = $item->attributes->item_id;
+            $table = $this->tableRepo->get($item->attributes->item_id);
+            $this->setTableToBooked($table);
             $temp['user_id'] = Auth::user()->id;
             $temp['cost'] = $item->price;
             Booking::create($temp);
@@ -453,7 +500,6 @@ class BookingController extends Controller
         foreach ($cart_contents as $index => $item) {
             Cart::remove($item->id);
         }
-        $user = Auth::user()->id . Auth::user()->username;
-        Session::forget($user);
+        $this->clearBookingSession();
     }
 }

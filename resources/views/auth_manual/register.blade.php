@@ -46,13 +46,13 @@
 
                                 <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
                                     <label for="role" class="control-label">Account Type</label>
-                                    
+
                                     <select name = "role" class="form-control select">
                                         <option value = "">Select user type</option>
                                         <option value = "diner">Diner</option>
                                         <option value = "restaurateur">Restaurateur</option>
                                     </select>
-                                    
+
                                 </div>
                             </div>
                         </div>

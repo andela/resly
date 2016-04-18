@@ -4,184 +4,7 @@
     @parent
     <link rel="stylesheet" type="text/css" href="{!! asset('css/jquery.datetimepicker.css') !!}">
     <link rel='stylesheet' href="{{ asset('fancybox/source/jquery.fancybox.css') }}" />
-
-    <style type="text/css">
-      .multiple_book {
-        pointer : cursor;
-      }
-
-      .single_book {
-        background-color: #889;
-        color: #fff;
-      }
-
-      .single_book:hover {
-        background-color: #990000;
-      }
-
-      .multiple_book {
-        background-color: #889;
-        color: #fff;
-      }
-
-      .multiple_book:hover {
-        background-color: #090;
-      }
-
-      .multiple_trigger_button {
-        border-radius: 0px;
-        border: medium 1px #fff;
-      }
-
-      .multiple_trigger_button:hover {
-        background-color: #900;
-        color: #fff;
-      }
-    </style>
-@endsection
-
-@section('scripts')
-    @parent
-    <script type="text/javascript">
-    $(document).ready(function () {
-
-        var tableToBook;
-        var returnTable;
-
-        $('.single_book').click(function (e) {
-            e.preventDefault();
-
-            book = $(this).attr('book');
-            tableToBook = parseInt(book.split('_')[1]);
-            $.get('/tables/' + tableToBook, function (d) {
-              returnTable = JSON.parse(d);
-              $('#booking_form').attr('bookingMode', function () {
-                return 'single';
-              });
-                var preparedHtML = '';
-                preparedHtML += '<tr>';
-                preparedHtML += '<td>' + returnTable.label + '</td>';
-                preparedHtML += '<td>' + returnTable.seats_number + '</td>';
-                preparedHtML += '<td>' + returnTable.cost + '</td></tr>';
-                preparedHtML += '</tr>';
-              $('#bookedRows').html(preparedHtML);
-            });
-        });
-
-        $('.closeMultiple').click(function (e) {
-            e.preventDefault();
-
-            $.post('/clear/bookings', function (d) {
-              if (JSON.parse(d) == true) {
-                $('#bookedNumber').html(0);
-                $('.res_table_row').css('background', '#fff');
-              }
-            });
-        });
-
-        $('.processMultiple').click(function (e) {
-            e.preventDefault();
-
-            $.get('/book/multipletables', function (d) {
-              data = JSON.parse(d);
-              returnTables = data.tables;
-              count = returnTables.length;
-              $('#booking_form').attr('bookingMode', function () {
-                return 'multiple';
-              });
-              var preparedHtML = '';
-              if (count < 1) {
-                preparedHtML = '<tr><th colspan="3" style="text-align: center;">Empty. Hold a table to book.</th></tr>'
-              } else {
-                for (var i = 0; i < count; i++) {
-                  preparedHtML += '<tr>';
-                    preparedHtML += '<td>' + returnTables[i].label + '</td>';
-                    preparedHtML += '<td>' + returnTables[i].seats_number + '</td>';
-                    preparedHtML += '<td>$' + returnTables[i].cost + '</td></tr>';
-                  preparedHtML += '</tr>';
-                }
-                sum = data.sum;
-                preparedHtML += '<tr><th colspan="2">TOTAL</th><th>' + sum + '</th></tr>';
-              }
-              $('#bookedRows').html(preparedHtML);
-            });
-        });
-
-
-
-        var bookingMode;
-        var responseData;
-
-        $("#submitBookings").click(function (e) {
-            e.preventDefault();
-
-            bookDate = $('#bookDate').val();
-            bookDuration = $('#bookDuration').val();
-            bookingMode = $('#booking_form').attr('bookingMode');
-            bookingData = {date: bookDate, duration: bookDuration};
-
-            if (bookingMode === 'single') {
-              $.post('/booking/table/' + tableToBook + '/add', bookingData, function (d) {
-                respondWith(d);
-                updateTable(tableToBook);
-              });
-            }
-            if (bookingMode === 'multiple') {
-              $.post('/booking/tables/add', {date: bookDate, duration: bookDuration}, function (d) {
-                respondWith(d);
-                updateTables(d);
-              });
-            }
-        });
-
-        var updateTable = function (id) {
-          bookedButton = '<button class="" disabled="" style="cursor: not-allowed;">Booked</button>';
-          $(".bookStatus#bookStatus_" + id).html(bookedButton);
-        }
-
-        var updateTables = function (d) {
-          ids = (JSON.parse(d)).tables;
-          count = ids.length;
-          for (var i = 0; i < count; i++) {
-            updateTable(ids[i]);
-          }
-        }
-
-        var respondWith = function (returnData) {
-            responseData = JSON.parse(returnData);
-            if (responseData.status == 'failure') {
-              alertify.error(responseData.message);
-            } else if (responseData.status == 'success') {
-              $(".closeBookingForm").trigger('click');
-              alertify.success(responseData.message);
-            }
-        }
-        $(".multiple_book").click(function (e) {
-            e.preventDefault();
-
-            id = $(this).attr('id');
-            $('#booking_form').attr('bookingMode', function () {
-              return 'multiple';
-            });
-
-            $.post('/multiple/book', {table: id}, function (data) {
-              id = id;
-              data = JSON.parse(data);
-              count = data.length;
-              $('#bookedNumber').html(count);
-                if (data.indexOf(id) == -1) {
-                  $('#' + id).parents('.res_table_row#table_' + id).css('background-color', '#fff');
-                  $('#' + id).html('Hold');
-                } else {
-                  $('#' + id).html('Unhold');
-                  $('#' + id).parents('.res_table_row#table_' + id).css('background-color', '#ffe');
-                }
-            });
-
-
-        });
-    });
-    </script>
+    <link rel='stylesheet' href="{{ asset('css/book.css') }}" />
 @endsection
 
 @section('title-suffix', '- Tables')
@@ -208,6 +31,9 @@
                     </tr>
                   </thead>
                   <tbody id="bookedRows">
+                    <tr>
+                      <th colspan="3" style="text-align: center;">Empty. Hold a table to book.</th>
+                    </tr>
                   </tbody>
                 </table>
                 <table class="table table-not-striped" id="processTable">
@@ -216,7 +42,7 @@
                       <td>Duration</td>
                   </tr>
                   <tr id="processRow">
-                      <td><input type='text' class='bookDate form-control' name='date' id="bookDate" placeholder="Dining Date" required="required"></td>
+                      <td><input type='text' class='bookDate form-control' name='date' id="bookDate" placeholder="Dining Date - At least 30 minutes from now" required="required"></td>
                       <td>
                           <select name='duration' placeholder='Duration' class='form-control' id="bookDuration">
                               <option value="1"> 1 Hour </option>
@@ -302,10 +128,12 @@
                                         </p>
                                         <div class="bookStatus" id="bookStatus_{{$table->id}}">
                                           @if ($table->is_booked)
-                                            <button disabled="" style="cursor: not-allowed;">Booked</button>
+                                            <button disabled="" class="btn btn-primary" style="cursor: not-allowed;">Booked</button>
+                                          @elseif ($table->is_on_hold)
+                                            <button disabled="" class="btn btn-primary" style="">On Hold</button>
                                           @else
-                                            <button class="single_book" book="book_{{$table->id}}" data-toggle="modal" data-target="#myModal">Book Now</button>
-                                            <button class="multiple_book" id="{{$table->id}}" book="add_book_{{$table->id}}">Hold</button>
+                                            <button class="single_book btn btn-primary" book="book_{{$table->id}}" data-toggle="modal" data-target="#myModal">Book Now</button>
+                                            <button class="multiple_book btn btn-primary" id="{{$table->id}}" book="add_book_{{$table->id}}">Hold</button>
                                           @endif
                                         </div>
                                     </td>
@@ -346,6 +174,13 @@
     <script type="text/javascript" src='{!! asset('js/moment-timezone.min.js') !!}'></script>
     <script type="text/javascript" src="{{ asset('fancybox/source/jquery.fancybox.js') }}"></script>
     <script type="text/javascript" src='{!! asset('js/book_table.js') !!}'></script>
+    <script type="text/javascript">
+      var tableIDs = ( {!! json_encode(array_values($tableIDs)) !!} );
+      var count = {!! $count !!};
+    </script>
+    <script type="text/javascript" src="{{ asset('js/booking_modes.js') }}">
+    </script>
+
 
 @endsection
 

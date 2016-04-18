@@ -63,8 +63,8 @@ class TableController extends Controller
 
     public function getTable(Request $request)
     {
-        $id = $request->table_id;
-        $table = Table::find($id);
+        $table = $this->tableRepository->get($request->table_id);
+        $table->cost = number_format($table->cost, 2);
         return json_encode($table);
     }
 
@@ -75,12 +75,15 @@ class TableController extends Controller
             return array();
         });
         $ids = array_values($tables);
-        $bookedTables = array_map(function ($id) { return Table::find($id);}, $ids);
+        $bookedTables = array_map(function ($id) { return $this->tableRepository->get($id);}, $ids);
+        array_map(function ($bookedTable) {$bookedTable->cost = number_format($bookedTable->cost, 2);}, $bookedTables);
         $sum = 0;
-        array_map(function ($bookedTable) use (&$sum) { return $sum = $sum + $bookedTable->cost;}, $bookedTables);
+        $total_seats = 0;
+        array_map(function ($bookedTable) use (&$sum, &$total_seats) { $sum = $sum + $bookedTable->cost; $total_seats = $total_seats + $bookedTable->seats_number;}, $bookedTables);
         $output = [
-            'sum' => $sum,
-            'tables' => array_values($bookedTables),
+            'sum'           => $sum,
+            'tables'        => array_values($bookedTables),
+            'total_seats'   => $total_seats,
         ];
 
         return json_encode($output);

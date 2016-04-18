@@ -13,6 +13,7 @@ class AddIsBookedColToTables extends Migration
     public function up()
     {
         Schema::table('tables', function ($table) {
+            $table->boolean('is_on_hold')->default(0);
             $table->boolean('is_booked')->default(0);
             $table->date('booked_date')->nullable();
         });
@@ -26,6 +27,7 @@ class AddIsBookedColToTables extends Migration
     public function down()
     {
         Schema::table('tables', function ($table) {
+            $table->dropColumn('is_on_hold');
             $table->dropColumn('is_booked');
             $table->dropColumn('booked_date');
         });
