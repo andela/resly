@@ -177,6 +177,7 @@ class RestaurantController extends Controller
                 'telephone' => 'required|numeric',
                 'email' => 'required|email',
                 'address' => 'required',
+                'refund_rate' => 'numeric',
             ]
         );
 

@@ -60,23 +60,30 @@
                         </div>
 
                         <div class='row'>
-                            <div class='col col-md-4'>
+                            <div class='col col-md-3'>
                                 <div class = "form-group">
                                     <label for = "opening-hours" class = "control-label visible-sm"> Opening Time</label>
                                     <input type='text' class = "form-control" id = "opening-hours" name="opening_time" placeholder = "09:00 (In 24hr system)" value="{{ old('opening_time') }}">
                                 </div>
                             </div>
-                            <div class='col col-md-4'>
+                            <div class='col col-md-3'>
                                 <div class = "form-group">
                                     <label for = "closing-time" class = "control-label visible-sm"> Closing Time</label>
                                     <input type='text' class = "form-control" id = "closing-time" name="closing_time" placeholder = "22:00" value="{{ old('closing_time') }}">
                                 </div>
                             </div>
-                            <div class="col col-md-4">
+                            <div class="col col-md-3">
                                 <div class = "form-group">
                                     <label for = "telephone" class = "control-label visible-sm"> Telephone Number</label>
                                     <input type = "text" class = "form-control" id = "telephone"
                                     name="telephone" placeholder = "Enter phone number" value="{{ old('telephone') }}">
+                                </div>
+                            </div>
+                            <div class="col col-md-3">
+                                <div class = "form-group">
+                                    <label for = "refund_rate" class = "control-label visible-sm"> Refund Rate</label>
+                                    <input type = "number" class = "form-control" id = "refund_rate"
+                                    name="refund_rate" placeholder = "Default is 0%." value="{{ old('refund_rate') }}">
                                 </div>
                             </div>
                         </div>

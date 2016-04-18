@@ -37,7 +37,7 @@
                                 @endcan
 
                                 <li><a href="#">Restaurants</a></li>
-                               
+
                                 @can('authenticated')
                                     <li>
                                         <a href="{{url('/booking/cart')}}">
@@ -53,6 +53,7 @@
                                             <li>
                                                 @can('restaurateur-user')
                                                     <a href="{{url('/restaurants')}}">My Restaurants</a>
+                                                    <a href="#"> Settings</a>
                                                 @endcan
                                             </li>
                                             <li class="divider"></li>
