@@ -26,10 +26,8 @@ class AddIsBookedColToTables extends Migration
      */
     public function down()
     {
-        Schema::table('tables', function ($table) {
-            $table->dropColumn('is_on_hold');
-            $table->dropColumn('is_booked');
-            $table->dropColumn('booked_date');
+        Schema::table('tables', function (Blueprint $table) {
+            $table->dropColumn('booked_date', 'is_booked', 'is_on_hold');
         });
     }
 }
