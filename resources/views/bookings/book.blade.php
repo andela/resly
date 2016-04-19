@@ -2,6 +2,7 @@
 
 @section('styles')
     @parent
+
     <link rel="stylesheet" type="text/css" href="{!! asset('css/jquery.datetimepicker.css') !!}">
     <link rel='stylesheet' href="{{ asset('fancybox/source/jquery.fancybox.css') }}" />
     <link rel='stylesheet' href="{{ asset('css/book.css') }}" />
