@@ -19,9 +19,6 @@
     @include('partials.navbar')
     @yield('content')
     {{-- <h5 class="home-footer">#TeamResly</h5> --}}
-    <style>
-
-    </style>
     <div id="footer" class="row">
         <nav class="footer-nav">
             <a href="/aboutus">About us</a>
