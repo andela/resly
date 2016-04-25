@@ -15,8 +15,9 @@ $(document).ready(function () {
                     var result = JSON.parse(d);
                     if (result.status == 'success') {
                         id = result.res;
-                        alertify.success("Thank you for rating.");
-                        location.reload();
+                        alertify.success(result.message);
+                        location.replace('/reservations/cancelled'); // Redirect to the page of cancelled reservations.
+                        // location.reload();
                     } else {
                         alertify.error(result.message);
                     }
