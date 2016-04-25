@@ -3,7 +3,7 @@
 $(document).ready(function () {
 
         for (var i = 0; i < count; i++) {
-          $('.multiple_book#' + tableIDs[i]).html('Unhold');
+          $('.multiple_book#' + tableIDs[i]).html('Un');
           $('.res_table_row#table_' + tableIDs[i]).css('background', '#ffe');
         };
 
@@ -37,7 +37,7 @@ $(document).ready(function () {
               if (JSON.parse(d) == true) {
                 $('#bookedNumber').html(0);
                 $('.res_table_row').css('background', '#fff');
-                $('.multiple_book').html('Hold');
+                $('.multiple_book').html('Select');
               }
             });
         });
@@ -54,7 +54,7 @@ $(document).ready(function () {
               });
               var preparedHtML = '';
               if (count < 1) {
-                preparedHtML = '<tr><th colspan="3" style="text-align: center;">Empty. Hold a table to book.</th></tr>'
+                preparedHtML = '<tr><th colspan="3" style="text-align: center;">Empty. Select a table to book.</th></tr>'
               } else {
                 for (var i = 0; i < count; i++) {
                   preparedHtML += '<tr>';
@@ -100,8 +100,8 @@ $(document).ready(function () {
         });
 
         var updateTable = function (id) {
-          buttonOnHold = '<button class="btn btn-primary" disabled="" style="cursor: not-allowed;">On Hold</button>';
-          $(".bookStatus#bookStatus_" + id).html(buttonOnHold);
+          Selected = '<button class="btn btn-primary" disabled="" style="cursor: not-allowed;">Selected</button>';
+          $(".bookStatus#bookStatus_" + id).html(Selected);
           $('.res_table_row#table_' + id).css('background-color', '#fff');
         }
 
@@ -137,9 +137,9 @@ $(document).ready(function () {
               $('#bookedNumber').html(count);
                 if (data.indexOf(id) == -1) {
                   $('#' + id).parents('.res_table_row#table_' + id).css('background-color', '#fff');
-                  $('#' + id).html('Hold');
+                  $('#' + id).html('Select');
                 } else {
-                  $('#' + id).html('Unhold');
+                  $('#' + id).html('Remove');
                   $('#' + id).parents('.res_table_row#table_' + id).css('background-color', '#ffe');
                 }
             });

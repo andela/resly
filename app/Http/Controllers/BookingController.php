@@ -202,17 +202,24 @@ class BookingController extends Controller
         });
         $count = count($bookedTablesIDs);
 
-        $bookedTables = array_map(function ($bookedTable) { return Table::find($bookedTable);}, $bookedTablesIDs);
+        $bookedTables = array_map(function ($bookedTable) {
+                            return Table::find($bookedTable);
+                        }, $bookedTablesIDs);
 
         return view('bookings.book')
-        ->with(['restaurant' => $restaurant, 'bookedTables' => $bookedTables, 'tableIDs' => $bookedTablesIDs, 'count' => $count]);
+        ->with([
+                'restaurant' => $restaurant,
+                'bookedTables' => $bookedTables,
+                'tableIDs' => $bookedTablesIDs,
+                'count' => $count
+                ]);
     }
 
     public function multipleBook(Request $request)
     {
         $user = Auth::user()->id . Auth::user()->username;
         $tables = $request->session()->get($user, function () {
-            return array();
+            return [];
         });
 
         $table = $request->input('table');
@@ -287,8 +294,10 @@ class BookingController extends Controller
 
 
         if ($seconds < 0) {
-            // $output['message'] = "Specify a date at least 30 minutes later.";
-            // $output['status'] = 'failure';
+            $output = [
+                'message'   => 'Specify a date at least 30 minutes later.',
+                'status'    => 'failure',
+            ];
         } else {
             $user = Auth::user()->id . Auth::user()->username;
             $bookedTablesIDs = Session::get($user, function () {
@@ -305,7 +314,7 @@ class BookingController extends Controller
                 $data = $this->prepareCartData($request, $table);
                 array_push($cartData, $data);
 
-                $this->setTableToOnHold($table);
+                $this->setTableToSelected($table);
             }
 
             $this->addToCart($cartData);
@@ -317,15 +326,12 @@ class BookingController extends Controller
                 'status'    => 'success',
                 'tables'    => array_values($bookedTablesIDs),
             ];
-
-            return json_encode($output);
         }
+        return json_encode($output);
     }
 
     public function addTable(Request $request)
     {
-        // return json_encode("hihihhih");
-
         if (Auth::guest()) {
             $request->session()->put('redirect_back', URL::previous());
 
@@ -371,7 +377,6 @@ class BookingController extends Controller
                 'status'    => 'failure',
                 'message'   => 'The specified date and time must be greater than or equal to the next 30mins from now.',
             ];
-            return json_encode($output);
         } else {
             //Convert to correct format
             $request->date = str_replace('/', '-', $request->date);
@@ -387,15 +392,12 @@ class BookingController extends Controller
                 'message'   => 'Table added to cart',
             ];
 
-            $this->setTableToOnHold($table);
-
-            return json_encode($output);
+            $this->setTableToSelected($table);
         }
-
-        // return redirect()->back();
+            return json_encode($output);
     }
 
-    private function prepareCartData($request ,$table)
+    private function prepareCartData($request, $table)
     {
         $cartData = [
                     'id'            => time() . '_' . $table->id,
@@ -423,9 +425,9 @@ class BookingController extends Controller
         Cart::add($cartData);
     }
 
-    private function setTableToOnHold($table)
+    private function setTableToSelected($table)
     {
-        $table->is_on_hold = 1;
+        $table->is_selected = 1;
         $table->save();
     }
 
@@ -443,7 +445,7 @@ class BookingController extends Controller
     public function delteCartItem($item_id)
     {
         $table = $this->getTableIDFromCart($item_id);
-        $this->setTableToNotOnHold($table);
+        $this->setTableToNotSelected($table);
         Cart::remove($item_id);
 
         return redirect()->back()->with('success', 'Item removed');
@@ -455,9 +457,9 @@ class BookingController extends Controller
         return $table = $this->tableRepo->get($tableID);
     }
 
-    private function setTableToNotOnHold($table)
+    private function setTableToNotSelected($table)
     {
-        $table->is_on_hold = 0;
+        $table->is_selected = 0;
         $table->save();
     }
 

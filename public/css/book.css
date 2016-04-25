@@ -1,40 +1,40 @@
 .multiple_book {
-        pointer : cursor;
-      }
+  pointer : cursor;
+}
 
-      .table-booked {
-        background: #fff;
-        cursor: not-allowed;
-      }
+.table-booked {
+  background: #fff;
+  cursor: not-allowed;
+}
 
-      .table-on-hold {
-        /*background: #bbb;*/
-      }
+.table-on-hold {
+  /*background: #bbb;*/
+}
 
-      .table-available {
-        background: #889;
-        color: #fff;
-      }
+.table-available {
+  background: #889;
+  color: #fff;
+}
 
-      .single_book:hover {
-        background-color: #444466;
-      }
+.single_book:hover {
+  background-color: #444466;
+}
 
-      .multiple_book {
-        background-color: #889;
-        color: #fff;
-      }
+.multiple_book {
+  background-color: #889;
+  color: #fff;
+}
 
-      .multiple_book:hover {
-        background-color: #664444;
-      }
+.multiple_book:hover {
+  background-color: #664444;
+}
 
-      .multiple_trigger_button {
-        border-radius: 0px;
-        border: medium 1px #fff;
-      }
+.multiple_trigger_button {
+  border-radius: 0px;
+  border: medium 1px #fff;
+}
 
-      .multiple_trigger_button:hover {
-        background-color: #900;
-        color: #fff;
-      }
+.multiple_trigger_button:hover {
+  background-color: #900;
+  color: #fff;
+}

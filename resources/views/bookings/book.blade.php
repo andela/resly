@@ -98,7 +98,7 @@
                       </div>
                       <div class="col-md-6 multiple_trigger">
                           <button class="btn btn-primary btn-lg pull-right multiple_trigger_button" id="bookedNumber" data-toggle="modal" data-target="#myModal">{{$count}}</button>
-                          <button class="btn btn-primary btn-lg pull-right multiple_trigger_button processMultiple" data-toggle="modal" data-target="#myModal">Process Booking</button>
+                          <button class="btn btn-primary btn-lg pull-right multiple_trigger_button processMultiple" data-toggle="modal" data-target="#myModal">Finish Booking</button>
                           <button class="btn btn-primary btn-lg pull-right multiple_trigger_button closeMultiple">&times;</button>
                       </div>
                     </div>
@@ -130,11 +130,11 @@
                                         <div class="bookStatus" id="bookStatus_{{$table->id}}">
                                           @if ($table->is_booked)
                                             <button disabled="" class="btn btn-primary" style="cursor: not-allowed;">Booked</button>
-                                          @elseif ($table->is_on_hold)
-                                            <button disabled="" class="btn btn-primary" style="">On Hold</button>
+                                          @elseif ($table->is_selected)
+                                            <button disabled="" class="btn btn-primary" style="">Selected</button>
                                           @else
                                             <button class="single_book btn btn-primary" book="book_{{$table->id}}" data-toggle="modal" data-target="#myModal">Book Now</button>
-                                            <button class="multiple_book btn btn-primary" id="{{$table->id}}" book="add_book_{{$table->id}}">Hold</button>
+                                            <button class="multiple_book btn btn-primary" id="{{$table->id}}" book="add_book_{{$table->id}}">Select</button>
                                           @endif
                                         </div>
                                     </td>

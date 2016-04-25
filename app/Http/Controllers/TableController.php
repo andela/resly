@@ -75,11 +75,18 @@ class TableController extends Controller
             return array();
         });
         $ids = array_values($tables);
-        $bookedTables = array_map(function ($id) { return $this->tableRepository->get($id);}, $ids);
-        array_map(function ($bookedTable) {$bookedTable->cost = number_format($bookedTable->cost, 2);}, $bookedTables);
+        $bookedTables = array_map(function ($id) {
+                            return $this->tableRepository->get($id);
+                        }, $ids);
+        array_map(function ($bookedTable) {
+            $bookedTable->cost = number_format($bookedTable->cost, 2);
+        }, $bookedTables);
         $sum = 0;
         $total_seats = 0;
-        array_map(function ($bookedTable) use (&$sum, &$total_seats) { $sum = $sum + $bookedTable->cost; $total_seats = $total_seats + $bookedTable->seats_number;}, $bookedTables);
+        array_map(function ($bookedTable) use (&$sum, &$total_seats) {
+            $sum = $sum + $bookedTable->cost;
+            $total_seats = $total_seats + $bookedTable->seats_number;
+        }, $bookedTables);
         $output = [
             'sum'           => $sum,
             'tables'        => array_values($bookedTables),
