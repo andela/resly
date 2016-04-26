@@ -37,7 +37,7 @@
                                 @endcan
 
                                 <li><a href="#">Restaurants</a></li>
-                               
+
                                 @can('authenticated')
                                     <li>
                                         <a href="{{url('/booking/cart')}}">
