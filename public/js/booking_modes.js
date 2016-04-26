@@ -91,7 +91,7 @@ $(document).ready(function () {
               });
             }
             if (bookingMode === 'multiple') {
-              $.post('/booking/tables/add', {date: bookDate, duration: bookDuration}, function (d) {
+              $.post('/booking/tables/add', bookingData, function (d) {
                 respondWith(d);
                 updateTables(d);
               });

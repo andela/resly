@@ -271,8 +271,10 @@ class BookingController extends Controller
         );
 
         if ($validator->fails()) {
-            $output['message'] = "Date and Duration are required.";
-            $output['status'] = 'failure';
+            $output = [
+                'message'   => 'Date and Duration are required.',
+                'status'    => 'failure',
+            ];
             return json_encode($output);
         }
 
