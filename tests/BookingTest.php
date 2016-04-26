@@ -155,6 +155,23 @@ class BookingTest extends TestCase
             ->see($booking->booking_date);
     }
 
+    public function testDinerCanViewRestaurantBookingPage()
+    {
+        Session::start();
+        factory('Resly\User')->create([
+            'username' => 'orton',
+            'role'  => 'diner'
+        ]);
+
+        $this->session(['1orton' => [0=>1, 1=>2]]);
+        $this->seed('DatabaseSeeder');
+
+        $diner = User::where('username', 'orton')->firstOrFail();
+        $this->actingAs($diner)
+            ->visit('restaurant/1/book')
+            ->see('please note that the cost shown is for only one hour');
+    }
+
     public function testRestaurantReservationsCanBeViewed()
     {
         $this->seed('DatabaseSeeder');
