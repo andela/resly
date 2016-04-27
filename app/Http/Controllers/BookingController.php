@@ -312,7 +312,7 @@ class BookingController extends Controller
             $res->save();
             $output = [
                 'status'    => 'success',
-                'red'       => $id,
+                'res'       => $id,
                 'message'   => 'Booking Cancelled',
             ];
             return json_encode($output);
