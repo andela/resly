@@ -25,7 +25,7 @@
                     <div class="col col-sm-5 col-lg-8 col-md-8">
                         <div class="input-group">
                             <span class='input-group-addon'><i class='fa fa-search'></i></span>
-                            <input type="text" class="form-control" required id="query" name="query" placeholder="Search for restaurant... name or location">
+                            <input type="text" class="form-control typehead" required id="query" name="query" placeholder="Search for restaurant... name or location">
                         </div>
                     </div>
 
@@ -131,7 +131,6 @@
 @endsection
 @section('scripts')
   <script type='text/javascript' src="{!! asset('owl-carousel/owl.carousel.min.js') !!}"></script>
-  {{-- <script type='text/javascript' src="{!! asset('js/ellipsis.js') !!}"></script> --}}
   <script type='text/javascript' src="{!! asset('js/welcome.js') !!}"></script>
   <script type="text/javascript" src="{!! asset('js/search_form_verification.js') !!}"></script>
   <script type="text/javascript" src="{!! asset('js/geolocation.js') !!}"></script>

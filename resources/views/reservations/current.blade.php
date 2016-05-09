@@ -28,11 +28,12 @@
                             </thead>
                             <tbody>
                                 @foreach($reservations as $res)
-                                    <tr>
+                                    <tr class="res-row">
                                         <td>{{$res->scheduled_date}}</td>
                                         <td>{{$res->restaurant()->name}}</td>
                                         <td>{{$res->duration}} hrs</td>
                                         <td>${{$res->cost}}</td>
+                                        <td><button class="confirm btn btn-sm" id="{{$res->id}}">Cancel</button></td>
                                     </tr>
                                 @endforeach
                             </tbody>

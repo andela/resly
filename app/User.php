@@ -61,6 +61,24 @@ class User extends Model implements
     }
 
     /**
+     * Users have a 1-many refunds relationship.
+     */
+    public function refunds()
+    {
+        return $this->hasMany('Resly\Refund');
+    }
+
+    /**
+     * Get the total credit-refunds that the user has.
+     *
+     * @return float
+     */
+    public function totalRefund()
+    {
+        return $this->refunds()->sum('credits');
+    }
+
+    /**
      *  Diner users have a 1-many bookings relationship.
      */
     public function bookings()

@@ -12,6 +12,7 @@ use Resly\Restaurant;
 use Resly\Booking;
 use Resly\Http\Requests;
 use Resly\Rating;
+use DB;
 
 class RestaurantController extends Controller
 {
@@ -41,6 +42,29 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::find($request->id);
 
         return view('restaurant.page', compact('restaurant'));
+    }
+
+    /**
+     * Search for restaurants
+     * @param  Request $request request oci_fetch_object
+     * @return Json           
+     */
+    public function search(Request $request)
+    {
+        $query = strtolower($request->input('query'));
+        $query = trim($query);
+        if (!$query) {
+            return;
+        }
+        $results = Restaurant::where(
+            DB::raw('name'),
+            'LIKE',
+            "%{$query}%"
+        )
+        ->take(20)
+        ->get(['name']);
+
+        return response()->json($results);
     }
 
     /**

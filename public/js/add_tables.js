@@ -77,7 +77,7 @@ $(document).ready(function() {
     tableTrack.restaurant_id = parseInt($("#rest_id").val());
 
     console.dir(tableTrack);
-    
+
     var request = $.ajax({
       url: "/tables/add-bulk",
       method: "POST",
