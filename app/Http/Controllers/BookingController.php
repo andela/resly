@@ -330,16 +330,26 @@ class BookingController extends Controller
                 'tables'    => array_values($bookedTablesIDs),
             ];
         }
-        $currentUser = Auth::user()->id;
-        $booker = $res->user_id;
-        $cost = $res->cost;
-        $credit = $this->getRefund($res, $cost);
-        if (Auth::user()->id != $booker) {
-            $output = [
-                'status'    => 'failure',
-                'message'   => 'You can only cancel your own reservation.',
-            ];
-            return json_encode($output);
+        // $currentUser = Auth::user()->id;
+        // $booker = $res->user_id;
+        // $cost = $res->cost;
+        // $credit = $this->getRefund($res, $cost);
+        // if (Auth::user()->id != $booker) {
+        //     $output = [
+        //         'status'    => 'failure',
+        //         'message'   => 'You can only cancel your own reservation.',
+        //     ];
+        //     return json_encode($output);
+        return json_encode($output);
+    }
+
+    public function addTable(Request $request)
+    {
+        if (Auth::guest()) {
+            $request->session()->put('redirect_back', URL::previous());
+
+            Session::flash('error', 'Please Login');
+            return redirect('/auth/login');
         }
 
         $validator = Validator::make(
@@ -440,10 +450,89 @@ class BookingController extends Controller
         $table->save();
     }
 
+    public function cart(Request $request)
+    {
+        return view('bookings.cart');
+    }
+
+    public function delteCartItem($item_id)
+    {
+        $table = $this->getTableIDFromCart($item_id);
+        $this->setTableToNotSelected($table);
+        Cart::remove($item_id);
+
+        return redirect()->back()->with('success', 'Item removed');
+    }
+
+    public function refund(Request $request)
+    {
+        $id = $request->input('res');
+        $res = Booking::find($id);
+        if ($res == null) {
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'Booking not found.',
+            ];
+            return json_encode($output);
+        }
+        $currentUser = Auth::user()->id;
+        $booker = $res->user_id;
+        $cost = $res->cost;
+        $credit = $this->getRefund($res, $cost); // The refund is only 70% of what was paid before.
+        if (Auth::user()->id != $booker) {
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'You can only cancel your own reservation.',
+            ];
+            return json_encode($output);
+        }
+        $timeOff = $request->input('offset');
+        if ($res->isSoon($timeOff)) {
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'This reservation is too soon to be cancelled.',
+            ];
+            return json_encode($output);
+        }
+        if ($res->hasPassed($timeOff)) {
+            $output = [
+                'status'    => 'failure',
+                'message'   => 'This reservation has passed.',
+            ];
+            return json_encode($output);
+        }
+        $refund = new Refund();
+        $refund->credits = $credit;
+        $refund->user_id = $booker;
+        $refund->booking_id = $res->id;
+        if ($refund->save()) {
+            $res->is_cancelled = 1; // Set the reservation to be cancelled.
+            $res->save();
+            $output = [
+                'status'    => 'success',
+                'res'       => $id,
+                'message'   => 'Booking Cancelled',
+            ];
+            return json_encode($output);
+        }
+    }
+
     private function getRefund($res, $cost)
     {
         // Get the refund rate for the current restaurant and calculate the refund for that user.
         return ($res->table->restaurant->refund_rate / 100) * $cost;
+    }
+
+    private function getTableIDFromCart($item_id)
+    {
+        $tableID = explode('_', $item_id)[1];
+        return $table = $this->tableRepo->get($tableID);
+    }
+
+    private function setTableToNotSelected($table)
+    {
+        $table->is_selected = 0;
+        $table->save();
     }
 
     public function checkout(Request $request)
