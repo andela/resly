@@ -118,6 +118,7 @@ Route::post('/multiple/book', 'BookingController@multipleBook');
 Route::post('/clear/bookings', 'BookingController@clearTableFromSession');
 
 Route::get('cart/delete/{item_id}', 'BookingController@delteCartItem');
+Route::post('booking/cancel', 'BookingController@refund');
 /*
  * Restaurant Profile
  */
@@ -150,7 +151,7 @@ Route::post('/user/profile/edit', [
     'middleware' => 'auth',
 ]);
 
-Route::get('/user/{username}', [
+Route::get('/user', [
     'uses' => 'UserProfileController@getProfile',
     'as' => 'userProfile',
     'middleware' => 'auth',

@@ -94,6 +94,7 @@ $factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
         'table_id' => factory('Resly\Table')->create()->id,
         'cost' => $faker->randomFloat(null, 5, 120),
         'type' => $faker->word,
+        // 'is_cancelled' => 0,
 
     ];
 });

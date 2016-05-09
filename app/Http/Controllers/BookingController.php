@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Resly\Repositories\TablesRepository;
 use URL;
 use Session;
+use Resly\Refund;
 
 class BookingController extends Controller
 {
@@ -495,7 +496,7 @@ class BookingController extends Controller
         //clear cart
         $this->clearCart();
 
-        return redirect('/')->with('success', 'Payment complete');
+        return redirect('/reservations/current')->with('success', 'Payment complete');
     }
 
     private function clearCart()
@@ -504,6 +505,7 @@ class BookingController extends Controller
         foreach ($cart_contents as $index => $item) {
             Cart::remove($item->id);
         }
-        $this->clearBookingSession();
+
     }
+    
 }
