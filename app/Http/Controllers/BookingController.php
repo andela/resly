@@ -280,7 +280,7 @@ class BookingController extends Controller
         $currentUser = Auth::user()->id;
         $booker = $res->user_id;
         $cost = $res->cost;
-        $credit = $this->getRefund($cost); // The refund is only 70% of what was paid before.
+        $credit = $this->getRefund($res, $cost);
         if (Auth::user()->id != $booker) {
             $output = [
                 'status'    => 'failure',
@@ -319,11 +319,10 @@ class BookingController extends Controller
         }
     }
 
-    private function getRefund($cost)
+    private function getRefund($res, $cost)
     {
-        // Later versions will fetch the particular restaurant's refund rate.
-        // For now refund rate is set to 70%.
-        return $cost * 0.7;
+        // Get the refund rate for the current restaurant and calculate the refund for that user.
+        return ($res->table->restaurant->refund_rate / 100) * $cost;
     }
 
     public function checkout(Request $request)

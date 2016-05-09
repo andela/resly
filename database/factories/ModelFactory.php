@@ -62,6 +62,7 @@ $factory->define(Resly\Restaurant::class, function (Faker\Generator $faker) {
         'telephone' => $faker->phoneNumber,
         'address' => $faker->address,
         'location' => $faker->name,
+        'refund_rate' => 70,
     ];
 });
 

@@ -83,7 +83,7 @@
                                 <div class = "form-group">
                                     <label for = "refund_rate" class = "control-label visible-sm"> Refund Rate</label>
                                     <input type = "number" class = "form-control" id = "refund_rate"
-                                    name="refund_rate" placeholder = "Default is 0%." value="{{ old('refund_rate') }}">
+                                    name="refund_rate" placeholder = "Refund rate - 100% max" min="0" max="100" value="{{ old('refund_rate') }}">
                                 </div>
                             </div>
                         </div>
