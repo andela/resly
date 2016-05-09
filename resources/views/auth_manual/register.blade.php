@@ -37,22 +37,22 @@
                         </div>
                         <div class="row">
                             <div class="col col-md-6 ">
-                                <div class="form-group {{ $errors->has('fname') ? ' has-error' : '' }}">
-                                    <label for="fname" class="control-label">Username</label>
-                                    <input type="text" name="fname" class="form-control" id="fname" value="{{ old('fname') ?: '' }}">
+                                <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}">
+                                    <label for="username" class="control-label">Username</label>
+                                    <input type="text" name="username" class="form-control" id="username" value="{{ old('username') ?: '' }}">
                                 </div>
                             </div>
                             <div class="col col-md-6">
 
                                 <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
                                     <label for="role" class="control-label">Account Type</label>
-                                    
+
                                     <select name = "role" class="form-control select">
                                         <option value = "">Select user type</option>
                                         <option value = "diner">Diner</option>
                                         <option value = "restaurateur">Restaurateur</option>
                                     </select>
-                                    
+
                                 </div>
                             </div>
                         </div>

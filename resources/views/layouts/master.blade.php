@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('css/alertify.core.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('css/alertify.default.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('css/application.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('css/refund.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('font-awesome/css/font-awesome.min.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('css/changepassword.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('css/typeahead-auto-complete.css') !!}">
@@ -32,9 +33,11 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{!! asset('js/jquery.confirm.min.js') !!}"></script>
     <script src="{!! asset('js/jquery.cookie.js') !!}"></script>
     <script src="{!! asset('js/alertify.js') !!}"></script>
     <script src="{!! asset('js/search.js') !!}"></script>
+    <script src="{!! asset('js/refund.js') !!}"></script>
     <script src="{!! asset('js/changepassword.js') !!}"></script>
     <script src="{!! asset('js/typeahead.bundle.min.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('js/search_autocomplete.js') !!}"></script>

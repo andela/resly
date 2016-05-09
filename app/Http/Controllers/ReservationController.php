@@ -14,7 +14,7 @@ class ReservationController extends Controller
     public function currentReservations(Request $request)
     {
         // $this->authorize('diner-user');
-        $bookings = $request->user()->bookings()->where('status', 1)->where('scheduled_date', '>=', \Carbon\Carbon::now()->toDateTimeString())->get();
+        $bookings = $request->user()->bookings()->where('status', 1)->where('is_cancelled', 0)->where('scheduled_date', '>=', \Carbon\Carbon::now()->toDateTimeString())->get();
 
         return view('reservations.current', ['user' => $request->user(), 'reservations' => $bookings]);
     }
@@ -28,7 +28,7 @@ class ReservationController extends Controller
 
     public function cancelledReservations(Request $request)
     {
-        $bookings = $request->user()->bookings()->where('status', 0)->get();
+        $bookings = $request->user()->bookings()->where('status', 0)->orWhere('is_cancelled', 1)->get();
 
         return view('reservations.cancelled', ['user' => $request->user(), 'reservations' => $bookings]);
     }
