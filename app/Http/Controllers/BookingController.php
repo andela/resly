@@ -330,16 +330,6 @@ class BookingController extends Controller
                 'tables'    => array_values($bookedTablesIDs),
             ];
         }
-        // $currentUser = Auth::user()->id;
-        // $booker = $res->user_id;
-        // $cost = $res->cost;
-        // $credit = $this->getRefund($res, $cost);
-        // if (Auth::user()->id != $booker) {
-        //     $output = [
-        //         'status'    => 'failure',
-        //         'message'   => 'You can only cancel your own reservation.',
-        //     ];
-        //     return json_encode($output);
         return json_encode($output);
     }
 
