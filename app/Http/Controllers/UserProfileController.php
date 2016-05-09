@@ -8,7 +8,7 @@ use Resly\User;
 
 class UserProfileController extends Controller
 {
-    public function getProfile($username)
+    public function getProfile()
     {
         return view('profile.user');
     }
