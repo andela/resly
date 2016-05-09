@@ -2,6 +2,7 @@
 
 namespace Resly\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use Resly\Repositories\TablesRepository;
 use Resly\Table;
@@ -58,6 +59,41 @@ class TableController extends Controller
         $table = $this->tableRepository->get($request->table_id);
 
         return view('table.edit', compact('table'));
+    }
+
+    public function getTable(Request $request)
+    {
+        $table = $this->tableRepository->get($request->table_id);
+        $table->cost = number_format($table->cost, 2);
+        return json_encode($table);
+    }
+
+    public function getTables(Request $request)
+    {
+        $user = Auth::user()->id . Auth::user()->username;
+        $tables = $request->session()->get($user, function () {
+            return array();
+        });
+        $ids = array_values($tables);
+        $bookedTables = array_map(function ($id) {
+                            return $this->tableRepository->get($id);
+                        }, $ids);
+        array_map(function ($bookedTable) {
+            $bookedTable->cost = number_format($bookedTable->cost, 2);
+        }, $bookedTables);
+        $sum = 0;
+        $total_seats = 0;
+        array_map(function ($bookedTable) use (&$sum, &$total_seats) {
+            $sum = $sum + $bookedTable->cost;
+            $total_seats = $total_seats + $bookedTable->seats_number;
+        }, $bookedTables);
+        $output = [
+            'sum'           => $sum,
+            'tables'        => array_values($bookedTables),
+            'total_seats'   => $total_seats,
+        ];
+
+        return json_encode($output);
     }
 
     public function update(Request $request)

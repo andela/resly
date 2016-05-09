@@ -80,6 +80,8 @@ Route::post('restaurants/{restaurant_id}/rate', 'RestaurantController@rateRestau
  */
 Route::post('tables/', 'TableController@store');
 Route::get('tables/{table_id}/edit', 'TableController@edit');
+Route::get('tables/{table_id}', 'TableController@getTable');
+Route::get('book/multipletables', 'TableController@getTables');
 Route::put('tables/{table_id}/', 'TableController@update');
 Route::delete('tables/{table_id}/delete', 'TableController@destroy');
 Route::get('tables/add-bulk', 'TableController@addBulk');
@@ -112,6 +114,8 @@ Route::get('bookings/{table_id}', 'TableController@showBookings');
 Route::get('gallery/{rest_id}', 'RestaurantGalleryController@index');
 Route::post('/gallery', 'RestaurantGalleryController@store');
 Route::delete('/gallery/{id}', 'RestaurantGalleryController@destroy');
+Route::post('/multiple/book', 'BookingController@multipleBook');
+Route::post('/clear/bookings', 'BookingController@clearTableFromSession');
 
 Route::get('cart/delete/{item_id}', 'BookingController@delteCartItem');
 Route::post('booking/cancel', 'BookingController@refund');
@@ -124,6 +128,7 @@ Route::get('/restaurant/{restaurant_id}/book/', [
 ]);
 
 Route::post('/booking/table/{table_id}/add', 'BookingController@addTable');
+Route::post('/booking/tables/add', 'BookingController@addTables');
 Route::get('/booking/cart', 'BookingController@cart');
 Route::post('/cart/checkout', 'BookingController@checkout');
 Route::get('dashboard', [
