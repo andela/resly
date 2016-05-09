@@ -6,20 +6,23 @@
     <div class='row'>
         <div class='col col-md-12 page-body'>
             <div class='row'>
-                <div class='col-md-6'>
+                <div class='col-md-4'>
+                    <p> <i class='fa fa-envelope'></i> {{$restaurant->email}} </p>
+                </div>
+                <div class='col-md-4'>
                     <p> <i class='fa fa-map-marker'></i> {{$restaurant->address}}</p>
                 </div>
-                <div class='col-md-6'>
+                <div class='col-md-4'>
                     <p> <i class='fa fa-phone'></i> {{$restaurant->telephone}} </p>
                 </div>
             </div>
 
             <div class='row'>
-                <div class='col-md-6'>
-                    <p> <i class='fa fa-envelope'></i> {{$restaurant->email}} </p>
-                </div>
-                <div class='col-md-6'>
+                <div class='col-md-4'>
                     <p> <i class='fa fa-clock-o'></i> {{$restaurant->opening_time}} - {{$restaurant->closing_time}} </p>
+                </div>
+                <div class='col-md-4'>
+                    <p> <i class="fa fa-money"></i> Refund Rate - {{$restaurant->refund_rate}}% </p>
                 </div>
             </div>
 

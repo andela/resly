@@ -26,14 +26,13 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                                 @can('authenticated')
-                                    <li>
-                                        @can('restaurateur-user')
-                                            <a href="{{url('restaurants')}}"> Reservations</a>
-                                        @endcan
-                                        @can('diner-user')
-                                            <a href="{{url('reservations/current')}}"> Reservations</a>
-                                        @endcan
-                                    </li>
+                                    @can('restaurateur-user')
+                                        <li><a href="{{url('restaurants')}}"> Reservations</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                    @endcan
+                                    @can('diner-user')
+                                        <li><a href="{{url('reservations/current')}}"> Reservations</a></li>
+                                    @endcan
                                 @endcan
 
                                 <li><a href="#">Restaurants</a></li>
@@ -53,6 +52,7 @@
                                             <li>
                                                 @can('restaurateur-user')
                                                     <a href="{{url('/restaurants')}}">My Restaurants</a>
+                                                    <a href="#"> Settings</a>
                                                 @endcan
                                             </li>
                                             <li class="divider"></li>

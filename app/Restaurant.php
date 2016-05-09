@@ -17,6 +17,7 @@ class Restaurant extends Model
         'telephone',
         'email',
         'address',
+        'refund_rate',
     ];
 
     public function tables()

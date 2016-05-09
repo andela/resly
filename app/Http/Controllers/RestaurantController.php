@@ -201,6 +201,7 @@ class RestaurantController extends Controller
                 'telephone' => 'required|numeric',
                 'email' => 'required|email',
                 'address' => 'required',
+                'refund_rate' => 'numeric|min:0|max:100',
             ]
         );
 
