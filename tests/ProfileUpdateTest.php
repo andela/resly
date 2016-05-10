@@ -22,8 +22,8 @@ class ProfileUpdateTest extends TestCase
     {
         $user = factory('Resly\User')->create();
         $this->actingAs($user)
-             ->visit('/dashboard')
-             ->see('Edit Your Profile');
+             ->visit('/user/profile/edit')
+             ->see('Update Account Details');
     }
 
     public function testCanUpdateProfile()

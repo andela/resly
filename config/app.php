@@ -149,6 +149,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class,
+        willvincent\Rateable\RateableServiceProvider::class,
 
     ],
 
@@ -203,6 +206,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Flash' => Laracasts\Flash\FlashServiceProvider::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
     ],
 
 ];

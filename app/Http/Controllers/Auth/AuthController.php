@@ -8,6 +8,7 @@ use Resly\User;
 use Resly\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -32,9 +33,14 @@ class AuthController extends Controller
     /**
      * Create a new authentication controller instance.
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+
+        if ($request->session()->has('redirect_back')) {
+            $this->redirectPath = $request->session()->get('redirect_back');
+            $request->session()->forget('redirect_back');
+        }
     }
 
     /**

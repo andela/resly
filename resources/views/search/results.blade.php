@@ -1,45 +1,71 @@
-@extends('layouts.master')
+@extends('dashboard.search')
 
 @section('title', 'Results')
 
-@section('styles')
-  <link rel="stylesheet" type="text/css" href="{!! asset('css/navbar-fixed-top.css') !!}">
-@endsection
 
-@section('content')
-  <div class="container white">
-    <h4>Results</h4>
-    @if (! $results->count())
-      <p>No results found, sorry</p>
-    @else
-      @foreach ($results as $result)
-      <div class="row result">
-        <div class="col-lg-6">
-          <h5>
-            <a href="{{ route('restprofile', ['id' => $result->id])}}">
-              {{ $result->getRestName()}}
-            </a>
-          </h5>
-          <p>
-            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-            {{ $result->location }} | {{ $result->address }}
-          </p>
-          <p class="description">
-            "{{ strlen($result->description) > 40 ? 
-              substr($result->description, 0, 40) . "..." : 
-              $result->description 
-            }}"
-          </p>
+@section('details')
+    <div class="row ">
+        <div class='col col-md-12 page-title'>
+            <h3>Results  <a class = "btn btn-primary pull-right" href="/">Back</a></h3>
+
         </div>
-        <div class="col-lg-6">
-          <p>Tables</p>
-          <h2 style="color:#2196f3">
-            {{ $result->tables->count() }}
-          </h2>
+    </div>
+    <div class='row'>
+        <div class='col col-md-12 page-body'>
+            <div class="row">
+                <div class="col col-md-12">
+                    @if (! $results->count())
+                        <p>No results found, sorry</p>
+                    @else
+                        <table class="table">
+                            <tbody>
+                                @foreach ($results as $restaurant)
+                                    <tr>
+                                        <td class='table-image-holder'>
+                                            @if($restaurant->pictures->first() !== null)
+                                                <img src="http://res.cloudinary.com/ddnvpqjmh/image/upload/c_fill,h_300,w_300/{{$restaurant->pictures->first()->filename}}" class='table-image'>
+                                            @else
+                                                <img src="{{asset('img/no-image-placeholder.jpg')}}" class='table-image'>
+
+                                            @endif
+
+                                        </td>
+                                        <td>
+                                            <h3>
+                                                <a href="/restaurants/page/{{$restaurant->id}}">
+                                                    {{ $restaurant->getRestName()}}
+                                                </a>
+
+                                                <span style="color:#2196f3 " class='pull-right'>
+                                                    {{ $restaurant->tables->count() }} tables
+                                                </span>
+                                            </h3>
+
+                                            <hr>
+                                            @include('search.average_rating')
+                                            <p class="description">
+                                                "{{ strlen($restaurant->description) > 40 ?
+                                                substr($restaurant->description, 0, 40) . "..." :
+                                                $restaurant->description
+                                                }}"
+                                            </p>
+                                            <p>
+                                                <span class="fa fa-map-marker" aria-hidden="true"></span>
+                                                {{ $restaurant->location }} | {{ $restaurant->address }}
+                                            </p>
+                                            <p>
+                                                <i class='fa fa-clock-o'></i>
+                                                {{$restaurant->opening_time}} -
+                                                {{$restaurant->closing_time}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                </div>
+            </div>
         </div>
-      </div>
-      @endforeach
-    @endif
-    <a class = "btn btn-primary" href="/">Back</a>
-  </div>
+    </div>
 @endsection

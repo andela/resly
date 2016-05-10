@@ -8,21 +8,35 @@
 @endsection
 
 @section('content')
+    <div class="row ">
+        <div class='col col-md-12 page-title'>
+            <h3>Update Account Details</h3>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col col-md-12 page-body'>
+            <div class="row">
+                <div class="col col-md-4">
+                    <form action="{{ route('diner_upload_photo', $diner->username) }}"
+                          method="POST"
+                          class="dropzone"
+                          id="dinerPic">
+                    </form>
+                </div>
+                <div class='col col-md-8'>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class = "container">
-        <div class="profile-diner">
-            <h1>Edit Profile</h1>
-            <hr>
 
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-3">
                     <!-- form for uploading picture -->
-                    <form action="{{ route('diner_upload_photo', $diner->username) }}"
-                          method="POST" 
-                          class="dropzone"
-                          id="dinerPic"
-                    >
-                    </form>
+
                 </div> <!-- end of .col-md-3 -->
 
                 <!-- edit form column -->
@@ -50,7 +64,7 @@
                                     {{$errors->first('lname')}}
                                 </span>
                             @endif
-                        </div> 
+                        </div>
 
                         <!-- Email Address -->
                         <div class="form-group {{$errors->has('email')?'has-error':''}}">
@@ -82,7 +96,7 @@
                                     {{$errors->first('password')}}
                                 </span>
                             @endif
-                        </div> 
+                        </div>
 
                         <!-- Confirm Password -->
                         <div class="form-group {{$errors->has('confirm-password')?'has-error':''}}">
@@ -101,7 +115,7 @@
                             {!! Form::reset('Reset', array('class' => 'btn btn-danger')) !!}
                         </div>
                     {!! Form::close() !!}
-                </div> <!-- col-md-9 -->       
+                </div> <!-- col-md-9 -->
             </div> <!-- end of .row -->
         </div> <!--end of .profile -->
         <hr>

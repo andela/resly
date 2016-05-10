@@ -62,6 +62,7 @@ $factory->define(Resly\Restaurant::class, function (Faker\Generator $faker) {
         'telephone' => $faker->phoneNumber,
         'address' => $faker->address,
         'location' => $faker->name,
+        'refund_rate' => 70,
     ];
 });
 
@@ -77,9 +78,6 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
     $menuItem = factory('Resly\MenuItem')->create([
         'restaurant_id' => $restaurant->id,
     ]);
-    $menuItemTag = factory('Resly\MenuItemTag')->create([
-        'menu_item_id' => $menuItem->id,
-    ]);
 
     return [
         'restaurant_id' => $restaurant->id,
@@ -91,11 +89,14 @@ $factory->define(Resly\Table::class, function (Faker\Generator $faker) {
 
 $factory->define(Resly\Booking::class, function (Faker\Generator $faker) {
     return [
-        'number_of_people' => rand(2, 8),
-        'booking_date' => $faker->date,
-        'booking_time' => $faker->time,
-        'diner_id' => factory('Resly\User')->create(['role' => 'diner'])->id,
+        'scheduled_date' => $faker->date,
+        'duration' => 1,
+        'user_id' => factory('Resly\User')->create(['role' => 'diner'])->id,
         'table_id' => factory('Resly\Table')->create()->id,
+        'cost' => $faker->randomFloat(null, 5, 120),
+        'type' => $faker->word,
+        // 'is_cancelled' => 0,
+
     ];
 });
 

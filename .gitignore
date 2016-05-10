@@ -8,3 +8,4 @@ Homestead.json
 .git merge master
 .DS_Store
 .idea
+/public/bootstrap

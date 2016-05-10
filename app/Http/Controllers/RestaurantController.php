@@ -6,9 +6,13 @@ use Auth;
 use Illuminate\Http\Request;
 use Resly\Repositories\TablesRepository;
 use Illuminate\Http\Response;
+use Gate;
 use Validator;
 use Resly\Restaurant;
+use Resly\Booking;
 use Resly\Http\Requests;
+use Resly\Rating;
+use DB;
 
 class RestaurantController extends Controller
 {
@@ -22,13 +26,56 @@ class RestaurantController extends Controller
      */
     public function index()
     {
+        $this->authorize('restaurateur-user');
         $restaurants = Restaurant::where('user_id', Auth::user()->id)->get();
 
         return view('restaurant.index', compact('restaurants'));
     }
 
+    /**
+     * Displays view for all users, logged in or nothing.
+     * @param  Request $request request oci_fetch_object
+     * @return View           view to display
+     */
+    public function showRestaurant(Request $request)
+    {
+        $restaurant = Restaurant::find($request->id);
+
+        return view('restaurant.page', compact('restaurant'));
+    }
+
+    /**
+     * Search for restaurants
+     * @param  Request $request request oci_fetch_object
+     * @return Json           
+     */
+    public function search(Request $request)
+    {
+        $query = strtolower($request->input('query'));
+        $query = trim($query);
+        if (!$query) {
+            return;
+        }
+        $results = Restaurant::where(
+            DB::raw('name'),
+            'LIKE',
+            "%{$query}%"
+        )
+        ->take(20)
+        ->get(['name']);
+
+        return response()->json($results);
+    }
+
+    /**
+     * Shows restaurants owned by a restaurant owner with given ID.
+     * @param  Request          $request          request object
+     * @param  TablesRepository $tablesRepository repository for getting table properties
+     * @return View                             view to render
+     */
     public function show(Request $request, TablesRepository $tablesRepository)
     {
+        $this->authorize('restaurateur-user');
         $tables = $tablesRepository->getRestaurantTables($request->restaurant_id);
         $restaurant = Restaurant::where('id', $request->restaurant_id)->get()->first();
 
@@ -36,7 +83,35 @@ class RestaurantController extends Controller
     }
 
     /**
-     *  Display the form for adding a restaurant.
+     * Displays gallery of a restaurant.
+     * @param  Request $request request object
+     * @return View           view to render
+     */
+    public function showGallery(Request $request)
+    {
+        $restaurant = Restaurant::find($request->id);
+        $pictures = $restaurant->pictures()->get();
+
+        return view('restaurant.show_gallery', compact('restaurant', 'pictures'));
+    }
+
+    /**
+     * Displays list of visited restaurant by logged in user.
+     * @param  Request $request request object
+     * @return View           view to render
+     */
+    public function visited(Request $request)
+    {
+        $this->authorize('diner-user');
+        //$tables = $tablesRepository->getRestaurantTables($request->restaurant_id);
+        $visitedRestaurants = Booking::where('user_id', Auth::user()->id)->get();
+
+        return view('restaurant.visited', compact('visitedRestaurants'));
+    }
+
+    /**
+     * Displays view for adding restaurant for a restaurateur.
+     * @return View view to render
      */
     public function create()
     {
@@ -45,6 +120,12 @@ class RestaurantController extends Controller
         return view('restaurant.create');
     }
 
+    /**
+     * Renders view to edit a restaurant created by logged in user.
+     * @param  Request $request       request object
+     * @param  int  $restaurant_id id of restaurnat to edit
+     * @return View                 View to render
+     */
     public function edit(Request $request, $restaurant_id)
     {
         $this->authorize('restaurateur-user');
@@ -59,6 +140,12 @@ class RestaurantController extends Controller
         }
     }
 
+    /**
+     * Saves a restaurant edit to the database.
+     * @param  Request $request       request object
+     * @param  int  $restaurant_id restauant id to save
+     * @return View                 view to render
+     */
     public function createEdit(Request $request, $restaurant_id)
     {
         $this->authorize('restaurateur-user');
@@ -96,7 +183,9 @@ class RestaurantController extends Controller
     }
 
     /**
-     *  Receive post requests from the add form submission.
+     * Not currently used: Receive post requests from the add form submission.
+     * @param  Request $request request object
+     * @return View            view to render
      */
     public function createAdd(Request $request)
     {
@@ -113,6 +202,7 @@ class RestaurantController extends Controller
                 'telephone' => 'required|numeric',
                 'email' => 'required|email',
                 'address' => 'required',
+                'refund_rate' => 'numeric|min:0|max:100',
             ]
         );
 
@@ -135,7 +225,9 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Fetch Nearby restaurants.
+     * Fetch nearby restaurant.
+     * @param  Request $request request object
+     * @return View           view to render
      */
     public function postCloseby(Request $request)
     {
@@ -162,7 +254,11 @@ class RestaurantController extends Controller
     }
 
     /**
-     * conver model results into assoc array.
+     * convert model results into assoc array.
+     * @param  array $records array to convert
+     * @param  int $lat     latitude
+     * @param  int $lng     longitude
+     * @return array          data result
      */
     private function constructAssoc($records, $lat, $lng)
     {
@@ -175,12 +271,25 @@ class RestaurantController extends Controller
             $output[$i]['location'] = $record->location;
             $output[$i]['distance'] = $this->calcDistance($lat, $lng,
                 $record->latitude, $record->longitude, 'km', 3);
+            $output[$i]['avatar'] = ($record->pictures()->first()) == null ?
+                asset('img/no-image-placeholder.jpg') :
+                'http://res.cloudinary.com/ddnvpqjmh/image/upload/c_fill,h_300,w_300/'.$record->pictures()->first()->filename;
             $i++;
         }
 
         return $output;
     }
 
+    /**
+     * Calculate distance between.
+     * @param  int  $point1_lat  latitue of point 1
+     * @param  int  $point1_long  longitude of point 1
+     * @param  int  $point2_lat  latitude of point 2
+     * @param  int  $point2_long longitude of point 2
+     * @param  string  $unit        unit of measurement
+     * @param  int $decimals    [description]
+     * @return int               distance between the two points
+     */
     private function calcDistance(
         $point1_lat, $point1_long,
         $point2_lat, $point2_long,
@@ -214,7 +323,9 @@ class RestaurantController extends Controller
     }
 
     /**
-     * fetch coordinates.
+     * Gets the coordinates of a point.
+     * @param  string $location location of point to fetch coordinates for
+     * @return array           of longitude and latitude
      */
     private function fetchCoordinates($location)
     {
@@ -225,5 +336,50 @@ class RestaurantController extends Controller
         $results = json_decode($response->getBody(), true, 512);
 
         return $results['results'][0]['geometry']['location'];
+    }
+
+    public function rateRestaurant(Request $request)
+    {
+        // If the user is not signed, redirect to the login page.
+        if (Gate::denies('diner-user')) {
+            return redirect('/auth/login')
+                ->with('info', 'Login as Diner first.');
+        }
+
+        //fetch restaurant instance and user rating
+        $restaurant = Restaurant::find($request->restaurant_id);
+        $user_rating = intval($request->input('rate'));
+        $comment = $request->input('comment');
+        $booking = intval($request->input('booking'));
+
+        // If the omment is empty, return false/failure.
+        if (empty(trim($comment))) {
+            $output['status'] = 'failure';
+            $output['message'] = 'The comment must not be empty';
+
+            return json_encode($output);
+        }
+
+        //if user has already rated update current rating, else save new rating
+        if ($restaurant->userHasNotRated($booking)) {
+            $rating = new Rating;
+            $rating->rating = $user_rating;
+            $rating->comment = $comment;
+            $rating->booking_id = $booking;
+            $rating->user_id = Auth::user()->id;
+
+            $restaurant->ratings()->save($rating);
+        } else {
+            $rating = Rating::where('user_id', Auth::user()->id)
+                            ->where('restaurant_id', $request->restaurant_id)->where('booking_id', $booking)->first();
+            $rating->rating = $user_rating;
+            $rating->comment = $comment;
+            $rating->save();
+        }
+
+        $output['status'] = 'success';
+        $output['avg_rating'] = $restaurant->averageRating();
+
+        return json_encode($output);
     }
 }

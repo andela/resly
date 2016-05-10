@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'HomeController@homepage');
+Route::get('/aboutus', 'HomeController@aboutus');
+Route::get('/contactus', 'HomeController@contactus');
 
 Route::get('auth/login', [
     'uses' => 'HomeController@login',
@@ -28,6 +30,11 @@ Route::get('auth/logout', [
 Route::get('auth/register', [
     'uses' => 'HomeController@register',
     'as' => 'register',
+]);
+
+Route::post('changepassword', [
+    'uses' => 'PasswordController@changePassword',
+    'as' => 'changepassword',
 ]);
 
 Route::post('auth/register', 'Auth\AuthController@postRegister');
@@ -57,18 +64,24 @@ Route::post('auth/social/register', [
 Route::get('restaurants/', 'RestaurantController@index');
 Route::get('restaurants/create', 'RestaurantController@create');
 Route::post('restaurants/add', 'RestaurantController@createAdd');
+Route::get('restaurants/search', 'RestaurantController@search');
 Route::get('restaurants/{restaurant_id}/tables', 'TableController@create');
-
+Route::get('restaurants/visited', 'RestaurantController@visited');
 Route::get('restaurants/{restaurant_id}', 'RestaurantController@show');
 Route::get('restaurants/edit/{restaurant_id}', 'RestaurantController@edit');
 Route::post('restaurants/edit/{restaurant_id}', 'RestaurantController@createEdit');
 Route::post('restaurants/closeby', 'RestaurantController@postCloseBy');
+Route::get('restaurants/page/{id}', 'RestaurantController@showRestaurant');
+Route::get('restaurant/{id}/gallery', 'RestaurantController@showGallery');
+Route::post('restaurants/{restaurant_id}/rate', 'RestaurantController@rateRestaurant');
 
 /*
  * Tables Routes
  */
 Route::post('tables/', 'TableController@store');
 Route::get('tables/{table_id}/edit', 'TableController@edit');
+Route::get('tables/{table_id}', 'TableController@getTable');
+Route::get('book/multipletables', 'TableController@getTables');
 Route::put('tables/{table_id}/', 'TableController@update');
 Route::delete('tables/{table_id}/delete', 'TableController@destroy');
 Route::get('tables/add-bulk', 'TableController@addBulk');
@@ -96,17 +109,28 @@ Route::get('bookings/addbulk', 'BookingController@addBulk');
 Route::post('bookings/begin', 'BookingController@begin');
 Route::post('bookings/create', 'BookingController@create');
 Route::post('bookings/cancel', 'BookingController@cancel');
+Route::get('bookings/{table_id}', 'TableController@showBookings');
 
-Route::resource('gallery', 'RestaurantGalleryController');
+Route::get('gallery/{rest_id}', 'RestaurantGalleryController@index');
+Route::post('/gallery', 'RestaurantGalleryController@store');
+Route::delete('/gallery/{id}', 'RestaurantGalleryController@destroy');
+Route::post('/multiple/book', 'BookingController@multipleBook');
+Route::post('/clear/bookings', 'BookingController@clearTableFromSession');
 
+Route::get('cart/delete/{item_id}', 'BookingController@delteCartItem');
+Route::post('booking/cancel', 'BookingController@refund');
 /*
  * Restaurant Profile
  */
-Route::get('/rest/{id}', [
-    'uses' => 'ProfileController@getProfile',
-    'as' => 'restprofile',
+Route::get('/restaurant/{restaurant_id}/book/', [
+    'uses' => 'BookingController@book',
+    'as' => 'bookRestaurantTable',
 ]);
 
+Route::post('/booking/table/{table_id}/add', 'BookingController@addTable');
+Route::post('/booking/tables/add', 'BookingController@addTables');
+Route::get('/booking/cart', 'BookingController@cart');
+Route::post('/cart/checkout', 'BookingController@checkout');
 Route::get('dashboard', [
     'uses' => 'DashboardController@showDashboard',
     'as' => 'dashboard',
@@ -127,8 +151,16 @@ Route::post('/user/profile/edit', [
     'middleware' => 'auth',
 ]);
 
-Route::get('/user/{username}', [
+Route::get('/user', [
     'uses' => 'UserProfileController@getProfile',
     'as' => 'userProfile',
     'middleware' => 'auth',
 ]);
+
+/* User reservations
+ *
+ */
+Route::get('/reservations/current', 'ReservationController@currentReservations');
+Route::get('/reservations/past', 'ReservationController@pastReservations');
+Route::get('/reservations/cancelled', 'ReservationController@cancelledReservations');
+Route::get('/reservations/cancel/{id}', 'ReservationController@cancelReservation');

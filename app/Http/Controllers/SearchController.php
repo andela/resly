@@ -10,7 +10,8 @@ class SearchController extends Controller
 {
     public function getResults(Request $request)
     {
-        $query = $request->input('query');
+        $query = strtolower($request->input('query'));
+        $query = trim($query);
         if (! $query) {
             return redirect()->back();
         }
