@@ -497,6 +497,9 @@ class BookingController extends Controller
         $refund->booking_id = $res->id;
         if ($refund->save()) {
             $res->is_cancelled = 1; // Set the reservation to be cancelled.
+            $res->table->is_selected = 0; // Set the reservation's table to not be selected
+            $res->table->is_booked = 0; // Set the reservation's table to not be booked
+            $res->table->save();
             $res->save();
             $output = [
                 'status'    => 'success',

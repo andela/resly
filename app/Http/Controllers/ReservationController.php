@@ -28,7 +28,7 @@ class ReservationController extends Controller
 
     public function cancelledReservations(Request $request)
     {
-        $bookings = $request->user()->bookings()->where('status', 0)->orWhere('is_cancelled', 1)->get();
+        $bookings = $request->user()->bookings()->where('is_cancelled', 1)->get();
 
         return view('reservations.cancelled', ['user' => $request->user(), 'reservations' => $bookings]);
     }
