@@ -80,4 +80,14 @@ class Booking extends Model
 
         return $restaurant;
     }
+
+    public function scopeConflictBooking($query, $tableId, $bookingDate, $bookingDuration)
+    {
+        return $query->where('table_id', '=', $tableId)
+                    ->where(function ($query) use ($bookingDate) {
+                            $query->where('scheduled_date', '<=', $bookingDate)
+                                  ->whereRaw('(scheduled_date + INTERVAL `duration` HOUR) > ?', [$bookingDate]);
+                    })
+                    ->whereRaw('(? - (`scheduled_date` + INTERVAL `duration` HOUR)) < ?', [$bookingDate, $bookingDuration]);
+    }
 }

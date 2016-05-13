@@ -360,6 +360,13 @@ class BookingController extends Controller
             ]
         );
 
+        $date = str_replace('/', '-', $request->date);
+        $bookingDate = date('Y-m-d H:i:s', strtotime($date));
+
+        $conflictBooking = Booking::conflictBooking($request->table_id, $bookingDate, $request->duration)->take(1)->get();
+        if (!$conflictBooking->isEmpty()) {
+            return redirect()->back()->with('error', 'Sorry, This table is not available at the selected time slot.');
+        }
         if ($validator->fails()) {
             $output = [
                 'status'    => 'failure',
@@ -541,15 +548,24 @@ class BookingController extends Controller
     public function checkout(Request $request)
     {
         $user = Auth::user();
+        $cart = Cart::getContent();
+        $data = [];
+
+        foreach ($cart as $item) {
+            $date = str_replace('/', '-', $item->attributes->date);
+            $bookingDate = date('Y-m-d H:i:s', strtotime($date));
+            $conflictBooking = Booking::conflictBooking($item->attributes->item_id, $bookingDate, $item->attributes->duration)->take(1)->get();
+            if (!$conflictBooking->isEmpty()) {
+                $table = Table::find($item->attributes->item_id);
+                return redirect('/booking/cart')->with('error', 'Sorry, The selected table , '.$table->label.', is no longer available at the selected time slot.');
+            }
+        }
 
         $return = $user->charge(Cart::getTotal() * 100, [
             'source' => $request->stripeToken,
             'receipt_email' => $user->email,
         ]);
 
-        $cart = Cart::getContent();
-
-        $data = [];
         foreach ($cart as $item) {
             $temp['scheduled_date'] = date('Y-m-d H:i:s', strtotime($item->attributes->date));
             $temp['duration'] = $item->attributes->duration;
@@ -562,8 +578,6 @@ class BookingController extends Controller
             Booking::create($temp);
             $data[] = $temp;
         }
-
-        // Booking::create($data);
 
         //clear cart
         $this->clearCart();
